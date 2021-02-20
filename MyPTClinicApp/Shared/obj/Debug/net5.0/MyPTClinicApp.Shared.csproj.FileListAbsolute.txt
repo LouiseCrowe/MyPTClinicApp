@@ -1,0 +1,12 @@
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.deps.json
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.pdb
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csprojAssemblyReference.cache
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfoInputs.cache
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfo.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csproj.CoreCompileInputs.cache
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.pdb
