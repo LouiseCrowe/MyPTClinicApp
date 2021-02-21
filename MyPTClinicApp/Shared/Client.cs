@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Shared
 {
-    public class Therapist
+    public class Client
     {
         [JsonPropertyName("iD")]
         public int ID { get; set; }
+
+        // EF will know this is a foreign key to Therapist table
+        // because of naming convention <DbSet>/table name followed 
+        // by ID
+        [JsonPropertyName("therapistID")]
+        public int? TherapistID { get; set; }
 
         [JsonPropertyName("firstName")]
         [Required(ErrorMessage = "Please input first name")]
@@ -23,6 +29,15 @@ namespace MyPTClinicApp.Shared
         [MaxLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string LastName { get; set; }
 
+        [JsonPropertyName("dateOfBirth")]
+        public DateTime DateOfBirth { get; set; }
+
+        [JsonPropertyName("medications")]
+        public string Medications { get; set; }
+
+        [JsonPropertyName("gender")]
+        public Gender Gender { get; set; }
+
         [JsonPropertyName("phone")]
         [Phone]
         [MaxLength(50, ErrorMessage = "Cannot exceed 50 characters")]
@@ -33,8 +48,8 @@ namespace MyPTClinicApp.Shared
         [MaxLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string Email { get; set; }
 
-        [JsonPropertyName("location")]
+        [JsonPropertyName("address")]
         [MaxLength(150, ErrorMessage = "Cannot exceed 150 characters")]
-        public string Location { get; set; }
+        public string Address { get; set; }
     }
 }

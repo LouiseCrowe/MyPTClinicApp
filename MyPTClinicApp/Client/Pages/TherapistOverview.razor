@@ -1,0 +1,42 @@
+﻿@page "/therapistoverview"
+
+<h1 class="page-title">All Therapists</h1>
+
+<br />
+
+@if (Therapists == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Therapist ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var therapist in Therapists)
+            {
+                <tr>
+                    <td>@therapist.ID</td>
+                    <td>@therapist.FirstName</td>
+                    <td>@therapist.LastName</td>
+                    <td>
+                        <a href="@($"therapistdetail/{therapist.ID}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        @*<a href="@($"employeeedit/{therapist.ID}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -10,7 +10,8 @@ using MyPTClinicApp.Shared;
 
 namespace MyPTClinicApp.Server.Controllers
 {
-    [Route("api/therapist")]
+    [Produces("application/json")]
+    [Route("api/therapists")]
     [ApiController]
     public class TherapistsController : ControllerBase
     {
@@ -21,33 +22,40 @@ namespace MyPTClinicApp.Server.Controllers
             _context = context;
         }
 
-        // GET: api/therapists
-        [HttpGet]
-        [Produces("application/json")]
+        // GET: api/therapists/all
+        [HttpGet("all")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<Therapist>>> GetTherapist()
         {
-            return await _context.Therapist.ToListAsync();
+            return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
         }
 
-        // GET: api/Therapists/5
-        [HttpGet("{id}")]
-        [Produces("application/json")]
-        public async Task<ActionResult<Therapist>> GetTherapist(int id)
+        // GET: api/Therapists/id/2
+        [HttpGet("id/{ID}", Name = "GetTherapistById")]  
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Therapist> GetTherapistById([FromRoute] int id)
         {
-            var therapist = await _context.Therapist.FindAsync(id);
-
+            Therapist therapist = _context.Therapist.SingleOrDefault
+                                            (t => t.ID == id);
             if (therapist == null)
             {
                 return NotFound();
             }
-
-            return therapist;
+            else
+            {
+                return Ok(therapist);
+            }
+            
         }
 
-        // PUT: api/Therapists/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTherapist(int id, Therapist therapist)
+        // PUT: api/Therapists/id/3
+        [HttpPut("id/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateTherapist([FromRoute] int id, 
+                                                    [FromBody] Therapist therapist)
         {
             if (id != therapist.ID)
             {
@@ -78,17 +86,21 @@ namespace MyPTClinicApp.Server.Controllers
         // POST: api/therapists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Therapist>> PostTherapist(Therapist therapist)
         {
             _context.Therapist.Add(therapist);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTherapist", new { id = therapist.ID }, therapist);
+            return CreatedAtAction("GetTherapistById", new { id = therapist.ID }, therapist);
         }
 
         // DELETE: api/Therapists/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteTherapist(int id)
         {
             var therapist = await _context.Therapist.FindAsync(id);
