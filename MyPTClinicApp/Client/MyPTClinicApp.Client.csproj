@@ -14,4 +14,12 @@
     <ProjectReference Include="..\Shared\MyPTClinicApp.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\TherapistEdit.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\TherapistEdit.razor" />
+  </ItemGroup>
+
 </Project>

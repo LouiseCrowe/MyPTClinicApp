@@ -82,7 +82,9 @@ using MyPTClinicApp.Client.Shared;
 #line default
 #line hidden
 #nullable disable
-    public partial class ClientOverview : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/therapistedit")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/therapistedit/{TherapistID}")]
+    public partial class TherapistEdit : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)

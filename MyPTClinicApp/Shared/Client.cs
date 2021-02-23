@@ -51,5 +51,8 @@ namespace MyPTClinicApp.Shared
         [JsonPropertyName("address")]
         [MaxLength(150, ErrorMessage = "Cannot exceed 150 characters")]
         public string Address { get; set; }
+
+        // navigation property to Therapist for this client
+        public virtual Therapist Therapist { get; set; }
     }
 }

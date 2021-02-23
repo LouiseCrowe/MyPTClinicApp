@@ -1,0 +1,63 @@
+﻿@page  "/therapistedit"
+@page "/therapistedit/{TherapistID}"
+
+
+
+
+
+@if (!Saved)
+{
+    <section class="employee-edit">
+        <h1 class="page-title">Details for @Therapist.FirstName @Therapist.LastName</h1>
+        <EditForm Model="@Therapist" OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary></ValidationSummary>
+            <div class="form-group row">
+                <label for="firstName" class="col-sm-3">First name: </label>
+                <InputText id="firstName" class="form-control col-sm-8" @bind-Value="@Therapist.FirstName" placeholder="Enter first name"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.FirstName)" />
+            </div>
+            <div class="form-group row">
+                <label for="lastName" class="col-sm-3">Last name: </label>
+                <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@Therapist.LastName" placeholder="Enter last name"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.LastName)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="phone" class="col-sm-3">Phone: </label>
+                <InputText id="phone" class="form-control col-sm-8" @bind-Value="@Therapist.Phone" placeholder="Enter phone"></InputText>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="col-sm-3">Email: </label>
+                <InputText id="email" class="form-control col-sm-8" @bind-Value="@Therapist.Email" placeholder="Enter email"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.Email)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="street" class="col-sm-3">Location: </label>
+                <InputText id="street" class="form-control col-sm-8" @bind-Value="@Therapist.Location" placeholder="Enter location"></InputText>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary edit-btn">Save therapist</button>
+
+            @if (Therapist.ID > 0)
+            {
+                <a class="btn btn-danger" @onclick="@DeleteTherapist">
+                    Delete
+                </a>
+            }
+
+            <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+        </EditForm>
+    </section>
+
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+
+
+}

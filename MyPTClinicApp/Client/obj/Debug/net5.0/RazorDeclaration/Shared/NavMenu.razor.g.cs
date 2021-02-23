@@ -90,7 +90,7 @@ using MyPTClinicApp.Client.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 23 "C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\Shared\NavMenu.razor"
+#line 28 "C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
