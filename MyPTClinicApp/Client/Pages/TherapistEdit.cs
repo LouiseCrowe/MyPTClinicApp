@@ -12,19 +12,42 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class TherapistEdit
     {
+
+        // need to have the ID of the therapist that's being edited when 
+        // we are in edit mode this page can be in two modes
+        // this was Blazor will search for the Therapist ID in the 
+        // query string when this component is being invoked
         [Parameter]
         public string TherapistID { get; set; }
 
+
+        // regardless of mode I will always be data binding on to a therapist
+        // so we create a public property we can data bind to
         public Therapist Therapist { get; set; } = new();
 
         private static readonly HttpClient client = new HttpClient();
 
         private static readonly String baseURL = "https://localhost:5001/api/therapists/";
 
-        protected async Task OnInitializedAsync()
+        
+        // when await added an unhandled error occurred when loading page
+        protected override async Task OnInitializedAsync()
         {
-            var streamTask = client.GetStreamAsync($"{baseURL}id/{TherapistID}");
-            Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTask);
+            Saved = false;
+
+            int.TryParse(TherapistID, out var therapistID);
+
+
+            if (therapistID == 0)       // new therapist is being created
+            {
+                // some defaults
+                Therapist = new Therapist { Location = "33 Pembroke Street Lower, Dublin 2" };
+            }
+            else
+            {
+                var streamTask = client.GetStreamAsync($"{baseURL}id/{TherapistID}");
+                Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTask);
+            }
         }
 
 
@@ -39,25 +62,14 @@ namespace MyPTClinicApp.Client.Pages
 
         protected async Task HandleValidSubmit()
         {
+
             Saved = false;
 
-
-            if (Therapist.ID == 0) //new
-            {
-                // code to add employee
-
-                Therapist = new Therapist
-                {
-                    FirstName = Therapist.FirstName,
-                    LastName = Therapist.LastName,
-                    Phone = Therapist.Phone,
-                    Email = Therapist.Email,
-                    Location = Therapist.Location
-                };
-
-                var stringContent = new StringContent(JsonSerializer.Serialize(Therapist),
+            if(Therapist.ID == 0)       // this means a new therapist is being added
+            { 
+                var addedTherapist = new StringContent(JsonSerializer.Serialize(Therapist),
                                             UnicodeEncoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PostAsync(baseURL, stringContent);
+                HttpResponseMessage httpResponse = await client.PostAsync(baseURL, addedTherapist);
                 httpResponse.EnsureSuccessStatusCode();
 
                 var jsonString = await httpResponse.Content.ReadAsStringAsync();
@@ -65,19 +77,28 @@ namespace MyPTClinicApp.Client.Pages
                 if (jsonString != null)
                 {
                     StatusClass = "alert-success";
-                    Message = "New employee added successfully.";
+                    Message = "New therapist added successfully.";
                     Saved = true;
                 }
                 else
                 {
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new employee. Please try again.";
+                    Message = "Something went wrong adding the new therapist. Please try again.";
                     Saved = false;
                 }
             }
+            else
+            {
+                var therapistJson = new StringContent(JsonSerializer.Serialize(Therapist),
+                                            Encoding.UTF8, "application/json");
+                HttpResponseMessage httpResponse = await client.PutAsync($"{baseURL}id/{Therapist.ID}", therapistJson);
 
+                httpResponse.EnsureSuccessStatusCode();
+                StatusClass = "alert-success";
+                Message = "Therapist updated successfully.";
+                Saved = true;
+            }
         }
-
 
 
         protected void HandleInvalidSubmit()
@@ -90,15 +111,18 @@ namespace MyPTClinicApp.Client.Pages
 
         protected async Task DeleteTherapist()
         {
-            //    await EmployeeDataService.DeleteEmployee(Employee.EmployeeId);
+            HttpResponseMessage httpResponse = await client.DeleteAsync($"{baseURL}id/{Therapist.ID}");
+            httpResponse.EnsureSuccessStatusCode();
 
-            //    StatusClass = "alert-success";
-            //    Message = "Deleted successfully";
+            StatusClass = "alert-success";
+            Message = "Deleted successfully";
 
-            //    Saved = true;
+            Saved = true;
         }
 
-        protected void NavigateToOverview()
+
+
+    protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/therapistoverview");
         }

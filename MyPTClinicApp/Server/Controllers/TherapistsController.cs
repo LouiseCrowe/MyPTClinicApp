@@ -54,37 +54,38 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateTherapist([FromRoute] int id, 
-                                                    [FromBody] Therapist therapist)
+        public IActionResult UpdateTherapist([FromBody] Therapist therapist)
         {
-            if (id != therapist.ID)
+            if (therapist != null)
             {
-                return BadRequest();
-            }
-
-            _context.Entry(therapist).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TherapistExists(id))
+                // find therapist to update
+                var therapistToUpdate = _context.Therapist.FirstOrDefault(t => t.ID == therapist.ID);
+                if (therapistToUpdate == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    throw;
+                    therapistToUpdate.FirstName = therapist.FirstName;
+                    therapistToUpdate.LastName = therapist.LastName;
+                    therapistToUpdate.Phone = therapist.Phone;
+                    therapistToUpdate.Email = therapist.Email;
+                    therapistToUpdate.Location = therapist.Location;
+
+                    _context.SaveChanges();
+
+                    return NoContent();
                 }
             }
+            else
+            {
+                return BadRequest();
+            }
 
-            return NoContent();
         }
-
+        
+        
         // POST: api/therapists
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

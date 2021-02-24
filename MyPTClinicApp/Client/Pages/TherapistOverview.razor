@@ -17,7 +17,8 @@ else
                 <th>ID</th>
                 <th>First name</th>
                 <th>Last name</th>
-                <th></th>
+                <th>View</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -31,8 +32,9 @@ else
                         <a href="@($"therapistdetail/{therapist.ID}")" class="btn btn-primary table-btn">
                             <i class="fas fa-info-circle"></i>
                         </a>
-
-                        <a href="@($"employeeedit/{therapist.ID}")" class="btn btn-primary table-btn">
+                    </td>
+                    <td>
+                        <a href="@($"therapistedit/{therapist.ID}")" class="btn btn-primary table-btn">
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
