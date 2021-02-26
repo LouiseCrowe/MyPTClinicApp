@@ -26,7 +26,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<Therapist>>> GetTherapist()
+        public async Task<ActionResult<IEnumerable<Therapist>>> GetAllTherapists()
         {
             return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
         }
@@ -54,7 +54,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateTherapist([FromBody] Therapist therapist)
+        public IActionResult PutUpdateTherapist([FromBody] Therapist therapist)
         {
             if (therapist != null)
             {

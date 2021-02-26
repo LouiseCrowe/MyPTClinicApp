@@ -1,0 +1,69 @@
+﻿@page "/patientdetail/{ID}"
+
+@using System.Linq
+@inject HttpClient Http
+
+<h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
+
+<br />
+
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">First Name: </label>
+    <div class="col">
+        @Patient.FirstName
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Last Name: </label>
+    <div class="col">
+        @Patient.LastName
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Phone: </label>
+    <div class="col">
+        @Patient.Phone
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Email: </label>
+    <div class="col">
+        @Patient.Email
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Address: </label>
+    <div class="col">
+        @Patient.Address
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Date of Birth: </label>
+    <div class="col">
+        @Patient.DateOfBirth.ToShortDateString()
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Medications: </label>
+    <div class="col">
+        @Patient.Medications
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Gender: </label>
+    <div class="col">
+        @Patient.Gender
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Therapist ID: </label>
+    <div class="col">
+        @Patient.TherapistID
+    </div>
+</div>
+
+<br />
+
+<div>
+    <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+</div>

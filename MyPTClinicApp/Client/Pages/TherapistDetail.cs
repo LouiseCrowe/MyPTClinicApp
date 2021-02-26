@@ -14,6 +14,9 @@ namespace MyPTClinicApp.Client.Pages
         [Parameter]
         public string ID { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         public Therapist Therapist { get; set; } = new();
 
         private static readonly HttpClient client = new HttpClient();
@@ -26,7 +29,12 @@ namespace MyPTClinicApp.Client.Pages
             Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTask);            
         }
 
-      
+
+        protected void NavigateToOverview()
+        {
+            NavigationManager.NavigateTo("/therapistoverview");
+        }
+
 
     }
 }

@@ -408,7 +408,11 @@ C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicA
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.RazorComponent.input.cache
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\PatientDetail.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\PatientEdit.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\PatientOverview.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistDetail.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistOverview.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
@@ -420,7 +424,11 @@ C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicA
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.RazorCoreGenerate.cache
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\PatientDetail.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\PatientEdit.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\PatientOverview.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistDetail.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistOverview.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
@@ -632,5 +640,3 @@ C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicA
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.dll
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\ref\MyPTClinicApp.Client.dll
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.pdb
-C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistEdit.razor.g.cs
-C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistEdit.razor.g.cs

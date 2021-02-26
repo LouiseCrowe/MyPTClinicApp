@@ -2,14 +2,11 @@
 @page  "/therapistedit"
 @page "/therapistedit/{TherapistID}"
 
-
-
 @if (!Saved)
 {
     <section class="therapist-edit">
         <h1 class="page-title">Details for @Therapist.FirstName @Therapist.LastName</h1>
-        @*Use form to add or edit therapist*@
-    <EditForm Model="@Therapist" OnValidSubmit="@HandleValidSubmit"
+        <EditForm Model="@Therapist" OnValidSubmit="@HandleValidSubmit"
               OnInvalidSubmit="@HandleInvalidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary></ValidationSummary>

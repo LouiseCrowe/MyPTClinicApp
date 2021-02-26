@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Shared
 {
-    public class Client
+    public class Patient
     {
         [JsonPropertyName("iD")]
         public int ID { get; set; }
@@ -33,6 +29,7 @@ namespace MyPTClinicApp.Shared
         public DateTime DateOfBirth { get; set; }
 
         [JsonPropertyName("medications")]
+        [MaxLength(150, ErrorMessage = "Cannot exceed 150 characters")]
         public string Medications { get; set; }
 
         [JsonPropertyName("gender")]

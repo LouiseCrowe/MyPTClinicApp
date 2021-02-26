@@ -37,6 +37,6 @@ namespace MyPTClinicApp.Shared
         [MaxLength(150, ErrorMessage = "Cannot exceed 150 characters")]
         public string Location { get; set; }
 
-        public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }
