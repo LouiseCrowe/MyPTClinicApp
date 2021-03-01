@@ -15,36 +15,40 @@ namespace MyPTClinicApp.Client.Pages
         [Parameter]
         public string PatientID { get; set; }
 
-
-        // regardless of mode I will always be data binding on to a therapist
-        // so we create a public property we can data bind to
-        public Patient Patient { get; set; } = new();
+        public Patient Patient { get; set; } = new ();
 
         private static readonly HttpClient client = new HttpClient();
 
         private static readonly String baseURL = "https://localhost:5001/api/patients/";
 
+        // needed for inputting therapist 
+        private static readonly String therapistURL = "https://localhost:5001/api/therapists/";
 
-        // when await added an unhandled error occurred when loading page
+        public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
+
         protected override async Task OnInitializedAsync()
         {
             Saved = false;
 
             int.TryParse(PatientID, out var patientID);
 
+            // get a list of all valid therapists
+            var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
+            Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
+                                                (await streamTaskTherapists);
 
             if (patientID != 0)       // this is a patient to be updated so get json stream from db
             {
-                var streamTask = client.GetStreamAsync($"{baseURL}id/{patientID}");
-                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTask);
+                var streamTaskPatient = client.GetStreamAsync($"{baseURL}id/{patientID}");
+                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient);
             }
-            else                     // this is 
+            else                     // include default therapist for all new patients
             {
                 Patient = new Patient { TherapistID = 1 };         // set all patient to therapist 1
             }
         }
 
-
+        // to allow navigation back to overview
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
@@ -84,7 +88,8 @@ namespace MyPTClinicApp.Client.Pages
             {
                 var therapistJson = new StringContent(JsonSerializer.Serialize(Patient),
                                             Encoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PutAsync($"{baseURL}id/{Patient.ID}", therapistJson);
+                HttpResponseMessage httpResponse = await client.PutAsync($"{baseURL}id/{Patient.ID}", 
+                                                                            therapistJson);
 
                 httpResponse.EnsureSuccessStatusCode();
                 StatusClass = "alert-success";

@@ -19,14 +19,22 @@ namespace MyPTClinicApp.Client.Pages
 
         public Patient Patient { get; set; } = new();
 
+        public Therapist Therapist { get; set; } = new();
+
         private static readonly HttpClient client = new HttpClient();
 
         private static readonly String baseURL = "https://localhost:5001/api/patients/";
+        
+        private static readonly String therapistBaseURL = "https://localhost:5001/api/therapists/";
 
         protected override async Task OnInitializedAsync()
         {
             var streamTask = client.GetStreamAsync($"{baseURL}id/{ID}");
             Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTask);
+
+            var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Patient.TherapistID}");
+            Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist);
+
         }
 
         protected void NavigateToOverview()

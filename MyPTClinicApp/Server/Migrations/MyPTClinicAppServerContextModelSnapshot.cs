@@ -51,7 +51,8 @@ namespace MyPTClinicApp.Server.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Medications")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(50)
@@ -101,6 +102,34 @@ namespace MyPTClinicApp.Server.Migrations
                     b.ToTable("Therapist");
                 });
 
+            modelBuilder.Entity("MyPTClinicApp.Shared.Treatment", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PatientID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TherapistID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PatientID");
+
+                    b.HasIndex("TherapistID");
+
+                    b.ToTable("Treatment");
+                });
+
             modelBuilder.Entity("MyPTClinicApp.Shared.Patient", b =>
                 {
                     b.HasOne("MyPTClinicApp.Shared.Therapist", "Therapist")
@@ -110,9 +139,35 @@ namespace MyPTClinicApp.Server.Migrations
                     b.Navigation("Therapist");
                 });
 
+            modelBuilder.Entity("MyPTClinicApp.Shared.Treatment", b =>
+                {
+                    b.HasOne("MyPTClinicApp.Shared.Patient", "Patient")
+                        .WithMany("Treatments")
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyPTClinicApp.Shared.Therapist", "Therapist")
+                        .WithMany("Treatments")
+                        .HasForeignKey("TherapistID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Therapist");
+                });
+
+            modelBuilder.Entity("MyPTClinicApp.Shared.Patient", b =>
+                {
+                    b.Navigation("Treatments");
+                });
+
             modelBuilder.Entity("MyPTClinicApp.Shared.Therapist", b =>
                 {
                     b.Navigation("Patients");
+
+                    b.Navigation("Treatments");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -51,5 +52,7 @@ namespace MyPTClinicApp.Shared
 
         // navigation property to Therapist for this client
         public virtual Therapist Therapist { get; set; }
+
+        public virtual ICollection<Treatment> Treatments { get; set; }
     }
 }

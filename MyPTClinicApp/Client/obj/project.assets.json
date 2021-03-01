@@ -1170,40 +1170,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LouiseEmily\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MyPTClinicApp\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
+      "projectUniqueName": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
       "projectName": "MyPTClinicApp.Client",
-      "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
-      "packagesPath": "C:\\Users\\LouiseEmily\\.nuget\\packages\\",
-      "outputPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\MyPTClinicApp\\Client\\obj\\",
+      "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
+      "packagesPath": "C:\\Users\\LouiseCrowe\\.nuget\\packages\\",
+      "outputPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\LouiseEmily\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\LouiseCrowe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.telerik.com/nuget": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\MyPTClinicApp\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {
-              "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj"
+            "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {
+              "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj"
             }
           }
         }

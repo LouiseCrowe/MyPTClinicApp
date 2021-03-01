@@ -12,31 +12,20 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class TherapistEdit
     {
-
-        // need to have the ID of the therapist that's being edited when 
-        // we are in edit mode this page can be in two modes
-        // this was Blazor will search for the Therapist ID in the 
-        // query string when this component is being invoked
         [Parameter]
         public string TherapistID { get; set; }
 
-
-        // regardless of mode I will always be data binding on to a therapist
-        // so we create a public property we can data bind to
         public Therapist Therapist { get; set; } = new();
 
         private static readonly HttpClient client = new HttpClient();
 
         private static readonly String baseURL = "https://localhost:5001/api/therapists/";
 
-        
-        // when await added an unhandled error occurred when loading page
         protected override async Task OnInitializedAsync()
         {
             Saved = false;
 
             int.TryParse(TherapistID, out var therapistID);
-
 
             if (therapistID == 0)       // new therapist is being created
             {

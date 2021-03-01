@@ -38,5 +38,7 @@ namespace MyPTClinicApp.Shared
         public string Location { get; set; }
 
         public virtual ICollection<Patient> Patients { get; set; }
+
+        public virtual ICollection<Treatment> Treatments { get; set; }
     }
 }

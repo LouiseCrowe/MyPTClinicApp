@@ -3,6 +3,12 @@
 @using System.Linq
 @inject HttpClient Http
 
+@*@if (Patient == null || Patient.Therapist == null)
+{
+    <p><em>Retrieving patient information, it will just take a moment...</em></p>
+}
+else
+{*@ 
 <h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
 
 <br />
@@ -40,7 +46,7 @@
 <div class="form-group row">
     <label class="col-6 col-sm-3 col-form-label">Date of Birth: </label>
     <div class="col">
-        @Patient.DateOfBirth.ToShortDateString()
+        @Patient.DateOfBirth.ToLongDateString()
     </div>
 </div>
 <div class="form-group row">
@@ -55,15 +61,25 @@
         @Patient.Gender
     </div>
 </div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Therapist ID: </label>
+
+@*<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
     <div class="col">
-        @Patient.TherapistID
+        FROM NAVIGATIONAL PROPERTY @Patient.Therapist.FirstName @Patient.Therapist.LastName
+    </div>
+</div>*@
+
+
+<div class="form-group row">
+    <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
+    <div class="col">
+        @Therapist.FirstName @Therapist.LastName
     </div>
 </div>
 
-<br />
 
 <div>
     <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
 </div>
+
+

@@ -35,10 +35,10 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("id/{ID}", Name = "GetPatientById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Therapist> GetPatientById([FromRoute] int id)
+        public ActionResult<Patient> GetPatientById([FromRoute] int id)
         {
-            Patient patient = _context.Patient.SingleOrDefault
-                                            (t => t.ID == id);
+            Patient patient = _context.Patient.FirstOrDefault(p => p.ID == id);
+
             if (patient == null)
             {
                 return NotFound();
@@ -48,6 +48,25 @@ namespace MyPTClinicApp.Server.Controllers
                 return Ok(patient);
             }
         }
+
+        // GET: api/patients/therapistid/2
+        [HttpGet("therapistid/{ID}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<Patient>> GetPatientByTherapistId([FromRoute] int id)
+        {
+            IEnumerable<Patient> patients = _context.Patient.Where(p => p.TherapistID == id);
+
+            if (patients.Any())
+            {
+                return Ok(patients);                
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
 
         // PUT: api/patients/id/2
         [HttpPut("id/{id}")]
@@ -86,8 +105,7 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
-        // POST: api/patients
- 
+        // POST: api/patients 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -101,7 +119,7 @@ namespace MyPTClinicApp.Server.Controllers
 
 
         // DELETE: api/Patients/5
-        [HttpDelete("{id}")]
+        [HttpDelete("id/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

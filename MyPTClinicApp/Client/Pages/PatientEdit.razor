@@ -2,6 +2,7 @@
 @page  "/patientedit"
 @page "/patientedit/{PatientID}"
 
+@using MyPTClinicApp.Shared 
  
 
 @if (!Saved)
@@ -63,15 +64,18 @@
         <div class="form-group row">
             <label for="gender" class="col-sm-3">Gender: </label>
             <InputSelect id="gender" class="form-control col-sm-8" @bind-Value="Patient.Gender">
-                <option value="@(MyPTClinicApp.Shared.Gender.Male)">Male</option>
-                <option value="@(MyPTClinicApp.Shared.Gender.Female)">Female</option>
-                <option value="@(MyPTClinicApp.Shared.Gender.Other)">Other</option>
+                <option value="@(Gender.Male)">Male</option>
+                <option value="@(Gender.Female)">Female</option>
+                <option value="@(Gender.Other)">Other</option>
             </InputSelect>
         </div>
         <div class="form-group row">
             <label for="therapistId" class="col-sm-3">Therapist ID: </label>
-            <InputSelect id="therapistId" class="form-control col-sm-8" @bind-Value="Patient.TherapistID"
-                       placeholder="Enter Therapist ID">
+            <InputSelect id="therapistId" class="form-control col-sm-8" @bind-Value="Patient.TherapistID">
+                @foreach (var therapist in Therapists)
+	            {
+                <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
+	            }
             </InputSelect>            
         </div>
 
@@ -83,9 +87,10 @@
         <div>
             @if (Patient.ID > 0)
             {
-    <a class="btn btn-danger" @onclick="@DeletePatient">
-        Delete Patient
-    </a>}
+                <a class="btn btn-danger" @onclick="@DeletePatient">
+                Delete Patient
+            </a>
+            }
         </div>
         <br />
         <div>
