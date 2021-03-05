@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -35,12 +36,14 @@ namespace MyPTClinicApp.Client.Pages
             // get a list of all valid therapists
             var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
             Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-                                                (await streamTaskTherapists);
+                         (await streamTaskTherapists,
+                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             if (patientID != 0)       // this is a patient to be updated so get json stream from db
             {
                 var streamTaskPatient = client.GetStreamAsync($"{baseURL}id/{patientID}");
-                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient);
+                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient,
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             else                     // include default therapist for all new patients
             {

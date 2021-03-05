@@ -35,9 +35,10 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("id/{ID}", Name = "GetPatientById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Patient> GetPatientById([FromRoute] int id)
+        public async Task<ActionResult<Patient>> GetPatientById([FromRoute] int id)
         {
-            Patient patient = _context.Patient.FirstOrDefault(p => p.ID == id);
+            Patient patient = await _context.Patient.FirstOrDefaultAsync(p => p.ID == id);
+                              
 
             if (patient == null)
             {
@@ -53,13 +54,13 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("therapistid/{ID}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<Patient>> GetPatientByTherapistId([FromRoute] int id)
+        public async Task<ActionResult<IEnumerable<Patient>>> GetPatientByTherapistId([FromRoute] int id)
         {
-            IEnumerable<Patient> patients = _context.Patient.Where(p => p.TherapistID == id);
+            var patients = await _context.Patient.Where(p => p.TherapistID == id).ToListAsync();
 
-            if (patients.Any())
+            if (patients != null)
             {
-                return Ok(patients);                
+                return Ok(patients);
             }
             else
             {
@@ -72,12 +73,12 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult PutUpdatePatient([FromBody] Patient patient)
+        public async Task<ActionResult<Patient>> UpdatePatient([FromBody] Patient patient)
         {
             if (patient != null)
             {
                 // find therapist to update and confirm that Therapist ID is valid
-                var patientToUpdate = _context.Patient.FirstOrDefault(t => t.ID == patient.ID);
+                var patientToUpdate = await _context.Patient.FirstOrDefaultAsync(t => t.ID == patient.ID);
                 if (patientToUpdate == null)
                 {
                     return NotFound();
@@ -104,7 +105,7 @@ namespace MyPTClinicApp.Server.Controllers
                 return BadRequest();
             }
         }
-
+     
         // POST: api/patients 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]

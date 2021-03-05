@@ -62,13 +62,19 @@ else
     </div>
 </div>
 
-@*<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
-    <div class="col">
-        FROM NAVIGATIONAL PROPERTY @Patient.Therapist.FirstName @Patient.Therapist.LastName
+@if (Patient.Therapist == null)
+{
+    <p> Retrieving therpaist information..... </p>
+}
+else 
+{ 
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
+        <div class="col">
+            FROM NAVIGATIONAL PROPERTY @Patient.Therapist.FirstName @Patient.Therapist.LastName
+        </div>
     </div>
-</div>*@
-
+}
 
 <div class="form-group row">
     <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>

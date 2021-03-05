@@ -26,18 +26,18 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<Treatment>>> GetTreatment()
+        public async Task<ActionResult<IEnumerable<Treatment>>> GetTreatments()
         {
-            return await _context.Treatment.OrderBy(t => t.ID).ToListAsync();
+            return  await _context.Treatment.OrderBy(t => t.ID).ToListAsync();
         }
 
         // GET: api/treatments/id/2
         [HttpGet("id/{id}", Name = "GetTreatmentById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Treatment> GetTreatmentById([FromRoute] int id)
+        public async Task<ActionResult<Treatment>> GetTreatmentById([FromRoute] int id)
         {
-            Treatment treatment = _context.Treatment.SingleOrDefault(t => t.ID == id);
+            Treatment treatment = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == id);
 
             if (treatment == null)
             {
@@ -53,12 +53,12 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult PutUpdateTreatment([FromBody] Treatment treatment)
+        public async Task<ActionResult<Treatment>> PutUpdateTreatment([FromBody] Treatment treatment)
         {
             if (treatment != null)
             {
                 // find therapist to update
-                var treatmentToUpdate = _context.Treatment.FirstOrDefault(t => t.ID == treatment.ID);
+                var treatmentToUpdate = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatment.ID);
                 if (treatmentToUpdate == null)
                 {
                     return NotFound();

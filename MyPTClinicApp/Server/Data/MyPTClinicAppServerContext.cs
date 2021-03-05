@@ -11,7 +11,7 @@ namespace MyPTClinicApp.Server.Data
     {
         public MyPTClinicAppServerContext (DbContextOptions<MyPTClinicAppServerContext> options)
             : base(options)
-        {
+        {            
         }
 
         public DbSet<MyPTClinicApp.Shared.Therapist> Therapist { get; set; }

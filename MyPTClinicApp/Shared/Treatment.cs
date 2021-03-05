@@ -10,23 +10,18 @@ namespace MyPTClinicApp.Shared
 {
     public class Treatment
     {
-        [JsonPropertyName("iD")]
         public int ID { get; set; }
 
-        [JsonPropertyName("patientID")]         // foreign key - int cannot be null
-        public int PatientID { get; set; }
+        public int PatientID { get; set; }                  // foreign key 
 
-        [JsonPropertyName("therapistID")]        // foreign key - int cannot be null   
-        public int TherapistID { get; set; }
+        public int TherapistID { get; set; }                // foreign key 
 
-        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
-        [JsonPropertyName("notes")]
         public string Notes { get; set; }
 
-        public virtual Patient Patient { get; set; }
+        public virtual Patient Patient { get; set; }                // navigation property
 
-        public virtual Therapist Therapist { get; set; }
+        public virtual Therapist Therapist { get; set; }            // navigation property
     }
 }

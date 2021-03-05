@@ -33,8 +33,8 @@ namespace MyPTClinicApp.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddDbContext<MyPTClinicAppServerContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MyPTClinicAppServerContext")));
+            services.AddDbContext<MyPTClinicAppServerContext>(options => options
+                        .UseSqlServer(Configuration.GetConnectionString("MyPTClinicAppServerContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

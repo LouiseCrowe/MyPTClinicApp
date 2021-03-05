@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -30,11 +31,12 @@ namespace MyPTClinicApp.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             var streamTask = client.GetStreamAsync($"{baseURL}id/{ID}");
-            Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTask);
+            Patient = await JsonSerializer.DeserializeAsync<Patient>
+                (await streamTask, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Patient.TherapistID}");
-            Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist);
-
+            Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
+                        new JsonSerializerOptions(){ PropertyNameCaseInsensitive = true});
         }
 
         protected void NavigateToOverview()

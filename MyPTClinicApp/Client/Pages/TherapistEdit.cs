@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -35,7 +36,8 @@ namespace MyPTClinicApp.Client.Pages
             else
             {
                 var streamTask = client.GetStreamAsync($"{baseURL}id/{TherapistID}");
-                Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTask);
+                Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTask,
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
         }
 

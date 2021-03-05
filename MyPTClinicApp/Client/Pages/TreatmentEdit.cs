@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -40,17 +41,20 @@ namespace MyPTClinicApp.Client.Pages
             // get a list of all valid therapists
             var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
             Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-                                                (await streamTaskTherapists);
+                       (await streamTaskTherapists,
+                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             // get a list of all valid patients
             var streamTaskPatients = client.GetStreamAsync($"{patientURL}all");
             Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Patient>>
-                                                (await streamTaskPatients);
+                                                (await streamTaskPatients,
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             if (treatmentID != 0)       // this is a patient to be updated so get json stream from db
             {
                 var streamTaskTreatment = client.GetStreamAsync($"{baseURL}id/{treatmentID}");
-                Treatment = await JsonSerializer.DeserializeAsync<Treatment>(await streamTaskTreatment);
+                Treatment = await JsonSerializer.DeserializeAsync<Treatment>(await streamTaskTreatment,
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
             else
             {
@@ -132,7 +136,7 @@ namespace MyPTClinicApp.Client.Pages
 
         protected void NavigateToOverview()
         {
-            NavigationManager.NavigateTo("/patientoverview");
+            NavigationManager.NavigateTo("/treatmentoverview");
         }
 
     }

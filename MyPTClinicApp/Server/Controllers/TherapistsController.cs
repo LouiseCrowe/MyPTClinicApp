@@ -35,10 +35,10 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("id/{ID}", Name = "GetTherapistById")]  
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Therapist> GetTherapistById([FromRoute] int id)
+        public async Task<ActionResult<Therapist>> GetTherapistById([FromRoute] int id)
         {
-            Therapist therapist = _context.Therapist.SingleOrDefault
-                                            (t => t.ID == id);
+            Therapist therapist = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == id);
+
             if (therapist == null)
             {
                 return NotFound();
@@ -50,16 +50,28 @@ namespace MyPTClinicApp.Server.Controllers
             
         }
 
+        // POST: api/therapists
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Therapist>> PostTherapist(Therapist therapist)
+        {
+            _context.Therapist.Add(therapist);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTherapistById", new { id = therapist.ID }, therapist);
+        }
+
         // PUT: api/Therapists/id/3
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult PutUpdateTherapist([FromBody] Therapist therapist)
+        public async Task<ActionResult<Therapist>> PutUpdateTherapist([FromBody] Therapist therapist)
         {
             if (therapist != null)
             {
                 // find therapist to update
-                var therapistToUpdate = _context.Therapist.FirstOrDefault(t => t.ID == therapist.ID);
+                var therapistToUpdate = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapist.ID);
                 if (therapistToUpdate == null)
                 {
                     return NotFound();
@@ -84,19 +96,6 @@ namespace MyPTClinicApp.Server.Controllers
 
         }
         
-        
-        // POST: api/therapists
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Therapist>> PostTherapist(Therapist therapist)
-        {
-            _context.Therapist.Add(therapist);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTherapistById", new { id = therapist.ID }, therapist);
-        }
-
         // DELETE: api/Therapists/5
         [HttpDelete("id/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
