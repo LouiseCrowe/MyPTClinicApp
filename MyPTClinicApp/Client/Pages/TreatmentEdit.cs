@@ -30,7 +30,7 @@ namespace MyPTClinicApp.Client.Pages
         // needed for selecting patient 
         private static readonly String patientURL = "https://localhost:5001/api/patients/";
 
-        public IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
+        public IEnumerable<Therapist> Patients { get; set; } = new List<Therapist>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -46,7 +46,7 @@ namespace MyPTClinicApp.Client.Pages
 
             // get a list of all valid patients
             var streamTaskPatients = client.GetStreamAsync($"{patientURL}all");
-            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Patient>>
+            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
                                                 (await streamTaskPatients,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 

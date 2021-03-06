@@ -33,7 +33,7 @@ namespace MyPTClinicApp.Client.Pages
 
             int.TryParse(PatientID, out var patientID);
 
-            // get a list of all valid therapists
+            // get a list of all valid therapists to include in patient detail
             var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
             Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
                          (await streamTaskTherapists,

@@ -18,14 +18,6 @@ namespace MyPTClinicApp.Server.Models
             _context = context;
         }
 
-        public async Task<Patient> AddPatient(Patient patient)
-        {
-            var result = await _context.Patient.AddAsync(patient);
-            await _context.SaveChangesAsync();
-
-            return result.Entity;
-        }
-
         public async Task<IEnumerable<Patient>> GetPatients()
         {
             return await _context.Patient.OrderBy(p => p.ID).ToListAsync();
@@ -37,6 +29,24 @@ namespace MyPTClinicApp.Server.Models
         }
 
 
+        //Task<IEnumerable<Patient>> GetPatientsByTherapistId(int therapistId);
+
+        public async Task<IEnumerable<Patient>> GetPatientsByTherapistId(int therapistId)
+        {
+            // look for patients
+            var results =  _context.Patient.Where(p => p.TherapistID == therapistId).ToList();
+
+            return results;
+        }
+
+        public async Task<Patient> AddPatient(Patient patient)
+        {
+            var result = await _context.Patient.AddAsync(patient);
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
+        }
+        
         public async Task<Patient> UpdatePatient(Patient patient)
         {
             // find patient to update
@@ -53,23 +63,38 @@ namespace MyPTClinicApp.Server.Models
                 result.Address = patient.Address;
                 result.Medications = patient.Medications;
                 result.TherapistID = patient.TherapistID;
+
+                await _context.SaveChangesAsync();
+                return result;
             }
 
             return null;
         }
 
-        public async void DeletePatient(int patientId)
+        public async Task<Patient> DeletePatient(int patientId)
         {
-            // find Patient to delete
             var result = await _context.Patient.FirstOrDefaultAsync(p => p.ID == patientId);
 
             if (result != null)
             {
-                _context.Patient.Remove(result);
+                _context.Remove(result);
                 await _context.SaveChangesAsync();
+                //return result;
             }
-            
+
+            return result;
         }
 
+
+        public async Task<Patient> GetPatientByFullName(string firstName, string lastName)
+        {
+            return await _context.Patient.FirstOrDefaultAsync(t => t.FirstName.ToLower() == firstName.ToLower()
+                                                                && t.LastName.ToLower() == lastName.ToLower());
+        }
+
+       
+
+        
+        
     }
 }

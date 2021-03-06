@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1Mtk0OPlUujsFwaUx4e4fmeF6z9NcKn7+tXn7ahc7lvJ0zu781bYX7bOuPTFD/WtnMR5QCy4GhESqh78WmPDlg==",
+  "dgSpecHash": "P/55W+HIdvayjwcKME+iBxap29+brGGvEXVpv5TCR7yHgQGMGasOliDotuacDzbNmoUiHa5DuHeySyOSPD751A==",
   "success": true,
   "projectFilePath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

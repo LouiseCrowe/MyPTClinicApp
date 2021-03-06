@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MyPTClinicApp.Server.Data;
+using MyPTClinicApp.Server.Models;
 
 namespace MyPTClinicApp.Server
 {
@@ -32,6 +33,10 @@ namespace MyPTClinicApp.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<ITherapistRepository, TherapistRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<ITreatmentRepository, TreatmentRepository>();
 
             services.AddDbContext<MyPTClinicAppServerContext>(options => options
                         .UseSqlServer(Configuration.GetConnectionString("MyPTClinicAppServerContext")));

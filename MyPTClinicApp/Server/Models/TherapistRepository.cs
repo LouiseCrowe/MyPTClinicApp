@@ -28,6 +28,11 @@ namespace MyPTClinicApp.Server.Models
             return await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistId);
         }
 
+        public async Task<Therapist> GetTherapistByFullName(string firstName, string lastName)
+        {
+            return await _context.Therapist.FirstOrDefaultAsync(t => t.FirstName.ToLower() == firstName.ToLower()
+                                                                && t.LastName.ToLower() == lastName.ToLower());
+        }
 
         public async Task<Therapist> AddTherapist(Therapist therapist)
         {
@@ -39,7 +44,7 @@ namespace MyPTClinicApp.Server.Models
         public async Task<Therapist> UpdateTherapist(Therapist therapist)
         {
             // find therapist to update
-            var result = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapist.ID);
+            var result = await _context.Therapist.FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Therapist, bool>>)(t => t.ID == therapist.ID));
 
             if (result != null)
             {
@@ -57,15 +62,18 @@ namespace MyPTClinicApp.Server.Models
         }
 
         
-        public async void DeleteTherapist(int therapistId)
+        public async Task<Therapist> DeleteTherapist(int therapistId)
         {
-            var result = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistId);
+            var result = await _context.Therapist.FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Therapist, bool>>)(t => t.ID == therapistId));
 
             if (result != null)
             {
                 _context.Remove(result);
                 await _context.SaveChangesAsync();
+                //return result;
             }
+
+            return result;
         }
 
     }

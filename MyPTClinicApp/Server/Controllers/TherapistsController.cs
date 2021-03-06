@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPTClinicApp.Server.Data;
+using MyPTClinicApp.Server.Models;
 using MyPTClinicApp.Shared;
 
 namespace MyPTClinicApp.Server.Controllers
@@ -15,12 +16,14 @@ namespace MyPTClinicApp.Server.Controllers
     [ApiController]
     public class TherapistsController : ControllerBase
     {
-        private readonly MyPTClinicAppServerContext _context;
 
-        public TherapistsController(MyPTClinicAppServerContext context)
+        private readonly ITherapistRepository therapistRepository;
+
+        public TherapistsController(ITherapistRepository therapistRepository)
         {
-            _context = context;
+            this.therapistRepository = therapistRepository;
         }
+
 
         // GET: api/therapists/all
         [HttpGet("all")]
@@ -28,26 +31,39 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<Therapist>>> GetAllTherapists()
         {
-            return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
+            try
+            {
+                return Ok(await therapistRepository.GetTherapists());
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }            
         }
 
         // GET: api/Therapists/id/2
         [HttpGet("id/{ID}", Name = "GetTherapistById")]  
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Therapist>> GetTherapistById([FromRoute] int id)
+        public async Task<ActionResult<Therapist>> GetTherapistById(int id)
         {
-            Therapist therapist = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == id);
 
-            if (therapist == null)
+            try
             {
-                return NotFound();
+                var result = await therapistRepository.GetTherapistById(id);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
             }
-            else
+            catch (Exception)
             {
-                return Ok(therapist);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
             }
-            
         }
 
         // POST: api/therapists
@@ -56,68 +72,96 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Therapist>> PostTherapist(Therapist therapist)
         {
-            _context.Therapist.Add(therapist);
-            await _context.SaveChangesAsync();
+            try
+            {
+                if (therapist == null)
+                {
+                    return BadRequest();
+                }
 
-            return CreatedAtAction("GetTherapistById", new { id = therapist.ID }, therapist);
+                //// check for duplicate full name
+                //var found = therapistRepository.GetTherapistByFullName(therapist.FirstName, therapist.LastName);
+
+                //if (found != null)
+                //{
+                //    ModelState.AddModelError("Full Name", "Full Name already in use");
+                //    return BadRequest(ModelState);
+                //}
+
+                var addedTherapist = await therapistRepository.AddTherapist(therapist);
+
+                return CreatedAtAction("GetTherapistById", 
+                                        new { id = addedTherapist.ID }, 
+                                        addedTherapist);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                                   "Error adding data");
+            }        
         }
 
         // PUT: api/Therapists/id/3
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Therapist>> PutUpdateTherapist([FromBody] Therapist therapist)
+        public async Task<ActionResult<Therapist>> UpdateTherapist(int id, [FromBody] Therapist therapist)
         {
-            if (therapist != null)
+
+            try
             {
+                if (id != therapist.ID)
+                {
+                    return BadRequest("Therapist ID mismatch");
+                }
+
                 // find therapist to update
-                var therapistToUpdate = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapist.ID);
+                var therapistToUpdate = await therapistRepository.GetTherapistById(id);
+
                 if (therapistToUpdate == null)
                 {
-                    return NotFound();
+                    return NotFound($"Therapist with ID {id} not found");
                 }
-                else
-                {
-                    therapistToUpdate.FirstName = therapist.FirstName;
-                    therapistToUpdate.LastName = therapist.LastName;
-                    therapistToUpdate.Phone = therapist.Phone;
-                    therapistToUpdate.Email = therapist.Email;
-                    therapistToUpdate.Location = therapist.Location;
+                
+                return await therapistRepository.UpdateTherapist(therapist);
 
-                    _context.SaveChanges();
-
-                    return NoContent();
-                }
             }
-            else
+            catch (Exception)
             {
-                return BadRequest();
-            }
-
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                    "Error updating data");
+            }            
         }
-        
+
         // DELETE: api/Therapists/5
         [HttpDelete("id/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> DeleteTherapist(int id)
+        public async Task<ActionResult<Therapist>> DeleteTherapist(int id)
         {
-            var therapist = await _context.Therapist.FindAsync(id);
-            if (therapist == null)
+            try
             {
-                return NotFound();
+                var therapistToDelete = await therapistRepository.GetTherapistById(id);
+
+                if (therapistToDelete == null)
+                {
+                    return NotFound($"Therapist with ID {id} not found");
+                }
+
+                return await therapistRepository.DeleteTherapist(id);                
+                
             }
-
-            _context.Therapist.Remove(therapist);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error deleting data");
+            }
         }
 
-        private bool TherapistExists(int id)
-        {
-            return _context.Therapist.Any(e => e.ID == id);
-        }
+        //private bool TherapistExists(int id)
+        //{
+        //    return _context.Therapist.Any(e => e.ID == id);
+        //}
     }
 }

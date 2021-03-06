@@ -10,7 +10,6 @@ namespace MyPTClinicApp.Server.Models
 {
     public class TreatmentRepository : ITreatmentRepository
     {
-
         public MyPTClinicAppServerContext _context { get; }
 
         public TreatmentRepository(MyPTClinicAppServerContext context)

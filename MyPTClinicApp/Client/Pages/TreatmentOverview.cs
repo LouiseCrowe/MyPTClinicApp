@@ -23,7 +23,7 @@ namespace MyPTClinicApp.Client.Pages
         private static readonly String therapistBaseURL = "https://localhost:5001/api/therapists/";
 
         // to display patient info
-        public IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
+        public IEnumerable<Therapist> Patients { get; set; } = new List<Therapist>();
         private static readonly String patientBaseURL = "https://localhost:5001/api/patients/";
 
         protected override async Task OnInitializedAsync()
@@ -37,7 +37,7 @@ namespace MyPTClinicApp.Client.Pages
                   (await streamTaskTherapist, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             var streamTaskPatients = client.GetStreamAsync($"{patientBaseURL}all");
-            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Patient>>
+            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
                  (await streamTaskPatients, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 

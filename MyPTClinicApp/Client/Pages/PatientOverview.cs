@@ -13,14 +13,14 @@ namespace MyPTClinicApp.Client.Pages
     {
         private static readonly HttpClient client = new HttpClient();
 
-        private IEnumerable<Patient> Patients { get; set; }
+        private IEnumerable<Therapist> Patients { get; set; }
 
         private static readonly String baseURL = "https://localhost:5001/api/patients/";
 
         protected override async Task OnInitializedAsync()
         {
             var streamTask = client.GetStreamAsync($"{baseURL}all");
-            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Patient>>
+            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
                      (await streamTask,
                      new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }

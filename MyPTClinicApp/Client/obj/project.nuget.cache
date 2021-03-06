@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KeMSiDPah6TYW+73AivpKAV3c/MH2ZILwzjxDJFB6gh36H8ZfvviDscM07tBV8bAwiIhaXDyPsg87B2WFlkxCg==",
+  "dgSpecHash": "bmLS0EzXAEh9S/EigSKxjYsMDASOPtnisoQq+X37HtqehFxnTL7l7l0ew0RbqzeT66fHHxWw8XRLrmN5hvzYww==",
   "success": true,
   "projectFilePath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\microsoft.jsinterop\\5.0.3\\microsoft.jsinterop.5.0.3.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\microsoft.jsinterop.webassembly\\5.0.3\\microsoft.jsinterop.webassembly.5.0.3.nupkg.sha512",
+    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.3\\microsoft.netcore.app.runtime.browser-wasm.5.0.3.nupkg.sha512"
