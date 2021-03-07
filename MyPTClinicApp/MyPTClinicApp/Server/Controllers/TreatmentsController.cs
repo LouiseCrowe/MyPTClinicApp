@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPTClinicApp.Server.Data;
+using MyPTClinicApp.Server.Models;
 using MyPTClinicApp.Shared;
 
 namespace MyPTClinicApp.Server.Controllers
@@ -15,11 +16,11 @@ namespace MyPTClinicApp.Server.Controllers
     [ApiController]
     public class TreatmentsController : ControllerBase
     {
-        private readonly MyPTClinicAppServerContext _context;
+        private readonly ITreatmentRepository treatmentRepository;
 
-        public TreatmentsController(MyPTClinicAppServerContext context)
+        public TreatmentsController(ITreatmentRepository treatmentRepository)
         {
-            _context = context;
+            this.treatmentRepository = treatmentRepository;
         }
 
         // GET: api/treatments/all
@@ -28,56 +29,38 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<Treatment>>> GetTreatments()
         {
-            return  await _context.Treatment.OrderBy(t => t.ID).ToListAsync();
+            try
+            {
+                return Ok(await treatmentRepository.GetTreatments());
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: api/treatments/id/2
         [HttpGet("id/{id}", Name = "GetTreatmentById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Treatment>> GetTreatmentById([FromRoute] int id)
         {
-            Treatment treatment = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == id);
+            try
+            {
+                var result = await treatmentRepository.GetTreatmentById(id);
 
-            if (treatment == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(treatment);
-            }            
-        }
-
-        // PUT: api/treatments/id/2
-        [HttpPut("id/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Treatment>> PutUpdateTreatment([FromBody] Treatment treatment)
-        {
-            if (treatment != null)
-            {
-                // find therapist to update
-                var treatmentToUpdate = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatment.ID);
-                if (treatmentToUpdate == null)
+                if (result == null)
                 {
-                    return NotFound();
+                    return NotFound($"Treatment with id {id} not found");
                 }
-                else
-                {
-                    treatmentToUpdate.PatientID = treatment.PatientID;
-                    treatmentToUpdate.TherapistID = treatment.TherapistID;
-                    treatmentToUpdate.Date = treatment.Date;
-                    treatmentToUpdate.Notes = treatment.Notes;
-                    
-                    _context.SaveChanges();
 
-                    return NoContent();
-                }
+                return Ok(result);
             }
-            else
+            catch (Exception)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
             }
         }
 
@@ -87,10 +70,55 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Treatment>> PostTreatment(Treatment treatment)
         {
-            _context.Treatment.Add(treatment);
-            await _context.SaveChangesAsync();
+            try
+            {
+                if (treatment == null)
+                {
+                    return BadRequest();
+                }
+                                
+                var addedTreatment = await treatmentRepository.AddTreatment(treatment);
 
-            return CreatedAtAction("GetTreatmentById", new { id = treatment.ID }, treatment);
+                return CreatedAtAction("GetTreatmentById",
+                                        new { id = addedTreatment.ID }, 
+                                        addedTreatment);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error adding data");
+            }
+        }
+
+        // PUT: api/treatments/id/2
+        [HttpPut("id/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Treatment>> PutUpdateTreatment(int id, [FromBody] Treatment treatment)
+        {
+            try
+            {
+                if (id != treatment.ID)
+                {
+                    return BadRequest("Treatment ID mismatch");
+                }
+
+                // find treatment to update
+                var treatmentToUpdate = await treatmentRepository.GetTreatmentById(id);
+
+                if (treatmentToUpdate == null)
+                {
+                    return NotFound($"Treatment with ID {id} not found");
+                }
+
+                return await treatmentRepository.UpdateTreatment(treatment);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error updating data");
+            }
+
         }
 
         // DELETE: api/Treatments/id/5
@@ -98,23 +126,30 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> DeleteTreatment(int id)
+        public async Task<ActionResult<Treatment>> DeleteTreatment(int id)
         {
-            var treatment = await _context.Treatment.FindAsync(id);
-            if (treatment == null)
+            try
             {
-                return NotFound();
+                // find treatment to delete
+                var treatmentToDelete = await treatmentRepository.GetTreatmentById(id);
+
+                if (treatmentToDelete == null)
+                {
+                    return NotFound($"Treatment with ID {id} not found");
+                }
+
+                return await treatmentRepository.DeleteTreatment(id);
             }
-
-            _context.Treatment.Remove(treatment);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  "Error deleting data");
+            }
         }
 
-        private bool TreatmentExists(int id)
-        {
-            return _context.Treatment.Any(e => e.ID == id);
-        }
+        //private bool TreatmentExists(int id)
+        //{
+        //    return _context.Treatment.Any(e => e.ID == id);
+        //}
     }
 }

@@ -56,16 +56,19 @@ namespace MyPTClinicApp.Server.Models
             return null;
         }
 
-        public async void DeleteTreatment(int treatmentId)
+        public async Task<Treatment> DeleteTreatment(int treatmentId)
         {
             // find treatment to delete
-            var result = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
+            var treatmentToDelete = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
 
-            if (result != null)
+            if (treatmentToDelete != null)
             {
-                _context.Treatment.Remove(result);
+                _context.Treatment.Remove(treatmentToDelete);
                 await _context.SaveChangesAsync();
+                return treatmentToDelete;
             }
+
+            return null;
         }
     }
 }

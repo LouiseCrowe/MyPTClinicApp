@@ -13,6 +13,6 @@ namespace MyPTClinicApp.Server.Models
         Task<Therapist> GetTherapistByFullName(string firstName, string lastName);
         Task<Therapist> UpdateTherapist(Therapist therapist);
         Task<Therapist> AddTherapist(Therapist therapist);
-        Task<Therapist> DeleteTherapist(int therapistId);
+        Task<Therapist> DeleteTherapist(int id);
     }
 }

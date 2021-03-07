@@ -22,7 +22,7 @@ namespace MyPTClinicApp.Client.Pages
             var streamTask = client.GetStreamAsync($"{baseURL}all");
             Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
                      (await streamTask,
-                     new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                     new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
         }
     }
 }

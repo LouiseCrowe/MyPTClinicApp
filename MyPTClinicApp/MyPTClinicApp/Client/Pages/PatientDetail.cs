@@ -36,7 +36,7 @@ namespace MyPTClinicApp.Client.Pages
 
             var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Patient.TherapistID}");
             Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
-                        new JsonSerializerOptions(){ PropertyNameCaseInsensitive = true});
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         protected void NavigateToOverview()

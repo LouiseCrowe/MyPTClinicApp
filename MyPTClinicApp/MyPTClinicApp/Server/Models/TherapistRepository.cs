@@ -70,10 +70,10 @@ namespace MyPTClinicApp.Server.Models
             {
                 _context.Remove(result);
                 await _context.SaveChangesAsync();
-                //return result;
+                return result;
             }
 
-            return result;
+            return null;
         }
 
     }
