@@ -24,6 +24,32 @@ namespace MyPTClinicApp.Server.Controllers
             this.therapistRepository = therapistRepository;
         }
 
+        // search criteria
+        // GET: api/therapists/search
+        [HttpGet("{search}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Therapist>>> Search(string name)
+        {
+            try
+            {
+                var result = await therapistRepository.Search(name);
+
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
+
 
         // GET: api/therapists/all
         [HttpGet("all")]
@@ -47,7 +73,6 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Therapist>> GetTherapistById(int id)
         {
-
             try
             {
                 var result = await therapistRepository.GetTherapistById(id);
@@ -122,15 +147,15 @@ namespace MyPTClinicApp.Server.Controllers
                 {
                     return NotFound($"Therapist with ID {id} not found");
                 }
-                
+
                 return await therapistRepository.UpdateTherapist(therapist);
 
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, 
+                return StatusCode(StatusCodes.Status500InternalServerError,
                     "Error updating data");
-            }            
+            }
         }
 
         // DELETE: api/Therapists/5

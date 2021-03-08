@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
@@ -62,8 +63,8 @@ namespace MyPTClinicApp.Client.Pages
 
             Saved = false;
 
-            if(Therapist.ID == 0)       // this means a new therapist is being added
-            { 
+            if (Therapist.ID == 0)       // this means a new therapist is being added
+            {
                 var addedTherapist = new StringContent(JsonSerializer.Serialize(Therapist),
                                             UnicodeEncoding.UTF8, "application/json");
                 HttpResponseMessage httpResponse = await client.PostAsync(baseURL, addedTherapist);
@@ -119,7 +120,7 @@ namespace MyPTClinicApp.Client.Pages
 
 
 
-    protected void NavigateToOverview()
+        protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/therapistoverview");
         }

@@ -18,6 +18,21 @@ namespace MyPTClinicApp.Server.Models
             _context = context;
         }
 
+        public async Task<IEnumerable<Therapist>> Search(string name)
+        {
+            // returns complete list of Therapists
+            IQueryable<Therapist> query = _context.Therapist;
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(t => t.FirstName.Contains(name) 
+                                    || t.LastName.Contains(name));
+            }
+
+            return await query.ToListAsync();
+        }
+
+
         public async Task<IEnumerable<Therapist>> GetTherapists()
         {
             return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
@@ -74,7 +89,6 @@ namespace MyPTClinicApp.Server.Models
             }
 
             return null;
-        }
-
+        }       
     }
 }

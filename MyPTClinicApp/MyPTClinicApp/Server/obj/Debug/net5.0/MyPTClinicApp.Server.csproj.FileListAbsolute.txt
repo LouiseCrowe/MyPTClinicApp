@@ -191,3 +191,4 @@ C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\runtimes\wi
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Castle.Core.dll
 C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Microsoft.AspNetCore.Blazor.HttpClient.dll

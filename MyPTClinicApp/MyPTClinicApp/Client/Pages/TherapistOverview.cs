@@ -1,4 +1,6 @@
-﻿using MyPTClinicApp.Shared;
+﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
+using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +13,35 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class TherapistOverview
     {
-        private static readonly HttpClient client = new HttpClient();
-        
+        [Inject]
+        public ITherapistService TherapistService { get; set; }
+
         private IEnumerable<Therapist> Therapists { get; set; }
 
-        private static readonly String baseURL = "https://localhost:5001/api/therapists/";
+        private IEnumerable<Patient> Patients { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-                var streamTask = client.GetStreamAsync($"{baseURL}all");
-                Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-                       (await streamTask,
-                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            Therapists = (await TherapistService.GetTherapists()).ToList();  
+            
         }
 
+
+
+        //    // Original calls 
+        //    private IEnumerable<Therapist> Therapists { get; set; }
+
+        //    private static readonly HttpClient client = new HttpClient();
+
+        //    private static readonly String baseURL = "https://localhost:5001/api/therapists/";
+
+
+        //    protected override async Task OnInitializedAsync()
+        //    {
+        //        var streamTask = client.GetStreamAsync($"{baseURL}all");
+        //        Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
+        //               (await streamTask,
+        //               new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //    }
     }
 }

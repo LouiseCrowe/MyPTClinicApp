@@ -8,10 +8,14 @@
   "resources": {
     "assembly": {
       "Microsoft.AspNetCore.Authorization.dll": "sha256-hBmEudhpdeLXLU5KNzx5bBkI9o4ZurJu15U6afmGyIg=",
+      "Microsoft.AspNetCore.Blazor.HttpClient.dll": "sha256-1xfOnnlZZg19s2R3vH\/UX9m3dprauIFLdeaYzgmiwc0=",
       "Microsoft.AspNetCore.Components.dll": "sha256-YYHd2lVuYwtRTYNBtWL5k+alBHjMQGBqMwwgixqG9Ak=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-UCDJr7\/sSWmGNxe2PdesHLGuJ4DDhl80kt\/tIVZWHek=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-3xdazV4ZzJeovsJfSuAf6fDNtYdN6s8\/Jb07Ad4ba14=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-97KtZg0QVFDfIPBAh8dCa7c7uEsp4E6nZ4nQaVPUJio=",
+      "Microsoft.AspNetCore.Http.Abstractions.dll": "sha256-qFKmKNr9iAZiZxOVvLJBfMhkKfDy1GvY81fHh1hiphU=",
+      "Microsoft.AspNetCore.Http.Extensions.dll": "sha256-dsGZ+sGJdrYngMg72CIF31THFtl6ovcKTjtGtj9orn8=",
+      "Microsoft.AspNetCore.Http.Features.dll": "sha256-J2xQUZ4BD6tsrQkvGS5HDQfkTGMzmaS76TA9nJrtCpg=",
       "Microsoft.AspNetCore.Metadata.dll": "sha256-tYBkgcpE9Uhi+xZAH+XLgtMNHASeCWzvIjDrtyKGN6o=",
       "Microsoft.Extensions.Configuration.dll": "sha256-x9zYR1t1is\/fStNpBiQnXyPdMpLLcQcra3w4RXGSg4o=",
       "Microsoft.Extensions.Configuration.Abstractions.dll": "sha256-NYecKM0ZpUvzj4spvgi6xUu80rkx8PX7fiRok\/BNaHw=",
@@ -29,6 +33,7 @@
       "Microsoft.Extensions.Primitives.dll": "sha256-f2PgoftqEkKRuuiAk6S1MHygOuqZBHzB0HOB3vR93TU=",
       "Microsoft.JSInterop.dll": "sha256-nRrEUPsQERx39N5116F8869epzUx5PHVOexlygwlEaw=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-4vJK1Cg+6YCG2LXoMEVEqy8bqawD3HL16+WNXWIzVCU=",
+      "Microsoft.Net.Http.Headers.dll": "sha256-P66ftDrXwc6ayND8uYzIk0CPQy1GjNZAPHx9RMhi3V4=",
       "System.IO.Pipelines.dll": "sha256-3ET+mpR7F058YRj9YaLHOVXBqOW6iUxtIpeiKPYw4PA=",
       "Microsoft.CSharp.dll": "sha256-p6Zo15zz3qX\/9gWFiC8okcmNldkS8Ql+qU\/m5khmjBw=",
       "Microsoft.VisualBasic.Core.dll": "sha256-lVbiJ8H9FeZTTzlcLegk3QRCf2YnDu3h1Pg30r6\/KxE=",
@@ -196,12 +201,12 @@
       "netstandard.dll": "sha256-FbW0xcZkySFb6B8yBpUE8XmaiMacDVdXdN9GeDH6xu4=",
       "System.Private.CoreLib.dll": "sha256-AQbVm+Z+NByScjRZWDWQnNUk5PBVgwCSWPLQN4YxxZs=",
       "MyPTClinicApp.Shared.dll": "sha256-L3uL5fYP7Fvlxh\/SUu1o7iuAVUIi1bGWUbahsA5DuuA=",
-      "MyPTClinicApp.Client.dll": "sha256-cHlC4Ebx8rNiI8NhJdg7GwLybPdlsZrKgOFr7nxOuZM="
+      "MyPTClinicApp.Client.dll": "sha256-QD7VQGtei5zlJTaYcIL9UEd2fWCoF\/zk8+NY9kAqdps="
     },
     "lazyAssembly": null,
     "pdb": {
       "MyPTClinicApp.Shared.pdb": "sha256-Fyc86jP+tptdeab0UoIS5VHcanEnRBDPN4dFni99m48=",
-      "MyPTClinicApp.Client.pdb": "sha256-XhKgBui+oI2pN6FaWUcIIJo+qHCXIie5OJL2+hiSDK4="
+      "MyPTClinicApp.Client.pdb": "sha256-tMX2sL1EIjozNBfuTOgrSzcp74um28pm748po8GW2T4="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-rFG55cwkAnfHzxmxwBL2tTwfj8X8cjcSEAlco4bc1eo=",

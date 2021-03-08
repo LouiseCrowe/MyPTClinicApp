@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
@@ -18,30 +19,43 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        [Inject]
+        public IPatientService PatientService { get; set; }
+
         public Patient Patient { get; set; } = new();
-
-        public Therapist Therapist { get; set; } = new();
-
-        private static readonly HttpClient client = new HttpClient();
-
-        private static readonly String baseURL = "https://localhost:5001/api/patients/";
-        
-        private static readonly String therapistBaseURL = "https://localhost:5001/api/therapists/";
 
         protected override async Task OnInitializedAsync()
         {
-            var streamTask = client.GetStreamAsync($"{baseURL}id/{ID}");
-            Patient = await JsonSerializer.DeserializeAsync<Patient>
-                (await streamTask, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-
-            var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Patient.TherapistID}");
-            Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            Patient = await PatientService.GetPatientById(int.Parse(ID));
         }
+
+
 
         protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/patientoverview");
         }
+
+
+        //Original not abstracted PatientDetail Service
+        //public Therapist Therapist { get; set; } = new();
+
+        //private static readonly HttpClient client = new HttpClient();
+
+        //private static readonly String baseURL = "https://localhost:5001/api/patients/";
+
+        //private static readonly String therapistBaseURL = "https://localhost:5001/api/therapists/";
+
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    var streamTask = client.GetStreamAsync($"{baseURL}id/{ID}");
+        //    Patient = await JsonSerializer.DeserializeAsync<Patient>
+        //        (await streamTask, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+        //    var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Patient.TherapistID}");
+        //    Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
+        //                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        //}
+
     }
 }

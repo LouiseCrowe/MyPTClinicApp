@@ -126,21 +126,16 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Patient>> UpdatePatient(int id, [FromBody] Patient patient)
+        public async Task<ActionResult<Patient>> UpdatePatient([FromBody] Patient patient)
         {
             try
             {
-                if (id != patient.ID)
-                {
-                    return BadRequest("Patient ID mismatch");
-                }
-
                 // find patient to update
-                var patientToUpdate = await patientRepository.GetPatientById(id);
+                var patientToUpdate = await patientRepository.GetPatientById(patient.ID);
 
                 if (patientToUpdate == null)
                 {
-                    return NotFound($"Patient with ID {id} not found");
+                    return NotFound($"Patient with ID {patient.ID} not found");
                 }
 
                 return await patientRepository.UpdatePatient(patient);

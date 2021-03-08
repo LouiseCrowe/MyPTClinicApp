@@ -1,4 +1,6 @@
-﻿using MyPTClinicApp.Shared;
+﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
+using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +13,14 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class PatientOverview
     {
-        private static readonly HttpClient client = new HttpClient();
+        [Inject]
+        public IPatientService PatientService { get; set; }
 
-        private IEnumerable<Therapist> Patients { get; set; }
-
-        private static readonly String baseURL = "https://localhost:5001/api/patients/";
+        public IEnumerable<Patient> Patients { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            var streamTask = client.GetStreamAsync($"{baseURL}all");
-            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-                     (await streamTask,
-                     new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
+            Patients = (await PatientService.GetPatients()).ToList();
         }
     }
 }

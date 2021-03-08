@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,27 @@ namespace MyPTClinicApp.Client.Pages
         [Parameter]
         public string ID { get; set; }
 
-        [Inject]
+        //[Inject]
+        //public ITherapistService TherapistService { get; set; }
+        //public IPatientService PatientService { get; set; }
+
+       [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        //public Therapist Therapist { get; set; } = new();
+
+        //public IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
+
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    Therapist = await TherapistService.GetTherapistById(int.Parse(ID));
+        //    //Patients = (await PatientService.GetPatients()).ToList();
+        //}
+
+        protected void NavigateToOverview()
+        {
+            NavigationManager.NavigateTo("/therapistoverview");
+        }
 
         public Therapist Therapist { get; set; } = new();
 
@@ -38,13 +58,5 @@ namespace MyPTClinicApp.Client.Pages
             Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>(await streamTaskPatients,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
-
-
-        protected void NavigateToOverview()
-        {
-            NavigationManager.NavigateTo("/therapistoverview");
-        }
-
-
     }
 }

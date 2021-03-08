@@ -10,6 +10,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MyPTClinicApp.Server.Data;
 using MyPTClinicApp.Server.Models;
+using MyPTClinicApp.Client.Services;
+using System;
 
 namespace MyPTClinicApp.Server
 {
@@ -19,8 +21,6 @@ namespace MyPTClinicApp.Server
         {
             Configuration = configuration;
         }
-
-        
 
         public IConfiguration Configuration { get; }
 
@@ -38,12 +38,16 @@ namespace MyPTClinicApp.Server
 
             services.AddDbContext<MyPTClinicAppServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MyPTClinicAppServerContext")));
-                    
-
+            
             services.AddScoped<ITherapistRepository, TherapistRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentRepository>();
 
+            services.AddHttpClient<ITherapistService, TherapistService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/");
+            }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
