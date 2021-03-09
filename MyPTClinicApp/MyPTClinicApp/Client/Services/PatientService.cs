@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Services
@@ -17,9 +19,11 @@ namespace MyPTClinicApp.Client.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<Patient> GetPatientById(int id)
+        public Patient Patient { get; set; }
+
+        public async Task<PatientDTO> GetPatientById(int id)
         {
-            return await httpClient.GetJsonAsync<Patient>($"api/patients/id/{id}");            
+            return await httpClient.GetJsonAsync<PatientDTO>($"api/patients/id/{id}");
         }
 
         public async Task<IEnumerable<Patient>> GetPatients()

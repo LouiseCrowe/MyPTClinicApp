@@ -38,14 +38,13 @@ namespace MyPTClinicApp.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                                    "Error retrieving data from the database");
             }
-
         }
 
         // GET: api/patients/id/2
         [HttpGet("id/{ID}", Name = "GetPatientById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Patient>> GetPatientById([FromRoute] int id)
+        public async Task<ActionResult<PatientDTO>> GetPatientById([FromRoute] int id)
         {
 
             try

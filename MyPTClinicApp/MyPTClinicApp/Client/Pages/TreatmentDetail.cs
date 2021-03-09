@@ -21,7 +21,7 @@ namespace MyPTClinicApp.Client.Pages
         public Treatment Treatment { get; set; } = new();
 
         public Therapist Therapist { get; set; } = new();
-        public Therapist Patient { get; set; } = new();
+        public Patient Patient { get; set; } = new();
 
         private static readonly HttpClient client = new HttpClient();
 
@@ -38,7 +38,7 @@ namespace MyPTClinicApp.Client.Pages
                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             var streamTaskPatient = client.GetStreamAsync($"{patientBaseURL}id/{Treatment.PatientID}");
-            Patient = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskPatient,
+            Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
             var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Treatment.TherapistID}");

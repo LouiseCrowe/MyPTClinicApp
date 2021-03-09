@@ -22,14 +22,12 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public IPatientService PatientService { get; set; }
 
-        public Patient Patient { get; set; } = new();
+        public PatientDTO Patient { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
             Patient = await PatientService.GetPatientById(int.Parse(ID));
         }
-
-
 
         protected void NavigateToOverview()
         {

@@ -9,86 +9,58 @@
 }
 else
 {
-<h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
+    <h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
 
-<br />
+    <br />
 
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">First Name: </label>
-    <div class="col">
-        @Patient.FirstName
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Patient Name: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.FirstName @Patient.LastName</label>
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Last Name: </label>
-    <div class="col">
-        @Patient.LastName
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Phone: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.Phone</label>            
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Phone: </label>
-    <div class="col">
-        @Patient.Phone
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Email: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.Email</label>
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Email: </label>
-    <div class="col">
-        @Patient.Email
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Address: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.Address</label>            
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Address: </label>
-    <div class="col">
-        @Patient.Address
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Date of Birth: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.DateOfBirth.ToLongDateString()</label>            
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Date of Birth: </label>
-    <div class="col">
-        @Patient.DateOfBirth.ToLongDateString()
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Medications: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.Medications</label>            
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Medications: </label>
-    <div class="col">
-        @Patient.Medications
+    <div class="form-group row">
+        <label class="col-6 col-sm-3 col-form-label">Gender: </label>
+        <div class="col">
+            <label type="text" readonly class="form-control-plaintext">@Patient.Gender</label>
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Gender: </label>
-    <div class="col">
-        @Patient.Gender
-    </div>
-</div>
-
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Therapist ID: </label>
-    <div class="col">
-        @Patient.TherapistID
-    </div>
-</div>
-
-@if (Patient.Therapist == null)
-{
-    <p> Retrieving therapist information..... </p>
-}
-else
-{
     <div class="form-group row">
         <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
         <div class="col">
-            FROM NAVIGATIONAL PROPERTY @Patient.Therapist.FirstName @Patient.Therapist.LastName
+            <label type="text" readonly class="form-control-plaintext">@Patient.TherapistFirstName @Patient.TherapistLastName</label>            
         </div>
-    </div>
-}
-
-<div class="form-group row">
-    <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
-    <div class="col"> Commented out for now
-        @*@Therapist.FirstName @Therapist.LastName*@
-    </div>
-</div>
+    </div>    
 }
 
 <div>
