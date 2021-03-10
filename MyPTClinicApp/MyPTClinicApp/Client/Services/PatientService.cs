@@ -21,9 +21,9 @@ namespace MyPTClinicApp.Client.Services
 
         public Patient Patient { get; set; }
 
-        public async Task<PatientDTO> GetPatientById(int id)
+        public async Task<Patient> GetPatientById(int id)
         {
-            return await httpClient.GetJsonAsync<PatientDTO>($"api/patients/id/{id}");
+            return await httpClient.GetJsonAsync<Patient>($"api/patients/id/{id}");
         }
 
         public async Task<IEnumerable<Patient>> GetPatients()

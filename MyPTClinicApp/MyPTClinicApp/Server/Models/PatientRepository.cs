@@ -24,28 +24,30 @@ namespace MyPTClinicApp.Server.Models
             return await _context.Patient.OrderBy(p => p.ID).ToListAsync();
         }
 
-        public async Task<PatientDTO> GetPatientById(int patientId)
+        public async Task<Patient> GetPatientById(int patientId)
         {
-            var patient = _context.Patient.Include(p => p.Therapist)
-                                                .Select(p => new PatientDTO()
-                                                {
-                                                    ID = p.ID,
-                                                    FirstName = p.FirstName,
-                                                    LastName = p.LastName,
-                                                    DateOfBirth = p.DateOfBirth,
-                                                    Medications = p.Medications,
-                                                    Gender = p.Gender,
-                                                    Phone = p.Phone,
-                                                    Email = p.Email,
-                                                    Address = p.Address,
-                                                    TherapistFirstName = p.Therapist.FirstName,
-                                                    TherapistLastName = p.Therapist.LastName
-                                                }).FirstOrDefault(p => p.ID == patientId);
-
-            return patient;
-
-            //return await _context.Patient.FirstOrDefaultAsync(p => p.ID == patientId);
+            return await _context.Patient.FirstOrDefaultAsync(p => p.ID == patientId);
         }
+
+
+        //public async Task<PatientDTO> GetPatientById(int patientId)
+        //{
+        //    return _context.Patient.Include(p => p.Therapist)
+        //                                        .Select(p => new PatientDTO()
+        //                                        {
+        //                                            ID = p.ID,
+        //                                            FirstName = p.FirstName,
+        //                                            LastName = p.LastName,
+        //                                            DateOfBirth = p.DateOfBirth,
+        //                                            Medications = p.Medications,
+        //                                            Gender = p.Gender,
+        //                                            Phone = p.Phone,
+        //                                            Email = p.Email,
+        //                                            Address = p.Address,
+        //                                            TherapistFirstName = p.Therapist.FirstName,
+        //                                            TherapistLastName = p.Therapist.LastName
+        //                                        }).FirstOrDefault(p => p.ID == patientId);
+        //}
 
 
         public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)

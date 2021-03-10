@@ -37,14 +37,21 @@ namespace MyPTClinicApp.Client.Pages
             Treatment = await JsonSerializer.DeserializeAsync<Treatment>(await streamTask,
                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
-            var streamTaskPatient = client.GetStreamAsync($"{patientBaseURL}id/{Treatment.PatientID}");
-            Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
-            var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Treatment.TherapistID}");
-            Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
-                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            if (Treatment.PatientID != 0)
+            {
+                var streamTaskPatient = client.GetStreamAsync($"{patientBaseURL}id/{Treatment.PatientID}");
+                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient,
+                            new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
 
+
+            if (Treatment.TherapistID != 0)
+            {
+                var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Treatment.TherapistID}");
+                Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
+                           new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
         }
 
         protected void NavigateToOverview()

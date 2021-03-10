@@ -15,7 +15,7 @@ namespace MyPTClinicApp.Server.Models
         public TreatmentRepository(MyPTClinicAppServerContext context)
         {
             _context = context;
-        }        
+        }
 
         public async Task<Treatment> AddTreatment(Treatment treatment)
         {
@@ -25,17 +25,52 @@ namespace MyPTClinicApp.Server.Models
             return result.Entity;
         }
 
-        public async Task<IEnumerable<Treatment>> GetTreatments()
+        public IQueryable<TreatmentDTO> GetTreatments()
         {
-            return await _context.Treatment.OrderBy(t => t.ID).ToListAsync();
+            var treatments = from t in _context.Treatment
+                             select new TreatmentDTO()
+                             {
+                                 ID = t.ID,
+                                 PatientFirstName = t.Patient.FirstName,
+                                 PatientLastName = t.Patient.LastName,
+                                 TherapistFirstName = t.Therapist.FirstName,
+                                 TherapistLastName = t.Therapist.LastName,
+                                 Date = t.Date,
+                                 Notes = t.Notes
+                             };
+            return treatments;
+
+            //return await _context.Treatment.OrderBy(t => t.ID).ToListAsync();
         }
 
 
         public async Task<Treatment> GetTreatmentById(int treatmentId)
         {
-            return await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
+            return await _context.Treatment.FirstOrDefaultAsync(p => p.ID == treatmentId);
         }
-                
+
+
+        // when using TreatmentDTO
+        //public async Task<TreatmentDTO> GetTreatmentById(int treatmentId)
+        //{
+        //    return _context.Treatment.Include(t => t.Patient)
+        //                                .ThenInclude(t => t.Therapist)
+        //                            .Select(t => new TreatmentDTO()
+        //                            {
+        //                                ID = t.ID,
+        //                                PatientFirstName = t.Patient.FirstName,
+        //                                PatientLastName = t.Patient.LastName,
+        //                                TherapistFirstName = t.Therapist.FirstName,
+        //                                TherapistLastName = t.Therapist.LastName,
+        //                                Date = t.Date, 
+        //                                Notes = t.Notes
+
+        //                            }).FirstOrDefault(t => t.ID == treatmentId);
+
+
+        //    //return await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
+        //}
+
         public async Task<Treatment> UpdateTreatment(Treatment treatment)
         {
             // find treatment to update

@@ -30,7 +30,7 @@ namespace MyPTClinicApp.Client.Pages
         // needed for selecting patient 
         private static readonly String patientURL = "https://localhost:5001/api/patients/";
 
-        public IEnumerable<Therapist> Patients { get; set; } = new List<Therapist>();
+        public IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -38,19 +38,19 @@ namespace MyPTClinicApp.Client.Pages
 
             int.TryParse(TreatmentID, out var treatmentID);
 
-            // get a list of all valid therapists
+            // get a list of all therapists for the select option
             var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
             Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
                        (await streamTaskTherapists,
                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
-            // get a list of all valid patients
+            // get a list of all patients for the input select option
             var streamTaskPatients = client.GetStreamAsync($"{patientURL}all");
-            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
+            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Patient>>
                                                 (await streamTaskPatients,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
-            if (treatmentID != 0)       // this is a patient to be updated so get json stream from db
+            if (treatmentID != 0)       // this is a treatment to be updated so get json stream from db
             {
                 var streamTaskTreatment = client.GetStreamAsync($"{baseURL}id/{treatmentID}");
                 Treatment = await JsonSerializer.DeserializeAsync<Treatment>(await streamTaskTreatment,

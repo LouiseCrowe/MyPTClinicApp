@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace MyPTClinicApp.Client.Pages
         private static readonly String therapistURL = "https://localhost:5001/api/therapists/";
 
         public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
+
+        //protected string TherapistID = string.Empty;
 
         protected override async Task OnInitializedAsync()
         {

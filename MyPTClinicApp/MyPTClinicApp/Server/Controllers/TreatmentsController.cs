@@ -27,17 +27,12 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<Treatment>>> GetTreatments()
+        public IQueryable<TreatmentDTO> GetTreatments()
         {
-            try
-            {
-                return Ok(await treatmentRepository.GetTreatments());
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return treatmentRepository.GetTreatments();
         }
+
+
 
         // GET: api/treatments/id/2
         [HttpGet("id/{id}", Name = "GetTreatmentById")]

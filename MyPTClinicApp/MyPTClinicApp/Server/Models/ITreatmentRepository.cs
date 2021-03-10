@@ -8,7 +8,7 @@ namespace MyPTClinicApp.Server.Models
 {
     public interface ITreatmentRepository
     {
-        Task<IEnumerable<Treatment>> GetTreatments();
+        IQueryable<TreatmentDTO> GetTreatments();
         Task<Treatment> GetTreatmentById(int treatmentId);
         Task<Treatment> AddTreatment(Treatment treatment);
         Task<Treatment> UpdateTreatment(Treatment treatment);

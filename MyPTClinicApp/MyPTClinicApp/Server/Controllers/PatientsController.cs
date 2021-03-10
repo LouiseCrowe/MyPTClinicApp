@@ -44,7 +44,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("id/{ID}", Name = "GetPatientById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<PatientDTO>> GetPatientById([FromRoute] int id)
+        public async Task<ActionResult<Patient>> GetPatientById([FromRoute] int id)
         {
 
             try
@@ -68,6 +68,7 @@ namespace MyPTClinicApp.Server.Controllers
         }
 
 
+        
         // GET: api/patients/therapistid/2
         [HttpGet("therapistid/{ID}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

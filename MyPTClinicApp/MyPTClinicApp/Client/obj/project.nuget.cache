@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RUhILEePXdF8efH9S9g0uymZswtrZ+CZqIkPV7gMTIxj3Cl23S62KxQLAYIoqd/Xy5O8v964oFFhyu7mWicKAg==",
+  "dgSpecHash": "SaWe0+vp7MyK87skx6Hl9h2xp8PMkuYg3LryvdZFADULqNvPSRkT1VT0mimvmIAwdGpL//yJ9p0t6rotNpjKhg==",
   "success": true,
   "projectFilePath": "C:\\MyPTClinicApp\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
   "expectedPackageFiles": [
@@ -38,7 +38,7 @@
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.text.json\\4.7.1\\system.text.json.4.7.1.nupkg.sha512",
-    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.3\\microsoft.netcore.app.runtime.browser-wasm.5.0.3.nupkg.sha512"
+    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.4\\microsoft.netcore.app.runtime.browser-wasm.5.0.4.nupkg.sha512"
   ],
   "logs": []
 }

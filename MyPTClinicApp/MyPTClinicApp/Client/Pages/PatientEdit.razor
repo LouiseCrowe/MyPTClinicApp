@@ -2,13 +2,14 @@
 @page  "/patientedit"
 @page "/patientedit/{PatientID}"
 
-@using MyPTClinicApp.Shared 
- 
+@using MyPTClinicApp.Shared
 
-@if (!Saved)
-{
+
+    @if (!Saved)
+    {
 <section class="patient-edit">
     <h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
+
     <EditForm Model="@Patient" OnValidSubmit="@HandleValidSubmit"
               OnInvalidSubmit="@HandleInvalidSubmit">
         <DataAnnotationsValidator />
@@ -70,13 +71,13 @@
             </InputSelect>
         </div>
         <div class="form-group row">
-            <label for="therapistId" class="col-sm-3">Therapist ID: </label>
-            <InputSelect id="therapistId" class="form-control col-sm-8" @bind-Value="Patient.TherapistID">
+            <label for="therapist" class="col-sm-3">Therapist: </label>
+            <InputSelect id="therapist" class="form-control col-sm-8" @bind-Value="Patient.TherapistID">
                 @foreach (var therapist in Therapists)
-	            {
-                <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
-	            }
-            </InputSelect>            
+                    {
+                    <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
+                    }
+            </InputSelect>
         </div>
 
         <br />
@@ -88,8 +89,8 @@
             @if (Patient.ID > 0)
             {
                 <a class="btn btn-danger" @onclick="@DeletePatient">
-                Delete Patient
-            </a>
+                    Delete Patient
+                </a>
             }
         </div>
         <br />
@@ -97,12 +98,12 @@
             <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
         </div>
     </EditForm>
-</section> 
+</section>
+    }
 
-}
+    else
+    {
 
-else
-{
-
-    <div class="alert @StatusClass">@Message</div>
-}
+        <div class="alert @StatusClass">@Message</div>
+    }
+ 

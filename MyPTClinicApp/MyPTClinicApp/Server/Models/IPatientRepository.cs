@@ -9,7 +9,7 @@ namespace MyPTClinicApp.Server.Models
     public interface IPatientRepository
     {
         Task<IEnumerable<Patient>> GetPatients();
-        Task<PatientDTO> GetPatientById(int patientId);
+        Task<Patient> GetPatientById(int patientId);
         Task<Patient> GetPatientByFullName(string firstName, string lastName);
         IEnumerable<Patient> GetPatientsByTherapistId(int therapistId);
         Task<Patient> UpdatePatient(Patient patient);
