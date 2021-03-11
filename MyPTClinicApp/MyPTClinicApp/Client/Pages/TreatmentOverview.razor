@@ -29,7 +29,7 @@ else
                 <td>@treatment.ID</td>    
                 <td>@treatment.PatientFirstName @treatment.PatientLastName</td>
                 <td>@treatment.TherapistFirstName @treatment.TherapistLastName</td>
-                <td>@treatment.Date</td>
+                <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>
                 <td>@treatment.Notes</td>
                 <td>
                     <a href="@($"treatmentdetail/{treatment.ID}")" class="btn btn-primary table-btn">

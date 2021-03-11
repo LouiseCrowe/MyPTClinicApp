@@ -10,6 +10,8 @@ namespace MyPTClinicApp.Client.Services
     {
         Task<IEnumerable<Therapist>> GetTherapists();
         Task<Therapist> GetTherapistById(int therapistID);
-        public Task<Therapist> UpdateTherapist(Therapist therapist);
+        Task<Therapist> AddTherapist(Therapist therapist);
+        Task<Therapist> UpdateTherapist(Therapist therapist);
+        Task DeleteTherapist(int therapistID);        
     }
 }

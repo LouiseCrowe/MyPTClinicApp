@@ -5,105 +5,111 @@
 @using MyPTClinicApp.Shared
 
 
-    @if (!Saved)
-    {
-<section class="patient-edit">
-    <h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
+@if (Patient == null || Therapists == null)
+{
+<h3>Loading......  just a moment</h3>
+}
+else 
+{ 
+@if (!Saved)
+{
+    <section class="patient-edit">
+        <h1 class="page-title">Details for @Patient.FirstName @Patient.LastName</h1>
 
-    <EditForm Model="@Patient" OnValidSubmit="@HandleValidSubmit"
-              OnInvalidSubmit="@HandleInvalidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary></ValidationSummary>
-        <div class="form-group row">
-            <label for="firstName" class="col-sm-3">First name: </label>
-            <InputText id="firstName" class="form-control col-sm-8" @bind-Value="Patient.FirstName"
-                       placeholder="Enter first name">
-            </InputText>
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.FirstName)" />
-        </div>
-        <div class="form-group row">
-            <label for="lastName" class="col-sm-3">Last name: </label>
-            <InputText id="lastName" class="form-control col-sm-8" @bind-Value="Patient.LastName"
-                       placeholder="Enter last name">
-            </InputText>
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.LastName)" />
-        </div>
-        <div class="form-group row">
-            <label for="phone" class="col-sm-3">Phone Number: </label>
-            <InputText id="phone" class="form-control col-sm-8" @bind-Value="@Patient.Phone"
-                       placeholder="Enter phone number">
-            </InputText>
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Phone)" />
-        </div>
-        <div class="form-group row">
-            <label for="email" class="col-sm-3">Email: </label>
-            <InputText id="email" class="form-control col-sm-8" @bind-Value="@Patient.Email"
-                       placeholder="Enter email addess">
-            </InputText>
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Email)" />
-        </div>
-        <div class="form-group row">
-            <label for="address" class="col-sm-3">Address: </label>
-            <InputText id="address" class="form-control col-sm-8" @bind-Value="@Patient.Address"
-                       placeholder="Enter addess">
-            </InputText>
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Address)" />
-        </div>
-        <div class="form-group row">
-            <label for="dateOfBirth" class="col-sm-3">Date of birth: </label>
-            <InputDate id="dateOfBirth" class="form-control col-sm-8" @bind-Value="Patient.DateOfBirth"
-                       placeholder="Enter date of birth">
-            </InputDate>
-        </div>
-        <div class="form-group row">
-            <label for="medications" class="col-sm-3">Medications: </label>
-            <InputText id="medications" class="form-control col-sm-8" @bind-Value="Patient.Medications"
-                       placeholder="Enter medications">
-            </InputText>
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Medications)" />
-        </div>
-        <div class="form-group row">
-            <label for="gender" class="col-sm-3">Gender: </label>
-            <InputSelect id="gender" class="form-control col-sm-8" @bind-Value="Patient.Gender">
-                <option value="@(Gender.Male)">Male</option>
-                <option value="@(Gender.Female)">Female</option>
-                <option value="@(Gender.Other)">Other</option>
-            </InputSelect>
-        </div>
-        <div class="form-group row">
-            <label for="therapist" class="col-sm-3">Therapist: </label>
-            <InputSelect id="therapist" class="form-control col-sm-8" @bind-Value="Patient.TherapistID">
-                @foreach (var therapist in Therapists)
-                    {
-                    <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
-                    }
-            </InputSelect>
-        </div>
+        <EditForm Model="@Patient" OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary></ValidationSummary>
+            <div class="form-group row">
+                <label for="firstName" class="col-sm-3">First name: </label>
+                <InputText id="firstName" class="form-control col-sm-8" @bind-Value="Patient.FirstName"
+                           placeholder="Enter first name">
+                </InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.FirstName)" />
+            </div>
+            <div class="form-group row">
+                <label for="lastName" class="col-sm-3">Last name: </label>
+                <InputText id="lastName" class="form-control col-sm-8" @bind-Value="Patient.LastName"
+                           placeholder="Enter last name">
+                </InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.LastName)" />
+            </div>
+            <div class="form-group row">
+                <label for="phone" class="col-sm-3">Phone Number: </label>
+                <InputText id="phone" class="form-control col-sm-8" @bind-Value="@Patient.Phone"
+                           placeholder="Enter phone number">
+                </InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Phone)" />
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-3">Email: </label>
+                <InputText id="email" class="form-control col-sm-8" @bind-Value="@Patient.Email"
+                           placeholder="Enter email addess">
+                </InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Email)" />
+            </div>
+            <div class="form-group row">
+                <label for="address" class="col-sm-3">Address: </label>
+                <InputText id="address" class="form-control col-sm-8" @bind-Value="@Patient.Address"
+                           placeholder="Enter addess">
+                </InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Address)" />
+            </div>
+            <div class="form-group row">
+                <label for="dateOfBirth" class="col-sm-3">Date of birth: </label>
+                <InputDate id="dateOfBirth" class="form-control col-sm-8" @bind-Value="Patient.DateOfBirth"
+                           placeholder="Enter date of birth">
+                </InputDate>
+            </div>
+            <div class="form-group row">
+                <label for="medications" class="col-sm-3">Medications: </label>
+                <InputText id="medications" class="form-control col-sm-8" @bind-Value="Patient.Medications"
+                           placeholder="Enter medications">
+                </InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Patient.Medications)" />
+            </div>
+            <div class="form-group row">
+                <label for="gender" class="col-sm-3">Gender: </label>
+                <InputSelect id="gender" class="form-control col-sm-8" @bind-Value="Patient.Gender">
+                    <option value="@(Gender.Male)">Male</option>
+                    <option value="@(Gender.Female)">Female</option>
+                    <option value="@(Gender.Other)">Other</option>
+                </InputSelect>
+            </div>
+            <div class="form-group row">
+                <label for="therapist" class="col-sm-3">Therapist: </label>
+                <InputSelect id="therapist" class="form-control col-sm-8" @bind-Value="Patient.TherapistID">
+                    @foreach (var therapist in Therapists)
+                            {
+                        <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
+                            }
+                </InputSelect>
+            </div>
 
-        <br />
-        <div>
-            <button type="submit" class="btn btn-primary edit-btn">Save Patient</button>
-        </div>
-        <br />
-        <div>
-            @if (Patient.ID > 0)
-            {
-                <a class="btn btn-danger" @onclick="@DeletePatient">
-                    Delete Patient
-                </a>
-            }
-        </div>
-        <br />
-        <div>
-            <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
-        </div>
-    </EditForm>
-</section>
-    }
+            <br />
+            <div>
+                <button type="submit" class="btn btn-primary edit-btn">Save Patient</button>
+            </div>
+            <br />
+            <div>
+                @if (Patient.ID > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeletePatient">
+                        Delete Patient
+                    </a>
+                }
+            </div>
+            <br />
+            <div>
+                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+            </div>
+        </EditForm>
+    </section>
+}
 
-    else
-    {
+else
+{
 
-        <div class="alert @StatusClass">@Message</div>
-    }
- 
+    <div class="alert @StatusClass">@Message</div>
+}
+}

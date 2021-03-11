@@ -17,11 +17,13 @@ namespace MyPTClinicApp.Client.Pages
         [Parameter]
         public string TherapistID { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        public ITherapistService TherapistService { get; set; }
+
         public Therapist Therapist { get; set; } = new();
-
-        private static readonly HttpClient client = new HttpClient();
-
-        private static readonly String baseURL = "https://localhost:5001/api/therapists/";
 
         protected override async Task OnInitializedAsync()
         {
@@ -42,16 +44,10 @@ namespace MyPTClinicApp.Client.Pages
             }
             else
             {
-                var streamTask = client.GetStreamAsync($"{baseURL}id/{TherapistID}");
-                Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTask,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                // fetch therapist from db
+                Therapist = await TherapistService.GetTherapistById(int.Parse(TherapistID));              
             }
         }
-
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
 
         //used to store state of screen
         protected string Message = string.Empty;
@@ -65,14 +61,9 @@ namespace MyPTClinicApp.Client.Pages
 
             if (Therapist.ID == 0)       // this means a new therapist is being added
             {
-                var addedTherapist = new StringContent(JsonSerializer.Serialize(Therapist),
-                                            UnicodeEncoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PostAsync(baseURL, addedTherapist);
-                httpResponse.EnsureSuccessStatusCode();
+                var addedTherapist = await TherapistService.AddTherapist(Therapist);
 
-                var jsonString = await httpResponse.Content.ReadAsStringAsync();
-
-                if (jsonString != null)
+                if (addedTherapist != null)
                 {
                     StatusClass = "alert-success";
                     Message = "New therapist added successfully.";
@@ -87,17 +78,12 @@ namespace MyPTClinicApp.Client.Pages
             }
             else
             {
-                var therapistJson = new StringContent(JsonSerializer.Serialize(Therapist),
-                                            Encoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PutAsync($"{baseURL}id/{Therapist.ID}", therapistJson);
-
-                httpResponse.EnsureSuccessStatusCode();
+                await TherapistService.UpdateTherapist(Therapist);
                 StatusClass = "alert-success";
                 Message = "Therapist updated successfully.";
                 Saved = true;
             }
         }
-
 
         protected void HandleInvalidSubmit()
         {
@@ -105,20 +91,15 @@ namespace MyPTClinicApp.Client.Pages
             Message = "There are some validation errors. Please try again.";
         }
 
-        //update for deleting
-
         protected async Task DeleteTherapist()
         {
-            HttpResponseMessage httpResponse = await client.DeleteAsync($"{baseURL}id/{Therapist.ID}");
-            httpResponse.EnsureSuccessStatusCode();
+            await TherapistService.DeleteTherapist(Therapist.ID);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
 
             Saved = true;
         }
-
-
 
         protected void NavigateToOverview()
         {

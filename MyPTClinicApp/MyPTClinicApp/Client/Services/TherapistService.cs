@@ -27,15 +27,37 @@ namespace MyPTClinicApp.Client.Services
 
         public async Task<Therapist> GetTherapistById(int therapistId)
         {
-            return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/");
+            return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/{therapistId}");
         }
 
-        public Task<Therapist> UpdateTherapist(Therapist therapist)
-        {
-            //var therapistJson = new StringContent(JsonSerializer.Serialize(therapist), Encoding.UTF8, "application/json");
+        public async Task<Therapist> AddTherapist(Therapist therapist)
+        {   
+            var addedTherapist =
+            new StringContent(JsonSerializer.Serialize(therapist), Encoding.UTF8, "application/json");
 
-            //return await httpClient.PutJsonAsync($"api/therapists/id/{therapist.ID}", therapist);
+            var response = await httpClient.PostAsync("api/therapists", addedTherapist);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Therapist>(await response.Content.ReadAsStreamAsync());
+            }
+
+            return null;
+        }
+
+        public async Task<Therapist> UpdateTherapist(Therapist therapist)
+        {
+            var therapistJson = new StringContent(JsonSerializer.Serialize(therapist),
+                                            Encoding.UTF8, "application/json");
+            
+            await httpClient.PutAsync($"api/therapists/id/{therapist.ID}", therapistJson);
+
             return null; 
+        }
+
+        public async Task DeleteTherapist(int therapistID)
+        {
+            await httpClient.DeleteAsync($"api/therapists/id/{therapistID}");
         }
 
     }

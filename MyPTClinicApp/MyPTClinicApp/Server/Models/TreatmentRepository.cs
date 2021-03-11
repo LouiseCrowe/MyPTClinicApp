@@ -27,7 +27,7 @@ namespace MyPTClinicApp.Server.Models
 
         public IQueryable<TreatmentDTO> GetTreatments()
         {
-            var treatments = from t in _context.Treatment
+            var treatments = from t in _context.Treatment.OrderByDescending(t => t.Date)
                              select new TreatmentDTO()
                              {
                                  ID = t.ID,
@@ -48,28 +48,6 @@ namespace MyPTClinicApp.Server.Models
         {
             return await _context.Treatment.FirstOrDefaultAsync(p => p.ID == treatmentId);
         }
-
-
-        // when using TreatmentDTO
-        //public async Task<TreatmentDTO> GetTreatmentById(int treatmentId)
-        //{
-        //    return _context.Treatment.Include(t => t.Patient)
-        //                                .ThenInclude(t => t.Therapist)
-        //                            .Select(t => new TreatmentDTO()
-        //                            {
-        //                                ID = t.ID,
-        //                                PatientFirstName = t.Patient.FirstName,
-        //                                PatientLastName = t.Patient.LastName,
-        //                                TherapistFirstName = t.Therapist.FirstName,
-        //                                TherapistLastName = t.Therapist.LastName,
-        //                                Date = t.Date, 
-        //                                Notes = t.Notes
-
-        //                            }).FirstOrDefault(t => t.ID == treatmentId);
-
-
-        //    //return await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
-        //}
 
         public async Task<Treatment> UpdateTreatment(Treatment treatment)
         {

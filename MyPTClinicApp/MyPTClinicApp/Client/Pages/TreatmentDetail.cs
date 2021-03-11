@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
@@ -18,45 +19,41 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public Treatment Treatment { get; set; } = new();
+        [Inject]
+        public ITreatmentService TreatmentService { get; set; }
 
-        public Therapist Therapist { get; set; } = new();
+        [Inject]
+        public IPatientService PatientService { get; set; }
+
+        [Inject]
+        public ITherapistService TherapistService { get; set; }
+
         public Patient Patient { get; set; } = new();
 
-        private static readonly HttpClient client = new HttpClient();
+        public Therapist Therapist { get; set; } = new();
 
-        private static readonly String baseURL = "https://localhost:5001/api/treatments/";
-
-        private static readonly String patientBaseURL = "https://localhost:5001/api/patients/";
-
-        private static readonly String therapistBaseURL = "https://localhost:5001/api/therapists/";
+        public Treatment Treatment { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
-            var streamTask = client.GetStreamAsync($"{baseURL}id/{ID}");
-            Treatment = await JsonSerializer.DeserializeAsync<Treatment>(await streamTask,
-                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            Treatment = await TreatmentService.GetTreatmentById(int.Parse(ID));
 
-
-            if (Treatment.PatientID != 0)
+            if (Treatment != null)
             {
-                var streamTaskPatient = client.GetStreamAsync($"{patientBaseURL}id/{Treatment.PatientID}");
-                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient,
-                            new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-            }
-
-
-            if (Treatment.TherapistID != 0)
-            {
-                var streamTaskTherapist = client.GetStreamAsync($"{therapistBaseURL}id/{Treatment.TherapistID}");
-                Therapist = await JsonSerializer.DeserializeAsync<Therapist>(await streamTaskTherapist,
-                           new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                if (Treatment.PatientID != 0)
+                {
+                    Patient = await PatientService.GetPatientById(Treatment.PatientID);
+                }
+                if (Treatment.TherapistID != 0)
+                {
+                    Therapist = await TherapistService.GetTherapistById(Treatment.TherapistID);
+                }
             }
         }
 
         protected void NavigateToOverview()
         {
-            NavigationManager.NavigateTo("/patientoverview");
+            NavigationManager.NavigateTo("/treatmentoverview");
         }
     }
 }

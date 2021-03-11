@@ -32,8 +32,6 @@ namespace MyPTClinicApp.Server.Controllers
             return treatmentRepository.GetTreatments();
         }
 
-
-
         // GET: api/treatments/id/2
         [HttpGet("id/{id}", Name = "GetTreatmentById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -141,10 +139,5 @@ namespace MyPTClinicApp.Server.Controllers
                                   "Error deleting data");
             }
         }
-
-        //private bool TreatmentExists(int id)
-        //{
-        //    return _context.Treatment.Any(e => e.ID == id);
-        //}
     }
 }

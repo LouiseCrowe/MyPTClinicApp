@@ -30,6 +30,7 @@ namespace MyPTClinicApp.Server.Models
         }
 
 
+        //Caused issues with editing removed
         //public async Task<PatientDTO> GetPatientById(int patientId)
         //{
         //    return _context.Patient.Include(p => p.Therapist)
@@ -57,6 +58,15 @@ namespace MyPTClinicApp.Server.Models
 
             return results;
         }
+
+
+        //public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)
+        //{
+        //    // look for patients
+        //    var results = _context.Patient.Where(p => p.TherapistID == therapistId).ToList();
+
+        //    return results;
+        //}
 
         public async Task<Patient> AddPatient(Patient patient)
         {
@@ -104,16 +114,10 @@ namespace MyPTClinicApp.Server.Models
             return null; 
         }
 
-
         public async Task<Patient> GetPatientByFullName(string firstName, string lastName)
         {
             return await _context.Patient.FirstOrDefaultAsync(t => t.FirstName.ToLower() == firstName.ToLower()
                                                                 && t.LastName.ToLower() == lastName.ToLower());
         }
-
-       
-
-        
-        
     }
 }

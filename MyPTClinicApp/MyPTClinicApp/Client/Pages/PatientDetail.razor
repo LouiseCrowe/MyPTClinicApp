@@ -40,7 +40,9 @@ else
     <div class="form-group row">
         <label class="col-6 col-sm-3 col-form-label">Date of Birth: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.DateOfBirth.ToLongDateString()</label>            
+            <label type="text" readonly class="form-control-plaintext">
+                @Patient.DateOfBirth.Day/@Patient.DateOfBirth.Month/@Patient.DateOfBirth.Year
+            </label>            
         </div>
     </div>
     <div class="form-group row">

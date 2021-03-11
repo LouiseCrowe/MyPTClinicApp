@@ -66,8 +66,6 @@ namespace MyPTClinicApp.Server.Controllers
                                   "Error retrieving data from the database");
             }
         }
-
-
         
         // GET: api/patients/therapistid/2
         [HttpGet("therapistid/{ID}")]
@@ -172,13 +170,6 @@ namespace MyPTClinicApp.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                                "Error deleting data");
             }
-
-
         }
-
-        //private bool PatientExists(int id)
-        //{
-        //    return _context.Patient.Any(e => e.ID == id);
-        //}
     }
 }

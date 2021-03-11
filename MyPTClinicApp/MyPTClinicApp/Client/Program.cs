@@ -27,6 +27,8 @@ namespace MyPTClinicApp.Client
 
             builder.Services.AddScoped<IPatientService, PatientService>();
 
+            builder.Services.AddScoped<ITreatmentService, TreatmentService>();
+
             await builder.Build().RunAsync();
         }
     }

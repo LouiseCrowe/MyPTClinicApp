@@ -11,5 +11,8 @@ namespace MyPTClinicApp.Client.Services
         Task<IEnumerable<Patient>> GetPatients();
         Task<Patient> GetPatientById(int id);
         Task<IEnumerable<Patient>> GetPatientsByTherapistId(int ID);
+        Task<Patient> AddPatient(Patient patient);
+        Task<Patient> UpdatePatient(Patient patient);
+        Task DeletePatient(int patientID);
     }
 }

@@ -3,11 +3,9 @@ using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -17,18 +15,16 @@ namespace MyPTClinicApp.Client.Pages
         [Parameter]
         public string PatientID { get; set; }
 
+        [Inject]
+        public IPatientService PatientService { get; set; }
+
+        // needed to select therapists for patient
+        [Inject]
+        public ITherapistService TherapistService { get; set; }
+
         public Patient Patient { get; set; } = new ();
 
-        private static readonly HttpClient client = new HttpClient();
-
-        private static readonly String baseURL = "https://localhost:5001/api/patients/";
-
-        // needed for inputting therapist 
-        private static readonly String therapistURL = "https://localhost:5001/api/therapists/";
-
         public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
-
-        //protected string TherapistID = string.Empty;
 
         protected override async Task OnInitializedAsync()
         {
@@ -41,18 +37,13 @@ namespace MyPTClinicApp.Client.Pages
                 Message = "Patient ID must be an integer, please try again";
                 Saved = false;
             }
-            
-            // get a list of all valid therapists to include in patient detail
-            var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
-            Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-                         (await streamTaskTherapists,
-                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+            // complete list of therapists for input select in EditForm
+            Therapists = await TherapistService.GetTherapists();
 
             if (patientID != 0)       // this is a patient to be updated so get json stream from db
             {
-                var streamTaskPatient = client.GetStreamAsync($"{baseURL}id/{patientID}");
-                Patient = await JsonSerializer.DeserializeAsync<Patient>(await streamTaskPatient,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                Patient = await PatientService.GetPatientById(patientID);
             }
             else                     // include default therapist for all new patients
             {
@@ -68,22 +59,16 @@ namespace MyPTClinicApp.Client.Pages
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
         protected bool Saved;
-
+        
         protected async Task HandleValidSubmit()
         {
-
             Saved = false;
 
             if (Patient.ID == 0)       // this means a new patient is being added
             {
-                var addedPatient = new StringContent(JsonSerializer.Serialize(Patient),
-                                            UnicodeEncoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PostAsync(baseURL, addedPatient);
-                httpResponse.EnsureSuccessStatusCode();
-
-                var jsonString = await httpResponse.Content.ReadAsStringAsync();
-
-                if (jsonString != null)
+                var addedPatient = await PatientService.AddPatient(Patient);
+                
+                if (addedPatient != null)
                 {
                     StatusClass = "alert-success";
                     Message = "New patient added successfully.";
@@ -98,18 +83,12 @@ namespace MyPTClinicApp.Client.Pages
             }
             else    // this is updating an existing patient
             {
-                var therapistJson = new StringContent(JsonSerializer.Serialize(Patient),
-                                            Encoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PutAsync($"{baseURL}id/{Patient.ID}", 
-                                                                            therapistJson);
-
-                httpResponse.EnsureSuccessStatusCode();
+                await PatientService.UpdatePatient(Patient);
                 StatusClass = "alert-success";
                 Message = "Patient updated successfully.";
                 Saved = true;
             }
         }
-
 
         protected void HandleInvalidSubmit()
         {
@@ -121,8 +100,7 @@ namespace MyPTClinicApp.Client.Pages
 
         protected async Task DeletePatient()
         {
-            HttpResponseMessage httpResponse = await client.DeleteAsync($"{baseURL}id/{Patient.ID}");
-            httpResponse.EnsureSuccessStatusCode();
+            await PatientService.DeletePatient(Patient.ID);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
@@ -130,12 +108,9 @@ namespace MyPTClinicApp.Client.Pages
             Saved = true;
         }
 
-
-
         protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/patientoverview");
         }
-
     }
 }

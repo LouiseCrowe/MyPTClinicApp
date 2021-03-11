@@ -75,7 +75,6 @@ namespace MyPTClinicApp.Server.Models
 
             return null;
         }
-
         
         public async Task<Therapist> DeleteTherapist(int therapistId)
         {

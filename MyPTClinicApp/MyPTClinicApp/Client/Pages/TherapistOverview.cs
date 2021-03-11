@@ -22,26 +22,7 @@ namespace MyPTClinicApp.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Therapists = (await TherapistService.GetTherapists()).ToList();  
-            
+            Therapists = (await TherapistService.GetTherapists()).ToList();              
         }
-
-
-
-        //    // Original calls 
-        //    private IEnumerable<Therapist> Therapists { get; set; }
-
-        //    private static readonly HttpClient client = new HttpClient();
-
-        //    private static readonly String baseURL = "https://localhost:5001/api/therapists/";
-
-
-        //    protected override async Task OnInitializedAsync()
-        //    {
-        //        var streamTask = client.GetStreamAsync($"{baseURL}all");
-        //        Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-        //               (await streamTask,
-        //               new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-        //    }
     }
 }

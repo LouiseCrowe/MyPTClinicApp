@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
@@ -16,20 +17,28 @@ namespace MyPTClinicApp.Client.Pages
         [Parameter]
         public string TreatmentID { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        public ITreatmentService TreatmentService { get; set; }
+
+        [Inject]
+        public IPatientService PatientService { get; set; }
+
+        [Inject]
+        public ITherapistService TherapistService { get; set; }
+
+        public Patient Patient { get; set; } = new();
+
+        public Therapist Therapist { get; set; } = new();
+
         public Treatment Treatment { get; set; } = new();
-        
-        private static readonly HttpClient client = new HttpClient();
 
-        private static readonly String baseURL = "https://localhost:5001/api/treatments/";
-
-        // needed for selecting therapist 
-        private static readonly String therapistURL = "https://localhost:5001/api/therapists/";
-
+        // for selecting Therapist for treatment
         public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
-
-        // needed for selecting patient 
-        private static readonly String patientURL = "https://localhost:5001/api/patients/";
-
+        
+        // for selecting Patient for treatment
         public IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
 
         protected override async Task OnInitializedAsync()
@@ -38,34 +47,20 @@ namespace MyPTClinicApp.Client.Pages
 
             int.TryParse(TreatmentID, out var treatmentID);
 
-            // get a list of all therapists for the select option
-            var streamTaskTherapists = client.GetStreamAsync($"{therapistURL}all");
-            Therapists = await JsonSerializer.DeserializeAsync<IEnumerable<Therapist>>
-                       (await streamTaskTherapists,
-                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            Therapists = await TherapistService.GetTherapists();
 
-            // get a list of all patients for the input select option
-            var streamTaskPatients = client.GetStreamAsync($"{patientURL}all");
-            Patients = await JsonSerializer.DeserializeAsync<IEnumerable<Patient>>
-                                                (await streamTaskPatients,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            Patients = await PatientService.GetPatients();
 
             if (treatmentID != 0)       // this is a treatment to be updated so get json stream from db
             {
-                var streamTaskTreatment = client.GetStreamAsync($"{baseURL}id/{treatmentID}");
-                Treatment = await JsonSerializer.DeserializeAsync<Treatment>(await streamTaskTreatment,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                Treatment = await TreatmentService.GetTreatmentById(treatmentID);
             }
-            else
+            else                        // creating new treatment
             {
                 Treatment = new Treatment { Date = DateTime.Now };
             }
         }
-
-        // to allow navigation back to overview
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
+                
         //used to store state of screen
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
@@ -73,19 +68,13 @@ namespace MyPTClinicApp.Client.Pages
 
         protected async Task HandleValidSubmit()
         {
-
             Saved = false;
 
             if (Treatment.ID == 0)       // this means a new treatment is being added
             {
-                var addedTreatment = new StringContent(JsonSerializer.Serialize(Treatment),
-                                            UnicodeEncoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PostAsync(baseURL, addedTreatment);
-                httpResponse.EnsureSuccessStatusCode();
+                var addedTreatment = await TreatmentService.AddTreatment(Treatment);
 
-                var jsonString = await httpResponse.Content.ReadAsStringAsync();
-
-                if (jsonString != null)
+                if (addedTreatment != null)
                 {
                     StatusClass = "alert-success";
                     Message = "New treatment added successfully.";
@@ -100,18 +89,12 @@ namespace MyPTClinicApp.Client.Pages
             }
             else    // this is updating an existing patient
             {
-                var treatmentJson = new StringContent(JsonSerializer.Serialize(Treatment),
-                                            Encoding.UTF8, "application/json");
-                HttpResponseMessage httpResponse = await client.PutAsync($"{baseURL}id/{Treatment.ID}",
-                                                                            treatmentJson);
-
-                httpResponse.EnsureSuccessStatusCode();
+                await TreatmentService.UpdateTreatment(Treatment);
                 StatusClass = "alert-success";
                 Message = "Treatment updated successfully.";
                 Saved = true;
             }
         }
-
 
         protected void HandleInvalidSubmit()
         {
@@ -123,8 +106,7 @@ namespace MyPTClinicApp.Client.Pages
 
         protected async Task DeleteTreatment()
         {
-            HttpResponseMessage httpResponse = await client.DeleteAsync($"{baseURL}id/{Treatment.ID}");
-            httpResponse.EnsureSuccessStatusCode();
+            await TreatmentService.DeleteTreatment(Treatment.ID);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
