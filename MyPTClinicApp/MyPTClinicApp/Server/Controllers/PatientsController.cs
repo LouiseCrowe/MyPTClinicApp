@@ -46,7 +46,6 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Patient>> GetPatientById([FromRoute] int id)
         {
-
             try
             {
                 var result = await patientRepository.GetPatientById(id);

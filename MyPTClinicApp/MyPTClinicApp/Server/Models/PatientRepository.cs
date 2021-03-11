@@ -29,28 +29,6 @@ namespace MyPTClinicApp.Server.Models
             return await _context.Patient.FirstOrDefaultAsync(p => p.ID == patientId);
         }
 
-
-        //Caused issues with editing removed
-        //public async Task<PatientDTO> GetPatientById(int patientId)
-        //{
-        //    return _context.Patient.Include(p => p.Therapist)
-        //                                        .Select(p => new PatientDTO()
-        //                                        {
-        //                                            ID = p.ID,
-        //                                            FirstName = p.FirstName,
-        //                                            LastName = p.LastName,
-        //                                            DateOfBirth = p.DateOfBirth,
-        //                                            Medications = p.Medications,
-        //                                            Gender = p.Gender,
-        //                                            Phone = p.Phone,
-        //                                            Email = p.Email,
-        //                                            Address = p.Address,
-        //                                            TherapistFirstName = p.Therapist.FirstName,
-        //                                            TherapistLastName = p.Therapist.LastName
-        //                                        }).FirstOrDefault(p => p.ID == patientId);
-        //}
-
-
         public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)
         {
             // look for patients
@@ -58,15 +36,6 @@ namespace MyPTClinicApp.Server.Models
 
             return results;
         }
-
-
-        //public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)
-        //{
-        //    // look for patients
-        //    var results = _context.Patient.Where(p => p.TherapistID == therapistId).ToList();
-
-        //    return results;
-        //}
 
         public async Task<Patient> AddPatient(Patient patient)
         {

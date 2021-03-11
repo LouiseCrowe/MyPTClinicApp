@@ -22,7 +22,7 @@ else
     <div class="form-group row">
         <label class="col-6 col-sm-3 col-form-label">Phone: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Phone</label>            
+            <label type="text" readonly class="form-control-plaintext">@Patient.Phone</label>
         </div>
     </div>
     <div class="form-group row">
@@ -34,7 +34,7 @@ else
     <div class="form-group row">
         <label class="col-6 col-sm-3 col-form-label">Address: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Address</label>            
+            <label type="text" readonly class="form-control-plaintext">@Patient.Address</label>
         </div>
     </div>
     <div class="form-group row">
@@ -42,13 +42,13 @@ else
         <div class="col">
             <label type="text" readonly class="form-control-plaintext">
                 @Patient.DateOfBirth.Day/@Patient.DateOfBirth.Month/@Patient.DateOfBirth.Year
-            </label>            
+            </label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-3 col-form-label">Medications: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Medications</label>            
+            <label type="text" readonly class="form-control-plaintext">@Patient.Medications</label>
         </div>
     </div>
     <div class="form-group row">
@@ -60,9 +60,48 @@ else
     <div class="form-group row">
         <label class="col-6 col-sm-3 col-form-label">Therapist Name: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Therapist.FirstName @Therapist.LastName</label>            
+            <label type="text" readonly class="form-control-plaintext">@Therapist.FirstName @Therapist.LastName</label>
         </div>
-    </div>    
+    </div>
+
+    <h2>@Patient.FirstName @Patient.LastName's Treatment History</h2>
+
+    @if (!Treatments.Any())
+    {
+        <p>@Patient.FirstName @Patient.LastName has not received any treatments</p>
+    }
+    else 
+    { 
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Notes</th>                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var treatment in Treatments)
+            {
+            <tr>
+                <td>@treatment.ID</td>
+                <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>
+                <td>@treatment.Notes</td>
+                <td>
+                    <a href="@($"treatmentdetail/{treatment.ID}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="@($"treatmentedit/{treatment.ID}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+           }
+        </tbody>
+    </table>
+    }
 }
 
 <div>

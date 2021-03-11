@@ -49,6 +49,11 @@ namespace MyPTClinicApp.Server.Models
             return await _context.Treatment.FirstOrDefaultAsync(p => p.ID == treatmentId);
         }
 
+        public IEnumerable<Treatment> GetTreatmentsByPatientId(int patientId)
+        {
+            return _context.Treatment.Where(t => t.PatientID == patientId).ToList();
+        }
+
         public async Task<Treatment> UpdateTreatment(Treatment treatment)
         {
             // find treatment to update
@@ -82,6 +87,6 @@ namespace MyPTClinicApp.Server.Models
             }
 
             return null;
-        }
+        }        
     }
 }

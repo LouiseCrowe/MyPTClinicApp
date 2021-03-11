@@ -42,6 +42,8 @@ namespace MyPTClinicApp.Shared
         public string TherapistFirstName { get; set; }
         public string TherapistLastName { get; set; }
 
+        public IEnumerable<Treatment> Treatments { get; set; }
+
         //public virtual Therapist Therapist { get; set; }                    // navigation property
 
         //public virtual ICollection<Treatment> Treatments { get; set; }      // navigation property

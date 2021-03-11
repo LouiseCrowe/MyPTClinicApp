@@ -32,6 +32,7 @@ namespace MyPTClinicApp.Server.Controllers
             return treatmentRepository.GetTreatments();
         }
 
+        
         // GET: api/treatments/id/2
         [HttpGet("id/{id}", Name = "GetTreatmentById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -56,6 +57,39 @@ namespace MyPTClinicApp.Server.Controllers
                                    "Error retrieving data from the database");
             }
         }
+
+        // GET: api/treatments/patientid/2
+        [HttpGet("patientid/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<IEnumerable<Treatment>> GetTreatmentsByPatientId(int id)
+        {
+            try
+            {
+                return Ok(treatmentRepository.GetTreatmentsByPatientId(id));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
+        //public ActionResult<IEnumerable<Patient>> GetPatientByTherapistId(int id)
+        //{
+        //    try
+        //    {
+        //        return Ok(patientRepository.GetPatientsByTherapistId(id));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError,
+        //                       "Error retrieving data from the database");
+        //    }
+        //}
+
+
 
         // POST: api/Treatments
         [HttpPost]

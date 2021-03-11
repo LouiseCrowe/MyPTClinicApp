@@ -26,9 +26,16 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public ITherapistService TherapistService { get; set; }
 
+        [Inject]
+        public ITreatmentService TreatmentService { get; set; }
+
         public Patient Patient { get; set; } = new();
 
+        // for including Therapist Name
         public Therapist Therapist { get; set; } = new();
+
+        // for including Treatment details
+        public IEnumerable<Treatment> Treatments { get; set; } = new List<Treatment>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,7 +43,9 @@ namespace MyPTClinicApp.Client.Pages
 
             if (Patient != null && Patient.TherapistID.HasValue)
             {
-                Therapist = await TherapistService.GetTherapistById(Patient.TherapistID.Value);               
+                Therapist = await TherapistService.GetTherapistById(Patient.TherapistID.Value);
+
+                Treatments = await TreatmentService.GetTreatmentsByPatientId(Patient.ID);
             }
         }
 

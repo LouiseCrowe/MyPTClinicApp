@@ -9,7 +9,7 @@ namespace MyPTClinicApp.Client.Services
     public interface ITreatmentService
     {   Task<IEnumerable<TreatmentDTO>> GetTreatments();
         Task<Treatment> GetTreatmentById(int id);
-        Task<IEnumerable<Treatment>> GetTreatmentsByTherapistId(int ID);
+        Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID);
         Task<Treatment> AddTreatment(Treatment treatment);
         Task<Treatment> UpdateTreatment(Treatment treatment);
         Task DeleteTreatment(int treatmentID);

@@ -21,6 +21,8 @@ namespace MyPTClinicApp.Client.Services
 
         public Treatment Treatment { get; set; }
 
+        public IEnumerable<Treatment> Treatments { get; set; } = new List<Treatment>();
+
 
         public async Task<IEnumerable<TreatmentDTO>> GetTreatments()
         {
@@ -32,11 +34,10 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Treatment>($"api/treatments/id/{id}");
         }
 
-        public Task<IEnumerable<Treatment>> GetTreatmentsByTherapistId(int ID)
+        public async Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID)
         {
-            throw new NotImplementedException();
+            return await httpClient.GetJsonAsync<IEnumerable<Treatment>>($"api/treatments/patientID/{ID}");
         }
-
 
         public async Task<Treatment> AddTreatment(Treatment treatment)
         {

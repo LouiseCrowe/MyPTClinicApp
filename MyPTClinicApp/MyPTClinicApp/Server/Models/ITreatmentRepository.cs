@@ -10,6 +10,7 @@ namespace MyPTClinicApp.Server.Models
     {
         IQueryable<TreatmentDTO> GetTreatments();
         Task<Treatment> GetTreatmentById(int treatmentId);
+        IEnumerable<Treatment> GetTreatmentsByPatientId(int patientId);
         Task<Treatment> AddTreatment(Treatment treatment);
         Task<Treatment> UpdateTreatment(Treatment treatment);
         Task<Treatment> DeleteTreatment(int treatmentId);

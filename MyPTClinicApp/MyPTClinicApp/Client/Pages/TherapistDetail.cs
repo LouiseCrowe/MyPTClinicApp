@@ -37,8 +37,6 @@ namespace MyPTClinicApp.Client.Pages
             {
                 Patients = await PatientService.GetPatientsByTherapistId(Therapist.ID);
             }
-            
-            
         }
 
         protected void NavigateToOverview()
