@@ -29,11 +29,11 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("{search}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<Therapist>>> Search(string name)
+        public async Task<ActionResult<IEnumerable<Therapist>>> Search(string firstName)
         {
             try
             {
-                var result = await therapistRepository.Search(name);
+                var result = await therapistRepository.Search(firstName);
 
                 if (result.Any())
                 {
@@ -48,7 +48,6 @@ namespace MyPTClinicApp.Server.Controllers
                                    "Error retrieving data from the database");
             }
         }
-
 
 
         // GET: api/therapists/all

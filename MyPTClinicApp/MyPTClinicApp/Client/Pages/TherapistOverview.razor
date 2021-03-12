@@ -10,8 +10,18 @@
 }
 else
 {
+    <div class="input-group">
+        <input class="form-control" input type="text" placeholder="Search by therapist's first name" @bind-value="SearchName" />
+        <div class="input-group-append">
+            <button class="btn btn-primary" @onclick="Search">Search</button>
+            <button class="btn btn-outline-primary" @onclick="ClearSearch">Clear Search</button>
+        </div>
+    </div>
+    <div>@errormessage</div>        
+   
+    <br>
 
-    <table class="table table-hover table-striped" >
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>ID</th>

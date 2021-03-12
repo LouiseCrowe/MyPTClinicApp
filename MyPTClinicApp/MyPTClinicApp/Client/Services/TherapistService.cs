@@ -25,6 +25,11 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Therapist[]>("api/therapists/all");
         }
 
+        public async Task<IEnumerable<Therapist>> Search(string searchName)
+        {
+            return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/search?firstname={searchName}");
+        }
+
         public async Task<Therapist> GetTherapistById(int therapistId)
         {
             return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/{therapistId}");
@@ -60,5 +65,6 @@ namespace MyPTClinicApp.Client.Services
             await httpClient.DeleteAsync($"api/therapists/id/{therapistID}");
         }
 
+        
     }
 }
