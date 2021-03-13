@@ -108,8 +108,7 @@ namespace MyPTClinicApp.Server.Controllers
 
                 if (found != null)
                 {
-                    ModelState.AddModelError("Full Name", "Full Name already in use");
-                    return BadRequest(ModelState);
+                   return BadRequest();
                 }
 
                 var addedTherapist = await therapistRepository.AddTherapist(therapist);
@@ -129,22 +128,30 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Therapist>> UpdateTherapist(int id, [FromBody] Therapist therapist)
+        public async Task<ActionResult<Therapist>> UpdateTherapist([FromBody] Therapist therapist)
         {
 
             try
             {
-                if (id != therapist.ID)
+                if (therapist == null)
                 {
-                    return BadRequest("Therapist ID mismatch");
+                    return BadRequest();
+                }
+
+                // check for duplicate name before updating
+                var found = await therapistRepository.GetTherapistByFullName(therapist.FirstName, therapist.LastName);
+
+                if (found != null)
+                {
+                    return BadRequest();
                 }
 
                 // find therapist to update
-                var therapistToUpdate = await therapistRepository.GetTherapistById(id);
+                var therapistToUpdate = await therapistRepository.GetTherapistById(therapist.ID);
 
                 if (therapistToUpdate == null)
                 {
-                    return NotFound($"Therapist with ID {id} not found");
+                    return NotFound($"Therapist with ID {therapist.ID} not found");
                 }
 
                 return await therapistRepository.UpdateTherapist(therapist);

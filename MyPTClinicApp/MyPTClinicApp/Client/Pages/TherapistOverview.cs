@@ -18,12 +18,10 @@ namespace MyPTClinicApp.Client.Pages
 
         private IEnumerable<Therapist> Therapists { get; set; }
 
-        private IEnumerable<Patient> Patients { get; set; }
-
         // properties for search
         public string SearchName { get; set; }
 
-        private bool found;
+        //private bool found;
 
         private string errormessage;
 
@@ -38,12 +36,12 @@ namespace MyPTClinicApp.Client.Pages
             try
             {
                 Therapists = await TherapistService.Search(SearchName);
-                found = true;
+                //found = true;
                 errormessage = String.Empty;
             }
             catch (Exception)
             {
-                found = false;
+                //found = false;
                 errormessage = "Name not found - maybe check your spelling or try another name";
             }
             
@@ -54,7 +52,6 @@ namespace MyPTClinicApp.Client.Pages
         {
             SearchName = String.Empty;
             Therapists = await TherapistService.GetTherapists();
-
         }
     }
 }

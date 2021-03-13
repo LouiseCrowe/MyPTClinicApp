@@ -2,7 +2,7 @@
 @page  "/therapistedit"
 @page "/therapistedit/{TherapistID}"
 
-@if (!Saved)
+@if (SavedStatus == SavedStatus.NotSaved)
 {
     <section class="therapist-edit">
         <h1 class="page-title">Details for @Therapist.FirstName @Therapist.LastName</h1>
@@ -24,6 +24,7 @@
             <div class="form-group row">
                 <label for="phone" class="col-sm-3">Phone: </label>
                 <InputText id="phone" class="form-control col-sm-8" @bind-Value="@Therapist.Phone" placeholder="Enter phone"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.Phone)" />
             </div>
 
             <div class="form-group row">
@@ -45,13 +46,13 @@
                 @if (Therapist.ID > 0)
                 {
                     <a class="btn btn-danger" @onclick="@DeleteTherapist">
-                        Delete
+                        Delete Therapist
                     </a>
                 }
             </div>
             <br />
             <div>
-                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to therapist list</a>
             </div>
         </EditForm>
     </section>
@@ -60,4 +61,21 @@
 else
 {
     <div class="alert @StatusClass">@Message</div>
+
+
+    @if (ButtonNavigation == "fromdelete")
+    {
+        <div>
+            <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to therapist list</a>
+        </div>
+    }
+
+    @if (ButtonNavigation == "fromadd")
+    {
+        <div>
+            <a class="btn btn-outline-primary" @onclick="@NavigateToEditTherapistAsync">Add new therapist</a>
+        </div>
+    }
+
+
 }

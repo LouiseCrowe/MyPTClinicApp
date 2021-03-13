@@ -3,6 +3,7 @@ using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -50,14 +51,19 @@ namespace MyPTClinicApp.Client.Services
             return null;
         }
 
-        public async Task<Therapist> UpdateTherapist(Therapist therapist)
+        public async Task<Therapist> UpdateTherapist(Therapist updatedTherapist)
         {
-            var therapistJson = new StringContent(JsonSerializer.Serialize(therapist),
+            var therapistJson = new StringContent(JsonSerializer.Serialize(updatedTherapist),
                                             Encoding.UTF8, "application/json");
-            
-            await httpClient.PutAsync($"api/therapists/id/{therapist.ID}", therapistJson);
 
-            return null; 
+            var response = await httpClient.PutAsync($"api/therapists/id/{updatedTherapist.ID}", therapistJson);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Therapist>(await response.Content.ReadAsStreamAsync());
+            }
+           
+            return null;
         }
 
         public async Task DeleteTherapist(int therapistID)

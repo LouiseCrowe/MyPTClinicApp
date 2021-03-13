@@ -4,6 +4,7 @@ using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +13,11 @@ using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
 {
+    public enum SavedStatus
+    {
+        Saved, NotSaved, Error
+    }
+    
     public partial class TherapistEdit
     {
         [Parameter]
@@ -25,16 +31,24 @@ namespace MyPTClinicApp.Client.Pages
 
         public Therapist Therapist { get; set; } = new();
 
+        public SavedStatus SavedStatus { get; set; }
+
+        //used to store state of screen
+        protected string Message = string.Empty;
+        protected string StatusClass = string.Empty;
+        protected string ButtonNavigation = string.Empty;
+        
+
         protected override async Task OnInitializedAsync()
         {
-            Saved = false;
+            SavedStatus = SavedStatus.NotSaved;
 
             bool success = int.TryParse(TherapistID, out var therapistID);
             if (!success)
             {
                 StatusClass = "alert-danger";
-                Message = "Patient ID must be an integer, please try again";
-                Saved = false;
+                Message = "Therapist ID must be an integer, please try again";
+                SavedStatus = SavedStatus.NotSaved;
             }
 
             if (therapistID == 0)       // new therapist is being created
@@ -49,15 +63,10 @@ namespace MyPTClinicApp.Client.Pages
             }
         }
 
-        //used to store state of screen
-        protected string Message = string.Empty;
-        protected string StatusClass = string.Empty;
-        protected bool Saved;
-
+        
         protected async Task HandleValidSubmit()
         {
-
-            Saved = false;
+            SavedStatus = SavedStatus.NotSaved;
 
             if (Therapist.ID == 0)       // this means a new therapist is being added
             {
@@ -67,21 +76,32 @@ namespace MyPTClinicApp.Client.Pages
                 {
                     StatusClass = "alert-success";
                     Message = "New therapist added successfully.";
-                    Saved = true;
+                    SavedStatus = SavedStatus.Saved;
                 }
                 else
                 {
+                    // if there's a duplicate full name
+                    SavedStatus = SavedStatus.Error;
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new therapist. Please try again.";
-                    Saved = false;
+                    Message = "Therapist name already in use. Please try again.";
+                    ButtonNavigation = "fromadd";
                 }
             }
-            else
+            else                 // updating therapist
             {
-                await TherapistService.UpdateTherapist(Therapist);
-                StatusClass = "alert-success";
-                Message = "Therapist updated successfully.";
-                Saved = true;
+                var response = await TherapistService.UpdateTherapist(Therapist);
+                //if (response != null)           // Bad request returned instead of null
+                //{
+                    StatusClass = "alert-success";
+                    Message = "Therapist updated successfully.";
+                    SavedStatus = SavedStatus.Saved;
+                //}
+                //else
+                //{ 
+                //    SavedStatus = SavedStatus.Error;
+                //    StatusClass = "alert-danger";
+                //    Message = "Therapist name already in use. Please try again.";
+                //}
             }
         }
 
@@ -97,8 +117,8 @@ namespace MyPTClinicApp.Client.Pages
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
-
-            Saved = true;
+            ButtonNavigation = "fromdelete";
+            SavedStatus = SavedStatus.Saved;
         }
 
         protected void NavigateToOverview()
@@ -106,6 +126,10 @@ namespace MyPTClinicApp.Client.Pages
             NavigationManager.NavigateTo("/therapistoverview");
         }
 
+        protected async Task NavigateToEditTherapistAsync()
+        {
+            await OnInitializedAsync();
+        }
     }
 
 }
