@@ -14,6 +14,10 @@ namespace MyPTClinicApp.Client.Pages
     {
         [Parameter]
         public string PatientID { get; set; }
+        
+        // to allow navigation back to overview
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         [Inject]
         public IPatientService PatientService { get; set; }
@@ -26,16 +30,22 @@ namespace MyPTClinicApp.Client.Pages
 
         public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
 
+        //used to store state of screen
+        public SavedStatus SavedStatus { get; set; }
+        protected string Message = string.Empty;
+        protected string StatusClass = string.Empty;
+        protected string ButtonNavigation = string.Empty;
+
         protected override async Task OnInitializedAsync()
         {
-            Saved = false;
+            SavedStatus = SavedStatus.NotSaved;
 
             bool success = int.TryParse(PatientID, out var patientID);
             if (!success)
             {
                 StatusClass = "alert-danger";
                 Message = "Patient ID must be an integer, please try again";
-                Saved = false;
+                SavedStatus = SavedStatus.NotSaved;
             }
 
             // complete list of therapists for input select in EditForm
@@ -51,18 +61,9 @@ namespace MyPTClinicApp.Client.Pages
             }
         }
 
-        // to allow navigation back to overview
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        //used to store state of screen
-        protected string Message = string.Empty;
-        protected string StatusClass = string.Empty;
-        protected bool Saved;
-        
         protected async Task HandleValidSubmit()
         {
-            Saved = false;
+            SavedStatus = SavedStatus.NotSaved;
 
             if (Patient.ID == 0)       // this means a new patient is being added
             {
@@ -72,13 +73,15 @@ namespace MyPTClinicApp.Client.Pages
                 {
                     StatusClass = "alert-success";
                     Message = "New patient added successfully.";
-                    Saved = true;
+                    SavedStatus = SavedStatus.Saved;
                 }
                 else
                 {
+                    // if there's a duplicate full name
+                    SavedStatus = SavedStatus.Error;
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new patient. Please try again.";
-                    Saved = false;
+                    Message = "Patient name already in use. Please try again.";
+                    ButtonNavigation = "toAdd";
                 }
             }
             else    // this is updating an existing patient
@@ -86,7 +89,8 @@ namespace MyPTClinicApp.Client.Pages
                 await PatientService.UpdatePatient(Patient);
                 StatusClass = "alert-success";
                 Message = "Patient updated successfully.";
-                Saved = true;
+                SavedStatus = SavedStatus.Saved;
+                ButtonNavigation = "toOverview";
             }
         }
 
@@ -104,13 +108,18 @@ namespace MyPTClinicApp.Client.Pages
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
-
-            Saved = true;
+            ButtonNavigation = "toOverview";
+            SavedStatus = SavedStatus.Saved;
         }
 
         protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/patientoverview");
+        }
+
+        protected async Task NavigateToEditPatient()
+        {
+            await OnInitializedAsync();
         }
     }
 }

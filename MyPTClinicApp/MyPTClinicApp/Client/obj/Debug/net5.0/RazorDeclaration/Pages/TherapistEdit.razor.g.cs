@@ -82,6 +82,13 @@ using MyPTClinicApp.Client.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\MyPTClinicApp\MyPTClinicApp\MyPTClinicApp\Client\Pages\TherapistEdit.razor"
+using MyPTClinicApp.Shared;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/therapistedit")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/therapistedit/{TherapistID}")]
     public partial class TherapistEdit : Microsoft.AspNetCore.Components.ComponentBase

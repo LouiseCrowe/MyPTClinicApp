@@ -13,11 +13,6 @@ using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
 {
-    public enum SavedStatus
-    {
-        Saved, NotSaved, Error
-    }
-    
     public partial class TherapistEdit
     {
         [Parameter]
@@ -31,14 +26,12 @@ namespace MyPTClinicApp.Client.Pages
 
         public Therapist Therapist { get; set; } = new();
 
-        public SavedStatus SavedStatus { get; set; }
-
         //used to store state of screen
+        public SavedStatus SavedStatus { get; set; }
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
         protected string ButtonNavigation = string.Empty;
         
-
         protected override async Task OnInitializedAsync()
         {
             SavedStatus = SavedStatus.NotSaved;
@@ -84,7 +77,7 @@ namespace MyPTClinicApp.Client.Pages
                     SavedStatus = SavedStatus.Error;
                     StatusClass = "alert-danger";
                     Message = "Therapist name already in use. Please try again.";
-                    ButtonNavigation = "fromadd";
+                    ButtonNavigation = "toAdd";
                 }
             }
             else                 // updating therapist
@@ -95,14 +88,15 @@ namespace MyPTClinicApp.Client.Pages
                     StatusClass = "alert-success";
                     Message = "Therapist updated successfully.";
                     SavedStatus = SavedStatus.Saved;
-                //}
-                //else
-                //{ 
-                //    SavedStatus = SavedStatus.Error;
-                //    StatusClass = "alert-danger";
-                //    Message = "Therapist name already in use. Please try again.";
-                //}
-            }
+                    ButtonNavigation = "toOverview";
+            //}
+            //else
+            //{ 
+            //    SavedStatus = SavedStatus.Error;
+            //    StatusClass = "alert-danger";
+            //    Message = "Therapist name already in use. Please try again.";
+            //}
+        }
         }
 
         protected void HandleInvalidSubmit()
@@ -117,7 +111,7 @@ namespace MyPTClinicApp.Client.Pages
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
-            ButtonNavigation = "fromdelete";
+            ButtonNavigation = "toOverview";
             SavedStatus = SavedStatus.Saved;
         }
 
@@ -126,7 +120,7 @@ namespace MyPTClinicApp.Client.Pages
             NavigationManager.NavigateTo("/therapistoverview");
         }
 
-        protected async Task NavigateToEditTherapistAsync()
+        protected async Task NavigateToEditTherapist()
         {
             await OnInitializedAsync();
         }

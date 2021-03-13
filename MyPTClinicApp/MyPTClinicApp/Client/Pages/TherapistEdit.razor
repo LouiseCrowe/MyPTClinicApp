@@ -1,6 +1,8 @@
 ﻿@*Define two page directives one for edit with parameter and one for add without parameter*@
 @page  "/therapistedit"
 @page "/therapistedit/{TherapistID}"
+@using MyPTClinicApp.Shared
+
 
 @if (SavedStatus == SavedStatus.NotSaved)
 {
@@ -63,19 +65,17 @@ else
     <div class="alert @StatusClass">@Message</div>
 
 
-    @if (ButtonNavigation == "fromdelete")
+    @if (ButtonNavigation == "toOverview")
     {
         <div>
             <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to therapist list</a>
         </div>
     }
 
-    @if (ButtonNavigation == "fromadd")
+    @if (ButtonNavigation == "toAdd")
     {
         <div>
-            <a class="btn btn-outline-primary" @onclick="@NavigateToEditTherapistAsync">Add new therapist</a>
+            <a class="btn btn-outline-primary" @onclick="@NavigateToEditTherapist">Add new therapist</a>
         </div>
-    }
-
-
+    }   
 }
