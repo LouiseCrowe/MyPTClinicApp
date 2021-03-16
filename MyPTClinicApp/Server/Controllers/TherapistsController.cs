@@ -46,8 +46,60 @@ namespace MyPTClinicApp.Server.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                                    "Error retrieving data from the database");
-            }            
+            }
         }
+
+
+        //// search criteria
+        //// GET: api/therapists/searchwithonename
+        //[HttpGet("{searchwithonename}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<ActionResult<IEnumerable<Therapist>>> SearchWithOneName(string name)
+        //{
+        //    try
+        //    {
+        //        var result = await therapistRepository.SearchWithOneName(name);
+
+        //        if (result.Any())
+        //        {
+        //            return Ok(result);
+        //        }
+
+        //        return NotFound();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError,
+        //                           "Error retrieving data from the database");
+        //    }
+        //}
+
+
+        //// search criteria
+        //// GET: api/therapists/searchtwonames
+        //[HttpGet("{searchtwonames}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<ActionResult<IEnumerable<Therapist>>> SearchWithTwoNames(string firstName, string lastName)
+        //{
+        //    try
+        //    {
+        //        var result = await therapistRepository.SearchWithTwoNames(firstName, lastName);
+
+        //        if (result.Any())
+        //        {
+        //            return Ok(result);
+        //        }
+
+        //        return NotFound();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError,
+        //                           "Error retrieving data from the database");
+        //    }            
+        //}
 
 
         // GET: api/therapists/all
@@ -168,7 +220,7 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult<Therapist>> DeleteTherapist(int id)
+        public async Task<ActionResult> DeleteTherapist(int id)
         {
             try
             {
@@ -179,8 +231,9 @@ namespace MyPTClinicApp.Server.Controllers
                     return NotFound($"Therapist with ID {id} not found");
                 }
 
-                return await therapistRepository.DeleteTherapist(id);                
-                
+                await therapistRepository.DeleteTherapist(id);
+
+                return NoContent();
             }
             catch (Exception)
             {
@@ -188,10 +241,5 @@ namespace MyPTClinicApp.Server.Controllers
                                    "Error deleting data");
             }
         }
-
-        //private bool TherapistExists(int id)
-        //{
-        //    return _context.Therapist.Any(e => e.ID == id);
-        //}
     }
 }

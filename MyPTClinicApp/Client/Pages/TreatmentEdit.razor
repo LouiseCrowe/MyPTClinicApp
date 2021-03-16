@@ -7,72 +7,93 @@
 
 @if (Treatment == null || Patients == null || Therapists == null)
 {
-    <h3>Loading......  just a moment</h3>
+    <p><em>Loading......  just a moment</em></p>
 }
 
 else
 {
-@if (!Saved)
-{
-    <section class="treatment-edit">
-        <h1 class="page-title">Treatment Details</h1>
-        <EditForm Model="@Treatment" OnValidSubmit="@HandleValidSubmit"
-                  OnInvalidSubmit="@HandleInvalidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary></ValidationSummary>
-            <div class="form-group row">
-                <label for="patientId" class="col-sm-3">Patient: </label>
-                <InputSelect id="patientId" class="form-control col-sm-8" @bind-Value="Treatment.PatientID">
-                    @foreach (var patient in Patients)
+    @if (!Saved)
+    {
+        <section class="treatment-edit">
+            <h1 class="page-title">Treatment Details</h1>
+            <EditForm Model="@Treatment" OnValidSubmit="@HandleValidSubmit"
+                      OnInvalidSubmit="@HandleInvalidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary></ValidationSummary>
+                <div class="form-group row">
+                    <label for="patientId" class="col-sm-3">Patient: </label>
+                    <InputSelect id="patientId" class="form-control col-sm-8" @bind-Value="Treatment.PatientID">
+                        @foreach (var patient in Patients)
+                                {
+                            <option value="@patient.ID">@patient.FirstName @patient.LastName</option>
+                                }
+                    </InputSelect>
+                </div>
+                <div class="form-group row">
+                    <label for="therapistId" class="col-sm-3">Therapist: </label>
+                    <InputSelect id="therapistId" class="form-control col-sm-8" @bind-Value="Treatment.TherapistID">
+                        @foreach (var therapist in Therapists)
+                                {
+                            <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
+                                }
+                    </InputSelect>
+                </div>
+                <div class="form-group row">
+                    <label for="date" class="col-sm-3">Date: </label>
+                    <InputDate id="date" class="form-control col-sm-8" @bind-Value="Treatment.Date">
+                    </InputDate>
+                </div>
+                <div class="form-group row">
+                    <label for="notes" class="col-sm-3">Notes: </label>
+                    <InputTextArea id="date" class="form-control col-sm-8" @bind-Value="Treatment.Notes"
+                                   placeholder="Enter notes">
+                    </InputTextArea>
+                </div>
+                <br />
+                <div>
+                    <button type="submit" class="btn btn-primary edit-btn">Save Treatment</button>
+                </div>
+                <br />
+                <div>
+                    @if (Treatment.ID > 0)
                     {
-                        <option value="@patient.ID">@patient.FirstName @patient.LastName</option>
+                        <a class="btn btn-danger" @onclick="@DeleteTreatment">
+                            Delete Treatment
+                        </a>
                     }
-                </InputSelect>
-            </div>
-            <div class="form-group row">
-                <label for="therapistId" class="col-sm-3">Therapist: </label>
-                <InputSelect id="therapistId" class="form-control col-sm-8" @bind-Value="Treatment.TherapistID">
-                    @foreach (var therapist in Therapists)
-                    {
-                        <option value="@therapist.ID">@therapist.FirstName @therapist.LastName</option>
-                    }
-                </InputSelect>
-            </div>
-            <div class="form-group row">
-                <label for="date" class="col-sm-3">Date: </label>
-                <InputDate id="date" class="form-control col-sm-8" @bind-Value="Treatment.Date">
-                </InputDate>
-            </div>
-            <div class="form-group row">
-                <label for="notes" class="col-sm-3">Notes: </label>
-                <InputTextArea id="date" class="form-control col-sm-8" @bind-Value="Treatment.Notes"
-                               placeholder="Enter notes">
-                </InputTextArea>
-            </div>
-            <br />
-            <div>
-                <button type="submit" class="btn btn-primary edit-btn">Save Treatment</button>
-            </div>
-            <br />
-            <div>
-                @if (Treatment.ID > 0)
-                {
-                    <a class="btn btn-danger" @onclick="@DeleteTreatment">
-                        Delete Treatment
-                    </a>
-                }
-            </div>
-            <br />
-            <div>
-                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
-            </div>
-        </EditForm>
-    </section>
+                </div>
+                <br />
+                <div>
+                    <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+                </div>
+            </EditForm>
+        </section>
 
-}
-else
-{
+    }
+    else
+    {
+        <div class="alert @StatusClass">@Message</div>
 
-    <div class="alert @StatusClass">@Message</div>
-}
+
+        @if (ButtonNavigation == "toOverview")
+        {
+            <div>
+                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to therapist list</a>
+            </div>
+        }
+
+        @if (ButtonNavigation == "toEdit")
+        {
+
+            <div>
+                <a class="btn btn-outline-primary" @onclick="@NavigateToEditTreatment">Add new treatment</a>
+            </div>
+
+            <br />
+
+            <div>
+                <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to treatment list</a>
+            </div>
+        }
+    }
 }

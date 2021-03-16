@@ -1497,11 +1497,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
+      "projectUniqueName": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
       "projectName": "MyPTClinicApp.Client",
-      "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
+      "projectPath": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
       "packagesPath": "C:\\Users\\LouiseCrowe\\.nuget\\packages\\",
-      "outputPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\obj\\",
+      "outputPath": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\LouiseCrowe\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1518,8 +1518,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {
-              "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj"
+            "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {
+              "projectPath": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj"
             }
           }
         }

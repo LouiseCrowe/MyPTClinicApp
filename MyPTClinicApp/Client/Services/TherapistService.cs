@@ -31,6 +31,16 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/search?firstname={searchName}");
         }
 
+        //public async Task<IEnumerable<Therapist>> SearchWithOneName(string name)
+        //{
+        //    return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/searchwithonename?name={name}");
+        //}
+
+        //public async Task<IEnumerable<Therapist>> SearchWithTwoNames(string firstName, string lastName)
+        //{
+        //    return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/searchtwonames?firstname={firstName}&lastname={lastName}");
+        //}
+
         public async Task<Therapist> GetTherapistById(int therapistId)
         {
             return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/{therapistId}");
@@ -66,9 +76,16 @@ namespace MyPTClinicApp.Client.Services
             return null;
         }
 
-        public async Task DeleteTherapist(int therapistID)
+        public async Task<string> DeleteTherapist(int therapistID)
         {
-            await httpClient.DeleteAsync($"api/therapists/id/{therapistID}");
+            var response = await httpClient.DeleteAsync($"api/therapists/id/{therapistID}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return "saved";
+            }
+
+            return "notsaved";
         }
 
         

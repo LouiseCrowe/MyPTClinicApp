@@ -109,12 +109,24 @@ namespace MyPTClinicApp.Client.Pages
 
         protected async Task DeleteTherapist()
         {
-            await TherapistService.DeleteTherapist(Therapist.ID);
+            var response = await TherapistService.DeleteTherapist(Therapist.ID);
 
-            StatusClass = "alert-success";
-            Message = "Deleted successfully";
-            ButtonNavigation = "toOverview";
-            SavedStatus = SavedStatus.Saved;
+            if (response == "saved")
+            {
+                StatusClass = "alert-success";
+                Message = "Deleted successfully";
+                ButtonNavigation = "toOverview";
+                SavedStatus = SavedStatus.Saved;
+            }
+            else
+            {
+                StatusClass = "alert-danger";
+                Message = "Therapist assigned to patients, please reassign patients to another therapist before deleting";
+                ButtonNavigation = "toOverview";
+                SavedStatus = SavedStatus.Error;
+            }
+
+            
         }
 
         protected void NavigateToOverview()

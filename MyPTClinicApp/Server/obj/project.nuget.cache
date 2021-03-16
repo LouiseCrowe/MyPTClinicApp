@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KcUvl783y0UJduzI9rbtIotqD8+o2LVbSFtAh1+h/7wprSSKT633A5GBKRHOMFIuuGsuq9P15Wxktw41qR3Isw==",
+  "dgSpecHash": "Q1dPIUEjNQwG5kIYGu/CBmOXNVxSasYTeue4ia8syzdFr4uEoc3GcgVlWHuOA178i39dUKXzn5X0thrbqEfWvA==",
   "success": true,
-  "projectFilePath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Server\\MyPTClinicApp.Server.csproj",
+  "projectFilePath": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Server\\MyPTClinicApp.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

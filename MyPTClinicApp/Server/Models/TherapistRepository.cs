@@ -31,6 +31,35 @@ namespace MyPTClinicApp.Server.Models
             return await query.ToListAsync();
         }
 
+        //public async Task<IEnumerable<Therapist>> SearchWithOneName(string name)
+        //{
+        //    // returns complete list of Therapists
+        //    IQueryable<Therapist> query = _context.Therapist;
+
+        //    if (!string.IsNullOrEmpty(name))
+        //    {
+        //        query = query.Where(t => t.FirstName.ToLower().Contains(name.ToLower())
+        //                            || t.LastName.ToLower().Contains(name.ToLower()));
+        //    }
+
+        //    return await query.ToListAsync();
+        //}
+
+
+        //public async Task<IEnumerable<Therapist>> SearchWithTwoNames(string firstName, string lastName)
+        //{
+        //    // returns complete list of Therapists
+        //    IQueryable<Therapist> query = _context.Therapist;
+
+        //    if (!string.IsNullOrEmpty(firstName))
+        //    {
+        //        query = query.Where(t => t.FirstName.ToLower().Contains(firstName.ToLower())
+        //                            && t.LastName.ToLower().Contains(lastName.ToLower()));
+        //    }
+
+        //    return await query.ToListAsync();
+        //}
+
 
         public async Task<IEnumerable<Therapist>> GetTherapists()
         {

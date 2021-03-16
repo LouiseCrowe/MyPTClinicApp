@@ -38,7 +38,7 @@ namespace MyPTClinicApp.Server.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Treatment>> GetTreatmentById([FromRoute] int id)
+        public async Task<ActionResult<Treatment>> GetTreatmentById(int id)
         {
             try
             {
@@ -76,21 +76,6 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
-        //public ActionResult<IEnumerable<Patient>> GetPatientByTherapistId(int id)
-        //{
-        //    try
-        //    {
-        //        return Ok(patientRepository.GetPatientsByTherapistId(id));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError,
-        //                       "Error retrieving data from the database");
-        //    }
-        //}
-
-
-
         // POST: api/Treatments
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -121,21 +106,21 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPut("id/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Treatment>> PutUpdateTreatment(int id, [FromBody] Treatment treatment)
+        public async Task<ActionResult<Treatment>> UpdateTreatment(Treatment treatment)
         {
             try
             {
-                if (id != treatment.ID)
+                if (treatment == null)
                 {
-                    return BadRequest("Treatment ID mismatch");
+                    return BadRequest();
                 }
 
                 // find treatment to update
-                var treatmentToUpdate = await treatmentRepository.GetTreatmentById(id);
+                var treatmentToUpdate = await treatmentRepository.GetTreatmentById(treatment.ID);
 
                 if (treatmentToUpdate == null)
                 {
-                    return NotFound($"Treatment with ID {id} not found");
+                    return NotFound($"Treatment with ID {treatment.ID} not found");
                 }
 
                 return await treatmentRepository.UpdateTreatment(treatment);
