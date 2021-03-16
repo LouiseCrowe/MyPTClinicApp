@@ -21,9 +21,9 @@ namespace MyPTClinicApp.Client.Pages
         // properties for search
         public string SearchName { get; set; }
 
-        //string[] fullName;
-        //string firstName = "";
-        //string lastName = "";
+        string[] fullName;
+        string searchName = "";
+        string lastName = "";
 
         private string errormessage;
 
@@ -37,29 +37,20 @@ namespace MyPTClinicApp.Client.Pages
         {
             try
             {
-                //fullName = SearchName.Split(" ");
+                fullName = SearchName.Split(" ");
 
-                //firstName = fullName[0];
+                searchName = fullName[0];
 
-                //if (fullName.Length > 1)
-                //{
-                //    lastName = fullName[^1];
-                //}
-                //else
-                //{
-                //    lastName = fullName[0];         // this allows user to search by just first or last name
-                //}
+                if (fullName.Length > 1)
+                {
+                    lastName = fullName[^1];
+                }
+                else
+                {
+                    lastName = fullName[0];         // this allows user to search by just first or last name
+                }
 
-                //if (fullName.Length == 1)            // complete one name search
-                //{
-                //    Therapists = await TherapistService.SearchWithOneName(firstName);
-                //}
-                //else 
-                //{ 
-                //    Therapists = await TherapistService.SearchWithTwoNames(firstName, lastName);
-                //}
-
-                Therapists = await TherapistService.Search(SearchName);
+                Therapists = await TherapistService.Search(searchName, lastName);
 
                 errormessage = String.Empty;
             }

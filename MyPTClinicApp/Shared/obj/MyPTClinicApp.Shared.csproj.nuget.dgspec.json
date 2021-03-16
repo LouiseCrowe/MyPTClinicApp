@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {}
+    "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {}
   },
   "projects": {
-    "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {
+    "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj",
+        "projectUniqueName": "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj",
         "projectName": "MyPTClinicApp.Shared",
-        "projectPath": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj",
+        "projectPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\MyPTClinicApp.Shared.csproj",
         "packagesPath": "C:\\Users\\LouiseCrowe\\.nuget\\packages\\",
-        "outputPath": "C:\\CLONEDCOPY\\MyPTClinicApp\\MyPTClinicApp\\Shared\\obj\\",
+        "outputPath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LouiseCrowe\\AppData\\Roaming\\NuGet\\NuGet.Config",

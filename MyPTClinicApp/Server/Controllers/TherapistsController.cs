@@ -29,11 +29,11 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("{search}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<Therapist>>> Search(string firstName)
+        public async Task<ActionResult<IEnumerable<Therapist>>> Search(string searchName, string lastName)
         {
             try
             {
-                var result = await therapistRepository.Search(firstName);
+                var result = await therapistRepository.Search(searchName, lastName);
 
                 if (result.Any())
                 {
