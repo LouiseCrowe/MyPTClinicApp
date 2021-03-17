@@ -65,7 +65,32 @@ namespace MyPTClinicApp.Server.Controllers
                                   "Error retrieving data from the database");
             }
         }
-        
+
+        // search criteria
+        // GET: api/patients/search
+        [HttpGet("{search}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<Patient>>> Search(string searchName, string lastName)
+        {
+            try
+            {
+                var result = await patientRepository.Search(searchName, lastName);
+
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
         // GET: api/patients/therapistid/2
         [HttpGet("therapistid/{ID}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

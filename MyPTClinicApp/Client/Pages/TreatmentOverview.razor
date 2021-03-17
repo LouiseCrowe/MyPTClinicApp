@@ -6,10 +6,39 @@
 
 @if (Treatments == null)
 {
-    <p><em>Retrieving treatment information, it will just take a moment...</em></p> 
+    <p><em>Retrieving treatment information, it will just take a moment...</em></p>
 }
 else
 {
+    <div class="input-group">
+        <input class="form-control" input type="text" placeholder="Search by therapist's or patient's first, last or full name"
+               @bind-value="SearchName" />
+        <div class="input-group-append">
+            <button class="btn btn-primary" @onclick="Search">Search</button>
+            <button class="btn btn-outline-primary" @onclick="ClearSearch">Clear Search</button>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="input-group input-daterange">
+        <input type="text" class="form-control" value="2012-04-05">
+        <div class="input-group-addon">to</div>
+        <input type="text" class="form-control" value="2012-04-19">
+    </div>
+
+    <div class="input-group">
+        <input class="form-control" input type=date @bind-value="SearchDate" />
+        <div class="input-group-append">
+            <button class="btn btn-primary" @onclick="DateSearch">Search</button>
+            <button class="btn btn-outline-primary" @onclick="ClearSearch">Clear Search</button>
+        </div>
+    </div>
+
+    <div>@errormessage</div>
+
+    <br />
+
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -25,23 +54,24 @@ else
         <tbody>
             @foreach (var treatment in Treatments)
             {
-            <tr>
-                <td>@treatment.ID</td>    
-                <td>@treatment.PatientFirstName @treatment.PatientLastName</td>
-                <td>@treatment.TherapistFirstName @treatment.TherapistLastName</td>
-                <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>
-                <td>@treatment.Notes</td>
-                <td>
-                    <a href="@($"treatmentdetail/{treatment.ID}")" class="btn btn-primary table-btn">
-                        <i class="fas fa-info-circle"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="@($"treatmentedit/{treatment.ID}")" class="btn btn-primary table-btn">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </tr>}
+                <tr>
+                    <td>@treatment.ID</td>
+                    <td>@treatment.PatientFirstName @treatment.PatientLastName</td>
+                    <td>@treatment.TherapistFirstName @treatment.TherapistLastName</td>
+                    <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>
+                    <td>@treatment.Notes</td>
+                    <td>
+                        <a href="@($"treatmentdetail/{treatment.ID}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@($"treatmentedit/{treatment.ID}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }

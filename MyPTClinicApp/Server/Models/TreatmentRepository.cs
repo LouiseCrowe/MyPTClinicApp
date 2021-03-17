@@ -25,6 +25,10 @@ namespace MyPTClinicApp.Server.Models
             return result.Entity;
         }
 
+
+
+
+
         public IQueryable<TreatmentDTO> GetTreatments()
         {
             var treatments = from t in _context.Treatment.OrderByDescending(t => t.Date)
@@ -39,10 +43,32 @@ namespace MyPTClinicApp.Server.Models
                                  Notes = t.Notes
                              };
             return treatments;
-
-            //return await _context.Treatment.OrderBy(t => t.ID).ToListAsync();
         }
 
+
+        public async Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName)
+        {
+            // get full list of treatments
+            var query = GetTreatments();
+            
+            if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
+            {
+                query = query.Where(t => t.PatientFirstName.ToLower().Contains(searchName.ToLower()) 
+                                    || t.PatientLastName.ToLower().Contains(searchName.ToLower())
+                                    || t.TherapistFirstName.ToLower().Contains(searchName.ToLower())
+                                    || t.TherapistLastName.ToLower().Contains(searchName.ToLower()));
+                
+            }
+            if (searchName != lastName)                             // meaning full name provided
+            {
+                query = query.Where(t => (t.PatientFirstName.ToLower().Contains(searchName.ToLower())
+                                    && t.PatientLastName.ToLower().Contains(lastName.ToLower()))
+                                    || (t.TherapistFirstName.ToLower().Contains(searchName.ToLower())
+                                    && t.TherapistLastName.ToLower().Contains(lastName.ToLower())));
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task<Treatment> GetTreatmentById(int treatmentId)
         {

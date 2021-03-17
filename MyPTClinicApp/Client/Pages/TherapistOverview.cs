@@ -18,13 +18,11 @@ namespace MyPTClinicApp.Client.Pages
 
         private IEnumerable<Therapist> Therapists { get; set; }
 
-        // properties for search
+        // for managing search
         public string SearchName { get; set; }
-
         string[] fullName;
         string searchName = "";
         string lastName = "";
-
         private string errormessage;
 
         protected override async Task OnInitializedAsync()
@@ -32,15 +30,12 @@ namespace MyPTClinicApp.Client.Pages
             Therapists = (await TherapistService.GetTherapists()).ToList();
         }
 
-
         public async Task Search()
         {
             try
             {
                 fullName = SearchName.Split(" ");
-
                 searchName = fullName[0];
-
                 if (fullName.Length > 1)
                 {
                     lastName = fullName[^1];
@@ -58,7 +53,6 @@ namespace MyPTClinicApp.Client.Pages
             {
                 errormessage = "Name not found - maybe check your spelling or try another name";
             }           
-            
         }
 
         public async Task ClearSearch()

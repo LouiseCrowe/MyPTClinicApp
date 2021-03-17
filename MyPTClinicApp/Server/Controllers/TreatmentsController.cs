@@ -32,7 +32,32 @@ namespace MyPTClinicApp.Server.Controllers
             return treatmentRepository.GetTreatments();
         }
 
-        
+        // search criteria
+        // GET: api/treatments/search
+        [HttpGet("{search}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<TreatmentDTO>>> Search(string searchName, string lastName)
+        {
+            try
+            {
+                var result = await treatmentRepository.Search(searchName, lastName);
+
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
+
         // GET: api/treatments/id/2
         [HttpGet("id/{id}", Name = "GetTreatmentById")]
         [ProducesResponseType(StatusCodes.Status200OK)]

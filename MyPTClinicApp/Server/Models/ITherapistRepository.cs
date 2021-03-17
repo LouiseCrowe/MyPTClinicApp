@@ -9,8 +9,6 @@ namespace MyPTClinicApp.Server.Models
     public interface ITherapistRepository
     {
         Task<IEnumerable<Therapist>> Search(string searchName, string lastName);
-        //Task<IEnumerable<Therapist>> SearchWithOneName(string name);
-        //Task<IEnumerable<Therapist>> SearchWithTwoNames(string firstName, string lastName);
         Task<IEnumerable<Therapist>> GetTherapists();
         Task<Therapist> GetTherapistById(int therapistId);
         Task<Therapist> GetTherapistByFullName(string firstName, string lastName);

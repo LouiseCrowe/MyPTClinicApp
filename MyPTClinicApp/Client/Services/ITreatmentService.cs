@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace MyPTClinicApp.Client.Services
 {
     public interface ITreatmentService
-    {   Task<IEnumerable<TreatmentDTO>> GetTreatments();
+    {   
+        Task<IEnumerable<TreatmentDTO>> GetTreatments();
+        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName);
         Task<Treatment> GetTreatmentById(int id);
         Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID);
         Task<Treatment> AddTreatment(Treatment treatment);
         Task<Treatment> UpdateTreatment(Treatment treatment);
         Task DeleteTreatment(int treatmentID);
-
     }
 }

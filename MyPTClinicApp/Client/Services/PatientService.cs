@@ -27,10 +27,14 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Patient[]>("api/patients/all");
         }
 
-
         public async Task<Patient> GetPatientById(int id)
         {
             return await httpClient.GetJsonAsync<Patient>($"api/patients/id/{id}");
+        }
+
+        public async Task<IEnumerable<Patient>> Search(string searchName, string lastName)
+        {
+            return await httpClient.GetJsonAsync<Patient[]>($"api/patients/search?searchname={searchName}&lastname={lastName}");
         }
 
         public async Task<IEnumerable<Patient>> GetPatientsByTherapistId(int ID)

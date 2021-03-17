@@ -26,20 +26,10 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Therapist[]>("api/therapists/all");
         }
 
-        public async Task<IEnumerable<Therapist>> Search(string searchName, string lastName = "")
+        public async Task<IEnumerable<Therapist>> Search(string searchName, string lastName)
         {
             return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/search?searchname={searchName}&lastname={lastName}");
         }
-
-        //public async Task<IEnumerable<Therapist>> SearchWithOneName(string name)
-        //{
-        //    return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/searchwithonename?name={name}");
-        //}
-
-        //public async Task<IEnumerable<Therapist>> SearchWithTwoNames(string firstName, string lastName)
-        //{
-        //    return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/searchtwonames?firstname={firstName}&lastname={lastName}");
-        //}
 
         public async Task<Therapist> GetTherapistById(int therapistId)
         {

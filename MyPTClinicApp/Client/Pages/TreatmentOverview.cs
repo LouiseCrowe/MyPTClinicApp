@@ -17,10 +17,60 @@ namespace MyPTClinicApp.Client.Pages
         public ITreatmentService TreatmentService { get; set; }
 
         private IEnumerable<TreatmentDTO> Treatments { get; set; }
-               
+
+        // for managing search
+        public string SearchName { get; set; }
+        string[] fullName;
+        string searchName = "";
+        string lastName = "";
+        private string errormessage;
+
+        public DateTime SearchDate { get; set; }
+
+
         protected override async Task OnInitializedAsync()
         {
             Treatments = await TreatmentService.GetTreatments();
+        }
+
+        public async Task Search()
+        {
+            try
+            {
+                fullName = SearchName.Split(" ");
+                searchName = fullName[0];
+                if (fullName.Length > 1)
+                {
+                    lastName = fullName[^1];
+                }
+                else
+                {
+                    lastName = fullName[0];         // this allows user to search by just first or last name
+                }
+
+                Treatments = await TreatmentService.Search(searchName, lastName);
+
+                errormessage = String.Empty;
+            }
+            catch (Exception)
+            {
+                errormessage = "Name not found - maybe check your spelling or try another name";
+            }
+        }
+
+
+        public async Task DateSearch()
+        { 
+        
+        }
+
+
+
+        public async Task ClearSearch()
+        {
+            SearchName = String.Empty;
+            Treatments = await TreatmentService.GetTreatments();
+            errormessage = string.Empty;
         }
 
     }

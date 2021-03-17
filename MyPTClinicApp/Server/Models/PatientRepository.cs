@@ -29,6 +29,25 @@ namespace MyPTClinicApp.Server.Models
             return await _context.Patient.FirstOrDefaultAsync(p => p.ID == patientId);
         }
 
+        public async Task<IEnumerable<Patient>> Search(string searchName, string lastName)
+        {
+            // returns complete list of Patients
+            IQueryable<Patient> query = _context.Patient;
+
+            if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
+            {
+                query = query.Where(t => t.FirstName.ToLower().Contains(searchName.ToLower())
+                                    || t.LastName.ToLower().Contains(searchName.ToLower()));
+            }
+            if (searchName != lastName)                             // meaning full name provided
+            {
+                query = query.Where(t => t.FirstName.ToLower().Contains(searchName.ToLower())
+                                    && t.LastName.ToLower().Contains(lastName.ToLower()));
+            }
+
+            return await query.ToListAsync();
+        }
+
         public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)
         {
             // look for patients

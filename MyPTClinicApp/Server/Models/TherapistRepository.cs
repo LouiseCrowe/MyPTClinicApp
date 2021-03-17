@@ -28,6 +28,11 @@ namespace MyPTClinicApp.Server.Models
                 query = query.Where(t => t.FirstName.ToLower().Contains(searchName.ToLower())
                                     || t.LastName.ToLower().Contains(searchName.ToLower()));
             }
+            if (searchName != lastName)                             // meaning full name provided
+            {
+                query = query.Where(t => t.FirstName.ToLower().Contains(searchName.ToLower())
+                                    && t.LastName.ToLower().Contains(lastName.ToLower()));
+            }
 
             return await query.ToListAsync();
         }

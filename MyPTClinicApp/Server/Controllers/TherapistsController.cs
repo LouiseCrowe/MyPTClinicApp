@@ -49,59 +49,6 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
-
-        //// search criteria
-        //// GET: api/therapists/searchwithonename
-        //[HttpGet("{searchwithonename}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<ActionResult<IEnumerable<Therapist>>> SearchWithOneName(string name)
-        //{
-        //    try
-        //    {
-        //        var result = await therapistRepository.SearchWithOneName(name);
-
-        //        if (result.Any())
-        //        {
-        //            return Ok(result);
-        //        }
-
-        //        return NotFound();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError,
-        //                           "Error retrieving data from the database");
-        //    }
-        //}
-
-
-        //// search criteria
-        //// GET: api/therapists/searchtwonames
-        //[HttpGet("{searchtwonames}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<ActionResult<IEnumerable<Therapist>>> SearchWithTwoNames(string firstName, string lastName)
-        //{
-        //    try
-        //    {
-        //        var result = await therapistRepository.SearchWithTwoNames(firstName, lastName);
-
-        //        if (result.Any())
-        //        {
-        //            return Ok(result);
-        //        }
-
-        //        return NotFound();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError,
-        //                           "Error retrieving data from the database");
-        //    }            
-        //}
-
-
         // GET: api/therapists/all
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
