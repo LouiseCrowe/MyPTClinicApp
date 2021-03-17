@@ -34,9 +34,10 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Treatment>($"api/treatments/id/{id}");
         }
 
-        public async Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName)
+        public async Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate)
         {
-            return await httpClient.GetJsonAsync<TreatmentDTO[]>($"api/treatments/search?searchname={searchName}&lastname={lastName}");
+            return await httpClient.GetJsonAsync<TreatmentDTO[]>
+                ($"api/treatments/search?searchname={searchName}&lastname={lastName}&fromdate={fromDate}&todate={toDate}");
         }
 
         public async Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID)

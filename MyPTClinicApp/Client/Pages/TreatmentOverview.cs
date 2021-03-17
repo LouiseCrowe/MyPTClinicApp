@@ -23,11 +23,10 @@ namespace MyPTClinicApp.Client.Pages
         string[] fullName;
         string searchName = "";
         string lastName = "";
+        public DateTime FromDate { get; set; } = new DateTime(2021, 01, 01);
+        public DateTime ToDate { get; set; } = DateTime.Now;
         private string errormessage;
-
-        public DateTime SearchDate { get; set; }
-
-
+        
         protected override async Task OnInitializedAsync()
         {
             Treatments = await TreatmentService.GetTreatments();
@@ -48,7 +47,7 @@ namespace MyPTClinicApp.Client.Pages
                     lastName = fullName[0];         // this allows user to search by just first or last name
                 }
 
-                Treatments = await TreatmentService.Search(searchName, lastName);
+                Treatments = await TreatmentService.Search(searchName, lastName, FromDate, ToDate);
 
                 errormessage = String.Empty;
             }
@@ -57,13 +56,6 @@ namespace MyPTClinicApp.Client.Pages
                 errormessage = "Name not found - maybe check your spelling or try another name";
             }
         }
-
-
-        public async Task DateSearch()
-        { 
-        
-        }
-
 
 
         public async Task ClearSearch()

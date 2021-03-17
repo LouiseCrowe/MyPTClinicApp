@@ -9,7 +9,7 @@ namespace MyPTClinicApp.Client.Services
     public interface ITreatmentService
     {   
         Task<IEnumerable<TreatmentDTO>> GetTreatments();
-        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName);
+        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
         Task<Treatment> GetTreatmentById(int id);
         Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID);
         Task<Treatment> AddTreatment(Treatment treatment);

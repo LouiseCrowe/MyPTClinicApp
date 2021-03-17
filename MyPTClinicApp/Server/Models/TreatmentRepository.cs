@@ -25,10 +25,6 @@ namespace MyPTClinicApp.Server.Models
             return result.Entity;
         }
 
-
-
-
-
         public IQueryable<TreatmentDTO> GetTreatments()
         {
             var treatments = from t in _context.Treatment.OrderByDescending(t => t.Date)
@@ -46,11 +42,20 @@ namespace MyPTClinicApp.Server.Models
         }
 
 
-        public async Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName)
+        public async Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate)
         {
-            // get full list of treatments
-            var query = GetTreatments();
-            
+            // get full list of treatments that match date
+            var query = GetTreatments().Where(t => t.Date >= fromDate && t.Date <= toDate);
+
+            if (searchName == "" && lastName == "")
+            {
+                return await query.ToListAsync();
+            }
+
+
+
+            //TODO incorporate dates into search
+
             if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
             {
                 query = query.Where(t => t.PatientFirstName.ToLower().Contains(searchName.ToLower()) 

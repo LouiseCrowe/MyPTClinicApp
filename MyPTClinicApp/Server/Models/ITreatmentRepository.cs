@@ -9,7 +9,7 @@ namespace MyPTClinicApp.Server.Models
     public interface ITreatmentRepository
     {
         IQueryable<TreatmentDTO> GetTreatments();
-        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName);
+        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
         Task<Treatment> GetTreatmentById(int treatmentId);
         IEnumerable<Treatment> GetTreatmentsByPatientId(int patientId);
         Task<Treatment> AddTreatment(Treatment treatment);

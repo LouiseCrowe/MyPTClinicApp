@@ -22,20 +22,22 @@ else
     <br />
 
     <div class="input-group input-daterange">
-        <input type="text" class="form-control" value="2012-04-05">
-        <div class="input-group-addon">to</div>
-        <input type="text" class="form-control" value="2012-04-19">
-    </div>
-
-    <div class="input-group">
-        <input class="form-control" input type=date @bind-value="SearchDate" />
-        <div class="input-group-append">
-            <button class="btn btn-primary" @onclick="DateSearch">Search</button>
-            <button class="btn btn-outline-primary" @onclick="ClearSearch">Clear Search</button>
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Date Range From:</span>
+                <input class="form-control" input type=date @bind-value="FromDate" />
+            </div>
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Date Range To:</span>
+                <input class="form-control" input type=date @bind-value="ToDate" />
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-primary" @onclick="Search">Search</button>
+                <button class="btn btn-outline-primary" @onclick="ClearSearch">Clear Search</button>
+            </div>
         </div>
-    </div>
 
-    <div>@errormessage</div>
+        <br />
+    <div><em>@errormessage</em></div>
 
     <br />
 

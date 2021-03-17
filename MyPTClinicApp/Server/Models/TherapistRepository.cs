@@ -18,11 +18,11 @@ namespace MyPTClinicApp.Server.Models
             _context = context;
         }
 
-        public async Task<IEnumerable<Therapist>> Search(string searchName, string lastName )
+        public async Task<IEnumerable<Therapist>> Search(string searchName, string lastName)
         {
             // returns complete list of Therapists
             IQueryable<Therapist> query = _context.Therapist;
-
+            
             if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
             {
                 query = query.Where(t => t.FirstName.ToLower().Contains(searchName.ToLower())

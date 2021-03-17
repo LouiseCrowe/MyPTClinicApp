@@ -124,9 +124,7 @@ namespace MyPTClinicApp.Client.Pages
                 Message = "Therapist assigned to patients, please reassign patients to another therapist before deleting";
                 ButtonNavigation = "toOverview";
                 SavedStatus = SavedStatus.Error;
-            }
-
-            
+            }            
         }
 
         protected void NavigateToOverview()
