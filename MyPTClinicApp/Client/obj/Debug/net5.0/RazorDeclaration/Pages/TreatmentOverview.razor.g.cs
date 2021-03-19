@@ -82,6 +82,20 @@ using MyPTClinicApp.Client.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 11 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
+using Telerik.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
+using Telerik.Blazor.Components;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/treatmentoverview")]
     public partial class TreatmentOverview : Microsoft.AspNetCore.Components.ComponentBase
     {

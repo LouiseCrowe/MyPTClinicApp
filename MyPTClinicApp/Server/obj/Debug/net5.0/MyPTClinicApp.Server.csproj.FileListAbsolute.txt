@@ -473,6 +473,11 @@ C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\System.IdentityModel.Toke
 C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\System.IO.Pipelines.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\System.Runtime.Caching.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Telerik.DataSource.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Telerik.Documents.SpreadsheetStreaming.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Telerik.Recurrence.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Telerik.Blazor.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\Telerik.Zip.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\es\Microsoft.CodeAnalysis.resources.dll

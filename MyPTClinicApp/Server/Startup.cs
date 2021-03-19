@@ -60,6 +60,9 @@ namespace MyPTClinicApp.Server
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyPTClinic v1"));
 
+                // for Telerik
+                app.UseStaticFiles();
+
             }
             else
             {

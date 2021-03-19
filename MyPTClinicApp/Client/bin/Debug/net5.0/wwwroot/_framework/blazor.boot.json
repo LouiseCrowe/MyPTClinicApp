@@ -34,7 +34,13 @@
       "Microsoft.JSInterop.dll": "sha256-nRrEUPsQERx39N5116F8869epzUx5PHVOexlygwlEaw=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-4vJK1Cg+6YCG2LXoMEVEqy8bqawD3HL16+WNXWIzVCU=",
       "Microsoft.Net.Http.Headers.dll": "sha256-P66ftDrXwc6ayND8uYzIk0CPQy1GjNZAPHx9RMhi3V4=",
+      "Newtonsoft.Json.dll": "sha256-ubTmM+pscoutX3y773+LhC9+EBgXMdvl7DzZlab2Aoc=",
       "System.IO.Pipelines.dll": "sha256-3ET+mpR7F058YRj9YaLHOVXBqOW6iUxtIpeiKPYw4PA=",
+      "Telerik.DataSource.dll": "sha256-7oyHDmOvfaiCd16jeeuvw1dyYX9ubsi\/dHueyByEL0U=",
+      "Telerik.Documents.SpreadsheetStreaming.dll": "sha256-HTq5ySiCn05XHL411eCqDeIZI7Avr1B\/jYYwBp5BjcU=",
+      "Telerik.Recurrence.dll": "sha256-xLG+Fik0rHKCDwiKyVKaxPVi8N732EYAGZ2HmAjDc4I=",
+      "Telerik.Blazor.dll": "sha256-poPcEOd3+aZHlJTbo5g9mZwsTlovlzGVUODkriWlq3A=",
+      "Telerik.Zip.dll": "sha256-yOleSOZhtU4PPvm29rshq734mxprAnhtcSTMo\/1n7dk=",
       "Microsoft.CSharp.dll": "sha256-7w8yLgolT9mK58A8DN4p3fA1wWdGB+8RS++q3tPXs70=",
       "Microsoft.VisualBasic.Core.dll": "sha256-V1KpCFevupHZe1+dWpJW33HjUVBWKJoGe7VLVRvSAfg=",
       "Microsoft.VisualBasic.dll": "sha256-vmR3u+TDpPtHZ4XOdjyxQ2ST6N2z9QaK1FNRSSE0l2w=",
@@ -200,13 +206,13 @@
       "mscorlib.dll": "sha256-Fi+LybwHL\/VGD\/09OxxtYlT6exn9xVU+LdojZ9juR2c=",
       "netstandard.dll": "sha256-P8xX0ad1hKyWWbBxiXl3cYokFlDiuXwp3pqoYatH0kk=",
       "System.Private.CoreLib.dll": "sha256-2km83sNUTrumGJYdDzsN8RnJqv00vKWLCCh0UGajTB4=",
-      "MyPTClinicApp.Shared.dll": "sha256-vJ9gRyDDTC8LeME0kJSOMZ3r9GLH8e1OgnHh0xsaCCo=",
-      "MyPTClinicApp.Client.dll": "sha256-IploOjjObhtArsb67OZufBExtQrvqT\/PLGfRFgfIXo0="
+      "MyPTClinicApp.Shared.dll": "sha256-L8pak3MDOwFGTEohugqVAKlUEd8QmZKfUNejZq71Bq8=",
+      "MyPTClinicApp.Client.dll": "sha256-woKPbbl+mvX+bDijEblMkRrClm2ha5N0IDBnaavDGl0="
     },
     "lazyAssembly": null,
     "pdb": {
-      "MyPTClinicApp.Shared.pdb": "sha256-OeEfhWSYq80xuNm41iNZpjLcE02O8C4b4CyJZSf3KrE=",
-      "MyPTClinicApp.Client.pdb": "sha256-ZwUuV4SZ20hqZSA9dlVOHahpaqIwMONYx8eW\/T40sb4="
+      "MyPTClinicApp.Shared.pdb": "sha256-Oxj8XDJbfXT9erzlviBxjkUVqL9VFafybLzK9g6pVHw=",
+      "MyPTClinicApp.Client.pdb": "sha256-lIGbvtdbQLSyLbT0BZfsfbktLiBnE2zTe5Ub1TJrHO8="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-ibxaSjW7s3aLVssChknhzCpgMTHGu4D48Q9OLP3dfe8=",

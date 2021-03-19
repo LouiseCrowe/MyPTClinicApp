@@ -1285,7 +1285,7 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -1905,6 +1905,25 @@
           "ref/netstandard1.3/System.Console.dll": {}
         }
       },
+      "System.Data.Common/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.2/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
       "System.Diagnostics.Debug/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2228,6 +2247,25 @@
         },
         "runtime": {
           "lib/netstandard1.6/System.Linq.Expressions.dll": {}
+        }
+      },
+      "System.Linq.Queryable/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Linq.Expressions": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.0/System.Linq.Queryable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Linq.Queryable.dll": {}
         }
       },
       "System.Memory/4.5.4": {
@@ -2627,6 +2665,20 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "System.Runtime.Loader/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.5/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/System.Runtime.Loader.dll": {}
         }
       },
       "System.Runtime.Numerics/4.3.0": {
@@ -3213,6 +3265,77 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Telerik.DataSource.Trial/2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.6.0",
+          "Newtonsoft.Json": "12.0.2",
+          "System.Data.Common": "4.3.0",
+          "System.Linq.Queryable": "4.3.0",
+          "System.Runtime.Loader": "4.3.0",
+          "System.Text.Json": "4.7.1"
+        },
+        "compile": {
+          "lib/netstandard2.1/Telerik.DataSource.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Telerik.DataSource.dll": {}
+        }
+      },
+      "Telerik.Documents.SpreadsheetStreaming.Trial/2021.1.222": {
+        "type": "package",
+        "dependencies": {
+          "Telerik.Zip.Trial": "[2021.1.222]"
+        },
+        "compile": {
+          "lib/netstandard2.0/Telerik.Documents.SpreadsheetStreaming.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Telerik.Documents.SpreadsheetStreaming.dll": {}
+        }
+      },
+      "Telerik.Recurrence.Trial/0.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Telerik.Recurrence.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Telerik.Recurrence.dll": {}
+        }
+      },
+      "Telerik.UI.for.Blazor.Trial/2.22.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "3.2.1",
+          "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "3.2.1",
+          "System.Data.Common": "4.3.0",
+          "System.Linq.Queryable": "4.3.0",
+          "Telerik.DataSource.Trial": "2.0.9",
+          "Telerik.Documents.SpreadsheetStreaming.Trial": "2021.1.222",
+          "Telerik.Recurrence.Trial": "0.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/Telerik.Blazor.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Telerik.Blazor.dll": {}
+        },
+        "build": {
+          "buildTransitive/Telerik.UI.for.Blazor.Trial.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Telerik.UI.for.Blazor.Trial.props": {}
+        }
+      },
+      "Telerik.Zip.Trial/2021.1.222": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Telerik.Zip.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Telerik.Zip.dll": {}
+        }
+      },
       "MyPTClinicApp.Client/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -3221,7 +3344,8 @@
           "Microsoft.AspNetCore.Components.WebAssembly": "5.0.3",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
           "MyPTClinicApp.Shared": "1.0.0",
-          "System.Net.Http.Json": "5.0.0"
+          "System.Net.Http.Json": "5.0.0",
+          "Telerik.UI.for.Blazor.Trial": "2.22.0"
         },
         "compile": {
           "bin/placeholder/MyPTClinicApp.Client.dll": {}
@@ -5316,10 +5440,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "Newtonsoft.Json/12.0.2": {
+      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5342,7 +5466,7 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
+        "newtonsoft.json.12.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
       ]
     },
@@ -6417,6 +6541,57 @@
         "system.console.nuspec"
       ]
     },
+    "System.Data.Common/4.3.0": {
+      "sha512": "lm6E3T5u7BOuEH0u18JpbJHxBfOJPuCyl4Kg1RH10ktYLp5uEEE1xKrHW56/We4SnZpGAuCc9N0MJpSDhTHZGQ==",
+      "type": "package",
+      "path": "system.data.common/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.Common.dll",
+        "lib/netstandard1.2/System.Data.Common.dll",
+        "lib/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.xml",
+        "ref/netstandard1.2/de/System.Data.Common.xml",
+        "ref/netstandard1.2/es/System.Data.Common.xml",
+        "ref/netstandard1.2/fr/System.Data.Common.xml",
+        "ref/netstandard1.2/it/System.Data.Common.xml",
+        "ref/netstandard1.2/ja/System.Data.Common.xml",
+        "ref/netstandard1.2/ko/System.Data.Common.xml",
+        "ref/netstandard1.2/ru/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/de/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/es/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/fr/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/it/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ja/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ko/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ru/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hans/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hant/System.Data.Common.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.data.common.4.3.0.nupkg.sha512",
+        "system.data.common.nuspec"
+      ]
+    },
     "System.Diagnostics.Debug/4.3.0": {
       "sha512": "ZUhUOdqmaG5Jk3Xdb8xi5kIyQYAA4PnTNlHx1mu9ZY3qv4ELIdKbnL/akbGaKi2RnNUWaZsAs31rvzFdewTj2g==",
       "type": "package",
@@ -7427,6 +7602,65 @@
         "runtimes/aot/lib/netcore50/System.Linq.Expressions.dll",
         "system.linq.expressions.4.3.0.nupkg.sha512",
         "system.linq.expressions.nuspec"
+      ]
+    },
+    "System.Linq.Queryable/4.3.0": {
+      "sha512": "In1Bmmvl/j52yPu3xgakQSI0YIckPUr870w4K5+Lak3JCCa8hl+my65lABOuKfYs4ugmZy25ScFerC4nz8+b6g==",
+      "type": "package",
+      "path": "system.linq.queryable/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/monoandroid10/_._",
+        "lib/monotouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Linq.Queryable.dll",
+        "lib/netstandard1.3/System.Linq.Queryable.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/monoandroid10/_._",
+        "ref/monotouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Linq.Queryable.dll",
+        "ref/netcore50/System.Linq.Queryable.xml",
+        "ref/netcore50/de/System.Linq.Queryable.xml",
+        "ref/netcore50/es/System.Linq.Queryable.xml",
+        "ref/netcore50/fr/System.Linq.Queryable.xml",
+        "ref/netcore50/it/System.Linq.Queryable.xml",
+        "ref/netcore50/ja/System.Linq.Queryable.xml",
+        "ref/netcore50/ko/System.Linq.Queryable.xml",
+        "ref/netcore50/ru/System.Linq.Queryable.xml",
+        "ref/netcore50/zh-hans/System.Linq.Queryable.xml",
+        "ref/netcore50/zh-hant/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/System.Linq.Queryable.dll",
+        "ref/netstandard1.0/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/de/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/es/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/fr/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/it/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/ja/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/ko/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/ru/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/zh-hans/System.Linq.Queryable.xml",
+        "ref/netstandard1.0/zh-hant/System.Linq.Queryable.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.linq.queryable.4.3.0.nupkg.sha512",
+        "system.linq.queryable.nuspec"
       ]
     },
     "System.Memory/4.5.4": {
@@ -8674,6 +8908,38 @@
         "runtimes/win/lib/netstandard1.1/System.Runtime.InteropServices.RuntimeInformation.dll",
         "system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
         "system.runtime.interopservices.runtimeinformation.nuspec"
+      ]
+    },
+    "System.Runtime.Loader/4.3.0": {
+      "sha512": "DHMaRn8D8YCK2GG2pw+UzNxn/OHVfaWx7OTLBD/hPegHZZgcZh3H6seWegrC4BYwsfuGrywIuT+MQs+rPqRLTQ==",
+      "type": "package",
+      "path": "system.runtime.loader/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/_._",
+        "lib/netstandard1.5/System.Runtime.Loader.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/netstandard1.5/System.Runtime.Loader.dll",
+        "ref/netstandard1.5/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/de/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/es/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/fr/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/it/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/ja/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/ko/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/ru/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/zh-hans/System.Runtime.Loader.xml",
+        "ref/netstandard1.5/zh-hant/System.Runtime.Loader.xml",
+        "system.runtime.loader.4.3.0.nupkg.sha512",
+        "system.runtime.loader.nuspec"
       ]
     },
     "System.Runtime.Numerics/4.3.0": {
@@ -10190,6 +10456,87 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "Telerik.DataSource.Trial/2.0.9": {
+      "sha512": "wpI5GXHahAO4AH1DjeS0Vk+QGlV4DGB0vt7MCSknI8V31wtm0oIg8m1oQ9Dw4V8ayBuKw9tKaIAsYCRG73UIUQ==",
+      "type": "package",
+      "path": "telerik.datasource.trial/2.0.9",
+      "files": [
+        ".nupkg.metadata",
+        "lib/netstandard2.1/Telerik.DataSource.dll",
+        "lib/netstandard2.1/Telerik.DataSource.xml",
+        "telerik.datasource.trial.2.0.9.nupkg.sha512",
+        "telerik.datasource.trial.nuspec"
+      ]
+    },
+    "Telerik.Documents.SpreadsheetStreaming.Trial/2021.1.222": {
+      "sha512": "k7Aj0k4X7d08d4kA+pXOZ6l8awQtcROZG0igvRv5cbVRwIUmmEFQD0NaYvqeX1ZEXh4rK0WiPd6h/4s+4JswWg==",
+      "type": "package",
+      "path": "telerik.documents.spreadsheetstreaming.trial/2021.1.222",
+      "files": [
+        ".nupkg.metadata",
+        "LicenseAgreements/EULA.txt",
+        "LicenseAgreements/ThirdParty/AutoIt.txt",
+        "LicenseAgreements/ThirdParty/Progress Telerik UI for Silverlight - notices.txt",
+        "LicenseAgreements/ThirdParty/Progress Telerik UI for WPF - notices.txt",
+        "LicenseAgreements/ThirdParty/SpecFlow.txt",
+        "images/tdp.png",
+        "lib/netstandard2.0/Telerik.Documents.SpreadsheetStreaming.dll",
+        "lib/netstandard2.0/Telerik.Documents.SpreadsheetStreaming.xml",
+        "telerik.documents.spreadsheetstreaming.trial.2021.1.222.nupkg.sha512",
+        "telerik.documents.spreadsheetstreaming.trial.nuspec"
+      ]
+    },
+    "Telerik.Recurrence.Trial/0.1.0": {
+      "sha512": "LKfxFCJmhviOP2luk7GiZoxfzxY0ijapYGiPws11ys4eUPJ3XRXaDk/H4P5ZN6yQLHlD7rCQz/8DN35HP2HS0Q==",
+      "type": "package",
+      "path": "telerik.recurrence.trial/0.1.0",
+      "files": [
+        ".nupkg.metadata",
+        "lib/netstandard2.0/Telerik.Recurrence.dll",
+        "telerik.recurrence.trial.0.1.0.nupkg.sha512",
+        "telerik.recurrence.trial.nuspec"
+      ]
+    },
+    "Telerik.UI.for.Blazor.Trial/2.22.0": {
+      "sha512": "aQHi+afcsvrjbQ26a4UncMMpNK8dxVy6z0xGAzATtt6/8n4lMrwy8rq3I/JPrHNl/uPh3oxajd2QwyP3Br5J4A==",
+      "type": "package",
+      "path": "telerik.ui.for.blazor.trial/2.22.0",
+      "files": [
+        ".nupkg.metadata",
+        "blazor.png",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "build/Telerik.UI.for.Blazor.Trial.props",
+        "buildMultiTargeting/Telerik.UI.for.Blazor.Trial.props",
+        "buildTransitive/Telerik.UI.for.Blazor.Trial.props",
+        "lib/netstandard2.1/Telerik.Blazor.dll",
+        "lib/netstandard2.1/Telerik.Blazor.xml",
+        "staticwebassets/css/kendo-theme-bootstrap/all.css",
+        "staticwebassets/css/kendo-theme-default/all.css",
+        "staticwebassets/css/kendo-theme-material/all.css",
+        "staticwebassets/images/blazor.png",
+        "staticwebassets/js/telerik-blazor.js",
+        "telerik.ui.for.blazor.trial.2.22.0.nupkg.sha512",
+        "telerik.ui.for.blazor.trial.nuspec"
+      ]
+    },
+    "Telerik.Zip.Trial/2021.1.222": {
+      "sha512": "WaM+cAO6xAvyHhVIxabzrwKqUQTjkXMBDdOQK18qIrjMyinoSnhL69fQTuZQ2cMYj6geS2kD3hzVaWDuXze+sQ==",
+      "type": "package",
+      "path": "telerik.zip.trial/2021.1.222",
+      "files": [
+        ".nupkg.metadata",
+        "LicenseAgreements/EULA.txt",
+        "LicenseAgreements/ThirdParty/AutoIt.txt",
+        "LicenseAgreements/ThirdParty/Progress Telerik UI for Silverlight - notices.txt",
+        "LicenseAgreements/ThirdParty/Progress Telerik UI for WPF - notices.txt",
+        "LicenseAgreements/ThirdParty/SpecFlow.txt",
+        "images/tdp.png",
+        "lib/netstandard2.0/Telerik.Zip.dll",
+        "lib/netstandard2.0/Telerik.Zip.xml",
+        "telerik.zip.trial.2021.1.222.nupkg.sha512",
+        "telerik.zip.trial.nuspec"
+      ]
+    },
     "MyPTClinicApp.Client/1.0.0": {
       "type": "project",
       "path": "../Client/MyPTClinicApp.Client.csproj",
@@ -10237,7 +10584,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.telerik.com/nuget": {}
       },
       "frameworks": {
         "net5.0": {

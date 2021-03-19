@@ -26,7 +26,6 @@ C:\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.deps
 C:\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.dll
 C:\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
 C:\MyPTClinicApp\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.pdb
-C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csprojAssemblyReference.cache
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfoInputs.cache
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfo.cs

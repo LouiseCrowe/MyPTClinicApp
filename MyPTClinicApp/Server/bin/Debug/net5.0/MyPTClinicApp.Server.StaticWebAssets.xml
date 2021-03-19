@@ -2,4 +2,5 @@
   <ContentRoot BasePath="/" Path="C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\" />
   <ContentRoot BasePath="/" Path="C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\scopedcss\bundle\" />
   <ContentRoot BasePath="/" Path="C:\MyPTClinicApp\MyPTClinicApp\Client\wwwroot\" />
+  <ContentRoot BasePath="_content/Telerik.UI.for.Blazor.Trial" Path="C:\Users\LouiseCrowe\.nuget\packages\telerik.ui.for.blazor.trial\2.22.0\build\..\staticwebassets\" />
 </StaticWebAssets>

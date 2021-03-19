@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicApp.Server", "MyPTClinicApp\Server\MyPTClinicApp.Server.csproj", "{4837D962-16E8-4F9B-ACFB-2E4D2298D661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Server", "MyPTClinicApp\Server\MyPTClinicApp.Server.csproj", "{4837D962-16E8-4F9B-ACFB-2E4D2298D661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicApp.Client", "MyPTClinicApp\Client\MyPTClinicApp.Client.csproj", "{A24B0213-F9AE-417E-9D5C-B1EA812D0361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Client", "MyPTClinicApp\Client\MyPTClinicApp.Client.csproj", "{A24B0213-F9AE-417E-9D5C-B1EA812D0361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicApp.Shared", "MyPTClinicApp\Shared\MyPTClinicApp.Shared.csproj", "{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Shared", "MyPTClinicApp\Shared\MyPTClinicApp.Shared.csproj", "{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

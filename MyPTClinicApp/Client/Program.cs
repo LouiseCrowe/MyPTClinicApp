@@ -29,6 +29,9 @@ namespace MyPTClinicApp.Client
 
             builder.Services.AddScoped<ITreatmentService, TreatmentService>();
 
+            // register the Telerik services
+            builder.Services.AddTelerikBlazor();
+
             await builder.Build().RunAsync();
         }
     }

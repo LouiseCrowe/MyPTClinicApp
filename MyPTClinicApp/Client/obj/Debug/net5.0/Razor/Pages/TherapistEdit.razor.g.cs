@@ -80,6 +80,20 @@ using MyPTClinicApp.Client.Shared;
 #line hidden
 #nullable disable
 #nullable restore
+#line 11 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
+using Telerik.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
+using Telerik.Blazor.Components;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 4 "C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TherapistEdit.razor"
 using MyPTClinicApp.Shared;
 

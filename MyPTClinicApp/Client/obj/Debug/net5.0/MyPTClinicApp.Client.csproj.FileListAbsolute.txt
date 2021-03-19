@@ -1359,7 +1359,13 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Micros
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.JSInterop.dll.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.JSInterop.WebAssembly.dll.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.Net.Http.Headers.dll.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Newtonsoft.Json.dll.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\System.IO.Pipelines.dll.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.DataSource.dll.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Documents.SpreadsheetStreaming.dll.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Recurrence.dll.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Blazor.dll.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Zip.dll.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.CSharp.dll.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.VisualBasic.Core.dll.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.VisualBasic.dll.gz
@@ -1560,7 +1566,13 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Micros
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.JSInterop.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.JSInterop.WebAssembly.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.Net.Http.Headers.dll
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Newtonsoft.Json.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\System.IO.Pipelines.dll
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.DataSource.dll
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Documents.SpreadsheetStreaming.dll
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Recurrence.dll
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Blazor.dll
+C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Telerik.Zip.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.CSharp.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.VisualBasic.Core.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\bin\Debug\net5.0\wwwroot\_framework\Microsoft.VisualBasic.dll
@@ -1753,6 +1765,7 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Th
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TreatmentDetail.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TreatmentEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TreatmentOverview.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Shared\TelerikLayout.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Shared\NavMenu.razor.g.cs
@@ -1772,6 +1785,7 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistOver
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TreatmentDetail.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TreatmentEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TreatmentOverview.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Shared\TelerikLayout.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Shared\NavMenu.razor.g.cs
@@ -1802,7 +1816,13 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\P6C6CK7D.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\OvIhoe6n.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\OT8FYpJm.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\q3FJ+KHH.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\dWhvkgW+.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\w0UbyroP.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\QMINRvLK.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\zkXZS62D.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\dzZEKfR9.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\fSWEr9KV.gz
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\oEsl5Ek+.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\O+bWRFXo.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\Xd+qHZG6.gz
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\build-gz\YIJhIfCZ.gz

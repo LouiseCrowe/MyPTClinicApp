@@ -31,8 +31,10 @@ namespace MyPTClinicApp.Server.Models
                              select new TreatmentDTO()
                              {
                                  ID = t.ID,
+                                 PatientId = t.Patient.ID,
                                  PatientFirstName = t.Patient.FirstName,
                                  PatientLastName = t.Patient.LastName,
+                                 TherapistId = t.Therapist.ID,
                                  TherapistFirstName = t.Therapist.FirstName,
                                  TherapistLastName = t.Therapist.LastName,
                                  Date = t.Date,
