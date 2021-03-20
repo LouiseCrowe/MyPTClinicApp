@@ -2007,3 +2007,5 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.cspr
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\ref\MyPTClinicApp.Client.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.pdb
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\SchedulerOverview.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\SchedulerOverview.razor.g.cs

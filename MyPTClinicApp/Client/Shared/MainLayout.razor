@@ -1,20 +1,20 @@
-﻿@inherits LayoutComponentBase
-@layout TelerikLayout
+﻿@layout TelerikLayout
+@inherits LayoutComponentBase
 
-    <TelerikRootComponent>
-        <div class="page">
-            <div class="sidebar">
-                <NavMenu />
+<TelerikRootComponent>
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <div class="main">
+            <div class="top-row px-4">
+                <h4><a href="/">Manage your clinic with MyPTClinicApp</a></h4>
             </div>
 
-            <div class="main">
-                <div class="top-row px-4">
-                    <h4><a href="/">Manage your clinic with MyPTClinicApp</a></h4>
-                </div>
-
-                <div class="content px-4 container">
-                    @Body
-                </div>
+            <div class="content px-4 container">
+                @Body
             </div>
         </div>
-    </TelerikRootComponent>
+    </div>
+</TelerikRootComponent>

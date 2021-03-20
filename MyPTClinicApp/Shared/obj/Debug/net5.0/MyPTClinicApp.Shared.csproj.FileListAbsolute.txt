@@ -33,3 +33,4 @@ C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.cspr
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.dll
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.pdb
+C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csprojAssemblyReference.cache

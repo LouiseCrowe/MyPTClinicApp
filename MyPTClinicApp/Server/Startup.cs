@@ -48,6 +48,9 @@ namespace MyPTClinicApp.Server
                 client.BaseAddress = new Uri("https://localhost:5001/");
             }
             );
+
+            //for TelerikServices
+            services.AddTelerikBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +65,6 @@ namespace MyPTClinicApp.Server
 
                 // for Telerik
                 app.UseStaticFiles();
-
             }
             else
             {

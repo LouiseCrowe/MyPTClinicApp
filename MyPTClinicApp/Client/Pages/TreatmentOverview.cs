@@ -18,9 +18,11 @@ namespace MyPTClinicApp.Client.Pages
 
         private IEnumerable<TreatmentDTO> Treatments { get; set; }
 
+        private int totalTreatments;
+
         // for breakdown information 
-        List<List<TreatmentDTO>> PatientsWithTreatments = new List<List<TreatmentDTO>>();     
-        List<List<TreatmentDTO>> TherapistsWithTreatments = new List<List<TreatmentDTO>>();
+        List<List<TreatmentDTO>> PatientsWithTreatments = new ();     
+        List<List<TreatmentDTO>> TherapistsWithTreatments = new ();
 
 
         // for managing search
@@ -40,6 +42,7 @@ namespace MyPTClinicApp.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             Treatments = await TreatmentService.GetTreatments();        // retrieves all treatments    
+            totalTreatments = Treatments.Count();                       // this figure will remain the same
 
             // for breakdown display - will include all treatments in initial rendering
             GroupByPatientID();

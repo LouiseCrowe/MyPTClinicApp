@@ -104,7 +104,7 @@ using Telerik.Blazor.Components;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 48 "C:\MyPTClinicApp\MyPTClinicApp\Client\Shared\NavMenu.razor"
+#line 53 "C:\MyPTClinicApp\MyPTClinicApp\Client\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

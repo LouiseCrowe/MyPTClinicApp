@@ -125,7 +125,7 @@ namespace MyPTClinicApp.Client.Pages
 
 
 
-        protected void NavigateToOverview()
+        protected void NavigateToTreatmentOverview()
         {
             NavigationManager.NavigateTo("/treatmentoverview");
         }

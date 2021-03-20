@@ -37,7 +37,8 @@ else
     </div>
 
     <br />
-    <div><em>@errormessage</em></div>
+    <div><b class="alert-warning">@errormessage</b></div>
+    <br />
 
     @if (!showSummary)
     {
@@ -52,6 +53,7 @@ else
 
         <h4>Summary info for Treatments</h4>
 
+        <p>Total number of treatments: @totalTreatments</p>
         <p>Total number of treatments meeting search criteria: @Treatments.Count()</p>
 
         <h4>Breakdown of Treatments by Patient</h4>
@@ -61,15 +63,27 @@ else
                 <tr>
                     <th>Patient</th>
                     <th>Number of Treatments</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var patientGroup in PatientsWithTreatments)
                 {
-                    <tr>
-                        <td>@patientGroup[0].PatientFirstName @patientGroup[0].PatientLastName</td>
-                        <td>@patientGroup.Count</td>
-                    </tr>
+                <tr>
+                    <td>@patientGroup[0].PatientFirstName @patientGroup[0].PatientLastName</td>
+                    <td>@patientGroup.Count</td>
+                    <td>
+                        <a href="@($"patientdetail/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@($"patientedit/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -81,15 +95,27 @@ else
                 <tr>
                     <th>Therapist</th>
                     <th>Number of Treatments</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var therapistGroup in TherapistsWithTreatments)
                 {
-                    <tr>
-                        <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
-                        <td>@therapistGroup.Count</td>
-                    </tr>
+                <tr>
+                    <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
+                    <td>@therapistGroup.Count</td>
+                    <td>
+                        <a href="@($"therapistdetail/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@($"therapistedit/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
