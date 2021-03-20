@@ -37,36 +37,6 @@ namespace MyPTClinicApp.Server.Models
             return await query.ToListAsync();
         }
 
-        //public async Task<IEnumerable<Therapist>> SearchWithOneName(string name)
-        //{
-        //    // returns complete list of Therapists
-        //    IQueryable<Therapist> query = _context.Therapist;
-
-        //    if (!string.IsNullOrEmpty(name))
-        //    {
-        //        query = query.Where(t => t.FirstName.ToLower().Contains(name.ToLower())
-        //                            || t.LastName.ToLower().Contains(name.ToLower()));
-        //    }
-
-        //    return await query.ToListAsync();
-        //}
-
-
-        //public async Task<IEnumerable<Therapist>> SearchWithTwoNames(string firstName, string lastName)
-        //{
-        //    // returns complete list of Therapists
-        //    IQueryable<Therapist> query = _context.Therapist;
-
-        //    if (!string.IsNullOrEmpty(firstName))
-        //    {
-        //        query = query.Where(t => t.FirstName.ToLower().Contains(firstName.ToLower())
-        //                            && t.LastName.ToLower().Contains(lastName.ToLower()));
-        //    }
-
-        //    return await query.ToListAsync();
-        //}
-
-
         public async Task<IEnumerable<Therapist>> GetTherapists()
         {
             return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
@@ -93,7 +63,7 @@ namespace MyPTClinicApp.Server.Models
         public async Task<Therapist> UpdateTherapist(Therapist therapist)
         {
             // find therapist to update
-            var result = await _context.Therapist.FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Therapist, bool>>)(t => t.ID == therapist.ID));
+            var result = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapist.ID);
 
             if (result != null)
             {
@@ -112,7 +82,7 @@ namespace MyPTClinicApp.Server.Models
         
         public async Task<Therapist> DeleteTherapist(int therapistId)
         {
-            var result = await _context.Therapist.FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Therapist, bool>>)(t => t.ID == therapistId));
+            var result = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistId);
 
             if (result != null)
             {

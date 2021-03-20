@@ -28,6 +28,8 @@ namespace MyPTClinicApp.Client
             builder.Services.AddScoped<IPatientService, PatientService>();
 
             builder.Services.AddScoped<ITreatmentService, TreatmentService>();
+            
+            builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
             // register the Telerik services
             builder.Services.AddTelerikBlazor();

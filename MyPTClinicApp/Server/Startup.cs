@@ -42,6 +42,7 @@ namespace MyPTClinicApp.Server
             services.AddScoped<ITherapistRepository, TherapistRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
             services.AddHttpClient<ITherapistService, TherapistService>(client =>
             {

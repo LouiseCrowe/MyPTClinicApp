@@ -10,31 +10,16 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class SchedulerOverview
     {
-        public DateTime StartDate { get; set; } = new DateTime(2019, 11, 29);
         public SchedulerView CurrView { get; set; } = SchedulerView.Week;
-        //public DateTime DayStart { get; set; } = new DateTime(2000, 1, 1, 8, 0, 0);//the time portion is important
-
-
+        public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         DateTime DayStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
         DateTime DayEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
 
-
-        List<Appointment> Appointments { get; set; }
-
-        async Task UpdateAppointment(SchedulerUpdateEventArgs args)
-        {
-            Appointment item = (Appointment)args.Item;
-
-            //// perform actual data source operations here through your service
-            //await MyService.Update(item);
-
-            //// update the local view-model data with the service data
-            //await GetSchedulerData();
-        }
+        List<SchedulerAppointment> Appointments { get; set; }
 
         async Task AddAppointment(SchedulerCreateEventArgs args)
         {
-            Appointment item = args.Item as Appointment;
+            SchedulerAppointment item = args.Item as SchedulerAppointment;
 
             //// perform actual data source operations here through your service
             //await MyService.Create(item);
@@ -43,9 +28,22 @@ namespace MyPTClinicApp.Client.Pages
             //await GetSchedulerData();
         }
 
+
+        async Task UpdateAppointment(SchedulerUpdateEventArgs args)
+        {
+            SchedulerAppointment item = (SchedulerAppointment)args.Item;
+
+            //// perform actual data source operations here through your service
+            //await MyService.Update(item);
+
+            //// update the local view-model data with the service data
+            //await GetSchedulerData();
+        }
+
+        
         async Task DeleteAppointment(SchedulerDeleteEventArgs args)
         {
-            Appointment item = (Appointment)args.Item;
+            SchedulerAppointment item = (SchedulerAppointment)args.Item;
 
             //// perform actual data source operations here through your service
             //await MyService.Delete(item);
@@ -59,7 +57,7 @@ namespace MyPTClinicApp.Client.Pages
         //Handlers for application logic flexibility
         void EditHandler(SchedulerEditEventArgs args)
         {
-            Appointment item = args.Item as Appointment;
+            SchedulerAppointment item = args.Item as SchedulerAppointment;
             if (!args.IsNew) // an edit operation, otherwise - an insert operation
             {
                 // you can prevent opening an item for editing based on a condition
@@ -81,7 +79,7 @@ namespace MyPTClinicApp.Client.Pages
         {
             // you can know when a user wanted to modify an appointment but decided not to
             // the model you get contains the new data from the edit form so you can see what they did
-            Appointment item = args.Item as Appointment;
+            SchedulerAppointment item = args.Item as SchedulerAppointment;
         }
 
 

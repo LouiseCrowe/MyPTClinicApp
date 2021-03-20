@@ -1759,6 +1759,7 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\In
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\PatientDetail.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\PatientEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\PatientOverview.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\SchedulerOverview.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistDetail.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\TherapistOverview.razor.g.cs
@@ -1779,6 +1780,7 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\Index.razor.g
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\PatientDetail.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\PatientEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\PatientOverview.razor.g.cs
+C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\SchedulerOverview.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistDetail.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistEdit.razor.g.cs
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\TherapistOverview.razor.g.cs
@@ -2007,5 +2009,3 @@ C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.cspr
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\ref\MyPTClinicApp.Client.dll
 C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\MyPTClinicApp.Client.pdb
-C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\RazorDeclaration\Pages\SchedulerOverview.razor.g.cs
-C:\MyPTClinicApp\MyPTClinicApp\Client\obj\Debug\net5.0\Razor\Pages\SchedulerOverview.razor.g.cs

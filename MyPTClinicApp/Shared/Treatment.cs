@@ -12,8 +12,10 @@ namespace MyPTClinicApp.Shared
     {
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "Please select Patient")]
         public int PatientID { get; set; }                  // foreign key 
 
+        [Required(ErrorMessage = "Please select Therapist")]
         public int TherapistID { get; set; }                // foreign key 
 
         public DateTime Date { get; set; }

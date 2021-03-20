@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Shared
 {
-    public class Appointment
+    public class SchedulerAppointment
     {
         public int ID { get; set; }
         public string Title { get; set; }
@@ -14,5 +14,8 @@ namespace MyPTClinicApp.Shared
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public bool IsAllDay { get; set; }
+        public string RecurrenceRule { get; set; }
+        //public List<DateTime> RecurrenceExceptions { get; set; }
+        public Guid? RecurrenceId { get; set; }
     }
 }

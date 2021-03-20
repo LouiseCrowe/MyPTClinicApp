@@ -42,14 +42,14 @@ namespace MyPTClinicApp.Client.Pages
         public IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
 
         //used to store state of screen
+        public SavedStatus SavedStatus { get; set; }
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
-        protected bool Saved;
         protected string ButtonNavigation = string.Empty;
 
         protected override async Task OnInitializedAsync()
         {
-            Saved = false;
+            SavedStatus = SavedStatus.NotSaved;
 
             bool success = int.TryParse(TreatmentID, out var treatmentID);
             if (!success)
@@ -75,7 +75,7 @@ namespace MyPTClinicApp.Client.Pages
                 
         protected async Task HandleValidSubmit()
         {
-            Saved = false;
+            SavedStatus = SavedStatus.NotSaved;
 
             if (Treatment.ID == 0)       // this means a new treatment is being added
             {
@@ -85,14 +85,16 @@ namespace MyPTClinicApp.Client.Pages
                 {
                     StatusClass = "alert-success";
                     Message = "New treatment added successfully.";
-                    Saved = true;
+                    SavedStatus = SavedStatus.Saved;
                     ButtonNavigation = "toEdit";
                 }
                 else
                 {
+                    // if either the Patient or Therapist are not selected
+                    SavedStatus = SavedStatus.Error;
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new treatment. Please try again.";
-                    Saved = false;
+                    Message = "Treatment not created. Please ensure PATIENT and THERAPIST are selected";
+                    ButtonNavigation = "toEdit";
                 }
             }
             else    // this is updating an existing patient
@@ -100,7 +102,7 @@ namespace MyPTClinicApp.Client.Pages
                 await TreatmentService.UpdateTreatment(Treatment);
                 StatusClass = "alert-success";
                 Message = "Treatment updated successfully.";
-                Saved = true;
+                SavedStatus = SavedStatus.Saved;
                 ButtonNavigation = "toOverview";
             }
         }
@@ -119,7 +121,7 @@ namespace MyPTClinicApp.Client.Pages
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";
-            Saved = true;
+            SavedStatus = SavedStatus.Saved;
             ButtonNavigation = "toOverview";
         }
 

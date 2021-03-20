@@ -61,7 +61,8 @@ namespace MyPTClinicApp.Server.Controllers
             }
             catch (Exception)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");  
             }            
         }
 
