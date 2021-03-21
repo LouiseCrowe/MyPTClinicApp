@@ -7,37 +7,38 @@
 @if (SavedStatus == SavedStatus.NotSaved)
 {
     <section class="therapist-edit">
-        <h1 class="page-title">Details for @Therapist.FirstName @Therapist.LastName</h1>
+        <h1 class="page-title">Therapist details: @Therapist.FirstName @Therapist.LastName</h1>
         <EditForm Model="@Therapist" OnValidSubmit="@HandleValidSubmit"
                   OnInvalidSubmit="@HandleInvalidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary></ValidationSummary>
             <div class="form-group row">
-                <label for="firstName" class="col-sm-3">First name: </label>
+                <label for="firstName" class="col-sm-2">First name: </label>
                 <InputText id="firstName" class="form-control col-sm-8" @bind-Value="@Therapist.FirstName" placeholder="Enter first name"></InputText>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.FirstName)" />
             </div>
             <div class="form-group row">
-                <label for="lastName" class="col-sm-3">Last name: </label>
+                <label for="lastName" class="col-sm-2">Last name: </label>
                 <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@Therapist.LastName" placeholder="Enter last name"></InputText>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.LastName)" />
             </div>
 
             <div class="form-group row">
-                <label for="phone" class="col-sm-3">Phone: </label>
+                <label for="phone" class="col-sm-2">Phone: </label>
                 <InputText id="phone" class="form-control col-sm-8" @bind-Value="@Therapist.Phone" placeholder="Enter phone"></InputText>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.Phone)" />
             </div>
 
             <div class="form-group row">
-                <label for="email" class="col-sm-3">Email: </label>
+                <label for="email" class="col-sm-2">Email: </label>
                 <InputText id="email" class="form-control col-sm-8" @bind-Value="@Therapist.Email" placeholder="Enter email"></InputText>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.Email)" />
             </div>
 
             <div class="form-group row">
-                <label for="street" class="col-sm-3">Location: </label>
+                <label for="street" class="col-sm-2">Location: </label>
                 <InputText id="street" class="form-control col-sm-8" @bind-Value="@Therapist.Location" placeholder="Enter location"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Therapist.Location)" />
             </div>
             <br />
             <div>

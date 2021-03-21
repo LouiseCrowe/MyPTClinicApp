@@ -585,3 +585,6 @@ C:\MyPTClinicApp\MyPTClinicApp\Server\obj\Debug\net5.0\MyPTClinicApp.Server.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\obj\Debug\net5.0\ref\MyPTClinicApp.Server.dll
 C:\MyPTClinicApp\MyPTClinicApp\Server\obj\Debug\net5.0\MyPTClinicApp.Server.pdb
 C:\MyPTClinicApp\MyPTClinicApp\Server\obj\Debug\net5.0\MyPTClinicApp.Server.genruntimeconfig.cache
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\SendGrid.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\SendGrid.Extensions.DependencyInjection.dll
+C:\MyPTClinicApp\MyPTClinicApp\Server\bin\Debug\net5.0\StarkbankEcdsa.dll

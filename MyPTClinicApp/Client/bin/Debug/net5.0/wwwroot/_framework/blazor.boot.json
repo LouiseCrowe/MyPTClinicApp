@@ -206,13 +206,13 @@
       "mscorlib.dll": "sha256-Fi+LybwHL\/VGD\/09OxxtYlT6exn9xVU+LdojZ9juR2c=",
       "netstandard.dll": "sha256-P8xX0ad1hKyWWbBxiXl3cYokFlDiuXwp3pqoYatH0kk=",
       "System.Private.CoreLib.dll": "sha256-2km83sNUTrumGJYdDzsN8RnJqv00vKWLCCh0UGajTB4=",
-      "MyPTClinicApp.Shared.dll": "sha256-wE5JcKKNqu7afyRvOT1W3p3Zw5lOXP\/BfIkzBpa7+bY=",
-      "MyPTClinicApp.Client.dll": "sha256-pNp4tBLwKWjh\/5HS5wwcJJyLp\/kfD6KBFEDP8dmlu6M="
+      "MyPTClinicApp.Shared.dll": "sha256-+yu1kpCwYjV2JDhvDE0TLbX6NN9Kkgxv7pEoTCG0cAQ=",
+      "MyPTClinicApp.Client.dll": "sha256-34egWV1voA4YEFjA4yYMAIZHQQaVm3sxVlyrEMNv6k4="
     },
     "lazyAssembly": null,
     "pdb": {
-      "MyPTClinicApp.Shared.pdb": "sha256-EWzbySj4QHGNUi4z8JLNfihYOhyPhJtSqXcPaGoeznE=",
-      "MyPTClinicApp.Client.pdb": "sha256-rVqZcF9NXin3rdhCG0IS06hZCaR+DbgY4sL6b8kEM1w="
+      "MyPTClinicApp.Shared.pdb": "sha256-21FeexaRU8h9xepUFiIp+JCEuRVzMN7rKXxa8D7n2SY=",
+      "MyPTClinicApp.Client.pdb": "sha256-+jT4zGrfe1kxTKDRf735GknDTnOkgaVoYV7NiLPsHzE="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-ibxaSjW7s3aLVssChknhzCpgMTHGu4D48Q9OLP3dfe8=",

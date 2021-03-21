@@ -11,11 +11,11 @@ namespace MyPTClinicApp.Shared
 
         public int? TherapistID { get; set; }               // foreign key
 
-        [Required(ErrorMessage = "Please input first name")]
+        [Required(ErrorMessage = "Please input patient's first name")]
         [MaxLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Please input Last name")]
+        [Required(ErrorMessage = "Please input patient's last name")]
         [MaxLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string LastName { get; set; }
 

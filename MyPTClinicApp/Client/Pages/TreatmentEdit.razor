@@ -21,7 +21,7 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary></ValidationSummary>
                 <div class="form-group row">
-                    <label for="patientId" class="col-sm-3">Patient: </label>
+                    <label for="patientId" class="col-sm-2">Patient: </label>
                     <InputSelect id="patientId" class="form-control col-sm-8" @bind-Value="Treatment.PatientID">
                         @foreach (var patient in Patients)
                                 {
@@ -31,7 +31,7 @@ else
                     <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Treatment.PatientID)" />
                 </div>
                 <div class="form-group row">
-                    <label for="therapistId" class="col-sm-3">Therapist: </label>
+                    <label for="therapistId" class="col-sm-2">Therapist: </label>
                     <InputSelect id="therapistId" class="form-control col-sm-8" @bind-Value="Treatment.TherapistID">
                         @foreach (var therapist in Therapists)
                                 {
@@ -41,12 +41,12 @@ else
                     <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Treatment.TherapistID)" />
                 </div>
                 <div class="form-group row">
-                    <label for="date" class="col-sm-3">Date: </label>
+                    <label for="date" class="col-sm-2">Date: </label>
                     <InputDate id="date" class="form-control col-sm-8" @bind-Value="Treatment.Date">
                     </InputDate>
                 </div>
                 <div class="form-group row">
-                    <label for="notes" class="col-sm-3">Notes: </label>
+                    <label for="notes" class="col-sm-2">Notes: </label>
                     <InputTextArea id="date" class="form-control col-sm-8" @bind-Value="Treatment.Notes"
                                    placeholder="Enter notes">
                     </InputTextArea>
