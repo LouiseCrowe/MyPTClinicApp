@@ -1,8 +1,8 @@
 ﻿@page "/scheduleroverview"
 
 <TelerikScheduler Data="@Appointments" 
-                  OnUpdate="@UpdateAppointment"
                   OnCreate="@AddAppointment"
+                  OnUpdate="@UpdateAppointment"
                   OnDelete="@DeleteAppointment"
                   OnEdit="@EditHandler" OnCancel="@CancelHandler"
                   AllowCreate="true" AllowDelete="true" AllowUpdate="true"

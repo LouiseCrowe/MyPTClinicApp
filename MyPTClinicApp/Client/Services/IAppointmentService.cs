@@ -8,10 +8,9 @@ namespace MyPTClinicApp.Client.Services
 {
     public interface IAppointmentService
     {
-        Task<IEnumerable<SchedulerAppointment>> GetAppointments();
-        Task<IEnumerable<SchedulerAppointment>> GetAppointmentById();
-        Task<SchedulerAppointment> AddAppointment(SchedulerAppointment appointment);
-        Task<SchedulerAppointment> UpdateAppointment(SchedulerAppointment appointment);
-        Task DeleteAppointment(int appointmentID);
+        Task<List<SchedulerAppointment>> Read();
+        Task Create(SchedulerAppointment itemToInsert);
+        Task Update(SchedulerAppointment itemToUpdate);
+        Task Delete(SchedulerAppointment itemToDelete);
     }
 }

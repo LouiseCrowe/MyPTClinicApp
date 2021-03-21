@@ -1,4 +1,6 @@
-﻿using MyPTClinicApp.Shared;
+﻿using Microsoft.AspNetCore.Components;
+using MyPTClinicApp.Client.Services;
+using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,9 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class SchedulerOverview
     {
+        [Inject]
+        public IAppointmentService AppointmentService { get; set; }
+
         public SchedulerView CurrView { get; set; } = SchedulerView.Week;
         public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         DateTime DayStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
@@ -17,41 +22,36 @@ namespace MyPTClinicApp.Client.Pages
 
         List<SchedulerAppointment> Appointments { get; set; }
 
+        protected override async Task OnInitializedAsync()
+        {
+            Appointments = (await AppointmentService.Read()).ToList();
+        }
+
         async Task AddAppointment(SchedulerCreateEventArgs args)
         {
             SchedulerAppointment item = args.Item as SchedulerAppointment;
 
-            //// perform actual data source operations here through your service
-            //await MyService.Create(item);
+            await AppointmentService.Create(item);
 
-            //// update the local view-model data with the service data
-            //await GetSchedulerData();
+            Appointments = (await AppointmentService.Read()).ToList();           
         }
-
 
         async Task UpdateAppointment(SchedulerUpdateEventArgs args)
         {
             SchedulerAppointment item = (SchedulerAppointment)args.Item;
 
-            //// perform actual data source operations here through your service
-            //await MyService.Update(item);
+            await AppointmentService.Update(item);
 
-            //// update the local view-model data with the service data
-            //await GetSchedulerData();
+            Appointments = (await AppointmentService.Read()).ToList();
         }
-
         
         async Task DeleteAppointment(SchedulerDeleteEventArgs args)
         {
             SchedulerAppointment item = (SchedulerAppointment)args.Item;
 
-            //// perform actual data source operations here through your service
-            //await MyService.Delete(item);
+            await AppointmentService.Delete(item);
 
-            //// update the local view-model data with the service data
-            //await GetSchedulerData();
-
-            // see the comments in the service mimic method below.
+            Appointments = (await AppointmentService.Read()).ToList();
         }
 
         //Handlers for application logic flexibility
