@@ -12,9 +12,9 @@ namespace MyPTClinicApp.Server.Models
     public class PatientRepository : IPatientRepository
     {
         // injecting DB context into repo
-        private readonly MyPTClinicAppServerContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public PatientRepository(MyPTClinicAppServerContext context)
+        public PatientRepository(ApplicationDbContext context)
         {
             _context = context;
         }

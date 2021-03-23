@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31019.35
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Server", "MyPTClinicApp\Server\MyPTClinicApp.Server.csproj", "{4837D962-16E8-4F9B-ACFB-2E4D2298D661}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicApp.Server", "MyPTClinicApp\Server\MyPTClinicApp.Server.csproj", "{F31E8A97-5306-4362-B137-7B0C2AA73A4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Client", "MyPTClinicApp\Client\MyPTClinicApp.Client.csproj", "{A24B0213-F9AE-417E-9D5C-B1EA812D0361}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicApp.Client", "MyPTClinicApp\Client\MyPTClinicApp.Client.csproj", "{DDD66846-3B0D-45B6-970E-B9B4E0FC1EDE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Shared", "MyPTClinicApp\Shared\MyPTClinicApp.Shared.csproj", "{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicApp.Shared", "MyPTClinicApp\Shared\MyPTClinicApp.Shared.csproj", "{ED558296-9971-4141-B994-C0F38DDBA6D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,23 +15,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4837D962-16E8-4F9B-ACFB-2E4D2298D661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4837D962-16E8-4F9B-ACFB-2E4D2298D661}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4837D962-16E8-4F9B-ACFB-2E4D2298D661}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4837D962-16E8-4F9B-ACFB-2E4D2298D661}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A24B0213-F9AE-417E-9D5C-B1EA812D0361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A24B0213-F9AE-417E-9D5C-B1EA812D0361}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A24B0213-F9AE-417E-9D5C-B1EA812D0361}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A24B0213-F9AE-417E-9D5C-B1EA812D0361}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05BE43DD-B173-4D6E-BC89-C09ED39C18D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F31E8A97-5306-4362-B137-7B0C2AA73A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F31E8A97-5306-4362-B137-7B0C2AA73A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F31E8A97-5306-4362-B137-7B0C2AA73A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F31E8A97-5306-4362-B137-7B0C2AA73A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD66846-3B0D-45B6-970E-B9B4E0FC1EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD66846-3B0D-45B6-970E-B9B4E0FC1EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD66846-3B0D-45B6-970E-B9B4E0FC1EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD66846-3B0D-45B6-970E-B9B4E0FC1EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED558296-9971-4141-B994-C0F38DDBA6D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED558296-9971-4141-B994-C0F38DDBA6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED558296-9971-4141-B994-C0F38DDBA6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED558296-9971-4141-B994-C0F38DDBA6D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {05F12D2A-AA49-428C-9784-D217A371D023}
+		SolutionGuid = {FC82A098-5749-4083-8E07-EFCC4C1DC5AB}
 	EndGlobalSection
 EndGlobal

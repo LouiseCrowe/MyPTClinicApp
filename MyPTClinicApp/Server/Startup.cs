@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Server.Data;
 using MyPTClinicApp.Server.Models;
-using MyPTClinicApp.Client.Services;
 using System;
+using System.Linq;
 
 namespace MyPTClinicApp.Server
 {
@@ -28,17 +29,34 @@ namespace MyPTClinicApp.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+                      
+
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+            services.AddAuthentication()
+                .AddIdentityServerJwt();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
+            services.AddMvc();
+            services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyPTClinicApp", Version = "v1" });
             });
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
 
-            services.AddDbContext<MyPTClinicAppServerContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MyPTClinicAppServerContext")));
-            
             services.AddScoped<ITherapistRepository, TherapistRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentRepository>();
@@ -52,6 +70,7 @@ namespace MyPTClinicApp.Server
 
             //for TelerikServices
             services.AddTelerikBlazor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,12 +79,10 @@ namespace MyPTClinicApp.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
+                app.UseMigrationsEndPoint();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyPTClinic v1"));
-
-                // for Telerik
-                app.UseStaticFiles();
+                app.UseWebAssemblyDebugging();
             }
             else
             {
@@ -79,6 +96,10 @@ namespace MyPTClinicApp.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseIdentityServer();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

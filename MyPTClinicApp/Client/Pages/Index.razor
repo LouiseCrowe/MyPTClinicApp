@@ -3,36 +3,52 @@
 <h1 class="page-title">Welcome to MyPTClinicApp</h1>
 
 <br />
+<AuthorizeView>
+    <NotAuthorized>
+        <br/>
+            <div class="card bg-info col-md-3">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Login</h4>
+                    <p class="card-text text-center">
+                        Login to MyPTClinicApp
+                    </p>
+                    <a href="/authentication/login" class="btn btn-info btn-outline-dark btn-block stretched-link">Log in</a>
+                </div>
+            </div>
+  
+</NotAuthorized>
+    <Authorized>
+        <div class="card-deck">
+            <div class="card bg-success">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Appointments</h4>
+                    <p class="card-text text-center">
+                        Manage Appointments
+                    </p>
+                    <a href="/scheduleroverview" class="btn btn-success btn-outline-dark btn-block stretched-link">Appointments</a>
+                </div>
+            </div>
 
-<div class="card-deck">
-    <div class="card bg-info">
-        <div class="card-body">
-            <h4 class="card-title text-center">Appointments</h4>
-            <p class="card-text text-center">
-                Manage Appointments
-            </p>
-            <a href="/scheduleroverview" class="btn btn-info btn-outline-dark btn-block stretched-link">Appointments</a>
+            <div class="card bg-warning">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Add Treatment</h4>
+                    <p class="card-text text-center">
+                        Add a new treatment
+                    </p>
+                    <a href="/Treatmentedit" class="btn btn-warning btn-outline-dark btn-block stretched-link">Add Treatment</a>
+                </div>
+            </div>
+
+            <div class="card bg-danger">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Add Patient</h4>
+                    <p class="card-text text-center">
+                        Add a new patient
+                    </p>
+                    <a href="/patientedit" class="btn btn-danger btn-outline-dark btn-block stretched-link">Add Patient</a>
+                </div>
+            </div>
+
         </div>
-    </div>
-
-    <div class="card bg-warning">
-        <div class="card-body">
-            <h4 class="card-title text-center">Add Treatment</h4>
-            <p class="card-text text-center">
-                Add a new treatment
-            </p>
-            <a href="/Treatmentedit" class="btn btn-warning btn-outline-dark btn-block stretched-link">Add Treatment</a>
-        </div>
-    </div>
-
-    <div class="card bg-success">
-        <div class="card-body">
-            <h4 class="card-title text-center">Add Patient</h4>
-            <p class="card-text text-center">
-                Add a new patient
-            </p>
-            <a href="/patientedit" class="btn btn-success btn-outline-dark btn-block stretched-link">Add Patient</a>
-        </div>
-    </div>
-
-</div>
+    </Authorized>
+</AuthorizeView>

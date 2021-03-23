@@ -1,0 +1,26 @@
+﻿@page "/authentication/{action}"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+<RemoteAuthenticatorView Action="@Action">
+    <LoggingIn>
+        <h3>Starting login process, please wait...</h3>
+    </LoggingIn>
+    <CompletingLoggingIn>
+        <h3>Completing logging in, nearly there....</h3>
+    </CompletingLoggingIn>
+    <LogOut>
+        <h3>Logging you out, enjoy your day!</h3>
+    </LogOut>
+
+    <LogOutSucceeded>
+        <h3>Logged out, enjoy your day!</h3>
+    </LogOutSucceeded>
+</RemoteAuthenticatorView>
+
+@code{
+
+    [CascadingParameter]
+    Task<AuthenticationState> authenticationState { get; set; }
+
+    [Parameter] public string Action { get; set; }
+}

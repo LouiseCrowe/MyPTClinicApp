@@ -10,9 +10,9 @@ namespace MyPTClinicApp.Server.Models
 {
     public class AppointmentRepository : IAppointmentRepository
     {
-        private readonly MyPTClinicAppServerContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public AppointmentRepository(MyPTClinicAppServerContext context)
+        public AppointmentRepository(ApplicationDbContext context)
         {
             _context = context;
         }

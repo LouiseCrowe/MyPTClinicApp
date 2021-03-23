@@ -78,7 +78,7 @@ namespace MyPTClinicApp.Client.Pages
             }
             catch (Exception)
             {
-                errormessage = "Name not found - maybe check your spelling or try another name";
+                errormessage = "No treatments match the search criteria, please try again.";
             }
         }
 

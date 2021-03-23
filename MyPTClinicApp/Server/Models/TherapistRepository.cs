@@ -11,9 +11,9 @@ namespace MyPTClinicApp.Server.Models
     public class TherapistRepository : ITherapistRepository
     {
         // injecting DB context into repo
-        private readonly MyPTClinicAppServerContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public TherapistRepository(MyPTClinicAppServerContext context)
+        public TherapistRepository(ApplicationDbContext context)
         {
             _context = context;
         }
