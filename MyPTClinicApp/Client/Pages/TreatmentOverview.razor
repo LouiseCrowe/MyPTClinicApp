@@ -114,7 +114,7 @@ else
                         <a href="@($"therapistedit/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
                             <i class="fas fa-edit"></i>
                         </a>
-                    </td>
+                    </td>                    
                 </tr>
                 }
             </tbody>
@@ -128,9 +128,8 @@ else
     <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Patient</th>
-                <th>Therapist</th>
+                <th>Patient Name</th>
+                <th>Therapist Name</th>
                 <th>Date</th>
                 <th>Notes</th>
                 <th></th>
@@ -141,7 +140,6 @@ else
             @foreach (var treatment in Treatments)
             {
                 <tr>
-                    <td>@treatment.ID</td>
                     <td>@treatment.PatientFirstName @treatment.PatientLastName</td>
                     <td>@treatment.TherapistFirstName @treatment.TherapistLastName</td>
                     <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>

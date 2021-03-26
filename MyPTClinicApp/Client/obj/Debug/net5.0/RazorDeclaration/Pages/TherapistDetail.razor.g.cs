@@ -12,98 +12,98 @@ namespace MyPTClinicApp.Client.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 1 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 2 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using System.Net.Http.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 3 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 4 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 5 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 6 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 7 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 8 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 9 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 10 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using MyPTClinicApp.Client;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 11 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using MyPTClinicApp.Client.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 12 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Telerik.Blazor;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 13 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\_Imports.razor"
+#line 13 "C:\MyPTClinicApp\MyPTClinicApp\Client\_Imports.razor"
 using Telerik.Blazor.Components;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\01 MyPTClinicAppHookedUpToDatabase\MyPTClinicApp\Client\Pages\TherapistDetail.razor"
+#line 3 "C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TherapistDetail.razor"
 using System.Linq;
 
 #line default

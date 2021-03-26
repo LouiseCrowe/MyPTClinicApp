@@ -61,7 +61,7 @@ namespace MyPTClinicApp.Client.Pages
             if (!args.IsNew) // an edit operation, otherwise - an insert operation
             {
                 // you can prevent opening an item for editing based on a condition
-                if (item.Title.Contains("vet", StringComparison.InvariantCultureIgnoreCase))
+                if (item.Title.Contains("do not edit", StringComparison.InvariantCultureIgnoreCase))
                 {
                     args.IsCancelled = true;
                 }

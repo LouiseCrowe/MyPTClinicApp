@@ -75,16 +75,16 @@ else
     <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Date</th>
-                <th>Notes</th>                
+                <th>Notes</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var treatment in Treatments)
             {
             <tr>
-                <td>@treatment.ID</td>
                 <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>
                 <td>@treatment.Notes</td>
                 <td>
