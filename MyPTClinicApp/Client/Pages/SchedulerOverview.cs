@@ -21,7 +21,8 @@ namespace MyPTClinicApp.Client.Pages
         DateTime DayEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
 
         List<SchedulerAppointment> Appointments { get; set; }
-        public string Title { get; set; }
+
+        public SchedulerAppointment Appointment { get; set; } 
 
         // to include patient and therapist in appointment dropdowns
         [Inject]
@@ -48,10 +49,11 @@ namespace MyPTClinicApp.Client.Pages
             Appointments = (await AppointmentService.Read()).ToList();
 
 
-            //// for including therapist and patient in appointment
-            //Therapists = TherapistService.GetAllTherapistsFullNames().Result;
+            // for including therapist and patient in appointment
+            Therapists = (await TherapistService.GetAllTherapistsFullNames()).ToList();
 
             //Patients = await PatientService.GetPatients();
+            Patients = (await PatientService.GetAllPatientsFullNames()).ToList();
         }
 
         async Task AddAppointment(SchedulerCreateEventArgs args)

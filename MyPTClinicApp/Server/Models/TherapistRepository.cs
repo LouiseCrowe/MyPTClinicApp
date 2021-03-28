@@ -42,6 +42,22 @@ namespace MyPTClinicApp.Server.Models
             return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
         }
 
+        public IEnumerable<String> GetAllTherapistsFullNames()
+        {
+
+            List<String> fullNames = new List<string>();
+            var query =  _context.Therapist.Select(t => new { t.FirstName, t.LastName });
+
+            foreach (var item in query)
+            {
+                fullNames.Add($"{item.FirstName} {item.LastName}");
+            }
+
+            return fullNames;
+
+        }
+
+
         public async Task<Therapist> GetTherapistById(int therapistId)
         {
             return await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistId);

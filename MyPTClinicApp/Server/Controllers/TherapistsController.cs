@@ -66,6 +66,25 @@ namespace MyPTClinicApp.Server.Controllers
             }            
         }
 
+
+        // GET: api/therapists/fullnames
+        [HttpGet("fullnames")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<String>> GetAllTherapistsFullNames()
+        {
+            try
+            {
+                return Ok(therapistRepository.GetAllTherapistsFullNames());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
+
         // GET: api/Therapists/id/2
         [HttpGet("id/{ID}", Name = "GetTherapistById")]  
         [ProducesResponseType(StatusCodes.Status200OK)]

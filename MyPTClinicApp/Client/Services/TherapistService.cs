@@ -20,7 +20,7 @@ namespace MyPTClinicApp.Client.Services
         {
             this.httpClient = httpClient;
         }
-                
+
         public async Task<IEnumerable<Therapist>> GetTherapists()
         {
             return await httpClient.GetJsonAsync<Therapist[]>("api/therapists/all");
@@ -35,6 +35,12 @@ namespace MyPTClinicApp.Client.Services
         {
             return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/{therapistId}");
         }
+
+        public async Task<IEnumerable<String>> GetAllTherapistsFullNames()
+        {
+            return await httpClient.GetJsonAsync<List<String>>("api/therapists/fullnames");
+        }
+
 
         public async Task<Therapist> AddTherapist(Therapist therapist)
         {   

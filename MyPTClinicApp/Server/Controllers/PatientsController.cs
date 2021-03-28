@@ -40,6 +40,24 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
+        // GET: api/patients/fullnames
+        [HttpGet("fullnames")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<String>> GetAllPatientsFullNames()
+        {
+            try
+            {
+                return Ok(patientRepository.GetAllPatientsFullNames());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
+
         // GET: api/patients/id/2
         [HttpGet("id/{ID}", Name = "GetPatientById")]
         [ProducesResponseType(StatusCodes.Status200OK)]

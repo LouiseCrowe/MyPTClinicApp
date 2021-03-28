@@ -48,7 +48,9 @@ namespace MyPTClinicApp.Server.Models
                 result.IsAllDay = appointment.IsAllDay;
                 result.RecurrenceId = appointment.RecurrenceId;
                 result.RecurrenceRule = appointment.RecurrenceRule;
-                
+                result.TherapistName = appointment.TherapistName;
+                result.PatientName = appointment.PatientName;
+
                 await _context.SaveChangesAsync();
                 return result;
             }

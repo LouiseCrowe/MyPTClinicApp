@@ -12,6 +12,7 @@ namespace MyPTClinicApp.Server.Models
         Task<IEnumerable<Therapist>> GetTherapists();
         Task<Therapist> GetTherapistById(int therapistId);
         Task<Therapist> GetTherapistByFullName(string firstName, string lastName);
+        IEnumerable<String> GetAllTherapistsFullNames();
         Task<Therapist> UpdateTherapist(Therapist therapist);
         Task<Therapist> AddTherapist(Therapist therapist);
         Task<Therapist> DeleteTherapist(int id);

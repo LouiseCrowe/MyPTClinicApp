@@ -48,6 +48,20 @@ namespace MyPTClinicApp.Server.Models
             return await query.ToListAsync();
         }
 
+        public IEnumerable<String> GetAllPatientsFullNames()
+        {
+
+            List<String> fullNames = new List<string>();
+            var query = _context.Patient.Select(t => new { t.FirstName, t.LastName });
+
+            foreach (var item in query)
+            {
+                fullNames.Add($"{item.FirstName} {item.LastName}");
+            }
+
+            return fullNames;
+
+        }
         public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)
         {
             // look for patients
