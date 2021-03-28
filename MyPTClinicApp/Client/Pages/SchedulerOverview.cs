@@ -21,10 +21,37 @@ namespace MyPTClinicApp.Client.Pages
         DateTime DayEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
 
         List<SchedulerAppointment> Appointments { get; set; }
+        public string Title { get; set; }
+
+        // to include patient and therapist in appointment dropdowns
+        [Inject]
+        public IPatientService PatientService { get; set; }
+
+        [Inject]
+        public ITherapistService TherapistService { get; set; }
+
+        // for selecting Therapist for appointment
+        public List<String> Therapists { get; set; } = new List<String>()
+        {
+            "Dylan Crowe", "Emily Wanda", "Jennifer Morris"
+        };
+
+
+        // for selecting Patient for appointment
+        public IEnumerable<String> Patients { get; set; } = new List<String>()
+        {
+            "John Kahoot King", "Patrick Basketball King", "Louise Murphy"
+        };
 
         protected override async Task OnInitializedAsync()
         {
             Appointments = (await AppointmentService.Read()).ToList();
+
+
+            //// for including therapist and patient in appointment
+            //Therapists = TherapistService.GetAllTherapistsFullNames().Result;
+
+            //Patients = await PatientService.GetPatients();
         }
 
         async Task AddAppointment(SchedulerCreateEventArgs args)

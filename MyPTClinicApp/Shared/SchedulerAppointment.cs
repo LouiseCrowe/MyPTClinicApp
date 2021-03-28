@@ -11,8 +11,8 @@ namespace MyPTClinicApp.Shared
         public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        //public int PatientID { get; set; }                  // foreign key 
-        //public int TherapistID { get; set; }                // foreign key 
+        public string PatientName { get; set; }
+        public string TherapistName { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public bool IsAllDay { get; set; }

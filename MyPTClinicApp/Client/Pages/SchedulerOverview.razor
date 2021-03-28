@@ -1,12 +1,28 @@
 ﻿@page "/scheduleroverview"
 
-<TelerikScheduler Data="@Appointments" 
+@using MyPTClinicApp.Shared
+
+<TelerikScheduler Data="@Appointments"
                   OnCreate="@AddAppointment"
                   OnUpdate="@UpdateAppointment"
                   OnDelete="@DeleteAppointment"
                   OnEdit="@EditHandler" OnCancel="@CancelHandler"
                   AllowCreate="true" AllowDelete="true" AllowUpdate="true"
                   @bind-Date="@StartDate" @bind-View="@CurrView" Height="600px" Width="800px">
+    <ItemTemplate>
+        @{
+            var appointment = context as SchedulerAppointment;
+            <div style="font-size: smaller">@appointment.Title</div>
+            <span style="font-size:smaller">
+                : @appointment.PatientName with @appointment.TherapistName
+            </span>
+        }
+
+    </ItemTemplate>
+    <SchedulerResources>
+        <SchedulerResource Field="TherapistName" Title="Therapist Name" Data="@Therapists" />
+        <SchedulerResource Field="PatientName" Title="Patient Name" Data="@Patients" />
+    </SchedulerResources>
     <SchedulerViews>
         <SchedulerMonthView />
         <SchedulerDayView StartTime="@DayStartTime"
@@ -16,9 +32,9 @@
                            WorkDayStart="@DayStartTime"
                            WorkDayEnd="@DayEndTime" />
         <SchedulerMultiDayView StartTime="@DayStartTime"
-                          WorkDayStart="@DayStartTime"
-                          WorkDayEnd="@DayEndTime" 
-                          NumberOfDays="10" />
+                               WorkDayStart="@DayStartTime"
+                               WorkDayEnd="@DayEndTime"
+                               NumberOfDays="10" />
 
     </SchedulerViews>
 </TelerikScheduler>
