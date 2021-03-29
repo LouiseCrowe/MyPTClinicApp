@@ -46,7 +46,8 @@ namespace MyPTClinicApp.Server.Models
         {
 
             List<String> fullNames = new List<string>();
-            var query =  _context.Therapist.Select(t => new { t.FirstName, t.LastName });
+            var query =  _context.Therapist.OrderBy(t => t.FirstName)
+                                            .Select(t => new { t.FirstName, t.LastName });
 
             foreach (var item in query)
             {

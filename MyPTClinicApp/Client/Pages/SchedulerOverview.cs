@@ -32,27 +32,17 @@ namespace MyPTClinicApp.Client.Pages
         public ITherapistService TherapistService { get; set; }
 
         // for selecting Therapist for appointment
-        public List<String> Therapists { get; set; } = new List<String>()
-        {
-            "Dylan Crowe", "Emily Wanda", "Jennifer Morris"
-        };
-
+        public List<String> Therapists { get; set; } = new List<String>();
 
         // for selecting Patient for appointment
-        public IEnumerable<String> Patients { get; set; } = new List<String>()
-        {
-            "John Kahoot King", "Patrick Basketball King", "Louise Murphy"
-        };
-
+        public List<String> Patients { get; set; } = new List<String>();
+        
         protected override async Task OnInitializedAsync()
         {
             Appointments = (await AppointmentService.Read()).ToList();
 
-
             // for including therapist and patient in appointment
             Therapists = (await TherapistService.GetAllTherapistsFullNames()).ToList();
-
-            //Patients = await PatientService.GetPatients();
             Patients = (await PatientService.GetAllPatientsFullNames()).ToList();
         }
 

@@ -31,43 +31,131 @@ namespace MyPTClinicApp.Server.Models
         {
             var result = await _context.SchedulerAppointment.AddAsync(appointment);
             await _context.SaveChangesAsync();
+
+            // if user selects a patient, therapist or both patient and therapist when adding an appointment a 
+            // skeleton treatment will be added which will be manually updated after the treatment is completed
+            // declare variables for updating treatment
+
+            Patient patient = new();
+            Therapist therapist = new();
+
+            // patient and therapist included in appointment
+            if (!String.IsNullOrEmpty(appointment.PatientName) && !String.IsNullOrEmpty(appointment.TherapistName))
+            {
+                patient = await FindPatientFromAppt(appointment);
+                therapist = await FindTherapistFromAppt(appointment);
+            }
+
+            // therapist included in appointment but therapist is left blank
+            if (String.IsNullOrEmpty(appointment.PatientName))
+            {
+               var query = await _context.Patient.FirstOrDefaultAsync(p => p.FirstName == "To"
+                                           && p.LastName == "Be Confirmed");
+               patient = query;
+                therapist = await FindTherapistFromAppt(appointment);
+
+            }
+            if (String.IsNullOrEmpty(appointment.TherapistName))
+            {
+                var query = await _context.Therapist.FirstOrDefaultAsync(t => t.FirstName == "To"
+                                           && t.LastName == "Be Confirmed");
+                    therapist = query;
+                patient = await FindPatientFromAppt(appointment);
+            }
+
+                // create treatment and add to database
+                Treatment treatment = (new Treatment
+                {
+                    PatientID = patient.ID,
+                    TherapistID = therapist.ID,
+                    Date = appointment.Start.Date,
+                    Notes = "Please update after treatment takes place"                    
+                });
+
+                await _context.Treatment.AddAsync(treatment);
+                await _context.SaveChangesAsync();
+
             return result.Entity;
+         
         }
 
-        public async Task<SchedulerAppointment> UpdateAppointment(SchedulerAppointment appointment)
+        public async Task<Patient> FindPatientFromAppt(SchedulerAppointment appointment)
         {
-            // find therapist to update
-            var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointment.ID);
+            // find patient to include in treatment based on name in appointment
+            string patientFirstName, patientLastName;
 
-            if (result != null)
+            string[] patientFullName = appointment.PatientName.Split(" ");
+            patientFirstName = patientFullName[0];
+            if (patientFullName.Length > 1)
             {
-                result.Title = appointment.Title;
-                result.Description = appointment.Description;
-                result.Start = appointment.Start;
-                result.End = appointment.End;
-                result.IsAllDay = appointment.IsAllDay;
-                result.RecurrenceId = appointment.RecurrenceId;
-                result.RecurrenceRule = appointment.RecurrenceRule;
-                result.TherapistName = appointment.TherapistName;
-                result.PatientName = appointment.PatientName;
-
-                await _context.SaveChangesAsync();
-                return result;
+                patientLastName = patientFullName[^1];
             }
-            return null;
+            else
+            {
+                patientLastName = patientFullName[0];
+            }
+
+            return await _context.Patient.FirstOrDefaultAsync
+                                        (p => p.FirstName.ToLower().Contains(patientFirstName.ToLower())
+                                        && p.LastName.ToLower().Contains(patientLastName.ToLower()));            
         }
 
-        public async Task<SchedulerAppointment> DeleteAppointment(int appointmentId)
-        {
-            var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointmentId);
 
-            if (result != null)
+        public async Task<Therapist> FindTherapistFromAppt(SchedulerAppointment appointment)
+        {
+            // find therapist to include in treatment based on name in appointment
+            string therapistFirstName, therapistLastName;
+         
+            string[] therapistFullName = appointment.TherapistName.Split(" ");
+            therapistFirstName = therapistFullName[0];
+            if (therapistFullName.Length > 1)
             {
-                _context.Remove(result);
-                await _context.SaveChangesAsync();
-                return result;
+                therapistLastName = therapistFullName[^1];
             }
-            return null;
+            else
+            {
+                therapistLastName = therapistFullName[0];
+            }
+
+           return await _context.Therapist.FirstOrDefaultAsync
+                                        (t => t.FirstName.ToLower().Contains(therapistFirstName.ToLower())
+                                        && t.LastName.ToLower().Contains(therapistLastName.ToLower()));            
+        }
+
+            public async Task<SchedulerAppointment> UpdateAppointment(SchedulerAppointment appointment)
+            {
+                // find therapist to update
+                var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointment.ID);
+
+                if (result != null)
+                {
+                    result.Title = appointment.Title;
+                    result.Description = appointment.Description;
+                    result.Start = appointment.Start;
+                    result.End = appointment.End;
+                    result.IsAllDay = appointment.IsAllDay;
+                    result.RecurrenceId = appointment.RecurrenceId;
+                    result.RecurrenceRule = appointment.RecurrenceRule;
+                    result.TherapistName = appointment.TherapistName;
+                    result.PatientName = appointment.PatientName;
+
+                    await _context.SaveChangesAsync();
+                    return result;
+                }
+                return null;
+            }
+
+            public async Task<SchedulerAppointment> DeleteAppointment(int appointmentId)
+            {
+                var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointmentId);
+
+                if (result != null)
+                {
+                    _context.Remove(result);
+                    await _context.SaveChangesAsync();
+                    return result;
+                }
+                return null;
+            }
         }
     }
-}

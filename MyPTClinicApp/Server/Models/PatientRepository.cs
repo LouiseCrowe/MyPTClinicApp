@@ -52,7 +52,7 @@ namespace MyPTClinicApp.Server.Models
         {
 
             List<String> fullNames = new List<string>();
-            var query = _context.Patient.Select(t => new { t.FirstName, t.LastName });
+            var query = _context.Patient.OrderBy(p => p.FirstName).Select(p => new { p.FirstName, p.LastName });
 
             foreach (var item in query)
             {
@@ -118,8 +118,8 @@ namespace MyPTClinicApp.Server.Models
 
         public async Task<Patient> GetPatientByFullName(string firstName, string lastName)
         {
-            return await _context.Patient.FirstOrDefaultAsync(t => t.FirstName.ToLower() == firstName.ToLower()
-                                                                && t.LastName.ToLower() == lastName.ToLower());
+            return await _context.Patient.FirstOrDefaultAsync(p => p.FirstName.ToLower() == firstName.ToLower()
+                                                                && p.LastName.ToLower() == lastName.ToLower());
         }
     }
 }

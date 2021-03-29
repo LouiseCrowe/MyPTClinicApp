@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyPTClinicApp.Server.Data;
 
 namespace MyPTClinicApp.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210329210422_AddApptIDToTreatment")]
+    partial class AddApptIDToTreatment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -460,7 +462,7 @@ namespace MyPTClinicApp.Server.Data.Migrations
                     b.Property<int>("PatientID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SchedulerAppointmentID")
+                    b.Property<int>("SchedulerAppointmentID")
                         .HasColumnType("int");
 
                     b.Property<int>("TherapistID")
