@@ -49,9 +49,9 @@ namespace MyPTClinicApp.Server.Models
             // therapist included in appointment but therapist is left blank
             if (String.IsNullOrEmpty(appointment.PatientName))
             {
-               var query = await _context.Patient.FirstOrDefaultAsync(p => p.FirstName == "To"
-                                           && p.LastName == "Be Confirmed");
-               patient = query;
+                var query = await _context.Patient.FirstOrDefaultAsync(p => p.FirstName == "To"
+                                            && p.LastName == "Be Confirmed");
+                patient = query;
                 therapist = await FindTherapistFromAppt(appointment);
 
             }
@@ -59,24 +59,25 @@ namespace MyPTClinicApp.Server.Models
             {
                 var query = await _context.Therapist.FirstOrDefaultAsync(t => t.FirstName == "To"
                                            && t.LastName == "Be Confirmed");
-                    therapist = query;
+                therapist = query;
                 patient = await FindPatientFromAppt(appointment);
             }
 
-                // create treatment and add to database
-                Treatment treatment = (new Treatment
-                {
-                    PatientID = patient.ID,
-                    TherapistID = therapist.ID,
-                    Date = appointment.Start.Date,
-                    Notes = "Please update after treatment takes place"                    
-                });
+            // create treatment and add to database
+            Treatment treatment = (new Treatment
+            {
+                PatientID = patient.ID,
+                TherapistID = therapist.ID,
+                AppointmentID = appointment.ID,
+                Date = appointment.Start.Date,
+                Notes = "Please update after treatment takes place"
+            });
 
-                await _context.Treatment.AddAsync(treatment);
-                await _context.SaveChangesAsync();
+            await _context.Treatment.AddAsync(treatment);
+            await _context.SaveChangesAsync();
 
             return result.Entity;
-         
+
         }
 
         public async Task<Patient> FindPatientFromAppt(SchedulerAppointment appointment)
@@ -97,7 +98,7 @@ namespace MyPTClinicApp.Server.Models
 
             return await _context.Patient.FirstOrDefaultAsync
                                         (p => p.FirstName.ToLower().Contains(patientFirstName.ToLower())
-                                        && p.LastName.ToLower().Contains(patientLastName.ToLower()));            
+                                        && p.LastName.ToLower().Contains(patientLastName.ToLower()));
         }
 
 
@@ -105,7 +106,7 @@ namespace MyPTClinicApp.Server.Models
         {
             // find therapist to include in treatment based on name in appointment
             string therapistFirstName, therapistLastName;
-         
+
             string[] therapistFullName = appointment.TherapistName.Split(" ");
             therapistFirstName = therapistFullName[0];
             if (therapistFullName.Length > 1)
@@ -117,33 +118,50 @@ namespace MyPTClinicApp.Server.Models
                 therapistLastName = therapistFullName[0];
             }
 
-           return await _context.Therapist.FirstOrDefaultAsync
-                                        (t => t.FirstName.ToLower().Contains(therapistFirstName.ToLower())
-                                        && t.LastName.ToLower().Contains(therapistLastName.ToLower()));            
+            return await _context.Therapist.FirstOrDefaultAsync
+                                         (t => t.FirstName.ToLower().Contains(therapistFirstName.ToLower())
+                                         && t.LastName.ToLower().Contains(therapistLastName.ToLower()));
         }
 
-            public async Task<SchedulerAppointment> UpdateAppointment(SchedulerAppointment appointment)
+        public async Task<SchedulerAppointment> UpdateAppointment(SchedulerAppointment appointment)
+        {
+            // find schedulerAppointment to update
+            var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointment.ID);
+
+            if (result != null)
             {
-                // find therapist to update
-                var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointment.ID);
+                // update appointment
+                result.Title = appointment.Title;
+                result.Description = appointment.Description;
+                result.Start = appointment.Start;
+                result.End = appointment.End;
+                result.IsAllDay = appointment.IsAllDay;
+                result.RecurrenceId = appointment.RecurrenceId;
+                result.RecurrenceRule = appointment.RecurrenceRule;
+                result.TherapistName = appointment.TherapistName;
+                result.PatientName = appointment.PatientName;
+              
 
-                if (result != null)
+                // find related treatment to update too.
+                var treatment = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointment.ID);
+                if (treatment != null)
                 {
-                    result.Title = appointment.Title;
-                    result.Description = appointment.Description;
-                    result.Start = appointment.Start;
-                    result.End = appointment.End;
-                    result.IsAllDay = appointment.IsAllDay;
-                    result.RecurrenceId = appointment.RecurrenceId;
-                    result.RecurrenceRule = appointment.RecurrenceRule;
-                    result.TherapistName = appointment.TherapistName;
-                    result.PatientName = appointment.PatientName;
-
-                    await _context.SaveChangesAsync();
-                    return result;
+                    // find patient and therapist included in appointment
+                    Patient patient = await FindPatientFromAppt(appointment);
+                    Therapist therapist = await FindTherapistFromAppt(appointment);
+                    // update treatment 
+                    treatment.PatientID = patient.ID;
+                    treatment.TherapistID = therapist.ID;
+                    treatment.Date = appointment.Start.Date;
+                    
                 }
-                return null;
+
+
+                await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
+        }
 
             public async Task<SchedulerAppointment> DeleteAppointment(int appointmentId)
             {
@@ -152,6 +170,11 @@ namespace MyPTClinicApp.Server.Models
                 if (result != null)
                 {
                     _context.Remove(result);
+
+                    // delete from treatments too
+                    var treatmentToDelete = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointmentId);
+                    _context.Remove(treatmentToDelete);
+
                     await _context.SaveChangesAsync();
                     return result;
                 }
@@ -159,3 +182,4 @@ namespace MyPTClinicApp.Server.Models
             }
         }
     }
+

@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace MyPTClinicApp.Server.Data.Migrations
 {
-    public partial class AddAllControllers : Migration
+    public partial class AddTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,9 @@ namespace MyPTClinicApp.Server.Data.Migrations
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsAllDay = table.Column<bool>(type: "bit", nullable: false),
                     RecurrenceRule = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RecurrenceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    RecurrenceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PatientName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TherapistName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,6 +80,7 @@ namespace MyPTClinicApp.Server.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PatientID = table.Column<int>(type: "int", nullable: false),
                     TherapistID = table.Column<int>(type: "int", nullable: false),
+                    AppointmentID = table.Column<int>(type: "int", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -95,7 +98,7 @@ namespace MyPTClinicApp.Server.Data.Migrations
                         column: x => x.TherapistID,
                         principalTable: "Therapist",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);                    
                 });
 
             migrationBuilder.CreateIndex(

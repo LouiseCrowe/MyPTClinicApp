@@ -58,7 +58,6 @@ namespace MyPTClinicApp.Server.Models
 
         }
 
-
         public async Task<Therapist> GetTherapistById(int therapistId)
         {
             return await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistId);

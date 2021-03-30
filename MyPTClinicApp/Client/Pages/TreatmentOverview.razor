@@ -31,7 +31,7 @@ else
             <input class="form-control" input type=date @bind-value="ToDate" />
         </div>
         <div class="input-group-append">
-            <button class="btn btn-primary" @onclick="Search">Search</button>
+            <button class="btn btn-primary" @onclick="Search">Filter</button>
             <button class="btn btn-outline-primary" @onclick="ResetDates">Reset Dates</button>
         </div>
     </div>
@@ -54,7 +54,7 @@ else
         <h4>Summary info for Treatments</h4>
 
         <p>Total number of treatments: @totalTreatments</p>
-        <p>Total number of treatments meeting search criteria: @Treatments.Count()</p>
+        <p>Total number of treatments meeting search and filter criteria: @Treatments.Count()</p>
 
         <h4>Breakdown of Treatments by Patient</h4>
 

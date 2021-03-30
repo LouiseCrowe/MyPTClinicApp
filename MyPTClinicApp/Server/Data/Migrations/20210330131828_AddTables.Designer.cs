@@ -10,8 +10,8 @@ using MyPTClinicApp.Server.Data;
 namespace MyPTClinicApp.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210329215911_UpdateTreatmentTable2")]
-    partial class UpdateTreatmentTable2
+    [Migration("20210330131828_AddTables")]
+    partial class AddTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -453,6 +453,9 @@ namespace MyPTClinicApp.Server.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AppointmentID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -460,9 +463,6 @@ namespace MyPTClinicApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SchedulerAppointmentID")
                         .HasColumnType("int");
 
                     b.Property<int>("TherapistID")

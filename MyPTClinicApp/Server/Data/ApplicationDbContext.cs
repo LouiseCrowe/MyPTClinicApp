@@ -22,8 +22,7 @@ namespace MyPTClinicApp.Server.Data
 
         public DbSet<MyPTClinicApp.Shared.Patient> Patient { get; set; }
 
-        public DbSet<MyPTClinicApp.Shared.Treatment> Treatment { get; set; }
-
         public DbSet<MyPTClinicApp.Shared.SchedulerAppointment> SchedulerAppointment { get; set; }
+        public DbSet<MyPTClinicApp.Shared.Treatment> Treatment { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace MyPTClinicApp.Shared
 
         public string Notes { get; set; }
 
+        public int? AppointmentID { get; set; }
+
         public virtual Patient Patient { get; set; }                // navigation property
 
         public virtual Therapist Therapist { get; set; }            // navigation property

@@ -451,6 +451,9 @@ namespace MyPTClinicApp.Server.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AppointmentID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -458,9 +461,6 @@ namespace MyPTClinicApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SchedulerAppointmentID")
                         .HasColumnType("int");
 
                     b.Property<int>("TherapistID")

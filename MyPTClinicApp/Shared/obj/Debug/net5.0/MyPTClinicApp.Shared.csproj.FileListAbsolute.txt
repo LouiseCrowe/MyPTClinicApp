@@ -56,3 +56,15 @@ C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.dll
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.pdb
 C:\MyPTClinicApp\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csprojAssemblyReference.cache
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.deps.json
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.dll
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\bin\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\bin\Debug\net5.0\MyPTClinicApp.Shared.pdb
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csprojAssemblyReference.cache
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfoInputs.cache
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfo.cs
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.csproj.CoreCompileInputs.cache
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.dll
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
+C:\MyPTTryingToAddAppointmentIDToTreatment\MyPTClinicApp\Shared\obj\Debug\net5.0\MyPTClinicApp.Shared.pdb

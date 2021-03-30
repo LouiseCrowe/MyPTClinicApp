@@ -53,7 +53,7 @@ namespace MyPTClinicApp.Client.Pages
         {
             try
             {
-                fullName = SearchName.Split(" ");
+                fullName = SearchName.Trim().Split(" ");
                 searchName = fullName[0];
                 if (fullName.Length > 1)
                 {
