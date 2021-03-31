@@ -32,7 +32,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var therapist in Therapists)
+            @foreach (var therapist in TherapistList)
             {
                 <tr>
                     <td>@therapist.FirstName</td>
@@ -51,4 +51,19 @@ else
             }
         </tbody>
     </table>
+    //creating buttons for pagination
+    <div>
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("first"))">@("<<")</button>
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("prev"))">Prev</button>
+        @for (int i = 0; i < TotalPages; i++)
+        {
+            var pageNumber = i;
+            <button class="btn @(CurrentPage == pageNumber? "btn-dark":"btn-info") pagination-button"
+                    @onclick="@(e => UpdateList(pageNumber))">
+                @(i + 1)
+            </button>
+        }
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("next"))">Next</button>
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("last"))">@(">>")</button>
+    </div>
 }

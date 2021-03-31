@@ -24,7 +24,6 @@ namespace MyPTClinicApp.Client.Pages
         List<List<TreatmentDTO>> PatientsWithTreatments = new ();     
         List<List<TreatmentDTO>> TherapistsWithTreatments = new ();
 
-
         // for managing search
         public string SearchName { get; set; } = new string("");      // to allow initial search for all treatment
                                                                       // without searching for a specific name
@@ -38,6 +37,12 @@ namespace MyPTClinicApp.Client.Pages
         // for showing summary
         protected bool showSummary = false;
 
+        // for pagination
+        public IEnumerable<TreatmentDTO> TreatmentList { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public int CurrentPage { get; set; }
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -47,6 +52,43 @@ namespace MyPTClinicApp.Client.Pages
             // for breakdown display - will include all treatments in initial rendering
             GroupByPatientID();
             GroupByTherapistID();
+
+            // for pagination
+            PageSize = 3;
+            TreatmentList = Treatments.Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Treatments.Count() / (decimal)PageSize);
+        }
+
+        // for pagination
+        private void UpdateList(int pageNumber = 0)
+        {
+            // pageNumber * PageSize -> take 5
+            TreatmentList = Treatments.Skip(pageNumber * PageSize).Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Treatments.Count() / (decimal)PageSize);
+            CurrentPage = pageNumber;
+        }
+
+
+        private void NavigateTo(string direction)
+        {
+            if (direction == "prev" && CurrentPage != 0)
+            {
+                CurrentPage -= 1;
+            }
+            if (direction == "next" && CurrentPage != TotalPages - 1)
+            {
+                CurrentPage += 1;
+            }
+            if (direction == "first")
+            {
+                CurrentPage = 0;
+            }
+            if (direction == "last")
+            {
+                CurrentPage = TotalPages - 1;
+            }
+
+            UpdateList(CurrentPage);
         }
 
         public async Task Search()
@@ -75,6 +117,7 @@ namespace MyPTClinicApp.Client.Pages
                 GroupByTherapistID();                 // re-run query to include only search results
 
                 errormessage = String.Empty;
+                UpdateList();
             }
             catch (Exception)
             {
@@ -86,6 +129,7 @@ namespace MyPTClinicApp.Client.Pages
         {
             SearchName = String.Empty;
             Treatments = await TreatmentService.GetTreatments();
+            UpdateList();
             errormessage = string.Empty;
         }
 

@@ -25,9 +25,51 @@ namespace MyPTClinicApp.Client.Pages
         string lastName = "";
         private string errormessage;
 
+        // for pagination
+        public IEnumerable<Therapist> TherapistList { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public int CurrentPage { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             Therapists = (await TherapistService.GetTherapists()).ToList();
+
+            // for pagination
+            PageSize = 3;
+            TherapistList = Therapists.Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Therapists.Count() / (decimal)PageSize);
+        }
+
+        // for pagination
+        private void UpdateList(int pageNumber = 0)
+        {
+            // pageNumber * PageSize -> take 5
+            TherapistList = Therapists.Skip(pageNumber * PageSize).Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Therapists.Count() / (decimal)PageSize);
+            CurrentPage = pageNumber;
+        }
+
+        private void NavigateTo(string direction)
+        {
+            if (direction == "prev" && CurrentPage != 0)
+            {
+                CurrentPage -= 1;
+            }
+            if (direction == "next" && CurrentPage != TotalPages - 1)
+            {
+                CurrentPage += 1;
+            }
+            if (direction == "first")
+            {
+                CurrentPage = 0;
+            }
+            if (direction == "last")
+            {
+                CurrentPage = TotalPages - 1;
+            }
+
+            UpdateList(CurrentPage);
         }
 
         public async Task Search()
@@ -46,6 +88,7 @@ namespace MyPTClinicApp.Client.Pages
                 }
 
                 Therapists = await TherapistService.Search(searchName, lastName);
+                UpdateList();
 
                 errormessage = String.Empty;
             }
@@ -59,6 +102,7 @@ namespace MyPTClinicApp.Client.Pages
         {
             SearchName = String.Empty;
             Therapists = await TherapistService.GetTherapists();
+            UpdateList();
             errormessage = string.Empty;
         }
     }

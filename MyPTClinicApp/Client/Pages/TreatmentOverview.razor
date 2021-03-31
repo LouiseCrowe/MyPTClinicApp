@@ -70,20 +70,20 @@ else
             <tbody>
                 @foreach (var patientGroup in PatientsWithTreatments)
                 {
-                <tr>
-                    <td>@patientGroup[0].PatientFirstName @patientGroup[0].PatientLastName</td>
-                    <td>@patientGroup.Count</td>
-                    <td>
-                        <a href="@($"patientdetail/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@($"patientedit/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>@patientGroup[0].PatientFirstName @patientGroup[0].PatientLastName</td>
+                        <td>@patientGroup.Count</td>
+                        <td>
+                            <a href="@($"patientdetail/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@($"patientedit/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -102,20 +102,20 @@ else
             <tbody>
                 @foreach (var therapistGroup in TherapistsWithTreatments)
                 {
-                <tr>
-                    <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
-                    <td>@therapistGroup.Count</td>
-                    <td>
-                        <a href="@($"therapistdetail/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@($"therapistedit/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>                    
-                </tr>
+                    <tr>
+                        <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
+                        <td>@therapistGroup.Count</td>
+                        <td>
+                            <a href="@($"therapistdetail/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@($"therapistedit/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -137,7 +137,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var treatment in Treatments)
+            @foreach (var treatment in TreatmentList)
             {
                 <tr>
                     <td>@treatment.PatientFirstName @treatment.PatientLastName</td>
@@ -158,4 +158,20 @@ else
             }
         </tbody>
     </table>
+
+    //creating buttons for pagination
+    <div>
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("first"))">@("<<")</button>
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("prev"))">Prev</button>
+        @for (int i = 0; i < TotalPages; i++)
+        {
+            var pageNumber = i;
+            <button class="btn @(CurrentPage == pageNumber? "btn-dark":"btn-info") pagination-button"
+                    @onclick="@(e => UpdateList(pageNumber))">
+                @(i + 1)
+            </button>
+        }
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("next"))">Next</button>
+        <button class="btn btn-secondary" @onclick="@(e => NavigateTo("last"))">@(">>")</button>
+    </div>
 }
