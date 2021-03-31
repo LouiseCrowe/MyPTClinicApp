@@ -230,12 +230,11 @@
       "netstandard.dll": "sha256-P8xX0ad1hKyWWbBxiXl3cYokFlDiuXwp3pqoYatH0kk=",
       "System.Private.CoreLib.dll": "sha256-2km83sNUTrumGJYdDzsN8RnJqv00vKWLCCh0UGajTB4=",
       "MyPTClinicApp.Shared.dll": "sha256-iWQgHFKY5WbHUEZyYColh470YUOVe8hrLB1IjgxAfiE=",
-      "MyPTClinicApp.Client.dll": "sha256-YIJAdWtbin93var\/uA4BO0BVr6bZUybVj3\/qZCPD9Sw="
+      "MyPTClinicApp.Client.dll": "sha256-3ojsLUY\/7xg9FJiYsinLe813vndA4xtEmB\/QRgYE0Gk="
     },
     "lazyAssembly": null,
     "pdb": {
-      "MyPTClinicApp.Shared.pdb": "sha256-XZgrAL1MmPnypizrUi6E\/51dDWBM70Qq1k0xudP9Cr8=",
-      "MyPTClinicApp.Client.pdb": "sha256-dTkuLMTSyv6bIDCvj3JQZJ3kC5jaFLxnHCjf3jreVEE="
+      "MyPTClinicApp.Client.pdb": "sha256-haOxApKDG2p0a+Y\/03UVX1svqXXznncOoS1HvpxJdiM="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-ibxaSjW7s3aLVssChknhzCpgMTHGu4D48Q9OLP3dfe8=",

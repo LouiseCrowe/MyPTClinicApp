@@ -17,7 +17,13 @@ namespace MyPTClinicApp.Client.Pages
         public IPatientService PatientService { get; set; }
 
         public IEnumerable<Patient> Patients { get; set; }
-
+        
+        // for pagination
+        public IEnumerable<Patient> PatientList { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public int CurrentPage { get; set; }
+        
         // for managing search
         public string SearchName { get; set; }
         string[] fullName;
@@ -28,6 +34,43 @@ namespace MyPTClinicApp.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             Patients = (await PatientService.GetPatients()).ToList();
+
+            // for pagination
+            PageSize = 3;
+            PatientList = Patients.Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Patients.Count() / (decimal)PageSize);
+        }
+
+
+        // for pagination
+        private void UpdateList(int pageNumber = 0)
+        {
+            // pageNumber * PageSize -> take 5
+            PatientList = Patients.Skip(pageNumber * PageSize).Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Patients.Count() / (decimal)PageSize);
+            CurrentPage = pageNumber;
+        }
+
+        private void NavigateTo(string direction)
+        {
+            if (direction == "prev" && CurrentPage !=0)
+            {
+                CurrentPage -= 1;
+            }
+            if (direction == "next" && CurrentPage != TotalPages -1)
+            {
+                CurrentPage += 1;
+            }
+            if (direction == "first" )
+            {
+                CurrentPage = 0;
+            }
+            if (direction == "last")
+            {
+                CurrentPage = TotalPages - 1;
+            }
+
+            UpdateList(CurrentPage);
         }
 
         public async Task Search()
@@ -46,6 +89,7 @@ namespace MyPTClinicApp.Client.Pages
                 }
 
                 Patients = await PatientService.Search(searchName, lastName);
+                UpdateList();
 
                 errormessage = String.Empty;
             }
@@ -60,6 +104,7 @@ namespace MyPTClinicApp.Client.Pages
         {
             SearchName = String.Empty;
             Patients = await PatientService.GetPatients();
+            UpdateList();
             errormessage = string.Empty;
         }
     }

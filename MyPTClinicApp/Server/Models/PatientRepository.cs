@@ -21,7 +21,7 @@ namespace MyPTClinicApp.Server.Models
 
         public async Task<IEnumerable<Patient>> GetPatients()
         {
-            return await _context.Patient.OrderBy(p => p.ID).ToListAsync();
+            return await _context.Patient.OrderBy(p => p.FirstName).ToListAsync();
         }
 
         public async Task<Patient> GetPatientById(int patientId)
