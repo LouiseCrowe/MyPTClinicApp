@@ -47,7 +47,7 @@ namespace MyPTClinicApp.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             Treatments = await TreatmentService.GetTreatments();        // retrieves all treatments    
-            totalTreatments = Treatments.Count();                       // this figure will remain the same
+            totalTreatments = Treatments.Count();                       // this figure will remain the same regardless of search criteria
 
             // for breakdown display - will include all treatments in initial rendering
             GroupByPatientID();
@@ -108,16 +108,7 @@ namespace MyPTClinicApp.Client.Pages
 
                 Treatments = await TreatmentService.Search(searchName, lastName, FromDate, ToDate);
 
-                PatientsWithTreatments = new List<List<TreatmentDTO>>();  // reset Patients with treatments 
-                                                                          // so summary reflects search results
-                GroupByPatientID();                 // re-run query to include only search results
-
-                TherapistsWithTreatments = new List<List<TreatmentDTO>>();  // reset Patients with treatments 
-                                                                          // so summary reflects search results
-                GroupByTherapistID();                 // re-run query to include only search results
-
-                errormessage = String.Empty;
-                UpdateList();
+                UpdateBreakdownInfoAfterSearch();
             }
             catch (Exception)
             {
@@ -125,13 +116,30 @@ namespace MyPTClinicApp.Client.Pages
             }
         }
 
+        private void UpdateBreakdownInfoAfterSearch()
+        {
+            PatientsWithTreatments = new List<List<TreatmentDTO>>();  // reset Patients with treatments 
+                                                                      // so summary reflects search results
+            GroupByPatientID();                 // re-run query to include only search results
+
+            TherapistsWithTreatments = new List<List<TreatmentDTO>>();  // reset Patients with treatments 
+                                                                        // so summary reflects search results
+            GroupByTherapistID();                 // re-run query to include only search results
+
+            errormessage = String.Empty;
+            UpdateList();
+        }
+       
+
         public async Task ClearSearch()
         {
             SearchName = String.Empty;
             Treatments = await TreatmentService.GetTreatments();
-            UpdateList();
+            UpdateBreakdownInfoAfterSearch();
             errormessage = string.Empty;
         }
+
+
 
 
         public void ResetDates()

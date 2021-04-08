@@ -131,6 +131,12 @@ else
             <div>
                 <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to Patient list</a>
             </div>
+
+            <br />
+
+            <div>
+                <a class="btn btn-outline-primary" @onclick="@SendWelcomeMail">Send Welcome Mail to @Patient.FirstName @Patient.LastName </a>
+            </div>
         }
     }
 }

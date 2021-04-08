@@ -1990,6 +1990,32 @@
           }
         }
       },
+      "SendGrid/9.22.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1",
+          "starkbank-ecdsa": "[1.2.0, 2.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        }
+      },
+      "SendGrid.Extensions.DependencyInjection/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Http": "2.1.0",
+          "SendGrid": "9.16.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/SendGrid.Extensions.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SendGrid.Extensions.DependencyInjection.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.4": {
         "type": "package",
         "dependencies": {
@@ -2091,6 +2117,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll": {}
+        }
+      },
+      "starkbank-ecdsa/1.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/StarkbankEcdsa.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/StarkbankEcdsa.dll": {}
         }
       },
       "Swashbuckle.AspNetCore/6.0.7": {
@@ -3906,6 +3941,7 @@
           "Microsoft.Extensions.Http": "5.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
           "MyPTClinicApp.Shared": "1.0.0",
+          "SendGrid": "9.22.0",
           "System.Net.Http.Json": "5.0.0",
           "Telerik.UI.for.Blazor.Trial": "2.22.0"
         },
@@ -6845,6 +6881,42 @@
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
       ]
     },
+    "SendGrid/9.22.0": {
+      "sha512": "5vXkfOqPhi6W5/tEmRcTVJakT69SXiCGqVRERYF4ZAtJ4alylzlOqin6w8Xrog0Brf3RL+4BKXI+CwKbFLtteA==",
+      "type": "package",
+      "path": "sendgrid/9.22.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/SendGrid.dll",
+        "lib/net40/SendGrid.pdb",
+        "lib/net40/SendGrid.xml",
+        "lib/net452/SendGrid.dll",
+        "lib/net452/SendGrid.pdb",
+        "lib/net452/SendGrid.xml",
+        "lib/netstandard1.3/SendGrid.dll",
+        "lib/netstandard1.3/SendGrid.pdb",
+        "lib/netstandard1.3/SendGrid.xml",
+        "lib/netstandard2.0/SendGrid.dll",
+        "lib/netstandard2.0/SendGrid.pdb",
+        "lib/netstandard2.0/SendGrid.xml",
+        "sendgrid.9.22.0.nupkg.sha512",
+        "sendgrid.nuspec"
+      ]
+    },
+    "SendGrid.Extensions.DependencyInjection/1.0.0": {
+      "sha512": "AJLXUxvW2NFDlgZG7Ca4KI4TC0j/0N6pqAqMr3LjM16aUKlll9tiBxpLUBgtLrxzeKMTlONne/wLzZfot59M6g==",
+      "type": "package",
+      "path": "sendgrid.extensions.dependencyinjection/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/SendGrid.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.0/SendGrid.Extensions.DependencyInjection.xml",
+        "sendgrid.extensions.dependencyinjection.1.0.0.nupkg.sha512",
+        "sendgrid.extensions.dependencyinjection.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.4": {
       "sha512": "f5U8Sw0lRym8tTraJ2zm6OqcDrcrEVvcKDtYlKSLs3Ox9SerkwkPXiFXb/uiW0g2tJdUw6oBhsxI/l5DoRxXMg==",
       "type": "package",
@@ -6916,6 +6988,22 @@
         "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll",
         "sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
         "sqlitepclraw.provider.dynamic_cdecl.nuspec"
+      ]
+    },
+    "starkbank-ecdsa/1.2.0": {
+      "sha512": "hP53QPYOOEIR44EK9phz+DYliM6DEieDZxpb8GZzE+++qyrWqUscKcyHCC6L9yu/ehllYtqxtT4qrjWDsuQlUQ==",
+      "type": "package",
+      "path": "starkbank-ecdsa/1.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/StarkbankEcdsa.dll",
+        "lib/net452/StarkbankEcdsa.dll",
+        "lib/netstandard1.3/StarkbankEcdsa.dll",
+        "lib/netstandard2.0/StarkbankEcdsa.dll",
+        "lib/netstandard2.1/StarkbankEcdsa.dll",
+        "starkbank-ecdsa.1.2.0.nupkg.sha512",
+        "starkbank-ecdsa.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.0.7": {
@@ -11797,6 +11885,8 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
       "MyPTClinicApp.Client >= 1.0.0",
       "MyPTClinicApp.Shared >= 1.0.0",
+      "SendGrid >= 9.22.0",
+      "SendGrid.Extensions.DependencyInjection >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.0.7",
       "Swashbuckle.AspNetCore.Swagger >= 6.0.7",
       "Swashbuckle.AspNetCore.SwaggerGen >= 6.0.7",
@@ -11901,6 +11991,14 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[5.0.2, )"
+          },
+          "SendGrid": {
+            "target": "Package",
+            "version": "[9.22.0, )"
+          },
+          "SendGrid.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

@@ -84,7 +84,7 @@ namespace MyPTClinicApp.Server.Models
 
         public IEnumerable<Treatment> GetTreatmentsByPatientId(int patientId)
         {
-            return _context.Treatment.Where(t => t.PatientID == patientId).ToList();
+            return _context.Treatment.Where(t => t.PatientID == patientId).ToList().OrderByDescending(t => t.Date);
         }
 
         public async Task<Treatment> UpdateTreatment(Treatment treatment)

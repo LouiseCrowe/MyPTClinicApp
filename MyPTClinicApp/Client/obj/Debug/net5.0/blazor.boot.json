@@ -53,6 +53,8 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": "sha256-NtODhA3RBWNSdiRXw4DUiqo1NXWVVMC7pzDC+6wtrQM=",
       "Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": "sha256-MyZSaRW9WHDMIRrTxrYzfrXSLOrER7naiASfTpaHp04=",
       "Newtonsoft.Json.dll": "sha256-ubTmM+pscoutX3y773+LhC9+EBgXMdvl7DzZlab2Aoc=",
+      "SendGrid.dll": "sha256-nEwufC6Bm+eL6+kxH4ui4s3SO+DeBxQj80NiCjxX\/y0=",
+      "StarkbankEcdsa.dll": "sha256-dqqqERYBZgDykqA1b1LufZfMKjRW2mNQ9z9RtFHTWxc=",
       "System.Composition.AttributedModel.dll": "sha256-BNjrFBngU\/t1At2VLzl391sn3t5UGNX4fSHeFq29gxM=",
       "System.Composition.Convention.dll": "sha256-C9JMcpdyFpyZVZDQ+qkv\/UKKnhfEGEXGFMSvulsMeH8=",
       "System.Composition.Hosting.dll": "sha256-eibpXg916AOttVXs\/QK8pZpTOkhV22yGGj3vthnc6BM=",
@@ -229,13 +231,12 @@
       "mscorlib.dll": "sha256-Fi+LybwHL\/VGD\/09OxxtYlT6exn9xVU+LdojZ9juR2c=",
       "netstandard.dll": "sha256-P8xX0ad1hKyWWbBxiXl3cYokFlDiuXwp3pqoYatH0kk=",
       "System.Private.CoreLib.dll": "sha256-2km83sNUTrumGJYdDzsN8RnJqv00vKWLCCh0UGajTB4=",
-      "MyPTClinicApp.Shared.dll": "sha256-iWQgHFKY5WbHUEZyYColh470YUOVe8hrLB1IjgxAfiE=",
-      "MyPTClinicApp.Client.dll": "sha256-5ld2vVXcq1f6R+z1wphKVi0G78Z9s1q6rjomBaFIvqY="
+      "MyPTClinicApp.Shared.dll": "sha256-e5fVdp9sZFbPqa4qesLWr46rer6W0Vgw7tVfMHq3zlY=",
+      "MyPTClinicApp.Client.dll": "sha256-Nb6luY5HmpcwLbYzyVokSTVMANc1c3SGFJnZ8dWyRR8="
     },
     "lazyAssembly": null,
     "pdb": {
-      "MyPTClinicApp.Shared.pdb": "sha256-XZgrAL1MmPnypizrUi6E\/51dDWBM70Qq1k0xudP9Cr8=",
-      "MyPTClinicApp.Client.pdb": "sha256-m5fkxqWsLvHsmFaRFMa3Etf0LvCnvgI6yt9OMSYNg3Q="
+      "MyPTClinicApp.Client.pdb": "sha256-GdGTN0vZfld3RhY0sNvuv2s0AvjBe+62OU0vPWvZ2Rg="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-ibxaSjW7s3aLVssChknhzCpgMTHGu4D48Q9OLP3dfe8=",

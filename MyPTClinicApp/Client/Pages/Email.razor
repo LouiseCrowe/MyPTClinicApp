@@ -1,0 +1,42 @@
+﻿@page "/sendmail"  
+@using System.Net.Mail 
+
+<h3>Send mail</h3>
+
+<button class="btn btn-primary" @onclick="SendMail">Send Mail</button>
+
+<br />
+
+<span style="font-weight:bold;font-size:28px;color:#c00;">@Message</span>
+
+@code {
+    public string Message { get; set; } = "";
+
+    private void SendMail()
+    {
+        try
+        {
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("louise.crowe7@gmail.com");
+                mail.To.Add("x00159407@mytudublin.ie");
+                mail.Subject = "Sending test email from Blazor";
+                mail.Body = "<h1>This is mail body</h1>";
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new System.Net.NetworkCredential("louise.crowe7@gmail.com", "Sunsh*ne7");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                    Message = "Mail sent";
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+            Message = e.Message;
+        }
+    }
+}

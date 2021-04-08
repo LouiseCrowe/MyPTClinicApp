@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fY+UgqbBMcTP6NOOqvxxo3AfJpkzlUFfXwsOgwr3WYKcRf+WtFWuwpKz8nkjZ5Ie34BRXxVbtcWHt/KHp4144Q==",
+  "dgSpecHash": "lO/HmKlsusbBhEWtPIzhSDBz/kmankBOR7xiNzVES42rF6xPIO6ks2sTLEqBvCSchnPLk4StKduQHxQZKc9TJw==",
   "success": true,
   "projectFilePath": "C:\\MyPTClinicApp\\MyPTClinicApp\\Client\\MyPTClinicApp.Client.csproj",
   "expectedPackageFiles": [
@@ -91,6 +91,8 @@
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\sendgrid\\9.22.0\\sendgrid.9.22.0.nupkg.sha512",
+    "C:\\Users\\LouiseCrowe\\.nuget\\packages\\starkbank-ecdsa\\1.2.0\\starkbank-ecdsa.1.2.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\LouiseCrowe\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

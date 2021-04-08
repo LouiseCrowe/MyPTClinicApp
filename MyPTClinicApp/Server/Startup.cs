@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Server.Data;
 using MyPTClinicApp.Server.Models;
+using MyPTClinicApp.Shared;
+using SendGrid.Extensions.DependencyInjection;
 using System;
-using System.Linq;
 
 namespace MyPTClinicApp.Server
 {
@@ -37,8 +37,7 @@ namespace MyPTClinicApp.Server
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-                      
-
+            
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
@@ -47,8 +46,11 @@ namespace MyPTClinicApp.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-
             services.AddMvc();
+            
+            // added for SendGrid Email service
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -56,17 +58,34 @@ namespace MyPTClinicApp.Server
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyPTClinicApp", Version = "v1" });
             });
 
-
+            
             services.AddScoped<ITherapistRepository, TherapistRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-
             services.AddHttpClient<ITherapistService, TherapistService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:5001/");
             }
             );
+
+
+            services.AddSendGrid(opt => opt.ApiKey = Configuration["SendGrid:ApiKey"]);
+            services.AddScoped<ISendEmailRepository, SendEmailRepository>();
+            services.AddHttpClient<ISendEmailRepository, SendEmailRepository>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/");
+            }
+            );
+
+            // MAYBE USE LET'S SEE.....
+            //services.Configure<SendGridEmailSenderOptions>(options =>
+            //{
+            //    options.ApiKey = Configuration["ExternalProviders:SendGrid:ApiKey"];
+            //    options.SenderEmail = Configuration["ExternalProviders:SendGrid:SenderEmail"];
+            //    options.SenderName = Configuration["ExternalProviders:SendGrid:SenderName"];
+            //});
+
 
             //for TelerikServices
             services.AddTelerikBlazor();
@@ -97,6 +116,14 @@ namespace MyPTClinicApp.Server
 
             app.UseRouting();
 
+            // Enable cors
+            app.UseCors(policyName => policyName.WithOrigins("https://localhost:5001")
+               .AllowAnyMethod()
+               .WithHeaders(HeaderNames.ContentType));
+
+            app.UseAuthorization();
+
+
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -105,7 +132,7 @@ namespace MyPTClinicApp.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
-                endpoints.MapFallbackToFile("index.html");
+                endpoints.MapFallbackToFile("index.html");               
             });
         }
     }

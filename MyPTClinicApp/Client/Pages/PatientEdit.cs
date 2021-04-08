@@ -7,6 +7,10 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace MyPTClinicApp.Client.Pages
 {
@@ -18,6 +22,10 @@ namespace MyPTClinicApp.Client.Pages
         // to allow navigation back to overview
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        // for sending welcome mail
+        [Inject]
+        public IEmailService EmailService { get; set; }
 
         [Inject]
         public IPatientService PatientService { get; set; }
@@ -128,6 +136,35 @@ namespace MyPTClinicApp.Client.Pages
         protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/patientoverview");
+        }
+
+        private EmailMessage EmailMessage { get; set; }
+        private string uiMessage = string.Empty;
+        
+
+        protected async void SendWelcomeMail()
+        {
+            EmailMessage emailMessage = new EmailMessage()
+
+            {
+                RecipientAddress = "louise.crowe7@gmail.com",
+                RecipientName = "Louise Crowe",
+                SenderAddress = "dylan@dylancroweclinic.ie",
+                SenderName = "Dylan Crowe",
+                Subject = "Welcome to Dylan Crowe Physical Therapy Clinic", 
+                //Message = "We are delighted to have you on board.  Contact details: 087 7774512"               
+            };
+            
+            bool response = await EmailService.SendEmail(emailMessage);
+            if (response)
+            {
+                uiMessage = "Message sent!";
+            }
+            else
+            {
+                uiMessage = "There was an error sending the message";
+            }
+
         }
 
         protected async Task NavigateToEditPatient()

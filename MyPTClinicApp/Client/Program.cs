@@ -29,6 +29,9 @@ namespace MyPTClinicApp.Client
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:5001/") });
 
+            builder.Services.AddHttpClient<IEmailService, EmailService>();
+            builder.Services.AddScoped<EmailService>();
+
             builder.Services.AddScoped<ITherapistService, TherapistService>();
 
             builder.Services.AddScoped<IPatientService, PatientService>();

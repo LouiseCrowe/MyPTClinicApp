@@ -2,6 +2,17 @@
 
 <h1 class="page-title">Welcome to MyPTClinicApp</h1>
 
+
+    <br />
+
+<div>
+    <a class="btn btn-outline-primary" @onclick="@SendWelcomeMail">Send Welcome Mail </a>
+</div>
+
+<div>
+    @uiMessage
+</div>
+
 <br />
 <AuthorizeView>
     <NotAuthorized>
