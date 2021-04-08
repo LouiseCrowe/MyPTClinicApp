@@ -43,7 +43,7 @@ namespace MyPTClinicApp.Server.Models
 
 
 
-            //var apiKey = "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";
+            //var apiKey = "INSERT API KEY HERE";
             //var client = new SendGridClient(apiKey);
             //var from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan");
             //var to = new EmailAddress("x00159407@mytudublin.ie", "TUD");
