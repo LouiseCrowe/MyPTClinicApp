@@ -8,7 +8,7 @@ namespace MyPTClinicApp.Shared
 {
     public enum SavedStatus
     {
-        Saved, NotSaved, Error
+        Saved, NotSaved, Error, EmailSent
     }
 
 }

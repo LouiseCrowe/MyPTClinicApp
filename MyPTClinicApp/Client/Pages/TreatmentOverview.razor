@@ -40,6 +40,7 @@ else
     <div><b class="alert-warning">@errormessage</b></div>
     <br />
 
+
     @if (!showSummary)
     {
         <button class="btn btn-primary" @onclick="ShowSummary">Show Breakdown of Treatments by Patient and Therapist</button>
@@ -63,6 +64,7 @@ else
                 <tr>
                     <th>Patient</th>
                     <th>Number of Treatments</th>
+                    <th>Latest Treatment</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -73,6 +75,7 @@ else
                     <tr>
                         <td>@patientGroup[0].PatientFirstName @patientGroup[0].PatientLastName</td>
                         <td>@patientGroup.Count</td>
+                        <td>@patientGroup[0].Date.Day/@patientGroup[0].Date.Month/@patientGroup[0].Date.Year</td>
                         <td>
                             <a href="@($"patientdetail/{patientGroup[0].PatientId}")" class="btn btn-primary table-btn">
                                 <i class="fas fa-info-circle"></i>
@@ -84,6 +87,7 @@ else
                             </a>
                         </td>
                     </tr>
+
                 }
             </tbody>
         </table>
@@ -95,6 +99,7 @@ else
                 <tr>
                     <th>Therapist</th>
                     <th>Number of Treatments</th>
+                    <th>Latest Treatment</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -105,6 +110,7 @@ else
                     <tr>
                         <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
                         <td>@therapistGroup.Count</td>
+                        <td>@therapistGroup[0].Date.Day/@therapistGroup[0].Date.Month/@therapistGroup[0].Date.Year</td>
                         <td>
                             <a href="@($"therapistdetail/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
                                 <i class="fas fa-info-circle"></i>
@@ -142,7 +148,7 @@ else
                 <tr>
                     <td>@treatment.PatientFirstName @treatment.PatientLastName</td>
                     <td>@treatment.TherapistFirstName @treatment.TherapistLastName</td>
-                    <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year</td>
+                    <td>@treatment.Date.Day/@treatment.Date.Month/@treatment.Date.Year @treatment.Date.ToShortTimeString()</td>
                     <td>@treatment.Notes</td>
                     <td>
                         <a href="@($"treatmentdetail/{treatment.ID}")" class="btn btn-primary table-btn">
@@ -158,6 +164,13 @@ else
             }
         </tbody>
     </table>
+
+
+    <div>
+        <button class="btn btn-primary" @onclick="NavigateToTreatmentEdit">Add Treatment</button>
+    </div>
+
+    <br/>
 
     //creating buttons for pagination
     <div>

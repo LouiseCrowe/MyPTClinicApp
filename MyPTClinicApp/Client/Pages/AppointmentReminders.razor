@@ -1,0 +1,26 @@
+﻿@page "/appointmentreminders"
+
+<h1 class="page-title">Send Email Reminders for Appointments</h1>
+
+<br />
+
+@if (Treatments == null)
+{
+    <p><em>Retrieving treatment information, it will just take a moment...</em></p>
+}
+else
+{
+<div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Select date for appointment reminders:</span>
+        <input class="form-control" input type=date @bind-value="AppointmentsDate" />
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-primary" @onclick="GetAppointments">Show appointments</button>        
+    </div>
+</div>
+
+    <br />
+
+
+}

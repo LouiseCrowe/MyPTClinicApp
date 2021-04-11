@@ -29,14 +29,7 @@ namespace MyPTClinicApp.Client.Services
             var addedAppointment =
            new StringContent(JsonSerializer.Serialize(itemToInsert), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("api/schedulerappointments", addedAppointment);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    return await JsonSerializer.DeserializeAsync<Therapist>(await response.Content.ReadAsStreamAsync());
-            //}
-
-            //return null;
+            var response = await httpClient.PostAsync("api/schedulerappointments", addedAppointment);            
         }
 
         public async Task Delete(SchedulerAppointment itemToDelete)

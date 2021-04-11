@@ -120,7 +120,8 @@ namespace MyPTClinicApp.Client.Pages
             await TreatmentService.DeleteTreatment(Treatment.ID);
 
             StatusClass = "alert-success";
-            Message = "Deleted successfully";
+            Message = "Deleted successfully - Please note the associated appointment was not deleted from the calendar" +
+                " and the patient was not emailed.";
             SavedStatus = SavedStatus.Saved;
             ButtonNavigation = "toOverview";
         }

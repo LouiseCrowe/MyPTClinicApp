@@ -1,4 +1,4 @@
-﻿@*Define two page directives one for edit with parameter and one for add without parameter*@
+﻿@*Define two page directives one for edit with parameter {existing Patient) and one for add without parameter(new Patient)*@
 @page  "/patientedit"
 @page "/patientedit/{PatientID}"
 
@@ -134,9 +134,14 @@ else
 
             <br />
 
-            <div>
-                <a class="btn btn-outline-primary" @onclick="@SendWelcomeMail">Send Welcome Mail to @Patient.FirstName @Patient.LastName </a>
-            </div>
+
+            if (Patient.Email != null)
+            {
+                <div>
+                    <a class="btn btn-outline-primary" @onclick="@SendWelcomeMail">Send Welcome Mail to @Patient.FirstName @Patient.LastName </a>
+                </div>
+            }
+
         }
     }
 }

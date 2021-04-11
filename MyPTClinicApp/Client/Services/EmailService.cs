@@ -1,4 +1,5 @@
 ﻿using MyPTClinicApp.Shared;
+using SendGrid.Helpers.Mail;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace MyPTClinicApp.Client.Services
         }
 
 
-        public async Task<bool> SendEmail(EmailMessage emailMessage)
+        public async Task<bool> SendEmail(SendGridMessage emailMessage)
         {
             var newEmail = new StringContent(System.Text.Json.JsonSerializer.Serialize(emailMessage), Encoding.UTF8, "application/json");
 
@@ -27,19 +28,6 @@ namespace MyPTClinicApp.Client.Services
             }
 
             return false;
-
-
-            //// from SiteWASM
-            //using HttpContent requestBody = new StringContent(JsonConvert.SerializeObject(emailMessage));
-            //requestBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //Uri requestUri = new Uri($"/api/sendemail/contact", UriKind.Relative);
-            //var response = await httpClient.PostAsync(requestUri, requestBody).ConfigureAwait(false);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    return true;
-            //}
-            //return false;
         }
     }
 }

@@ -83,14 +83,15 @@ namespace MyPTClinicApp.Client.Pages
                     StatusClass = "alert-success";
                     Message = "New patient added successfully.";
                     SavedStatus = SavedStatus.Saved;
-                    ButtonNavigation = "toAdd";
+                    ButtonNavigation = "toAdd";                 // "toAdd" has option to add another patient
+                                                                // and send Welcome Email                            
                 }
                 else
                 {
                     // if there's a duplicate full name
-                    SavedStatus = SavedStatus.Error;
                     StatusClass = "alert-danger";
                     Message = "Patient name already in use. Please try again.";
+                    SavedStatus = SavedStatus.Error;
                     ButtonNavigation = "toAdd";
                 }
             }
@@ -138,31 +139,49 @@ namespace MyPTClinicApp.Client.Pages
             NavigationManager.NavigateTo("/patientoverview");
         }
 
-        private EmailMessage EmailMessage { get; set; }
-        private string uiMessage = string.Empty;
-        
-
-        protected async void SendWelcomeMail()
+        protected async Task SendWelcomeMail()
         {
-            EmailMessage emailMessage = new EmailMessage()
 
+            if (Patient.Email == null)
             {
-                RecipientAddress = "louise.crowe7@gmail.com",
-                RecipientName = "Louise Crowe",
-                SenderAddress = "dylan@dylancroweclinic.ie",
-                SenderName = "Dylan Crowe",
-                Subject = "Welcome to Dylan Crowe Physical Therapy Clinic", 
-                //Message = "We are delighted to have you on board.  Contact details: 087 7774512"               
-            };
-            
-            bool response = await EmailService.SendEmail(emailMessage);
+                SavedStatus = SavedStatus.Error;
+                StatusClass = "alert-danger";
+                Message = $"{Patient.FirstName} {Patient.LastName} has not provided an email address";
+                ButtonNavigation = "toOverview";
+            }
+
+
+            SendGridMessage msg = new SendGridMessage();
+            EmailAddress from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan Crowe");
+            EmailAddress recipient = new EmailAddress(Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
+
+            msg.SetSubject($"Welcome to Dylan Crowe Physical Therapy Clinic");
+            msg.SetFrom(from);
+            msg.AddTo(recipient);
+            msg.PlainTextContent = $"Dear {Patient.FirstName}" +
+                         $"\n\nWe are delighted you will be attending our clinic.  " +
+                         $"Please call or text on 087 7774512 to make an appointment." +                         
+                         $"\n\nKind regards," +
+                         $"\n\nDylan Crowe" +
+                         $"\n\nPhone Number: 087 7774512" +
+                         $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
+                         $"\nWebsite: https://dylancroweclinic.ie/";
+
+
+            bool response = await EmailService.SendEmail(msg);
             if (response)
             {
-                uiMessage = "Message sent!";
+                StatusClass = "alert-success";
+                Message = "Welcome Email Sent";
+                ButtonNavigation = "toOverview";
+                SavedStatus = SavedStatus.EmailSent;
             }
             else
             {
-                uiMessage = "There was an error sending the message";
+                SavedStatus = SavedStatus.Error;
+                StatusClass = "alert-danger";
+                Message = "Email not sent";
+                ButtonNavigation = "toOverview";
             }
 
         }

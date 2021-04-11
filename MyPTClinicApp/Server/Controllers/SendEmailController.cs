@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyPTClinicApp.Server.Models;
 using MyPTClinicApp.Shared;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
 
@@ -25,16 +26,16 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> SendEmail([FromBody] EmailMessage emailmessage)
+        public async Task<ActionResult> SendEmail([FromBody] SendGridMessage emailMessage)
         {
             try
             {
-                if (string.IsNullOrEmpty(emailmessage.SenderAddress) || string.IsNullOrEmpty(emailmessage.Content) || string.IsNullOrEmpty(emailmessage.RecipientAddress))
+                if (emailMessage == null)
                 {
                     return BadRequest();
                 }
 
-                bool response = await sendEmailRepository.SendEmail(emailmessage);
+                bool response = await sendEmailRepository.SendEmail(emailMessage);
                 if (response)
                 {
                     return Ok();
@@ -44,7 +45,7 @@ namespace MyPTClinicApp.Server.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

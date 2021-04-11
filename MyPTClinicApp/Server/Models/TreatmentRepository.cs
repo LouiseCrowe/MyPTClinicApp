@@ -27,7 +27,12 @@ namespace MyPTClinicApp.Server.Models
 
         public IQueryable<TreatmentDTO> GetTreatments()
         {
-            var treatments = from t in _context.Treatment.OrderByDescending(t => t.Date).ThenBy(t => t.Therapist.FirstName)
+            var treatments = from t in _context.Treatment.OrderByDescending(t => t.Date.Year)
+                                                         .ThenByDescending(t => t.Date.Month)
+                                                         .ThenByDescending(t => t.Date.Day)
+                                                         .ThenBy(t => t.Date.Hour)
+                                                         .ThenBy(t => t.Date.Minute)
+                                                         .ThenBy(t => t.Therapist.FirstName)                                                         
                              select new TreatmentDTO()
                              {
                                  ID = t.ID,

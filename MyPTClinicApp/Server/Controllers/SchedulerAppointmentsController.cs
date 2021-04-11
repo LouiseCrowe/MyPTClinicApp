@@ -27,7 +27,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<SchedulerAppointment>>> GetSchedulerAppointment()
+        public async Task<ActionResult<IEnumerable<SchedulerAppointment>>> GetSchedulerAppointments()
         {
             try
             {
@@ -71,10 +71,10 @@ namespace MyPTClinicApp.Server.Controllers
         {
             try
             {
-                //if (schedulerAppointment == null)
-                //{
-                //    return BadRequest();
-                //}
+                if (schedulerAppointment == null)
+                {
+                    return BadRequest();
+                }
 
                 var addedAppointment = await appointmentRepository.AddAppointment(schedulerAppointment);
 

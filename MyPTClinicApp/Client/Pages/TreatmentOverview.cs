@@ -13,6 +13,10 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class TreatmentOverview
     {
+        // for navigating to treatment edit
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Inject]
         public ITreatmentService TreatmentService { get; set; }
 
@@ -30,8 +34,9 @@ namespace MyPTClinicApp.Client.Pages
         string[] fullName;
         string searchName = "";
         string lastName = "";
-        public DateTime FromDate { get; set; } = new DateTime(2020, 01, 01);
-        public DateTime ToDate { get; set; } = DateTime.Now;
+
+        public DateTime FromDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+        public DateTime ToDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
         private string errormessage;
 
         // for showing summary
@@ -49,46 +54,14 @@ namespace MyPTClinicApp.Client.Pages
             Treatments = await TreatmentService.GetTreatments();        // retrieves all treatments    
             totalTreatments = Treatments.Count();                       // this figure will remain the same regardless of search criteria
 
-            // for breakdown display - will include all treatments in initial rendering
+            // for breakdown display - includes all treatments in initial rendering
             GroupByPatientID();
             GroupByTherapistID();
 
             // for pagination
-            PageSize = 3;
+            PageSize = 10;
             TreatmentList = Treatments.Take(PageSize).ToList();
             TotalPages = (int)Math.Ceiling(Treatments.Count() / (decimal)PageSize);
-        }
-
-        // for pagination
-        private void UpdateList(int pageNumber = 0)
-        {
-            // pageNumber * PageSize -> take 5
-            TreatmentList = Treatments.Skip(pageNumber * PageSize).Take(PageSize).ToList();
-            TotalPages = (int)Math.Ceiling(Treatments.Count() / (decimal)PageSize);
-            CurrentPage = pageNumber;
-        }
-
-
-        private void NavigateTo(string direction)
-        {
-            if (direction == "prev" && CurrentPage != 0)
-            {
-                CurrentPage -= 1;
-            }
-            if (direction == "next" && CurrentPage != TotalPages - 1)
-            {
-                CurrentPage += 1;
-            }
-            if (direction == "first")
-            {
-                CurrentPage = 0;
-            }
-            if (direction == "last")
-            {
-                CurrentPage = TotalPages - 1;
-            }
-
-            UpdateList(CurrentPage);
         }
 
         public async Task Search()
@@ -128,8 +101,7 @@ namespace MyPTClinicApp.Client.Pages
 
             errormessage = String.Empty;
             UpdateList();
-        }
-       
+        }       
 
         public async Task ClearSearch()
         {
@@ -138,9 +110,6 @@ namespace MyPTClinicApp.Client.Pages
             UpdateBreakdownInfoAfterSearch();
             errormessage = string.Empty;
         }
-
-
-
 
         public void ResetDates()
         {
@@ -181,5 +150,40 @@ namespace MyPTClinicApp.Client.Pages
         }
 
 
+        public void NavigateToTreatmentEdit()
+        {
+            NavigationManager.NavigateTo("/treatmentedit");
+        }
+
+        // for pagination
+        private void UpdateList(int pageNumber = 0)
+        {
+            // pageNumber * PageSize -> take 10
+            TreatmentList = Treatments.Skip(pageNumber * PageSize).Take(PageSize).ToList();
+            TotalPages = (int)Math.Ceiling(Treatments.Count() / (decimal)PageSize);
+            CurrentPage = pageNumber;
+        }
+
+        private void NavigateTo(string direction)
+        {
+            if (direction == "prev" && CurrentPage != 0)
+            {
+                CurrentPage -= 1;
+            }
+            if (direction == "next" && CurrentPage != TotalPages - 1)
+            {
+                CurrentPage += 1;
+            }
+            if (direction == "first")
+            {
+                CurrentPage = 0;
+            }
+            if (direction == "last")
+            {
+                CurrentPage = TotalPages - 1;
+            }
+
+            UpdateList(CurrentPage);
+        }
     }
 }

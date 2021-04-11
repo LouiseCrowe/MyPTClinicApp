@@ -1,20 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyPTClinicApp.Server.Data;
 using MyPTClinicApp.Shared;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Server.Models
 {
     public class AppointmentRepository : IAppointmentRepository
     {
+        private readonly ISendGridClient sendGridClient;
+        private readonly HttpClient httpClient;
         private readonly ApplicationDbContext _context;
 
-        public AppointmentRepository(ApplicationDbContext context)
+        public AppointmentRepository(ApplicationDbContext context, ISendGridClient sendGridClient, HttpClient httpClient)
         {
             _context = context;
+            this.sendGridClient = sendGridClient;
+            this.httpClient = httpClient;
         }
 
         public async Task<IEnumerable<SchedulerAppointment>> GetAppointments()
@@ -35,7 +42,6 @@ namespace MyPTClinicApp.Server.Models
             // if user selects a patient, therapist or both patient and therapist when adding an appointment a 
             // skeleton treatment will be added which will be manually updated after the treatment is completed
             // declare variables for updating treatment
-
             Patient patient = new();
             Therapist therapist = new();
 
@@ -69,15 +75,46 @@ namespace MyPTClinicApp.Server.Models
                 PatientID = patient.ID,
                 TherapistID = therapist.ID,
                 AppointmentID = appointment.ID,
-                Date = appointment.Start.Date,
+                Date = appointment.Start,
                 Notes = "Please update after treatment takes place"
             });
 
             await _context.Treatment.AddAsync(treatment);
             await _context.SaveChangesAsync();
 
-            return result.Entity;
+            // send email confirming appointment
+            string subject = $"Physical Therapy Appointment: {appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}";
+            string content = $"Dear {patient.FirstName}" +
+                             $"\n\nYour physical therapy appointment with {appointment.TherapistName} is confirmed for " +
+                             $"{appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}." +
+                             $"\n\nWe look forward to seeing you then." +
+                             $"\n\nKind regards," +
+                             $"\n\nDylan Crowe" +
+                             $"\n\nPhone Number: 087 7774512" +
+                             $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
+                             $"\nWebsite: https://dylancroweclinic.ie/";
 
+            await SendEmail(patient, appointment, subject, content);
+
+            return result.Entity;
+        }
+
+
+        public async Task SendEmail(Patient patient, SchedulerAppointment appointment, string subject, string content)
+        {
+            if (patient.Email != null)
+            {
+                SendGridMessage msg = new SendGridMessage();
+                EmailAddress from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan Crowe");
+                EmailAddress recipient = new EmailAddress(patient.Email, $"{patient.FirstName} {patient.LastName}");
+
+                msg.SetSubject(subject);
+                msg.SetFrom(from);
+                msg.AddTo(recipient);
+                msg.PlainTextContent = content;
+
+                await sendGridClient.SendEmailAsync(msg);
+            }
         }
 
         public async Task<Patient> FindPatientFromAppt(SchedulerAppointment appointment)
@@ -141,7 +178,6 @@ namespace MyPTClinicApp.Server.Models
                 result.TherapistName = appointment.TherapistName;
                 result.PatientName = appointment.PatientName;
               
-
                 // find related treatment to update too.
                 var treatment = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointment.ID);
                 if (treatment != null)
@@ -152,12 +188,24 @@ namespace MyPTClinicApp.Server.Models
                     // update treatment 
                     treatment.PatientID = patient.ID;
                     treatment.TherapistID = therapist.ID;
-                    treatment.Date = appointment.Start.Date;
-                    
+                    treatment.Date = appointment.Start;
+
+                    // send email confirming appointment
+                    string subject = $"Appointment UPDATED: {appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}";
+                    string content = $"Dear {patient.FirstName}" +
+                             $"\n\nYour updated physical therapy appointment with {appointment.TherapistName} is confirmed for " +
+                             $"{appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}." +
+                             $"\n\nWe look forward to seeing you then." +
+                             $"\n\nKind regards," +
+                             $"\n\nDylan Crowe" +
+                             $"\n\nPhone Number: 087 7774512" +
+                             $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
+                             $"\nWebsite: https://dylancroweclinic.ie/";
+                    await SendEmail(patient, appointment, subject, content);
                 }
 
+                await _context.SaveChangesAsync();                
 
-                await _context.SaveChangesAsync();
                 return result;
             }
             return null;
@@ -165,18 +213,32 @@ namespace MyPTClinicApp.Server.Models
 
             public async Task<SchedulerAppointment> DeleteAppointment(int appointmentId)
             {
-                var result = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointmentId);
+                var appointmentToDelete = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointmentId);
 
-                if (result != null)
+                if (appointmentToDelete != null)
                 {
-                    _context.Remove(result);
+                    _context.Remove(appointmentToDelete);
 
-                    // delete from treatments too
-                    var treatmentToDelete = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointmentId);
+                // send email confirming appointment
+                string subject = $"Appointment CANCELLED: {appointmentToDelete.Start.ToShortDateString()} at {appointmentToDelete.Start.ToShortTimeString()}";
+                Patient patient = await FindPatientFromAppt(appointmentToDelete);
+                string content = $"Dear {patient.FirstName}" +
+                             $"\n\nYour physical therapy appointment with {appointmentToDelete.TherapistName} for " +
+                             $"{appointmentToDelete.Start.ToShortDateString()} at {appointmentToDelete.Start.ToShortTimeString()} is cancelled." +
+                             $"\n\nPlease call or text to re-book whenever you need our help again." +
+                             $"\n\nKind regards," +
+                             $"\n\nDylan Crowe" +
+                             $"\n\nPhone Number: 087 7774512" +
+                             $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
+                             $"\nWebsite: https://dylancroweclinic.ie/";
+                await SendEmail(patient, appointmentToDelete, subject, content);
+
+                // delete from treatments too
+                var treatmentToDelete = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointmentId);
                     _context.Remove(treatmentToDelete);
 
                     await _context.SaveChangesAsync();
-                    return result;
+                    return appointmentToDelete;
                 }
                 return null;
             }

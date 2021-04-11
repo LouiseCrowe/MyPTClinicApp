@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace MyPTClinicApp.Client.Shared
+namespace MyPTClinicApp.Client.Pages
 {
     #line hidden
     using System;
@@ -103,23 +103,14 @@ using Telerik.Blazor.Components;
 #line default
 #line hidden
 #nullable disable
-    public partial class SurveyPrompt : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/appointmentreminders")]
+    public partial class AppointmentReminders : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 12 "C:\MyPTClinicApp\MyPTClinicApp\Client\Shared\SurveyPrompt.razor"
-       
-    // Demonstrates how a parent component can supply parameters
-    [Parameter]
-    public string Title { get; set; }
-
-#line default
-#line hidden
-#nullable disable
     }
 }
 #pragma warning restore 1591

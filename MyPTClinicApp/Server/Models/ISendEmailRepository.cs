@@ -1,5 +1,6 @@
 ﻿using MyPTClinicApp.Shared;
 using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace MyPTClinicApp.Server.Models
 {
     public interface ISendEmailRepository
     {
-        Task<bool> SendEmail(EmailMessage email);
+        Task<bool> SendEmail(SendGridMessage email);
     }
 }

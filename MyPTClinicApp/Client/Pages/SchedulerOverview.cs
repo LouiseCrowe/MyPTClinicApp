@@ -43,7 +43,7 @@ namespace MyPTClinicApp.Client.Pages
 
             // for including therapist and patient in appointment
             Therapists = (await TherapistService.GetAllTherapistsFullNames()).ToList();
-            Patients = (await PatientService.GetAllPatientsFullNames()).ToList();
+            Patients = (await PatientService.GetAllPatientsFullNames()).ToList();            
         }
 
         async Task AddAppointment(SchedulerCreateEventArgs args)
@@ -61,7 +61,7 @@ namespace MyPTClinicApp.Client.Pages
 
             await AppointmentService.Update(item);
 
-            Appointments = (await AppointmentService.Read()).ToList();
+            Appointments = (await AppointmentService.Read()).ToList();            
         }
         
         async Task DeleteAppointment(SchedulerDeleteEventArgs args)
