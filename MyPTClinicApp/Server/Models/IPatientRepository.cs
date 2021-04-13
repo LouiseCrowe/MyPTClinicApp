@@ -11,6 +11,7 @@ namespace MyPTClinicApp.Server.Models
         Task<IEnumerable<Patient>> GetPatients();
         Task<Patient> GetPatientById(int patientId);
         Task<Patient> GetPatientByFullName(string firstName, string lastName);
+        PatientDTO GetPatientNameAndEmail(string firstName, string lastName);
         Task<IEnumerable<Patient>> Search(string searchName, string lastName);
         IEnumerable<String> GetAllPatientsFullNames();
         IEnumerable<Patient> GetPatientsByTherapistId(int therapistId);

@@ -13,6 +13,10 @@ namespace MyPTClinicApp.Client.Pages
 {
     public partial class TherapistOverview
     {
+        // for navigating to therapist edit
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Inject]
         public ITherapistService TherapistService { get; set; }
 
@@ -36,7 +40,7 @@ namespace MyPTClinicApp.Client.Pages
             Therapists = (await TherapistService.GetTherapists()).ToList();
 
             // for pagination
-            PageSize = 3;
+            PageSize = 10;
             TherapistList = Therapists.Take(PageSize).ToList();
             TotalPages = (int)Math.Ceiling(Therapists.Count() / (decimal)PageSize);
         }
@@ -44,7 +48,7 @@ namespace MyPTClinicApp.Client.Pages
         // for pagination
         private void UpdateList(int pageNumber = 0)
         {
-            // pageNumber * PageSize -> take 5
+            // pageNumber * PageSize -> take 10
             TherapistList = Therapists.Skip(pageNumber * PageSize).Take(PageSize).ToList();
             TotalPages = (int)Math.Ceiling(Therapists.Count() / (decimal)PageSize);
             CurrentPage = pageNumber;
@@ -104,6 +108,11 @@ namespace MyPTClinicApp.Client.Pages
             Therapists = await TherapistService.GetTherapists();
             UpdateList();
             errormessage = string.Empty;
+        }
+
+        public void NavigateToTherapistEdit()
+        {
+            NavigationManager.NavigateTo("/therapistedit");
         }
     }
 }

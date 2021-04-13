@@ -24,6 +24,17 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<List<SchedulerAppointment>>("api/schedulerappointments");
         }
 
+
+        public async Task<List<SchedulerAppointment>> GetAppointmentsByDate(int year, int month, int day)
+        {
+            //return await httpClient.GetJsonAsync<List<SchedulerAppointment>>($"api/schedulerappointments/date/{year}-{month}-{day}");
+            return await httpClient.GetJsonAsync<List<SchedulerAppointment>>($"api/schedulerappointments/date/{year}-{month}-{day}");
+
+        }
+
+
+        
+
         public async Task Create(SchedulerAppointment itemToInsert)
         {
             var addedAppointment =
@@ -44,5 +55,6 @@ namespace MyPTClinicApp.Client.Services
 
             var response = await httpClient.PutAsync($"api/schedulerappointments/{itemToUpdate.ID}", appointmentJson);
         }
+
     }
 }

@@ -56,8 +56,7 @@ namespace MyPTClinicApp.Server.Controllers
                                    "Error retrieving data from the database");
             }
         }
-
-
+                
         // GET: api/patients/id/2
         [HttpGet("id/{ID}", Name = "GetPatientById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -126,6 +125,26 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
+
+        // GET: api/patients/nameandemail/firstName/lastName
+        [HttpGet("nameandemail/{firstName}/{lastName}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<PatientDTO> GetPatientNameAndEmail(string firstName, string lastName)
+        {
+            try
+            {
+                return Ok(patientRepository.GetPatientNameAndEmail(firstName, lastName));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                               "Error retrieving data from the database");
+            }
+        }
+
+
+
         // POST: api/patients 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -140,7 +159,7 @@ namespace MyPTClinicApp.Server.Controllers
                 }
 
                 // check for duplicate full name - need to handle in Client side
-                var exists = await patientRepository.GetPatientByFullName(patient.FirstName, patient.LastName);
+                Patient exists = await patientRepository.GetPatientByFullName(patient.FirstName, patient.LastName);
 
                 if (exists != null)
                 {

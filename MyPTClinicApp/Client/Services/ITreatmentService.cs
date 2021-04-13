@@ -11,6 +11,7 @@ namespace MyPTClinicApp.Client.Services
         Task<IEnumerable<TreatmentDTO>> GetTreatments();
         Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
         Task<Treatment> GetTreatmentById(int id);
+        Task<IEnumerable<Treatment>> GetTreatmentsByDate(int year, int month, int day);
         Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID);
         Task<Treatment> AddTreatment(Treatment treatment);
         Task<Treatment> UpdateTreatment(Treatment treatment);

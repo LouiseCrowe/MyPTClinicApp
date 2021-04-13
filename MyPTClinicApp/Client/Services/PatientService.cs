@@ -15,6 +15,7 @@ namespace MyPTClinicApp.Client.Services
     {
         private readonly HttpClient httpClient;
 
+
         public PatientService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
@@ -32,9 +33,16 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<List<String>>("api/patients/fullnames");
         }
 
+
         public async Task<Patient> GetPatientById(int id)
         {
             return await httpClient.GetJsonAsync<Patient>($"api/patients/id/{id}");
+        }
+
+        //find patient by fullname (from appointment)
+        public async Task<PatientDTO> GetPatientNameAndEmail(string firstName, string lastName)
+        {
+            return await httpClient.GetJsonAsync<PatientDTO>($"api/patients/nameandemail/{firstName}/{lastName}");
         }
 
         public async Task<IEnumerable<Patient>> Search(string searchName, string lastName)
@@ -46,7 +54,7 @@ namespace MyPTClinicApp.Client.Services
         {
             return await httpClient.GetJsonAsync<Patient[]>($"api/patients/therapistID/{ID}");
         }
-                
+
         public async Task<Patient> AddPatient(Patient patient)
         {
             var addedPatient =

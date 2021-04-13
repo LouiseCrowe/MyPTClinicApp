@@ -10,6 +10,7 @@ namespace MyPTClinicApp.Server.Models
     {
         Task<IEnumerable<SchedulerAppointment>> GetAppointments();
         Task<SchedulerAppointment> GetAppointmentById(int appointmentId);
+        Task<IEnumerable<SchedulerAppointment>> GetAppointmentsByDate(DateTime appointmentsDate);
         Task<SchedulerAppointment> UpdateAppointment(SchedulerAppointment appointment);
         Task<SchedulerAppointment> AddAppointment(SchedulerAppointment appointment);
         Task<SchedulerAppointment> DeleteAppointment(int appointmentId);

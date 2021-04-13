@@ -36,7 +36,7 @@ namespace MyPTClinicApp.Client.Pages
             Patients = (await PatientService.GetPatients()).ToList();
 
             // for pagination
-            PageSize = 3;
+            PageSize = 10;
             PatientList = Patients.Take(PageSize).ToList();
             TotalPages = (int)Math.Ceiling(Patients.Count() / (decimal)PageSize);
         }
@@ -45,7 +45,7 @@ namespace MyPTClinicApp.Client.Pages
         // for pagination
         private void UpdateList(int pageNumber = 0)
         {
-            // pageNumber * PageSize -> take 5
+            // pageNumber * PageSize -> take 10
             PatientList = Patients.Skip(pageNumber * PageSize).Take(PageSize).ToList();
             TotalPages = (int)Math.Ceiling(Patients.Count() / (decimal)PageSize);
             CurrentPage = pageNumber;

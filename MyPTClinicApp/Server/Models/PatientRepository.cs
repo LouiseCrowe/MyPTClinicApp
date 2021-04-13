@@ -51,7 +51,7 @@ namespace MyPTClinicApp.Server.Models
         public IEnumerable<String> GetAllPatientsFullNames()
         {
 
-            List<String> fullNames = new List<string>();
+            List<String> fullNames = new ();
             var query = _context.Patient.OrderBy(p => p.FirstName).Select(p => new { p.FirstName, p.LastName });
 
             foreach (var item in query)
@@ -70,6 +70,7 @@ namespace MyPTClinicApp.Server.Models
             return results;
         }
 
+        
         public async Task<Patient> AddPatient(Patient patient)
         {
             var result = await _context.Patient.AddAsync(patient);
@@ -116,10 +117,35 @@ namespace MyPTClinicApp.Server.Models
             return null; 
         }
 
+
         public async Task<Patient> GetPatientByFullName(string firstName, string lastName)
         {
             return await _context.Patient.FirstOrDefaultAsync(p => p.FirstName.ToLower() == firstName.ToLower()
                                                                 && p.LastName.ToLower() == lastName.ToLower());
         }
+
+        public PatientDTO GetPatientNameAndEmail(string firstName, string lastName)
+        {
+            PatientDTO patient = GetTreatments().FirstOrDefault(p => p.FirstName.ToLower().Contains(firstName.ToLower())
+                                       && p.LastName.ToLower().Contains(lastName.ToLower()));
+            return patient;
+        }
+
+
+        // get a full list of Patients as PatientDTOs
+        public IQueryable<PatientDTO> GetTreatments()
+        {
+            var patients = from p in _context.Patient
+                             select new PatientDTO()
+                             {
+                                 ID = p.ID,
+                                 FirstName = p.FirstName,
+                                 LastName = p.LastName,
+                                 Email = p.Email
+                             };
+            return patients;
+        }
+
+
     }
 }

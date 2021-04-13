@@ -26,12 +26,29 @@ namespace MyPTClinicApp.Server.Models
 
         public async Task<IEnumerable<SchedulerAppointment>> GetAppointments()
         {
-            return await _context.SchedulerAppointment.ToListAsync();
+            return await _context.SchedulerAppointment.OrderByDescending(a => a.Start.Year)
+                                                      .ThenByDescending(a => a.Start.Month)
+                                                      .ThenByDescending(a => a.Start.Day)
+                                                      .ThenBy(a => a.Start.Hour)
+                                                      .ThenBy(a => a.Start.Minute)
+                                                      .ToListAsync();
         }
 
         public async Task<SchedulerAppointment> GetAppointmentById(int appointmentId)
         {
             return await _context.SchedulerAppointment.FirstOrDefaultAsync(t => t.ID == appointmentId);
+        }
+
+        //TRYING TO USE FOR SENDING EMAILS - seems to work
+        public async Task<IEnumerable<SchedulerAppointment>> GetAppointmentsByDate(DateTime appointmentsDate)
+        {
+            return await _context.SchedulerAppointment.Where(a => a.Start.Date == appointmentsDate.Date)
+                                                      .OrderByDescending(a => a.Start.Year)
+                                                      .ThenByDescending(a => a.Start.Month)
+                                                      .ThenByDescending(a => a.Start.Day)
+                                                      .ThenBy(a => a.Start.Hour)
+                                                      .ThenBy(a => a.Start.Minute)
+                                                      .ToListAsync();
         }
 
         public async Task<SchedulerAppointment> AddAppointment(SchedulerAppointment appointment)
@@ -104,9 +121,9 @@ namespace MyPTClinicApp.Server.Models
         {
             if (patient.Email != null)
             {
-                SendGridMessage msg = new SendGridMessage();
-                EmailAddress from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan Crowe");
-                EmailAddress recipient = new EmailAddress(patient.Email, $"{patient.FirstName} {patient.LastName}");
+                SendGridMessage msg = new ();
+                EmailAddress from = new ("dylan@dylancroweclinic.ie", "Dylan Crowe");
+                EmailAddress recipient = new (patient.Email, $"{patient.FirstName} {patient.LastName}");
 
                 msg.SetSubject(subject);
                 msg.SetFrom(from);
@@ -242,6 +259,8 @@ namespace MyPTClinicApp.Server.Models
                 }
                 return null;
             }
-        }
+
+       
+    }
     }
 

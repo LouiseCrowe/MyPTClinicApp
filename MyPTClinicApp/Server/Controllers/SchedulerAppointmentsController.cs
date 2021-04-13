@@ -63,6 +63,30 @@ namespace MyPTClinicApp.Server.Controllers
            
         }
 
+
+        //NOT USING ANYMORE SWITCHED TO USING TREATMENTS
+        // GET: api/SchedulerAppointments/date/2021-04-13
+        [HttpGet("date/{appointmentsDate}")]
+        public async Task<ActionResult<IEnumerable<SchedulerAppointment>>> GetAppointmentsByDate(DateTime appointmentsDate)
+        {
+            try
+            {
+                var result = await appointmentRepository.GetAppointmentsByDate(appointmentsDate);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                   "Error retrieving data from the database");
+            }
+        }
+
         // POST: api/SchedulerAppointments
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]

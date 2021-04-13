@@ -45,6 +45,12 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<IEnumerable<Treatment>>($"api/treatments/patientID/{ID}");
         }
 
+        public async Task<IEnumerable<Treatment>> GetTreatmentsByDate(int year, int month, int day)
+        {
+            return await httpClient.GetJsonAsync<List<Treatment>>($"api/treatments/date/{year}-{month}-{day}");
+        }
+
+
         public async Task<Treatment> AddTreatment(Treatment treatment)
         {
             var addedTreatment =

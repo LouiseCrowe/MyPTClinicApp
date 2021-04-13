@@ -60,7 +60,6 @@ namespace MyPTClinicApp.Server.Models
             }
 
 
-
             //TODO incorporate dates into search
 
             if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
@@ -91,6 +90,19 @@ namespace MyPTClinicApp.Server.Models
         {
             return _context.Treatment.Where(t => t.PatientID == patientId).ToList().OrderByDescending(t => t.Date);
         }
+
+
+        public async Task<IEnumerable<Treatment>> GetTreatmentsByDate(DateTime appointmentsDate)
+        {
+            return await _context.Treatment.Where(t => t.Date == appointmentsDate)
+                                                      .OrderByDescending(t => t.Date.Year)
+                                                      .ThenByDescending(t => t.Date.Month)
+                                                      .ThenByDescending(t => t.Date.Day)
+                                                      .ThenBy(t => t.Date.Hour)
+                                                      .ThenBy(t => t.Date.Minute)
+                                                      .ToListAsync();
+        }
+
 
         public async Task<Treatment> UpdateTreatment(Treatment treatment)
         {

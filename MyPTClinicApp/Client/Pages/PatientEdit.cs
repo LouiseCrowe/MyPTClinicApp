@@ -151,9 +151,9 @@ namespace MyPTClinicApp.Client.Pages
             }
 
 
-            SendGridMessage msg = new SendGridMessage();
-            EmailAddress from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan Crowe");
-            EmailAddress recipient = new EmailAddress(Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
+            SendGridMessage msg = new ();
+            EmailAddress from = new ("dylan@dylancroweclinic.ie", "Dylan Crowe");
+            EmailAddress recipient = new (Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
 
             msg.SetSubject($"Welcome to Dylan Crowe Physical Therapy Clinic");
             msg.SetFrom(from);
