@@ -32,7 +32,7 @@ namespace MyPTClinicApp.Server.Models
                                                          .ThenByDescending(t => t.Date.Day)
                                                          .ThenBy(t => t.Date.Hour)
                                                          .ThenBy(t => t.Date.Minute)
-                                                         .ThenBy(t => t.Therapist.FirstName)                                                         
+                                                         .ThenBy(t => t.Therapist.FirstName)
                              select new TreatmentDTO()
                              {
                                  ID = t.ID,
@@ -59,16 +59,14 @@ namespace MyPTClinicApp.Server.Models
                 return await query.ToListAsync();
             }
 
-
-            //TODO incorporate dates into search
-
+            //  look for search name if one is provided
             if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
             {
-                query = query.Where(t => t.PatientFirstName.ToLower().Contains(searchName.ToLower()) 
+                query = query.Where(t => t.PatientFirstName.ToLower().Contains(searchName.ToLower())
                                     || t.PatientLastName.ToLower().Contains(searchName.ToLower())
                                     || t.TherapistFirstName.ToLower().Contains(searchName.ToLower())
                                     || t.TherapistLastName.ToLower().Contains(searchName.ToLower()));
-                
+
             }
             if (searchName != lastName)                             // meaning full name provided
             {

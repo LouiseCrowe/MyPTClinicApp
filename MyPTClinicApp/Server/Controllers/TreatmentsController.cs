@@ -37,7 +37,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("{search}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<TreatmentDTO>>> Search(string searchName, string lastName, 
+        public async Task<ActionResult<IEnumerable<TreatmentDTO>>> Search(string searchName, string lastName,
                                                                           DateTime fromDate, DateTime toDate)
         {
             try

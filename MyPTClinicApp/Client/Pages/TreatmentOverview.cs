@@ -113,8 +113,8 @@ namespace MyPTClinicApp.Client.Pages
 
         public void ResetDates()
         {
-            FromDate = new DateTime(2020, 01, 01);
-            ToDate = DateTime.Now;
+            FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            ToDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
         }
 
         public void ShowSummary()

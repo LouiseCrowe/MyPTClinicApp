@@ -15,10 +15,6 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public IAppointmentService AppointmentService { get; set; }
 
-        // GOING TO TRY TO USE APPOINTMENTS FOR REMINDERS
-        //[Inject]
-        //public ITreatmentService TreatmentService { get; set; }
-
         [Inject]
         public IPatientService PatientService { get; set; }
 
@@ -28,17 +24,16 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public IEmailService EmailService { get; set; }
 
-        //// using treatment table to get information for appointments because treatments have Patient ID (needed to send email)
-        //// appointments is a class to interact with Telerik scheduler does not contain Patient ID
-        //private IEnumerable<Treatment> Treatments { get; set; } = new List<Treatment>();
-
         // set default date to the next day
-        public DateTime AppointmentsDate { get; set; } = DateTime.Now.AddDays(2);
+        public DateTime AppointmentsDate { get; set; } = DateTime.Now.AddDays(1);
 
+        // for retrieving list of appointments for specified date
         public List<SchedulerAppointment> Appointments { get; set; } = new();
 
+        // for retrieving patient email address
         public PatientDTO Patient { get; set; } = new();
 
+        // list for displaying names of patients whe were or were not sent emails
         protected List<string> emailRecipients = new ();
         protected List<string> noEmailList = new();
 
@@ -50,17 +45,9 @@ namespace MyPTClinicApp.Client.Pages
         protected string sendingStatusClass = string.Empty;
         protected string sendingMessage = string.Empty;
 
-        //TRYING TO USE APPOINTMENT FOR REMINDER EMAILS
-        //// for finding Patient and Therapist for sending reminder emails
-        //Patient patient = new();
-        //Therapist therapist = new();
-
         protected override async Task OnInitializedAsync()
         {
-            //// get a list of Appointments based on the Treatments records
-            //// defaults to next day 
-            //Treatments = await TreatmentService.GetTreatmentsByDate(AppointmentsDate.Year, AppointmentsDate.Month, AppointmentsDate.Day);            
-
+            // initial rendering will display the appointments for the following day
             Appointments = await AppointmentService.GetAppointmentsByDate(AppointmentsDate.Year, AppointmentsDate.Month, AppointmentsDate.Day);
             
         }
@@ -68,51 +55,50 @@ namespace MyPTClinicApp.Client.Pages
         public async Task GetAppointments()
         {
             Appointments = await AppointmentService.GetAppointmentsByDate(AppointmentsDate.Year, AppointmentsDate.Month, AppointmentsDate.Day);
-            // clear errors from screen 
+            // clear all messages from screen when new search is completed
             SuccessStatusClass = string.Empty;
             successMessage = string.Empty;
             noEmailStatusClass = string.Empty;
             noEmailMessage = string.Empty;
             sendingStatusClass = string.Empty;
             sendingMessage = string.Empty;
-    }
+            emailRecipients = new();
+            noEmailList = new();
+        }
 
         
         protected async Task SendReminderMails()
         {
+            // reminders can only be sent for appointments between current day and the following five days
             if (AppointmentsDate >= DateTime.Now && AppointmentsDate <= DateTime.Now.AddDays(5) && Appointments.Count >= 1)
             {
-                SendGridMessage msg = new();
-                EmailAddress from = new("dylan@dylancroweclinic.ie", "Dylan Crowe");
-
                 foreach (SchedulerAppointment appointment in Appointments)
                 {
                     if (appointment.PatientName != "" || appointment.PatientName != "To Be Confirmed")
                     {
-                        // find patient to include in treatment based on name in appointment
+                        // find patient email based on patient name in appointment
                         string patientFirstName, patientLastName;
 
                         string[] patientFullName = appointment.PatientName.Split(" ");
                         patientFirstName = patientFullName[0];
                         patientLastName = patientFullName[^1];
 
-                        // find patient using Patient name - THIS IS THE PROBLEM maybe jst need PatientDTO
+                        // retrieve patient email using PatientDTO
                         Patient = await PatientService.GetPatientNameAndEmail(patientFirstName, patientLastName);
 
                         if (Patient != null)
                         {
-                            if (Patient.Email == null)
+                            if (Patient.Email == null)                       // add patient name to the list of patients NOT sent emails
                             {
                                 noEmailList.Add($"{Patient.FirstName} {Patient.LastName}");
                             }
                             else
                             {
                                 // create email
-                                EmailAddress recipient = new(Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
-                                msg.SetSubject($"Physical Therapy Appointment Reminder: {appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}");
-                                msg.SetFrom(from);
-                                msg.AddTo(recipient);
-                                msg.PlainTextContent = $"Dear {Patient.FirstName}" +
+                                EmailAddress from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan Crowe");
+                                EmailAddress recipient = new EmailAddress(Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
+                                String subject = $"Physical Therapy Appointment Reminder: {appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}";
+                                String plainTextContent = $"Dear {Patient.FirstName}," +
                                              $"\n\nYour physical therapy appointment with {appointment.TherapistName} is confirmed for " +
                                              $"{appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}." +
                                              $"\n\nWe look forward to seeing you then." +
@@ -121,20 +107,37 @@ namespace MyPTClinicApp.Client.Pages
                                              $"\n\nPhone Number: 087 7774512" +
                                              $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
                                              $"\nWebsite: https://dylancroweclinic.ie/";
+                                String htmlContent = $"<div>Dear {Patient.FirstName},</div>" +
+                                    $"<p></p>" +
+                                    $"<div>Your physical therapy appointment with {appointment.TherapistName} is confirmed for " +
+                                    $"{appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}.</div>" +
+                                    $"<p></p>" +
+                                    $"<div>We look forward to seeing you then.</div>" +
+                                    $"<p></p>" +
+                                    $"<div>Kind regards,</div>" +
+                                    $"<p></p>" +
+                                    $"<div>Dylan Crowe</div>" +
+                                    $"<p></p>" +
+                                    $"<div>Phone Number: 087 7774512</div>" +
+                                    $"<div>Location: 33 Pembroke Street Lower, Dublin 2</div>" +
+                                    $"<div>Website: https://dylancroweclinic.ie/ </div>";
+                                SendGridMessage emailReminder = MailHelper.CreateSingleEmail(
+                                    from,
+                                    recipient,
+                                    subject,
+                                    plainTextContent, htmlContent
+                                    );
 
-                                var response = await EmailService.SendEmail(msg);
+                                var response = await EmailService.SendEmail(emailReminder);
 
+                               
                                 if (response)                   // response returns true if <= 400
                                 {
                                     // add name to list of email recipients
                                     emailRecipients.Add($"{Patient.FirstName} {Patient.LastName}");
                                 }
-
                             }
-
                         }
-
-
                     }
 
                     if (emailRecipients.Count >= 1)
@@ -148,7 +151,6 @@ namespace MyPTClinicApp.Client.Pages
                             {
                                 successMessage += $", {emailRecipients[i]}";
                             }
-
                         }
                     }
 
@@ -173,11 +175,6 @@ namespace MyPTClinicApp.Client.Pages
                 sendingStatusClass = "alert-danger";
                 sendingMessage = "Email reminders cannot be sent for dates in the past or more than five days in the future";
             }
-
         }
-
-
-        
-
     }
 }

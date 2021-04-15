@@ -7,7 +7,7 @@
 
 <div class="input-group">
     <div class="input-group-prepend">
-        <span class="input-group-text" id="apptdate">Select date for appointment reminders:</span>
+        <span class="input-group-text" id="apptdate">Select date for reminders:</span>
         <input class="form-control" input type=date @bind-value="AppointmentsDate" />
     </div>
     <div class="input-group-append">
@@ -40,9 +40,7 @@
 
 
 <div>
-    <button class="btn btn-primary" @onclick="@SendReminderMails">
-            Send reminder emails to patients for @AppointmentsDate.Day/@AppointmentsDate.Month/@AppointmentsDate.Year
-    </button>
+    <button class="btn btn-primary" @onclick="@SendReminderMails">Send reminder emails to patients</button>
 </div>
 <br/>
 

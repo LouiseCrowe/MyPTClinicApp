@@ -39,7 +39,6 @@ namespace MyPTClinicApp.Server.Models
             return await _context.SchedulerAppointment.FirstOrDefaultAsync(t => t.ID == appointmentId);
         }
 
-        //TRYING TO USE FOR SENDING EMAILS - seems to work
         public async Task<IEnumerable<SchedulerAppointment>> GetAppointmentsByDate(DateTime appointmentsDate)
         {
             return await _context.SchedulerAppointment.Where(a => a.Start.Date == appointmentsDate.Date)
@@ -115,7 +114,6 @@ namespace MyPTClinicApp.Server.Models
 
             return result.Entity;
         }
-
 
         public async Task SendEmail(Patient patient, SchedulerAppointment appointment, string subject, string content)
         {

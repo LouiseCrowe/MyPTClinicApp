@@ -63,8 +63,6 @@ namespace MyPTClinicApp.Server.Controllers
            
         }
 
-
-        //NOT USING ANYMORE SWITCHED TO USING TREATMENTS
         // GET: api/SchedulerAppointments/date/2021-04-13
         [HttpGet("date/{appointmentsDate}")]
         public async Task<ActionResult<IEnumerable<SchedulerAppointment>>> GetAppointmentsByDate(DateTime appointmentsDate)

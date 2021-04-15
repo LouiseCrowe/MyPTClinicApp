@@ -27,9 +27,7 @@ namespace MyPTClinicApp.Client.Services
 
         public async Task<List<SchedulerAppointment>> GetAppointmentsByDate(int year, int month, int day)
         {
-            //return await httpClient.GetJsonAsync<List<SchedulerAppointment>>($"api/schedulerappointments/date/{year}-{month}-{day}");
             return await httpClient.GetJsonAsync<List<SchedulerAppointment>>($"api/schedulerappointments/date/{year}-{month}-{day}");
-
         }
 
 
