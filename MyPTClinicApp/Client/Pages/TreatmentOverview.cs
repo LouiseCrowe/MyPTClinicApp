@@ -36,7 +36,7 @@ namespace MyPTClinicApp.Client.Pages
         string lastName = "";
 
         public DateTime FromDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-        public DateTime ToDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
+        public DateTime ToDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         private string errormessage;
 
         // for showing summary
@@ -79,12 +79,22 @@ namespace MyPTClinicApp.Client.Pages
                     lastName = fullName[0];         // this allows user to search by just first or last name
                 }
 
+
+                // need to add a day because the time for the ToDate is 12AM which means treatments 
+                // will not be included as the time will always be greater than 12AM!
+                ToDate = ToDate.AddDays(1);
+
                 Treatments = await TreatmentService.Search(searchName, lastName, FromDate, ToDate);
+
+
+                // need to reset the back to the user selected date as soon as the treatments are displayed
+                ToDate = ToDate.AddDays(-1);
 
                 UpdateBreakdownInfoAfterSearch();
             }
             catch (Exception)
             {
+                ToDate = ToDate.AddDays(-1);
                 errormessage = "No treatments match the search criteria, please try again.";
             }
         }
@@ -114,7 +124,7 @@ namespace MyPTClinicApp.Client.Pages
         public void ResetDates()
         {
             FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-            ToDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
+            ToDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         }
 
         public void ShowSummary()
