@@ -4,8 +4,6 @@ using MyPTClinicApp.Shared;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -34,7 +32,7 @@ namespace MyPTClinicApp.Client.Pages
         public PatientDTO Patient { get; set; } = new();
 
         // list for displaying names of patients whe were or were not sent emails
-        protected List<string> emailRecipients = new ();
+        protected List<string> emailRecipients = new();
         protected List<string> noEmailList = new();
 
         // for managing screen messages regarding sending emails
@@ -49,7 +47,6 @@ namespace MyPTClinicApp.Client.Pages
         {
             // initial rendering will display the appointments for the following day
             Appointments = await AppointmentService.GetAppointmentsByDate(AppointmentsDate.Year, AppointmentsDate.Month, AppointmentsDate.Day);
-            
         }
 
         public async Task GetAppointments()
@@ -66,7 +63,7 @@ namespace MyPTClinicApp.Client.Pages
             noEmailList = new();
         }
 
-        
+
         protected async Task SendReminderMails()
         {
             // reminders can only be sent for appointments between current day and the following five days
@@ -88,8 +85,9 @@ namespace MyPTClinicApp.Client.Pages
 
                         if (Patient != null)
                         {
-                            if (Patient.Email == null)                       // add patient name to the list of patients NOT sent emails
+                            if (Patient.Email == null)
                             {
+                                // add patient name to the list of patients NOT sent emails
                                 noEmailList.Add($"{Patient.FirstName} {Patient.LastName}");
                             }
                             else
@@ -130,7 +128,7 @@ namespace MyPTClinicApp.Client.Pages
 
                                 var response = await EmailService.SendEmail(emailReminder);
 
-                               
+
                                 if (response)                   // response returns true if <= 400
                                 {
                                     // add name to list of email recipients

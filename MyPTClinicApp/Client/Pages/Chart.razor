@@ -1,18 +1,17 @@
 ﻿@page  "/chart"
 
 
-<h1 class="page-title">Monthly Treatment Totals for @currentYear</h1>
+<h1 class="page-title">Comparing Monthly Treatment Totals for @lastYear and @currentYear</h1>
 
     <TelerikChart>
         <ChartSeriesItems>
-            <ChartSeries Type="ChartSeriesType.Column" Name="Monthly treatment totals" Data="@modelData" Field="@nameof(DataModel.MonthlyTotal)">
-                <ChartSeriesLabels Template="#=value# in #=dataItem.Month#" Visible="true"></ChartSeriesLabels>
+            <ChartSeries Type="ChartSeriesType.Column" Name="Last Year's Monthly Totals" Data="@oldModelData"  Field="@nameof(DataModel.MonthlyTotal)">
+                <ChartSeriesLabels Template="#=dataItem.Year#: #=value#" Visible="true"></ChartSeriesLabels>
+            </ChartSeries>
+            <ChartSeries Type="ChartSeriesType.Column" Name="Current Monthly Totals" Data="@newModelData" Field="@nameof(DataModel.MonthlyTotal)">
+                <ChartSeriesLabels Template="#=dataItem.Year#: #=value#" Visible="true"></ChartSeriesLabels>
             </ChartSeries>
         </ChartSeriesItems>
-
-        <ChartValueAxes>
-            <ChartValueAxis Color="red"></ChartValueAxis>
-        </ChartValueAxes>
 
         <ChartCategoryAxes>
             <ChartCategoryAxis Categories="@xAxisItems"></ChartCategoryAxis>
