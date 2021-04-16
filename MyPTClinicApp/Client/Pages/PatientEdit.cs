@@ -38,6 +38,9 @@ namespace MyPTClinicApp.Client.Pages
 
         public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
 
+       
+
+
         //used to store state of screen
         public SavedStatus SavedStatus { get; set; }
         protected string Message = string.Empty;
@@ -121,19 +124,27 @@ namespace MyPTClinicApp.Client.Pages
             StatusClass = "alert-danger";
             Message = "There are some validation errors. Please try again.";
         }
+        
+        protected Confirm DeleteConfirmation { get; set; }
 
-        //update for deleting
-
-        protected async Task DeletePatient()
+        protected void DeletePatient()
         {
-            await PatientService.DeletePatient(Patient.ID);
-
-            StatusClass = "alert-success";
-            Message = "Deleted successfully";
-            ButtonNavigation = "toOverview";
-            SavedStatus = SavedStatus.Saved;
+            DeleteConfirmation.Show();
         }
 
+        protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
+            {
+                await PatientService.DeletePatient(Patient.ID);
+
+                StatusClass = "alert-success";
+                Message = "Deleted successfully";
+                ButtonNavigation = "toOverview";
+                SavedStatus = SavedStatus.Saved;
+            }
+        }
+        
         protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/patientoverview");
