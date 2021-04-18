@@ -13,7 +13,7 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public ITreatmentService TreatmentService { get; set; }
 
-        private IEnumerable<TreatmentDTO> Treatments { get; set; }
+        private IEnumerable<TreatmentDto> Treatments { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

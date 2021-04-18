@@ -37,9 +37,9 @@ namespace MyPTClinicApp.Client.Services
         }
 
         //find patient by fullname (from appointment)
-        public async Task<PatientDTO> GetPatientNameAndEmail(string firstName, string lastName)
+        public async Task<PatientDto> GetPatientNameAndEmail(string firstName, string lastName)
         {
-            return await httpClient.GetJsonAsync<PatientDTO>($"api/patients/nameandemail/{firstName}/{lastName}");
+            return await httpClient.GetJsonAsync<PatientDto>($"api/patients/nameandemail/{firstName}/{lastName}");
         }
 
         public async Task<IEnumerable<Patient>> Search(string searchName, string lastName)

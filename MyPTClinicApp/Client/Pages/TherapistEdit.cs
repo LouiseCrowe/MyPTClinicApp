@@ -98,24 +98,35 @@ namespace MyPTClinicApp.Client.Pages
             Message = "There are some validation errors. Please try again.";
         }
 
-        protected async Task DeleteTherapist()
-        {
-            var response = await TherapistService.DeleteTherapist(Therapist.ID);
+        protected Confirm DeleteConfirmation { get; set; }
 
-            if (response == "saved")
+        protected void DeleteTherapist()
+        {
+            DeleteConfirmation.Show();
+        }
+
+
+        protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
             {
-                StatusClass = "alert-success";
-                Message = "Deleted successfully";
-                ButtonNavigation = "toOverview";
-                SavedStatus = SavedStatus.Saved;
+                var response = await TherapistService.DeleteTherapist(Therapist.ID);
+
+                if (response == "saved")
+                {
+                    StatusClass = "alert-success";
+                    Message = "Deleted successfully";
+                    ButtonNavigation = "toOverview";
+                    SavedStatus = SavedStatus.Saved;
+                }
+                else
+                {
+                    StatusClass = "alert-danger";
+                    Message = "Therapist assigned to patients, please reassign patients to another therapist before deleting";
+                    ButtonNavigation = "toOverview";
+                    SavedStatus = SavedStatus.Error;
+                }
             }
-            else
-            {
-                StatusClass = "alert-danger";
-                Message = "Therapist assigned to patients, please reassign patients to another therapist before deleting";
-                ButtonNavigation = "toOverview";
-                SavedStatus = SavedStatus.Error;
-            }            
         }
 
         protected void NavigateToOverview()

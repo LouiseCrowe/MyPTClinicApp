@@ -25,7 +25,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IQueryable<TreatmentDTO> GetTreatments()
+        public IQueryable<TreatmentDto> GetTreatments()
         {
             return treatmentRepository.GetTreatments();
         }
@@ -35,7 +35,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("{search}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<TreatmentDTO>>> Search(string searchName, string lastName,
+        public async Task<ActionResult<IEnumerable<TreatmentDto>>> Search(string searchName, string lastName,
                                                                           DateTime fromDate, DateTime toDate)
         {
             try

@@ -121,18 +121,18 @@ namespace MyPTClinicApp.Server.Models
                                                                 && p.LastName.ToLower() == lastName.ToLower());
         }
 
-        public PatientDTO GetPatientNameAndEmail(string firstName, string lastName)
+        public PatientDto GetPatientNameAndEmail(string firstName, string lastName)
         {
-            PatientDTO patient = GetTreatments().FirstOrDefault(p => p.FirstName.ToLower().Contains(firstName.ToLower())
+            PatientDto patient = GetTreatments().FirstOrDefault(p => p.FirstName.ToLower().Contains(firstName.ToLower())
                                        && p.LastName.ToLower().Contains(lastName.ToLower()));
             return patient;
         }
 
-        // get a full list of Patients as PatientDTOs
-        public IQueryable<PatientDTO> GetTreatments()
+        // get a full list of Patients as PatientDtos
+        public IQueryable<PatientDto> GetTreatments()
         {
             var patients = from p in _context.Patient
-                           select new PatientDTO()
+                           select new PatientDto()
                            {
                                ID = p.ID,
                                FirstName = p.FirstName,

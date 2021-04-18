@@ -25,7 +25,7 @@ namespace MyPTClinicApp.Server.Models
             return result.Entity;
         }
 
-        public IQueryable<TreatmentDTO> GetTreatments()
+        public IQueryable<TreatmentDto> GetTreatments()
         {
             var treatments = from t in DbContext.Treatment.OrderByDescending(t => t.Date.Year)
                                                          .ThenByDescending(t => t.Date.Month)
@@ -33,7 +33,7 @@ namespace MyPTClinicApp.Server.Models
                                                          .ThenBy(t => t.Date.Hour)
                                                          .ThenBy(t => t.Date.Minute)
                                                          .ThenBy(t => t.Therapist.FirstName)
-                             select new TreatmentDTO()
+                             select new TreatmentDto()
                              {
                                  ID = t.ID,
                                  PatientId = t.Patient.ID,
@@ -49,7 +49,7 @@ namespace MyPTClinicApp.Server.Models
         }
 
 
-        public async Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate)
+        public async Task<IEnumerable<TreatmentDto>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate)
         {
             // get full list of treatments that match date
             var query = GetTreatments().Where(t => t.Date >= fromDate && t.Date <= toDate);

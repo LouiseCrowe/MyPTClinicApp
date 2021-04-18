@@ -128,7 +128,7 @@ namespace MyPTClinicApp.Server.Controllers
         [HttpGet("nameandemail/{firstName}/{lastName}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PatientDTO> GetPatientNameAndEmail(string firstName, string lastName)
+        public ActionResult<PatientDto> GetPatientNameAndEmail(string firstName, string lastName)
         {
             try
             {

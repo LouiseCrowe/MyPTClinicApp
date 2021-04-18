@@ -20,13 +20,13 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public ITreatmentService TreatmentService { get; set; }
 
-        private IEnumerable<TreatmentDTO> Treatments { get; set; }
+        private IEnumerable<TreatmentDto> Treatments { get; set; }
 
         private int totalTreatments;
 
         // for breakdown information 
-        List<List<TreatmentDTO>> PatientsWithTreatments = new ();     
-        List<List<TreatmentDTO>> TherapistsWithTreatments = new ();
+        List<List<TreatmentDto>> PatientsWithTreatments = new ();     
+        List<List<TreatmentDto>> TherapistsWithTreatments = new ();
 
         // for managing search
         public string SearchName { get; set; } = new string("");      // to allow initial search for all treatment
@@ -44,7 +44,7 @@ namespace MyPTClinicApp.Client.Pages
         protected bool showSummary = false;
 
         // for pagination
-        public IEnumerable<TreatmentDTO> TreatmentList { get; set; }
+        public IEnumerable<TreatmentDto> TreatmentList { get; set; }
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
         public int CurrentPage { get; set; }
@@ -101,11 +101,11 @@ namespace MyPTClinicApp.Client.Pages
 
         private void UpdateBreakdownInfoAfterSearch()
         {
-            PatientsWithTreatments = new List<List<TreatmentDTO>>();  // reset Patients with treatments 
+            PatientsWithTreatments = new List<List<TreatmentDto>>();  // reset Patients with treatments 
                                                                       // so summary reflects search results
             GroupByPatientID();                 // re-run query to include only search results
 
-            TherapistsWithTreatments = new List<List<TreatmentDTO>>();  // reset Patients with treatments 
+            TherapistsWithTreatments = new List<List<TreatmentDto>>();  // reset Patients with treatments 
                                                                         // so summary reflects search results
             GroupByTherapistID();                 // re-run query to include only search results
 

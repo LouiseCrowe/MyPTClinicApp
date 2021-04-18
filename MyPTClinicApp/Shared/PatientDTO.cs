@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Shared
 {
-    public class PatientDTO
+    public class PatientDto
     {
         public int ID { get; set; }
         public string FirstName { get; set; }

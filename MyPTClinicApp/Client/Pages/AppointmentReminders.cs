@@ -31,7 +31,7 @@ namespace MyPTClinicApp.Client.Pages
         public List<SchedulerAppointment> Appointments { get; set; } = new();
 
         // for retrieving patient email address
-        public PatientDTO Patient { get; set; } = new();
+        public PatientDto Patient { get; set; } = new();
 
         // list for displaying names of patients whe were or were not sent emails
         protected List<string> emailRecipients = new();
@@ -94,7 +94,7 @@ namespace MyPTClinicApp.Client.Pages
                         patientFirstName = patientFullName[0];
                         patientLastName = patientFullName[^1];
 
-                        // retrieve patient email using PatientDTO
+                        // retrieve patient email using PatientDto
                         Patient = await PatientService.GetPatientNameAndEmail(patientFirstName, patientLastName);
 
                         if (Patient != null)

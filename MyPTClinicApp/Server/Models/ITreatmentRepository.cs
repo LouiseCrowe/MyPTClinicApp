@@ -8,8 +8,8 @@ namespace MyPTClinicApp.Server.Models
 {
     public interface ITreatmentRepository
     {
-        IQueryable<TreatmentDTO> GetTreatments();
-        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
+        IQueryable<TreatmentDto> GetTreatments();
+        Task<IEnumerable<TreatmentDto>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
         Task<Treatment> GetTreatmentById(int treatmentId);
         IEnumerable<Treatment> GetTreatmentsByPatientId(int patientId);
         Task<IEnumerable<Treatment>> GetTreatmentsByDate(DateTime appointmentsDate);

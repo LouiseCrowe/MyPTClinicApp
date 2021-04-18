@@ -7,8 +7,8 @@ namespace MyPTClinicApp.Client.Services
 {
     public interface ITreatmentService
     {   
-        Task<IEnumerable<TreatmentDTO>> GetTreatments();
-        Task<IEnumerable<TreatmentDTO>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
+        Task<IEnumerable<TreatmentDto>> GetTreatments();
+        Task<IEnumerable<TreatmentDto>> Search(string searchName, string lastName, DateTime fromDate, DateTime toDate);
         Task<Treatment> GetTreatmentById(int id);
         Task<IEnumerable<Treatment>> GetTreatmentsByDate(int year, int month, int day);
         Task<IEnumerable<Treatment>> GetTreatmentsByPatientId(int ID);
