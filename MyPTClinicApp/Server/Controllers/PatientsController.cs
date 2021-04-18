@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MyPTClinicApp.Server.Models;
+using MyPTClinicApp.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MyPTClinicApp.Server.Data;
-using MyPTClinicApp.Server.Models;
-using MyPTClinicApp.Shared;
 
 namespace MyPTClinicApp.Server.Controllers
 {
@@ -143,8 +141,6 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
-
-
         // POST: api/patients 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -219,8 +215,7 @@ namespace MyPTClinicApp.Server.Controllers
             }
         }
 
-
-        // DELETE: api/Patients/5
+        // DELETE: api/Patients/id/5
         [HttpDelete("id/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-//using TestApp.Data;
+
 
 [assembly: HostingStartup(typeof(MyPTClinicApp.Server.Areas.Identity.IdentityHostingStartup))]
 namespace MyPTClinicApp.Server.Areas.Identity

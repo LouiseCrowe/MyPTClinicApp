@@ -51,11 +51,15 @@ else
                                    placeholder="Enter notes">
                     </InputTextArea>
                 </div>
+
                 <br />
+
                 <div>
                     <button type="submit" class="btn btn-primary edit-btn">Save Treatment</button>
                 </div>
+
                 <br />
+
                 <div>
                     @if (Treatment.ID > 0)
                     {
@@ -64,7 +68,9 @@ else
                         </a>
                     }
                 </div>
+
                 <br />
+
                 <div>
                     <a class="btn btn-outline-primary" @onclick="@NavigateToTreatmentOverview">Back to treatment list</a>
                 </div>

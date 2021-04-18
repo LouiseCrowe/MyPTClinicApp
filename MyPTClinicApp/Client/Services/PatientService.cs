@@ -2,11 +2,9 @@
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Services
@@ -14,7 +12,6 @@ namespace MyPTClinicApp.Client.Services
     public class PatientService : IPatientService
     {
         private readonly HttpClient httpClient;
-
 
         public PatientService(HttpClient httpClient)
         {
@@ -76,7 +73,6 @@ namespace MyPTClinicApp.Client.Services
                                             Encoding.UTF8, "application/json");
 
             var response = await httpClient.PutAsync($"api/patients/id/{patient.ID}", patientJson);
-
 
             if (response.IsSuccessStatusCode)
             {

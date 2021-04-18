@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyPTClinicApp.Shared;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -24,26 +22,22 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<List<SchedulerAppointment>>("api/schedulerappointments");
         }
 
-
         public async Task<List<SchedulerAppointment>> GetAppointmentsByDate(int year, int month, int day)
         {
             return await httpClient.GetJsonAsync<List<SchedulerAppointment>>($"api/schedulerappointments/date/{year}-{month}-{day}");
         }
-
-
         
-
         public async Task Create(SchedulerAppointment itemToInsert)
         {
             var addedAppointment =
            new StringContent(JsonSerializer.Serialize(itemToInsert), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("api/schedulerappointments", addedAppointment);            
+           await httpClient.PostAsync("api/schedulerappointments", addedAppointment);            
         }
 
         public async Task Delete(SchedulerAppointment itemToDelete)
         {
-            var response = await httpClient.DeleteAsync($"api/schedulerappointments/{itemToDelete.ID}");
+            await httpClient.DeleteAsync($"api/schedulerappointments/{itemToDelete.ID}");
         }       
 
         public async Task Update(SchedulerAppointment itemToUpdate)
@@ -51,8 +45,7 @@ namespace MyPTClinicApp.Client.Services
             var appointmentJson = new StringContent(JsonSerializer.Serialize(itemToUpdate),
                                            Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PutAsync($"api/schedulerappointments/{itemToUpdate.ID}", appointmentJson);
+            await httpClient.PutAsync($"api/schedulerappointments/{itemToUpdate.ID}", appointmentJson);
         }
-
     }
 }

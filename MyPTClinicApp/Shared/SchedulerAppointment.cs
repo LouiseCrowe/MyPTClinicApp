@@ -17,7 +17,6 @@ namespace MyPTClinicApp.Shared
         public DateTime End { get; set; }
         public bool IsAllDay { get; set; }
         public string RecurrenceRule { get; set; }
-        //public List<DateTime> RecurrenceExceptions { get; set; }
         public Guid? RecurrenceId { get; set; }
     }
 }

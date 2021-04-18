@@ -1,8 +1,4 @@
-﻿using MyPTClinicApp.Shared;
-using SendGrid.Helpers.Mail;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Services

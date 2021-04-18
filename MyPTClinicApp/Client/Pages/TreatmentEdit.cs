@@ -3,11 +3,6 @@ using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -63,7 +58,7 @@ namespace MyPTClinicApp.Client.Pages
 
             Patients = await PatientService.GetPatients();
 
-            if (treatmentID != 0)       // this is a treatment to be updated so get json stream from db
+            if (treatmentID != 0)       // treatment to be update need to retrieve from db
             {
                 Treatment = await TreatmentService.GetTreatmentById(treatmentID);
             }
@@ -137,6 +132,5 @@ namespace MyPTClinicApp.Client.Pages
         {
             await OnInitializedAsync();
         }
-
     }
 }

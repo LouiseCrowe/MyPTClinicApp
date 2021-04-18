@@ -119,9 +119,9 @@ namespace MyPTClinicApp.Server.Models
         {
             if (patient.Email != null)
             {
-                SendGridMessage msg = new ();
-                EmailAddress from = new ("dylan@dylancroweclinic.ie", "Dylan Crowe");
-                EmailAddress recipient = new (patient.Email, $"{patient.FirstName} {patient.LastName}");
+                SendGridMessage msg = new();
+                EmailAddress from = new("dylan@dylancroweclinic.ie", "Dylan Crowe");
+                EmailAddress recipient = new(patient.Email, $"{patient.FirstName} {patient.LastName}");
 
                 msg.SetSubject(subject);
                 msg.SetFrom(from);
@@ -152,7 +152,6 @@ namespace MyPTClinicApp.Server.Models
                                         (p => p.FirstName.ToLower().Contains(patientFirstName.ToLower())
                                         && p.LastName.ToLower().Contains(patientLastName.ToLower()));
         }
-
 
         public async Task<Therapist> FindTherapistFromAppt(SchedulerAppointment appointment)
         {
@@ -192,7 +191,7 @@ namespace MyPTClinicApp.Server.Models
                 result.RecurrenceRule = appointment.RecurrenceRule;
                 result.TherapistName = appointment.TherapistName;
                 result.PatientName = appointment.PatientName;
-              
+
                 // find related treatment to update too.
                 var treatment = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointment.ID);
                 if (treatment != null)
@@ -219,46 +218,46 @@ namespace MyPTClinicApp.Server.Models
                     await SendEmail(patient, appointment, subject, content);
                 }
 
-                await _context.SaveChangesAsync();                
+                await _context.SaveChangesAsync();
 
                 return result;
             }
             return null;
         }
 
-            public async Task<SchedulerAppointment> DeleteAppointment(int appointmentId)
-            {
-                var appointmentToDelete = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointmentId);
+        public async Task<SchedulerAppointment> DeleteAppointment(int appointmentId)
+        {
+            var appointmentToDelete = await _context.SchedulerAppointment.FirstOrDefaultAsync(a => a.ID == appointmentId);
 
-                if (appointmentToDelete != null)
-                {
-                    _context.Remove(appointmentToDelete);
+            if (appointmentToDelete != null)
+            {
+                _context.Remove(appointmentToDelete);
 
                 // send email confirming appointment
                 string subject = $"Appointment CANCELLED: {appointmentToDelete.Start.ToShortDateString()} at {appointmentToDelete.Start.ToShortTimeString()}";
                 Patient patient = await FindPatientFromAppt(appointmentToDelete);
                 string content = $"Dear {patient.FirstName}" +
-                             $"\n\nYour physical therapy appointment with {appointmentToDelete.TherapistName} for " +
-                             $"{appointmentToDelete.Start.ToShortDateString()} at {appointmentToDelete.Start.ToShortTimeString()} is cancelled." +
-                             $"\n\nPlease call or text to re-book whenever you need our help again." +
-                             $"\n\nKind regards," +
-                             $"\n\nDylan Crowe" +
-                             $"\n\nPhone Number: 087 7774512" +
-                             $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
-                             $"\nWebsite: https://dylancroweclinic.ie/";
+                                $"\n\nYour physical therapy appointment with {appointmentToDelete.TherapistName} for " +
+                                $"{appointmentToDelete.Start.ToShortDateString()} at {appointmentToDelete.Start.ToShortTimeString()} is cancelled." +
+                                $"\n\nPlease call or text to re-book whenever you need our help again." +
+                                $"\n\nKind regards," +
+                                $"\n\nDylan Crowe" +
+                                $"\n\nPhone Number: 087 7774512" +
+                                $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
+                                $"\nWebsite: https://dylancroweclinic.ie/";
                 await SendEmail(patient, appointmentToDelete, subject, content);
 
                 // delete from treatments too
                 var treatmentToDelete = _context.Treatment.FirstOrDefault(t => t.AppointmentID == appointmentId);
-                    _context.Remove(treatmentToDelete);
+                _context.Remove(treatmentToDelete);
 
-                    await _context.SaveChangesAsync();
-                    return appointmentToDelete;
-                }
-                return null;
+                await _context.SaveChangesAsync();
+                return appointmentToDelete;
             }
+            return null;
+        }
 
-       
+
     }
-    }
+}
 

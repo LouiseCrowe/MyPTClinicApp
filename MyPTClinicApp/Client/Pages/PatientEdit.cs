@@ -1,16 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using SendGrid;
 using SendGrid.Helpers.Mail;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
 {
@@ -36,12 +29,10 @@ namespace MyPTClinicApp.Client.Pages
 
         public Patient Patient { get; set; } = new ();
 
+        // for selecting therapist for patient
         public IEnumerable<Therapist> Therapists { get; set; } = new List<Therapist>();
 
-       
-
-
-        //used to store state of screen
+        // screen and message management
         public SavedStatus SavedStatus { get; set; }
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
@@ -67,7 +58,7 @@ namespace MyPTClinicApp.Client.Pages
                 Patient = new Patient { TherapistID = 1 };         // set all patient to therapist 1
                 
             }
-            else                      // patient to be updated 
+            else                      // patient to be updated, has an ID != 0 
             {
                 Patient = await PatientService.GetPatientById(patientID);
             }
@@ -161,7 +152,6 @@ namespace MyPTClinicApp.Client.Pages
                 ButtonNavigation = "toOverview";
             }
 
-
             SendGridMessage msg = new ();
             EmailAddress from = new ("dylan@dylancroweclinic.ie", "Dylan Crowe");
             EmailAddress recipient = new (Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
@@ -178,7 +168,6 @@ namespace MyPTClinicApp.Client.Pages
                          $"\nLocation: 33 Pembroke Street Lower, Dublin 2" +
                          $"\nWebsite: https://dylancroweclinic.ie/";
 
-
             bool response = await EmailService.SendEmail(msg);
             if (response)
             {
@@ -194,7 +183,6 @@ namespace MyPTClinicApp.Client.Pages
                 Message = "Email not sent";
                 ButtonNavigation = "toOverview";
             }
-
         }
 
         protected async Task NavigateToEditPatient()

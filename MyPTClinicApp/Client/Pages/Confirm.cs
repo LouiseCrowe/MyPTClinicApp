@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
 {
     public partial class Confirm
     {
+        // for displaying Delete confirmation dialog box
         protected bool ShowConfirmation { get; set; }
 
         [Parameter]
-        public string ConfirmationTitle { get; set; } = "Confirm Delete";
+        public string ConfirmationTitle { get; set; } = "Confirm Delete";           // set default, can overridden in razor page
 
         [Parameter]
         public string ConfirmationMessage { get; set; } = "Are you sure you want to delete record?";

@@ -1,7 +1,6 @@
 ﻿using MyPTClinicApp.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Server.Models
@@ -15,6 +14,6 @@ namespace MyPTClinicApp.Server.Models
         IEnumerable<String> GetAllTherapistsFullNames();
         Task<Therapist> UpdateTherapist(Therapist therapist);
         Task<Therapist> AddTherapist(Therapist therapist);
-        Task<Therapist> DeleteTherapist(int id);
+        Task<Therapist> DeleteTherapist(int therapistID);
     }
 }

@@ -35,6 +35,7 @@ namespace MyPTClinicApp.Client.Pages
         string searchName = "";
         string lastName = "";
 
+        // need to include time 0, 0, 0 to ensure all treatments are included, based on treatment start time
         public DateTime FromDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         public DateTime ToDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
         private string errormessage;
@@ -79,21 +80,20 @@ namespace MyPTClinicApp.Client.Pages
                     lastName = fullName[0];         // this allows user to search by just first or last name
                 }
 
-
-                // need to add a day because the time for the ToDate is 12AM which means treatments 
-                // will not be included as the time will always be greater than 12AM!
+                // need to add a day because the time for the ToDate is 12AM otherwise treatments 
+                // would not be included as the treatment start time will always be greater than 12AM!
                 ToDate = ToDate.AddDays(1);
 
                 Treatments = await TreatmentService.Search(searchName, lastName, FromDate, ToDate);
 
-
-                // need to reset the back to the user selected date as soon as the treatments are displayed
+                // need to reset date display back to the user selected date as soon as the treatments are retrieved and displayed
                 ToDate = ToDate.AddDays(-1);
 
                 UpdateBreakdownInfoAfterSearch();
             }
             catch (Exception)
             {
+                // need to reset display date if search does not retrieve any records
                 ToDate = ToDate.AddDays(-1);
                 errormessage = "No treatments match the search criteria, please try again.";
             }
@@ -137,6 +137,7 @@ namespace MyPTClinicApp.Client.Pages
             showSummary = false;
         }
 
+        // for finding how many treatments each patient received
         public void GroupByPatientID()
         {
             var query = from treatment in Treatments
@@ -148,6 +149,7 @@ namespace MyPTClinicApp.Client.Pages
             }
         }
 
+        // for finding how many treatments each therapists performed
         public void GroupByTherapistID()
         {
             var query = from treatment in Treatments

@@ -16,6 +16,5 @@ namespace MyPTClinicApp.Server.Models
         Task<Treatment> AddTreatment(Treatment treatment);
         Task<Treatment> UpdateTreatment(Treatment treatment);
         Task<Treatment> DeleteTreatment(int treatmentId);
-
     }
 }

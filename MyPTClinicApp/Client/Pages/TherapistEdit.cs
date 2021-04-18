@@ -1,14 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyPTClinicApp.Client.Services;
 using MyPTClinicApp.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -26,7 +18,7 @@ namespace MyPTClinicApp.Client.Pages
 
         public Therapist Therapist { get; set; } = new();
 
-        //used to store state of screen
+        // used to store state of screen
         public SavedStatus SavedStatus { get; set; }
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
@@ -46,7 +38,7 @@ namespace MyPTClinicApp.Client.Pages
 
             if (therapistID == 0)       // new therapist is being created
             {
-                // some defaults
+                // add default location for all therapists
                 Therapist = new Therapist { Location = "33 Pembroke Street Lower, Dublin 2" };
             }
             else
@@ -55,7 +47,6 @@ namespace MyPTClinicApp.Client.Pages
                 Therapist = await TherapistService.GetTherapistById(int.Parse(TherapistID));              
             }
         }
-
         
         protected async Task HandleValidSubmit()
         {

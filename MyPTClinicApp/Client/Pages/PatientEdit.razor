@@ -87,10 +87,13 @@ else
                 </div>
 
                 <br />
+
                 <div>
                     <button type="submit" class="btn btn-primary edit-btn">Save Patient</button>
                 </div>
+
                 <br />
+
                 <div>
                     @if (Patient.ID > 0)
                     {
@@ -99,7 +102,9 @@ else
                         </a>
                     }
                 </div>
+
                 <br />
+
                 <div>
                     <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to patient list</a>
                 </div>
@@ -112,9 +117,7 @@ else
 
     else
     {
-
         <div class="alert @StatusClass">@Message</div>
-
 
         @if (ButtonNavigation == "toOverview")
         {
@@ -144,7 +147,6 @@ else
                     <a class="btn btn-outline-primary" @onclick="@SendWelcomeMail">Send Welcome Mail to @Patient.FirstName @Patient.LastName </a>
                 </div>
             }
-
         }
     }
 }

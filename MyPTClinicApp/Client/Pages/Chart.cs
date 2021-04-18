@@ -24,26 +24,27 @@ namespace MyPTClinicApp.Client.Pages
             GetDataForLastYear(currentMonth);
         }
 
-        int currentMonth = DateTime.Now.Month;
-        int numItemsInXAxis = (DateTime.Now.Month + 1);                     // need extra space for "total"
-        int currentYear = DateTime.Now.Year;
-        int lastYear = (DateTime.Now.Year -1);
-        int currentYearTotal;
-        int lastYearTotal;
+        private readonly int currentMonth = DateTime.Now.Month;
+        private readonly int numItemsInXAxis = (DateTime.Now.Month + 1);                     // need extra space for "total"
+        private readonly int currentYear = DateTime.Now.Year;
+        private readonly int lastYear = (DateTime.Now.Year -1);
+        private int currentYearTotal;
+        private int lastYearTotal;
 
         // create List to include data for year up to current date
-        private List<DataModel> newModelData = new() { };        
+        private readonly List<DataModel> newModelData = new() { };
 
         // create List to include data for months from last year corresponding to current year i.e. if April include Jan - Apr only
-        private List<DataModel> oldModelData = new() { };
+        private readonly List<DataModel> oldModelData = new() { };
 
         // label xAxis based on current month need to include + 1 for the "Total" label       
-        public string[] xAxisItems = new string[DateTime.Now.Month + 1];
-        
-        public List<string> Months = new List<string> { "January", "February", "March", "April", "May",
+        private readonly string[] xAxisItems = new string[DateTime.Now.Month + 1];
+
+        // for populating column chart labels
+        private readonly List<string> Months = new (){ "January", "February", "March", "April", "May",
                     "June", "July", "August", "September", "October", "November", "December"};
 
-        protected List<DataModel> GetDataForCurrentYear(int currentMonth)
+        public List<DataModel> GetDataForCurrentYear(int currentMonth)
         {
             // populate data model with month name and totals
             for (int i = 0; i < currentMonth; i++)
@@ -55,6 +56,7 @@ namespace MyPTClinicApp.Client.Pages
                     MonthlyTotal = Treatments.Count(t => t.Date.Month == (i + 1))                   
                 });
 
+                // update running total
                 currentYearTotal += newModelData[i].MonthlyTotal;
             }
 
@@ -81,7 +83,8 @@ namespace MyPTClinicApp.Client.Pages
                     Year = lastYear.ToString(),
                     MonthlyTotal = Treatments.Count(t => t.Date.Year == (DateTime.Now.Year - 1) && t.Date.Month == (i + 1))                    
                 });
-                                
+
+                // update running total
                 lastYearTotal += oldModelData[i].MonthlyTotal;
             }
 
@@ -91,7 +94,7 @@ namespace MyPTClinicApp.Client.Pages
                 Month = "Total",
                 Year = lastYear.ToString(),
                 MonthlyTotal = lastYearTotal
-            }); ;
+            }); 
 
             return newModelData;
         }
@@ -116,9 +119,7 @@ namespace MyPTClinicApp.Client.Pages
             xAxisItems[numItemsInXAxis -1] = "Total";
 
             return xAxisItems.ToArray();
-        }
-
-       
+        }       
     }
 }
 

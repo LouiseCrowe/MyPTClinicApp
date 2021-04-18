@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MyPTClinicApp.Server.Data;
 using MyPTClinicApp.Shared;
 using System;
@@ -51,7 +50,7 @@ namespace MyPTClinicApp.Server.Models
         public IEnumerable<String> GetAllPatientsFullNames()
         {
 
-            List<String> fullNames = new ();
+            List<String> fullNames = new();
             var query = _context.Patient.OrderBy(p => p.FirstName).Select(p => new { p.FirstName, p.LastName });
 
             foreach (var item in query)
@@ -60,8 +59,8 @@ namespace MyPTClinicApp.Server.Models
             }
 
             return fullNames;
-
         }
+
         public IEnumerable<Patient> GetPatientsByTherapistId(int therapistId)
         {
             // look for patients
@@ -70,7 +69,6 @@ namespace MyPTClinicApp.Server.Models
             return results;
         }
 
-        
         public async Task<Patient> AddPatient(Patient patient)
         {
             var result = await _context.Patient.AddAsync(patient);
@@ -78,7 +76,7 @@ namespace MyPTClinicApp.Server.Models
 
             return result.Entity;
         }
-        
+
         public async Task<Patient> UpdatePatient(Patient patient)
         {
             // find patient to update
@@ -114,9 +112,8 @@ namespace MyPTClinicApp.Server.Models
                 return result;
             }
 
-            return null; 
+            return null;
         }
-
 
         public async Task<Patient> GetPatientByFullName(string firstName, string lastName)
         {
@@ -131,21 +128,18 @@ namespace MyPTClinicApp.Server.Models
             return patient;
         }
 
-
         // get a full list of Patients as PatientDTOs
         public IQueryable<PatientDTO> GetTreatments()
         {
             var patients = from p in _context.Patient
-                             select new PatientDTO()
-                             {
-                                 ID = p.ID,
-                                 FirstName = p.FirstName,
-                                 LastName = p.LastName,
-                                 Email = p.Email
-                             };
+                           select new PatientDTO()
+                           {
+                               ID = p.ID,
+                               FirstName = p.FirstName,
+                               LastName = p.LastName,
+                               Email = p.Email
+                           };
             return patients;
         }
-
-
     }
 }

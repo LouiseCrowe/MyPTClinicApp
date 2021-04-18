@@ -6,18 +6,18 @@
                   OnCreate="@AddAppointment"
                   OnUpdate="@UpdateAppointment"
                   OnDelete="@DeleteAppointment"
-                  OnEdit="@EditHandler" OnCancel="@CancelHandler"
+                  OnEdit="@EditHandler" 
                   AllowCreate="true" AllowDelete="true" AllowUpdate="true"
                   @bind-Date="@StartDate" @bind-View="@CurrView" Height="600px" Width="800px">
+    @*ItemTemplate used to determine the size of the font displayed on calendar, chose xx-small to show patient and therapist name*@
     <ItemTemplate>        
-        @{
-            
+        @{            
             var appointment = context as SchedulerAppointment;
-                <span style="font-size: x-small">@appointment.PatientName (@appointment.Title) @appointment.TherapistName</span>            
+                <span style="font-size: xx-small">@appointment.PatientName (@appointment.Title) @appointment.TherapistName</span>            
         }
-
     </ItemTemplate>
     <SchedulerResources>
+        @*Custom fields added to include drop downs for patient and therapist in appointment*@
         <SchedulerResource Field="TherapistName" Title="Therapist Name" Data="@Therapists" />
         <SchedulerResource Field="PatientName" Title="Patient Name" Data="@Patients" />
     </SchedulerResources>

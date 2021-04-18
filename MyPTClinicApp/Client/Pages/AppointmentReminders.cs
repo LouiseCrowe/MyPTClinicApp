@@ -4,6 +4,8 @@ using MyPTClinicApp.Shared;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MyPTClinicApp.Client.Pages
@@ -37,11 +39,13 @@ namespace MyPTClinicApp.Client.Pages
 
         // for managing screen messages regarding sending emails
         protected string SuccessStatusClass = string.Empty;
-        protected string successMessage = string.Empty;
+        protected StringBuilder successMessage = new();
         protected string noEmailStatusClass = string.Empty;
-        protected string noEmailMessage = string.Empty;
+        protected StringBuilder noEmailMessage = new();
         protected string sendingStatusClass = string.Empty;
         protected string sendingMessage = string.Empty;
+
+        
 
         protected override async Task OnInitializedAsync()
         {
@@ -52,22 +56,32 @@ namespace MyPTClinicApp.Client.Pages
         public async Task GetAppointments()
         {
             Appointments = await AppointmentService.GetAppointmentsByDate(AppointmentsDate.Year, AppointmentsDate.Month, AppointmentsDate.Day);
+
+            // need to check that appointment time has not passed for current date appointments
+            // don't want to send reminders for an appointment time in the past
+            if (AppointmentsDate.Year == DateTime.Now.Year
+                && AppointmentsDate.Month == DateTime.Now.Month
+                && AppointmentsDate.Day == DateTime.Now.Day)
+            {
+                Appointments = Appointments.Where(a => a.Start.TimeOfDay >= DateTime.Now.TimeOfDay).ToList();                
+            }
+            
             // clear all messages from screen when new search is completed
             SuccessStatusClass = string.Empty;
-            successMessage = string.Empty;
+            successMessage = new();
             noEmailStatusClass = string.Empty;
-            noEmailMessage = string.Empty;
+            noEmailMessage = new();
             sendingStatusClass = string.Empty;
             sendingMessage = string.Empty;
             emailRecipients = new();
             noEmailList = new();
         }
 
-
+        
         protected async Task SendReminderMails()
         {
             // reminders can only be sent for appointments between current day and the following five days
-            if (AppointmentsDate >= DateTime.Now && AppointmentsDate <= DateTime.Now.AddDays(5) && Appointments.Count >= 1)
+            if (AppointmentsDate.AddDays(1) >= DateTime.Now  && AppointmentsDate <= DateTime.Now.AddDays(5) && Appointments.Count >= 1)
             {
                 foreach (SchedulerAppointment appointment in Appointments)
                 {
@@ -93,8 +107,8 @@ namespace MyPTClinicApp.Client.Pages
                             else
                             {
                                 // create email
-                                EmailAddress from = new EmailAddress("dylan@dylancroweclinic.ie", "Dylan Crowe");
-                                EmailAddress recipient = new EmailAddress(Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
+                                EmailAddress from = new ("dylan@dylancroweclinic.ie", "Dylan Crowe");
+                                EmailAddress recipient = new (Patient.Email, $"{Patient.FirstName} {Patient.LastName}");
                                 String subject = $"Physical Therapy Appointment Reminder: {appointment.Start.ToShortDateString()} at {appointment.Start.ToShortTimeString()}";
                                 String plainTextContent = $"Dear {Patient.FirstName}," +
                                              $"\n\nYour physical therapy appointment with {appointment.TherapistName} is confirmed for " +
@@ -138,31 +152,32 @@ namespace MyPTClinicApp.Client.Pages
                         }
                     }
 
-                    if (emailRecipients.Count >= 1)
-                    {
-                        SuccessStatusClass = "alert-success";
-                        successMessage = $"Emails sent to patient(s): {emailRecipients[0]}";
 
-                        if (emailRecipients.Count > 1)
+                }
+                if (emailRecipients.Count >= 1)
+                {
+                    SuccessStatusClass = "alert-success";
+                    successMessage.Append($"Emails sent to patient(s): {emailRecipients[0]}");
+
+                    if (emailRecipients.Count > 1)
+                    {
+                        for (int i = 1; i < emailRecipients.Count; i++)
                         {
-                            for (int i = 1; i < emailRecipients.Count; i++)
-                            {
-                                successMessage += $", {emailRecipients[i]}";
-                            }
+                            successMessage.Append($", {emailRecipients[i]}");
                         }
                     }
+                }
 
-                    if (noEmailList.Count >= 1)
+                if (noEmailList.Count >= 1)
+                {
+                    noEmailStatusClass = "alert-danger";
+                    noEmailMessage.Append($"No email address available for patient(s): {noEmailList[0]}");
+
+                    if (noEmailList.Count > 1)
                     {
-                        noEmailStatusClass = "alert-danger";
-                        noEmailMessage = $"No email address available for patient(s): {noEmailList[0]}";
-
-                        if (noEmailList.Count > 1)
+                        for (int i = 1; i < noEmailList.Count; i++)
                         {
-                            for (int i = 1; i < noEmailList.Count; i++)
-                            {
-                                noEmailMessage += $", {noEmailList[i]}";
-                            }
+                            noEmailMessage.Append($", {noEmailList[i]}");
                         }
                     }
                 }

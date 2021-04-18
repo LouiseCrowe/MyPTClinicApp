@@ -22,7 +22,7 @@ namespace MyPTClinicApp.Server.Models
         {
             // returns complete list of Therapists
             IQueryable<Therapist> query = _context.Therapist;
-            
+
             if (!string.IsNullOrEmpty(searchName) && searchName == lastName)            // meaning only one name was provided              
             {
                 query = query.Where(t => t.FirstName.ToLower().Contains(searchName.ToLower())
@@ -39,14 +39,14 @@ namespace MyPTClinicApp.Server.Models
 
         public async Task<IEnumerable<Therapist>> GetTherapists()
         {
-            return await _context.Therapist.OrderBy(t => t.ID).ToListAsync();
+            return await _context.Therapist.OrderBy(t => t.FirstName).ToListAsync();
         }
 
         public IEnumerable<String> GetAllTherapistsFullNames()
         {
 
-            List<String> fullNames = new List<string>();
-            var query =  _context.Therapist.OrderBy(t => t.FirstName)
+            List<String> fullNames = new ();
+            var query = _context.Therapist.OrderBy(t => t.FirstName)
                                             .Select(t => new { t.FirstName, t.LastName });
 
             foreach (var item in query)
@@ -95,10 +95,10 @@ namespace MyPTClinicApp.Server.Models
 
             return null;
         }
-        
-        public async Task<Therapist> DeleteTherapist(int therapistId)
+
+        public async Task<Therapist> DeleteTherapist(int therapistID)
         {
-            var result = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistId);
+            var result = await _context.Therapist.FirstOrDefaultAsync(t => t.ID == therapistID);
 
             if (result != null)
             {
@@ -108,6 +108,6 @@ namespace MyPTClinicApp.Server.Models
             }
 
             return null;
-        }       
+        }
     }
 }

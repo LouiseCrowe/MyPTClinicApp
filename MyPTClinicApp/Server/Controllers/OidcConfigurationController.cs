@@ -6,12 +6,9 @@ namespace MyPTClinicApp.Server.Controllers
 {
     public class OidcConfigurationController : Controller
     {
-        private readonly ILogger<OidcConfigurationController> _logger;
-
-        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> logger)
+        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider)
         {
-            ClientRequestParametersProvider = clientRequestParametersProvider;
-            _logger = logger;
+            ClientRequestParametersProvider = clientRequestParametersProvider;            
         }
 
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }

@@ -23,7 +23,6 @@ namespace MyPTClinicApp.Client.Services
 
         public IEnumerable<Treatment> Treatments { get; set; } = new List<Treatment>();
 
-
         public async Task<IEnumerable<TreatmentDTO>> GetTreatments()
         {
             return await httpClient.GetJsonAsync<TreatmentDTO[]>("api/treatments/all");
@@ -50,11 +49,9 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<List<Treatment>>($"api/treatments/date/{year}-{month}-{day}");
         }
 
-
         public async Task<Treatment> AddTreatment(Treatment treatment)
         {
-            var addedTreatment =
-            new StringContent(JsonSerializer.Serialize(treatment), Encoding.UTF8, "application/json");
+            var addedTreatment = new StringContent(JsonSerializer.Serialize(treatment), Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync("api/treatments", addedTreatment);
 

@@ -29,9 +29,9 @@ namespace MyPTClinicApp.Client.Services
             return await httpClient.GetJsonAsync<Therapist[]>($"api/therapists/search?searchname={searchName}&lastname={lastName}");
         }
 
-        public async Task<Therapist> GetTherapistById(int therapistId)
+        public async Task<Therapist> GetTherapistById(int therapistID)
         {
-            return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/{therapistId}");
+            return await httpClient.GetJsonAsync<Therapist>($"api/therapists/id/{therapistID}");
         }
 
         public async Task<IEnumerable<String>> GetAllTherapistsFullNames()
@@ -55,12 +55,12 @@ namespace MyPTClinicApp.Client.Services
             return null;
         }
 
-        public async Task<Therapist> UpdateTherapist(Therapist updatedTherapist)
+        public async Task<Therapist> UpdateTherapist(Therapist therapist)
         {
-            var therapistJson = new StringContent(JsonSerializer.Serialize(updatedTherapist),
+            var therapistJson = new StringContent(JsonSerializer.Serialize(therapist),
                                             Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PutAsync($"api/therapists/id/{updatedTherapist.ID}", therapistJson);
+            var response = await httpClient.PutAsync($"api/therapists/id/{therapist.ID}", therapistJson);
 
             if (response.IsSuccessStatusCode)
             {
@@ -80,8 +80,6 @@ namespace MyPTClinicApp.Client.Services
             }
 
             return "notsaved";
-        }
-
-        
+        }        
     }
 }

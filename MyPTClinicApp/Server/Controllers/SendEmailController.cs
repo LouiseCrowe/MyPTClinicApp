@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MyPTClinicApp.Server.Models;
-using MyPTClinicApp.Shared;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
@@ -14,13 +12,12 @@ namespace MyPTClinicApp.Server.Controllers
     [ApiController]
     public class SendEmailController : ControllerBase
     {
-          private readonly ISendEmailRepository sendEmailRepository;
+        private readonly ISendEmailRepository sendEmailRepository;
 
         public SendEmailController(ISendEmailRepository sendEmailRepository)
         {
             this.sendEmailRepository = sendEmailRepository;
         }
-
 
         //POST: api/sendemail
         [HttpPost]
@@ -50,9 +47,5 @@ namespace MyPTClinicApp.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
-
-        
-
     }
 }

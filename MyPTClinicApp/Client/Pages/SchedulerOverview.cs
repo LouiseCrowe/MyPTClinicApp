@@ -15,10 +15,13 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public IAppointmentService AppointmentService { get; set; }
 
-        public SchedulerView CurrView { get; set; } = SchedulerView.Week;
+        // displays full week on calendar (can also choose day, month, multi-day vew)
+        public SchedulerView CurrView { get; set; } = SchedulerView.Week;   
+        // determines what date displays on the calendar
         public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-        DateTime DayStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
-        DateTime DayEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
+        // highlights start and end for working hours on calendar
+        private readonly DateTime DayStartTime = new (DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
+        private readonly DateTime DayEndTime = new (DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
 
         List<SchedulerAppointment> Appointments { get; set; }
 
@@ -74,34 +77,16 @@ namespace MyPTClinicApp.Client.Pages
         }
 
         //Handlers for application logic flexibility
-        void EditHandler(SchedulerEditEventArgs args)
+        static void EditHandler(SchedulerEditEventArgs args)
         {
+            // an edit operation, otherwise - an insert operation
+            // you can prevent opening an item for editing based on a condition
             SchedulerAppointment item = args.Item as SchedulerAppointment;
-            if (!args.IsNew) // an edit operation, otherwise - an insert operation
+            if (!args.IsNew && item.Title.Contains("do not edit", StringComparison.InvariantCultureIgnoreCase))
             {
-                // you can prevent opening an item for editing based on a condition
-                if (item.Title.Contains("do not edit", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    args.IsCancelled = true;
-                }
-            }
-            else
-            {
-                // new appointment
-                DateTime SlotStart = args.Start; // the start of the slot the user clicked
-                DateTime SlotEnd = args.End; // the start of the slot the user clicked
-                bool InsertInAllDay = args.IsAllDay; // whether the user started insertion in the All Day row
-            }
+                args.IsCancelled = true;
+            }   
         }
-
-        void CancelHandler(SchedulerCancelEventArgs args)
-        {
-            // you can know when a user wanted to modify an appointment but decided not to
-            // the model you get contains the new data from the edit form so you can see what they did
-            SchedulerAppointment item = args.Item as SchedulerAppointment;
-        }
-
-
 
     }
 }

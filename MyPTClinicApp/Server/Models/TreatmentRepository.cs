@@ -10,24 +10,24 @@ namespace MyPTClinicApp.Server.Models
 {
     public class TreatmentRepository : ITreatmentRepository
     {
-        public ApplicationDbContext _context { get; }
+        public ApplicationDbContext DbContext { get; }
 
         public TreatmentRepository(ApplicationDbContext context)
         {
-            _context = context;
+            DbContext = context;
         }
 
         public async Task<Treatment> AddTreatment(Treatment treatment)
         {
-            var result = await _context.Treatment.AddAsync(treatment);
-            await _context.SaveChangesAsync();
+            var result = await DbContext.Treatment.AddAsync(treatment);
+            await DbContext.SaveChangesAsync();
 
             return result.Entity;
         }
 
         public IQueryable<TreatmentDTO> GetTreatments()
         {
-            var treatments = from t in _context.Treatment.OrderByDescending(t => t.Date.Year)
+            var treatments = from t in DbContext.Treatment.OrderByDescending(t => t.Date.Year)
                                                          .ThenByDescending(t => t.Date.Month)
                                                          .ThenByDescending(t => t.Date.Day)
                                                          .ThenBy(t => t.Date.Hour)
@@ -81,18 +81,18 @@ namespace MyPTClinicApp.Server.Models
 
         public async Task<Treatment> GetTreatmentById(int treatmentId)
         {
-            return await _context.Treatment.FirstOrDefaultAsync(p => p.ID == treatmentId);
+            return await DbContext.Treatment.FirstOrDefaultAsync(p => p.ID == treatmentId);
         }
 
         public IEnumerable<Treatment> GetTreatmentsByPatientId(int patientId)
         {
-            return _context.Treatment.Where(t => t.PatientID == patientId).ToList().OrderByDescending(t => t.Date);
+            return DbContext.Treatment.Where(t => t.PatientID == patientId).OrderByDescending(t => t.Date);
         }
 
 
         public async Task<IEnumerable<Treatment>> GetTreatmentsByDate(DateTime appointmentsDate)
         {
-            return await _context.Treatment.Where(t => t.Date == appointmentsDate)
+            return await DbContext.Treatment.Where(t => t.Date == appointmentsDate)
                                                       .OrderByDescending(t => t.Date.Year)
                                                       .ThenByDescending(t => t.Date.Month)
                                                       .ThenByDescending(t => t.Date.Day)
@@ -101,11 +101,10 @@ namespace MyPTClinicApp.Server.Models
                                                       .ToListAsync();
         }
 
-
         public async Task<Treatment> UpdateTreatment(Treatment treatment)
         {
             // find treatment to update
-            var result = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatment.ID);
+            var result = await DbContext.Treatment.FirstOrDefaultAsync(t => t.ID == treatment.ID);
 
             if (result != null)
             {
@@ -114,7 +113,7 @@ namespace MyPTClinicApp.Server.Models
                 result.Date = treatment.Date;
                 result.Notes = treatment.Notes;
 
-                await _context.SaveChangesAsync();
+                await DbContext.SaveChangesAsync();
 
                 return result;
             }
@@ -125,16 +124,16 @@ namespace MyPTClinicApp.Server.Models
         public async Task<Treatment> DeleteTreatment(int treatmentId)
         {
             // find treatment to delete
-            var treatmentToDelete = await _context.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
+            var treatmentToDelete = await DbContext.Treatment.FirstOrDefaultAsync(t => t.ID == treatmentId);
 
             if (treatmentToDelete != null)
             {
-                _context.Treatment.Remove(treatmentToDelete);
-                await _context.SaveChangesAsync();
+                DbContext.Treatment.Remove(treatmentToDelete);
+                await DbContext.SaveChangesAsync();
                 return treatmentToDelete;
             }
 
             return null;
-        }        
+        }
     }
 }

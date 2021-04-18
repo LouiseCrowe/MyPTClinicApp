@@ -78,15 +78,7 @@ namespace MyPTClinicApp.Server
             }
             );
 
-            // MAYBE USE LET'S SEE.....
-            //services.Configure<SendGridEmailSenderOptions>(options =>
-            //{
-            //    options.ApiKey = Configuration["ExternalProviders:SendGrid:ApiKey"];
-            //    options.SenderEmail = Configuration["ExternalProviders:SendGrid:SenderEmail"];
-            //    options.SenderName = Configuration["ExternalProviders:SendGrid:SenderName"];
-            //});
-
-
+            
             //for TelerikServices
             services.AddTelerikBlazor();
 
