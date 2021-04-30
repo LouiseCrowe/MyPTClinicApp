@@ -1,0 +1,124 @@
+[18:49:20.386 Verbose] - BuildManager - Some of the paths are absolute. This may prevent Live Unit Testing from building to the correct location.
+[18:49:20.389 Verbose] - BuildManager - Property BaseOutputPath evaluated to 'bin\' via:
+BaseOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseOutputPath)', 'bin'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:154
+  BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+[18:49:20.390 Verbose] - BuildManager - Property BaseIntermediateOutputPath evaluated to 'C:\MyPTClinicApp\MyPTClinicApp\Client\obj\' via:
+BaseIntermediateOutputPath: '$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk.Publish\targets\Microsoft.NET.Sdk.Publish.targets:80
+  MSBuildProjectDirectory: 'C:\MyPTClinicApp\MyPTClinicApp\Client'
+  BaseIntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseIntermediateOutputPath)', 'obj'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:159
+    BaseIntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseIntermediateOutputPath)', 'obj'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Microsoft.Common.props:46
+      BaseIntermediateOutputPath: '[Undefined]'
+[18:49:20.390 Verbose] - BuildManager - Property IntermediateOutputPath evaluated to 'obj\Debug\net5.0\' via:
+IntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash('$(IntermediateOutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:162
+  IntermediateOutputPath: '$(IntermediateOutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:241
+    IntermediateOutputPath: '$(BaseIntermediateOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:39
+      BaseIntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseIntermediateOutputPath)', 'obj'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Microsoft.Common.props:46
+        BaseIntermediateOutputPath: '[Undefined]'
+      Configuration: 'Debug'
+[18:49:20.390 Verbose] - BuildManager - Property OutputPath evaluated to 'bin\Debug\net5.0\' via:
+OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+  OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+    OutputPath: '$(BaseOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:33
+      BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+      Configuration: 'Debug'
+[18:49:20.390 Verbose] - BuildManager - Property OutDir evaluated to 'bin\Debug\net5.0\' via:
+OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+  OutDir: '[Undefined]'
+  OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+    OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+      OutputPath: '$(BaseOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:33
+        BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+        Configuration: 'Debug'
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\AppointmentReminders.cs(50,39): error CS0115: 'AppointmentReminders.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\PatientOverview.cs(31,39): error CS0115: 'PatientOverview.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\Chart.cs(18,39): error CS0115: 'Chart.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TreatmentOverview.cs(53,39): error CS0115: 'TreatmentOverview.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\PatientEdit.cs(41,39): error CS0115: 'PatientEdit.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TreatmentDetail.cs(37,39): error CS0115: 'TreatmentDetail.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TherapistDetail.cs(26,39): error CS0115: 'TherapistDetail.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TherapistEdit.cs(27,39): error CS0115: 'TherapistEdit.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TherapistOverview.cs(35,39): error CS0115: 'TherapistOverview.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\TreatmentEdit.cs(45,39): error CS0115: 'TreatmentEdit.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\PatientDetail.cs(35,39): error CS0115: 'PatientDetail.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\SchedulerOverview.cs(43,39): error CS0115: 'SchedulerOverview.OnInitializedAsync()': no suitable method found to override
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Pages\Confirm.cs(20,13): error CS0103: The name 'StateHasChanged' does not exist in the current context
+[18:49:21.214 Verbose] - BuildManager - C:\MyPTClinicApp\MyPTClinicApp\Client\Program.cs(16,40): error CS0246: The type or namespace name 'App' could not be found (are you missing a using directive or an assembly reference?)
+[18:49:21.219 Verbose] - BuildManager - C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Roslyn\Microsoft.CSharp.Core.targets(71,5): error MSB4181: The "Csc" task returned false but did not log an error.
+[18:49:21.253 Verbose] - BuildManager - Some of the file paths defined in the csproj under the Live Unit Testing build path are missing. Verify whether these files should be present under the Live Unit Testing build path and if necessary update the csproj definition to look these files up in a different place.
+[18:49:21.253 Verbose] - BuildManager - Item _OutputPathItem 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' evaluated via:
+_OutputPathItem: '$(OutDir)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:309
+  OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+    OutDir: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+    OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+      OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+        OutputPath: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+[18:49:21.253 Verbose] - BuildManager - Item AppConfigFileDestination 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\MyPTClinicApp.Client.dll.config' evaluated via:
+AppConfigFileDestination: '$(OutDir)$(TargetFileName).config' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:337
+  OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+    OutDir: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+    OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+      OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+        OutputPath: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+  TargetFileName: '$(TargetName)$(TargetExt)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:247
+    TargetName: '$(AssemblyName)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:239
+      AssemblyName: '$(MSBuildProjectName)' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.props:32
+        MSBuildProjectName: 'MyPTClinicApp.Client'
+    TargetExt: '.dll' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.BeforeCommon.targets:101
+[18:49:21.254 Verbose] - BuildManager - Item CreateDirectory 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\ref' evaluated via:
+CreateDirectory: '$(OutDir)ref' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:394
+  OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+    OutDir: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+    OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+      OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+        OutputPath: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+[18:49:21.254 Verbose] - BuildManager - Item _DebugSymbolsOutputPath 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\MyPTClinicApp.Client.pdb' evaluated via:
+_DebugSymbolsOutputPath: '@(_DebugSymbolsIntermediatePath->'$(OutDir)%(Filename)%(Extension)')' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:400
+  OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+    OutDir: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+    OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+      OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+        OutputPath: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+[18:49:21.254 Verbose] - BuildManager - Item _ApplicationManifestFinal 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\MyPTClinicApp.Client.dll.manifest' evaluated via:
+_ApplicationManifestFinal: '$(OutDir)$(_DeploymentTargetApplicationManifestFileName)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:438
+  OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+    OutDir: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+    OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+      OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+        OutputPath: 'C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp\Client\bin\Debug\net5.0\' @ C:\MyPTClinicApp\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj:0
+  _DeploymentTargetApplicationManifestFileName: '$(TargetFileName).manifest' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:267
+    TargetFileName: '$(TargetName)$(TargetExt)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:247
+      TargetName: '$(AssemblyName)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:239
+        AssemblyName: '$(MSBuildProjectName)' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.props:32
+          MSBuildProjectName: 'MyPTClinicApp.Client'
+      TargetExt: '.dll' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.BeforeCommon.targets:101
+[18:49:21.459 Verbose] - BuildManager - Some of the paths are absolute. This may prevent Live Unit Testing from building to the correct location.
+[18:49:21.459 Verbose] - BuildManager - Property BaseOutputPath evaluated to 'bin\' via:
+BaseOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseOutputPath)', 'bin'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:154
+  BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+[18:49:21.459 Verbose] - BuildManager - Property BaseIntermediateOutputPath evaluated to 'C:\MyPTClinicApp\MyPTClinicApp\Server\obj\' via:
+BaseIntermediateOutputPath: '$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk.Publish\targets\Microsoft.NET.Sdk.Publish.targets:80
+  MSBuildProjectDirectory: 'C:\MyPTClinicApp\MyPTClinicApp\Server'
+  BaseIntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseIntermediateOutputPath)', 'obj'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:159
+    BaseIntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseIntermediateOutputPath)', 'obj'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Microsoft.Common.props:46
+      BaseIntermediateOutputPath: '[Undefined]'
+[18:49:21.459 Verbose] - BuildManager - Property IntermediateOutputPath evaluated to 'obj\Debug\net5.0\' via:
+IntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash('$(IntermediateOutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:162
+  IntermediateOutputPath: '$(IntermediateOutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:241
+    IntermediateOutputPath: '$(BaseIntermediateOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:39
+      BaseIntermediateOutputPath: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(BaseIntermediateOutputPath)', 'obj'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Microsoft.Common.props:46
+        BaseIntermediateOutputPath: '[Undefined]'
+      Configuration: 'Debug'
+[18:49:21.460 Verbose] - BuildManager - Property OutputPath evaluated to 'bin\Debug\net5.0\' via:
+OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+  OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+    OutputPath: '$(BaseOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:33
+      BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+      Configuration: 'Debug'
+[18:49:21.460 Verbose] - BuildManager - Property OutDir evaluated to 'bin\Debug\net5.0\' via:
+OutDir: '$([MSBuild]::EnsureTrailingSlash($([MSBuild]::ValueOrDefault('$(OutDir)', '$(OutputPath)'))))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:230
+  OutDir: '[Undefined]'
+  OutputPath: '$([MSBuild]::EnsureTrailingSlash('$(OutputPath)'))' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:157
+    OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:242
+      OutputPath: '$(BaseOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:33
+        BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\5.0.201\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+        Configuration: 'Debug'

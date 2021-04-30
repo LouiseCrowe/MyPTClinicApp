@@ -18,7 +18,7 @@ namespace MyPTClinicApp.Client.Services
         {
             var newEmail = new StringContent(System.Text.Json.JsonSerializer.Serialize(emailMessage), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("https://localhost:5001/api/sendemail", newEmail);
+            var response = await httpClient.PostAsync("api/sendemail", newEmail);
 
             if (response.IsSuccessStatusCode)
             {

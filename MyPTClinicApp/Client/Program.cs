@@ -23,7 +23,7 @@ namespace MyPTClinicApp.Client
 
             builder.Services.AddApiAuthorization();
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:5001/") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             builder.Services.AddHttpClient<IEmailService, EmailService>();
             builder.Services.AddScoped<IEmailService, EmailService>();

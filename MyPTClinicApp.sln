@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Client", "MyP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicApp.Shared", "MyPTClinicApp\Shared\MyPTClinicApp.Shared.csproj", "{ED558296-9971-4141-B994-C0F38DDBA6D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTClinicAppUnitTest", "MyPTClinicAppUnitTest\MyPTClinicAppUnitTest.csproj", "{346E0E93-6AAC-46BE-819C-A6471E149E31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPTClinicAppUnitTest", "MyPTClinicAppUnitTest\MyPTClinicAppUnitTest.csproj", "{346E0E93-6AAC-46BE-819C-A6471E149E31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPTCLinicAppUITests", "MyPTCLinicAppUITests\MyPTCLinicAppUITests.csproj", "{87F7F1B5-65D5-4232-8D72-4C297C0BFD08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{346E0E93-6AAC-46BE-819C-A6471E149E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{346E0E93-6AAC-46BE-819C-A6471E149E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{346E0E93-6AAC-46BE-819C-A6471E149E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F7F1B5-65D5-4232-8D72-4C297C0BFD08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F7F1B5-65D5-4232-8D72-4C297C0BFD08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F7F1B5-65D5-4232-8D72-4C297C0BFD08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F7F1B5-65D5-4232-8D72-4C297C0BFD08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

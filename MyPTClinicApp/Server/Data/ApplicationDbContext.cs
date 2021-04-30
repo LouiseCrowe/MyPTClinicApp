@@ -3,10 +3,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MyPTClinicApp.Server.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MyPTClinicApp.Shared;
 
 namespace MyPTClinicApp.Server.Data
 {
@@ -18,11 +15,9 @@ namespace MyPTClinicApp.Server.Data
         {
         }
 
-        public DbSet<MyPTClinicApp.Shared.Therapist> Therapist { get; set; }
-
-        public DbSet<MyPTClinicApp.Shared.Patient> Patient { get; set; }
-
-        public DbSet<MyPTClinicApp.Shared.SchedulerAppointment> SchedulerAppointment { get; set; }
-        public DbSet<MyPTClinicApp.Shared.Treatment> Treatment { get; set; }
+        public DbSet<Therapist> Therapist { get; set; }
+        public DbSet<Patient> Patient { get; set; }
+        public DbSet<SchedulerAppointment> SchedulerAppointment { get; set; }
+        public DbSet<Treatment> Treatment { get; set; }
     }
 }

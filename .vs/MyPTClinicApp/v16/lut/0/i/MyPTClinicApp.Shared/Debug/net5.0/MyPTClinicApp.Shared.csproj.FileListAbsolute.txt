@@ -1,0 +1,10 @@
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.deps.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.Shared\Debug\net5.0\ref\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.csprojAssemblyReference.cache
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfoInputs.cache
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.AssemblyInfo.cs
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.csproj.CopyComplete
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\MyPTClinicApp.Shared.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.Shared\Debug\net5.0\ref\MyPTClinicApp.Shared.dll

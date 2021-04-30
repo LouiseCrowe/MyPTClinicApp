@@ -1,0 +1,17 @@
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\testhost.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\testhost.exe
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.deps.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.runtimeconfig.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.runtimeconfig.dev.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicApp.UITests\Debug\net5.0\ref\MyPTClinicApp.UITests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.AssemblyInfoInputs.cache
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.AssemblyInfo.cs
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.csproj.CopyComplete
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\ref\MyPTClinicApp.UITests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicApp.UITests\Debug\net5.0\MyPTClinicApp.UITests.genruntimeconfig.cache

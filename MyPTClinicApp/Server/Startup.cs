@@ -31,7 +31,7 @@ namespace MyPTClinicApp.Server
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("ApplicationDbContext")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -63,20 +63,12 @@ namespace MyPTClinicApp.Server
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<ITreatmentRepository, TreatmentRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            services.AddHttpClient<ITherapistService, TherapistService>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:5001/");
-            }
-            );
+            services.AddHttpClient<ITherapistService, TherapistService>();
 
 
             services.AddSendGrid(opt => opt.ApiKey = Configuration["SendGrid:ApiKey"]);
             services.AddScoped<ISendEmailRepository, SendEmailRepository>();
-            services.AddHttpClient<ISendEmailRepository, SendEmailRepository>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:5001/");
-            }
-            );
+            services.AddHttpClient<ISendEmailRepository, SendEmailRepository>();
 
             
             //for TelerikServices
