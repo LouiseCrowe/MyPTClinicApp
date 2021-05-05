@@ -1,0 +1,17 @@
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\testhost.exe
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\testhost.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.deps.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.runtimeconfig.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.runtimeconfig.dev.json
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\b\MyPTClinicAppWebDriverTests\Debug\net5.0\ref\MyPTClinicAppWebDriverTests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.AssemblyInfoInputs.cache
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.AssemblyInfo.cs
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.csproj.CopyComplete
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\ref\MyPTClinicAppWebDriverTests.dll
+C:\MyPTClinicApp\.vs\MyPTClinicApp\v16\lut\0\i\MyPTClinicAppWebDriverTests\Debug\net5.0\MyPTClinicAppWebDriverTests.genruntimeconfig.cache

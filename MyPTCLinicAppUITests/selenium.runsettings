@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RunSettings>
-
-	<!-- Parameters used by test at runtime -->
-	<TestRunParameters>	
-	  <Parameter name="webAppUrl" value="https://localhost:5001/" />
-	</TestRunParameters>	
-
-</RunSettings>

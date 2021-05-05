@@ -16,31 +16,31 @@ else
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Patient Name: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.FirstName @Patient.LastName</label>
+            <label type="text" readonly class="form-control-plaintext" id="PatientName">@Patient.FirstName @Patient.LastName</label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Phone: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Phone</label>
+            <label type="text" readonly class="form-control-plaintext" id="Phone">@Patient.Phone</label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Email: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Email</label>
+            <label type="text" readonly class="form-control-plaintext" id="Email">@Patient.Email</label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Address: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Address</label>
+            <label type="text" readonly class="form-control-plaintext" id="Address">@Patient.Address</label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Date of Birth: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">
+            <label type="text" readonly class="form-control-plaintext" id="DateOfBirth">
                 @Patient.DateOfBirth.Day/@Patient.DateOfBirth.Month/@Patient.DateOfBirth.Year
             </label>
         </div>
@@ -48,19 +48,19 @@ else
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Medications: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Medications</label>
+            <label type="text" readonly class="form-control-plaintext" id="Medication">@Patient.Medications</label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Gender: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Patient.Gender</label>
+            <label type="text" readonly class="form-control-plaintext" id="Gender">@Patient.Gender</label>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-6 col-sm-2 col-form-label">Therapist Name: </label>
         <div class="col">
-            <label type="text" readonly class="form-control-plaintext">@Therapist.FirstName @Therapist.LastName</label>
+            <label type="text" readonly class="form-control-plaintext" id="TherapistName">@Therapist.FirstName @Therapist.LastName</label>
         </div>
     </div>
 
