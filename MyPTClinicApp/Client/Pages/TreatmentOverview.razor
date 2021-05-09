@@ -44,12 +44,12 @@ else
 
     @if (!showSummary)
     {
-        <button class="btn btn-primary" @onclick="ShowSummary">Show Breakdown of Treatments by Patient and Therapist</button>
+        <button class="btn btn-primary" id="showsummary" @onclick="ShowSummary">Show Breakdown of Treatments by Patient and Therapist</button>
         <br />
     }
     @if (showSummary)
     {
-        <button class="btn btn-primary" @onclick="HideSummary">Hide Breakdown of Treatments by Patient and Therapist</button>
+        <button class="btn btn-primary" id="hidesummary" @onclick="HideSummary">Hide Breakdown of Treatments by Patient and Therapist</button>
         <br />
         <br />
 
@@ -75,7 +75,7 @@ else
                 {
                     <tr>
                         @*can use patientGroup[0] to retrieve data for patient because the data will be the same
-                          for each patient in the patientGroup*@
+                            for each patient in the patientGroup*@
                         <td>@patientGroup[0].PatientFirstName @patientGroup[0].PatientLastName</td>
                         <td>@patientGroup.Count</td>
                         <td>@patientGroup[0].Date.Day/@patientGroup[0].Date.Month/@patientGroup[0].Date.Year</td>
@@ -110,23 +110,23 @@ else
             <tbody>
                 @foreach (var therapistGroup in TherapistsWithTreatments)
                 {
-                <tr>
-                    @*can use therapistGroup[0] to retrieve data for patient because the data will be the same
-                      for each therapist in the therapistGroup*@
-                    <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
-                    <td>@therapistGroup.Count</td>
-                    <td>@therapistGroup[0].Date.Day/@therapistGroup[0].Date.Month/@therapistGroup[0].Date.Year</td>
-                    <td>
-                        <a href="@($"therapistdetail/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="@($"therapistedit/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        @*can use therapistGroup[0] to retrieve data for patient because the data will be the same
+                            for each therapist in the therapistGroup*@
+                        <td>@therapistGroup[0].TherapistFirstName @therapistGroup[0].TherapistLastName</td>
+                        <td>@therapistGroup.Count</td>
+                        <td>@therapistGroup[0].Date.Day/@therapistGroup[0].Date.Month/@therapistGroup[0].Date.Year</td>
+                        <td>
+                            <a href="@($"therapistdetail/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@($"therapistedit/{therapistGroup[0].TherapistId}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>

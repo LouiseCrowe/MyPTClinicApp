@@ -68,23 +68,38 @@ namespace MyPTClinicApp.Server.Models
                 therapist = await FindTherapistFromAppt(appointment);
             }
 
-            // therapist included in appointment but therapist is left blank
-            if (String.IsNullOrEmpty(appointment.PatientName))
-            {
-                var query = await _context.Patient.FirstOrDefaultAsync(p => p.FirstName == "To"
-                                            && p.LastName == "Be Confirmed");
-                patient = query;
-                therapist = await FindTherapistFromAppt(appointment);
+            // therapist included in appointment but patient is left blank
 
-            }
-            if (String.IsNullOrEmpty(appointment.TherapistName))
+            if (String.IsNullOrEmpty(appointment.PatientName) && String.IsNullOrEmpty(appointment.TherapistName))
             {
-                var query = await _context.Therapist.FirstOrDefaultAsync(t => t.FirstName == "To"
+                var query1 = await _context.Therapist.FirstOrDefaultAsync(t => t.FirstName == "To"
                                            && t.LastName == "Be Confirmed");
-                therapist = query;
-                patient = await FindPatientFromAppt(appointment);
+                therapist = query1;
+
+
+                var query2 = await _context.Patient.FirstOrDefaultAsync(p => p.FirstName == "To"
+                                            && p.LastName == "Be Confirmed");
+                patient = query2;
             }
 
+            else
+            {
+                if (String.IsNullOrEmpty(appointment.PatientName))
+                {
+                    var query = await _context.Patient.FirstOrDefaultAsync(p => p.FirstName == "To"
+                                                && p.LastName == "Be Confirmed");
+                    patient = query;
+                    therapist = await FindTherapistFromAppt(appointment);
+                }
+
+                if (String.IsNullOrEmpty(appointment.TherapistName))
+                {
+                    var query = await _context.Therapist.FirstOrDefaultAsync(t => t.FirstName == "To"
+                                               && t.LastName == "Be Confirmed");
+                    therapist = query;
+                    patient = await FindPatientFromAppt(appointment);
+                }
+            }
             // create treatment and add to database
             Treatment treatment = (new Treatment
             {

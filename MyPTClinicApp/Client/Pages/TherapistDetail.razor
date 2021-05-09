@@ -1,5 +1,6 @@
 ﻿@page "/therapistdetail/{ID}"
 
+
 <h2 class="page-title">Therapist details: @Therapist.FirstName @Therapist.LastName</h2>
 
 <br />
@@ -7,13 +8,13 @@
 <div class="form-group row">
     <label class="col-6 col-sm-2 col-form-label">First Name: </label>
     <div class="col">
-        <label type="text" readonly class="form-control-plaintext">@Therapist.FirstName</label>        
+        <label type="text" readonly class="form-control-plaintext">@Therapist.FirstName</label>
     </div>
 </div>
 <div class="form-group row">
     <label class="col-6 col-sm-2 col-form-label">Last Name: </label>
     <div class="col">
-        <label type="text" readonly class="form-control-plaintext">@Therapist.LastName</label>        
+        <label type="text" readonly class="form-control-plaintext">@Therapist.LastName</label>
     </div>
 </div>
 <div class="form-group row">
@@ -25,14 +26,14 @@
 <div class="form-group row">
     <label class="col-6 col-sm-2 col-form-label">Email: </label>
     <div class="col">
-        <label type="text" readonly class="form-control-plaintext">@Therapist.Email</label>   
+        <label type="text" readonly class="form-control-plaintext">@Therapist.Email</label>
     </div>
 </div>
 <div class="form-group row">
     <label class="col-6 col-sm-2 col-form-label">Location: </label>
     <div class="col">
         <label type="text" readonly class="form-control-plaintext">@Therapist.Location</label>
-</div>
+    </div>
 </div>
 
 <h2>@Therapist.FirstName @Therapist.LastName's Patients</h2>
@@ -49,20 +50,21 @@
     <tbody>
         @foreach (var patient in Patients)
         {
-<tr>
-    <td>@patient.FirstName</td>
-    <td>@patient.LastName</td>
-    <td>
-        <a href="@($"patientdetail/{patient.ID}")" class="btn btn-primary table-btn">
-            <i class="fas fa-info-circle"></i>
-        </a>
-    </td>
-    <td>
-        <a href="@($"patientedit/{patient.ID}")" class="btn btn-primary table-btn">
-            <i class="fas fa-edit"></i>
-        </a>
-    </td>
-</tr>            }
+            <tr>
+                <td>@patient.FirstName</td>
+                <td>@patient.LastName</td>
+                <td>
+                    <a href="@($"patientdetail/{patient.ID}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="@($"patientedit/{patient.ID}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+       }
     </tbody>
 </table>
 

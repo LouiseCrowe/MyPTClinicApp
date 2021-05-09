@@ -68,7 +68,7 @@
                     <NavLink class="nav-link" @onclick="BeginSignOut">
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
                     </NavLink>
-                </li>
+                </li>               
             </ul>
         </Authorized>
     </AuthorizeView>
@@ -88,5 +88,5 @@
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
-    }
+    }   
 }

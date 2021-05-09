@@ -17,7 +17,7 @@ namespace MyPTClinicApp.Client.Pages
         [Inject]
         public ITherapistService TherapistService { get; set; }
 
-        private IEnumerable<Therapist> Therapists { get; set; }
+        private IEnumerable<Therapist> Therapists { get; set; } 
 
         // for managing search
         public string SearchName { get; set; }
@@ -34,6 +34,7 @@ namespace MyPTClinicApp.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            
             Therapists = (await TherapistService.GetTherapists()).ToList();
 
             // for pagination

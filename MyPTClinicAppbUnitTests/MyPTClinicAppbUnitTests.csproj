@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bunit" Version="1.1.5" />
+    <PackageReference Include="bunit.core" Version="1.1.5" />
+    <PackageReference Include="bunit.web" Version="1.1.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.1" />
+    <PackageReference Include="coverlet.collector" Version="1.3.0" />
+	<PackageReference Include="RichardSzalay.MockHttp" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyPTClinicApp\Client\MyPTClinicApp.Client.csproj" />
+    <ProjectReference Include="..\MyPTClinicApp\Shared\MyPTClinicApp.Shared.csproj" />	  
+  </ItemGroup>
+
+</Project>

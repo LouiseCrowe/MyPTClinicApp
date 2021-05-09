@@ -3,25 +3,25 @@
 
 <h1 class="page-title">Comparing Monthly Treatment Totals for @lastYear and @currentYear</h1>
 
-    <TelerikChart>
-        <ChartSeriesItems>
-            <ChartSeries Type="ChartSeriesType.Column" Name="Last Year's Monthly Totals" Data="@oldModelData"  Field="@nameof(DataModel.MonthlyTotal)">
-                <ChartSeriesLabels Template="#=dataItem.Year#: #=value#" Visible="true"></ChartSeriesLabels>
-            </ChartSeries>
-            <ChartSeries Type="ChartSeriesType.Column" Name="Current Monthly Totals" Data="@newModelData" Field="@nameof(DataModel.MonthlyTotal)">
-                <ChartSeriesLabels Template="#=dataItem.Year#: #=value#" Visible="true"></ChartSeriesLabels>
-            </ChartSeries>
-        </ChartSeriesItems>
+<TelerikChart>
+    <ChartSeriesItems>
+        <ChartSeries Type="ChartSeriesType.Column" Name="Last Year's Monthly Totals" Data="@oldModelData" Field="@nameof(DataModel.MonthlyTotal)">
+            <ChartSeriesLabels Template="#=dataItem.Year#: #=value#" Visible="true"></ChartSeriesLabels>
+        </ChartSeries>
+        <ChartSeries Type="ChartSeriesType.Column" Name="Current Monthly Totals" Data="@newModelData" Field="@nameof(DataModel.MonthlyTotal)">
+            <ChartSeriesLabels Template="#=dataItem.Year#: #=value#" Visible="true"></ChartSeriesLabels>
+        </ChartSeries>
+    </ChartSeriesItems>
 
-        <ChartCategoryAxes>
-            <ChartCategoryAxis Categories="@xAxisItems"></ChartCategoryAxis>
-        </ChartCategoryAxes>
+    <ChartCategoryAxes>
+        <ChartCategoryAxis Categories="@xAxisItems"></ChartCategoryAxis>
+    </ChartCategoryAxes>
 
-        <ChartTitle Text="Monthly Treatments Totals"></ChartTitle>
+    <ChartTitle Text="Monthly Treatments Totals"></ChartTitle>
 
-        <ChartLegend Position="Telerik.Blazor.ChartLegendPosition.Bottom">
-        </ChartLegend>
-    </TelerikChart>
+    <ChartLegend Position="Telerik.Blazor.ChartLegendPosition.Bottom">
+    </ChartLegend>
+</TelerikChart>
 
 
 
