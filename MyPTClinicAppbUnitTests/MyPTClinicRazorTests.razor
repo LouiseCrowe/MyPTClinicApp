@@ -1,0 +1,267 @@
+﻿@attribute [TestClass]
+
+@using MyPTClinicApp.Client.Services
+@using MyPTClinicApp.Shared
+@using Telerik.JustMock
+@using System.Threading.Tasks;
+@using Bunit
+@using Microsoft.Extensions.DependencyInjection
+
+
+@code
+{
+    [TestMethod]
+    public void HomePageInitialRenderCorrectAuthorisedUser()
+    {
+        // Arrange
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddApiAuthorization();
+
+        // set user and authenticated and authorised
+        var authContext = ctx.AddTestAuthorization();
+        authContext.SetAuthorized("TEST USER");
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.Index />);
+
+        string expectedPageTitle = "Welcome to MyPTClinicApp";
+        var actualPageTitle = cut.Find("h1").TextContent;
+
+        string expectedFirstCardTitle = "Appointments";
+        var actualFirstCardTitle = cut.Find("h4").InnerHtml;
+
+        List<String> expectedCardTitles = new List<string>() { "Appointments", "Reminders", "Treatments", "Add Patient" };
+        var cardTitles = cut.FindAll("h4").ToList();
+
+        List<String> actualCardTitles = new List<string>();
+
+        foreach (var item in cardTitles)
+        {
+        actualCardTitles.Add(item.InnerHtml);
+        }
+
+        // Assert
+        Assert.AreEqual(expectedPageTitle, actualPageTitle);
+        Assert.AreEqual(expectedFirstCardTitle, actualFirstCardTitle);
+        CollectionAssert.AreEqual(expectedCardTitles, actualCardTitles);
+    }
+
+
+    [TestMethod]
+    public void HomePageInitialRenderCorrectUnAuthorisedUser()
+    {
+        // Arrange
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddApiAuthorization();
+
+        // set user and authenticated and authorised
+        var authContext = ctx.AddTestAuthorization();
+        authContext.SetAuthorized("TEST USER", AuthorizationState.Unauthorized);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.Index />);
+        string expectedPageTitle = "Welcome to MyPTClinicApp";
+        var actualPageTitle = cut.Find("h1").TextContent;
+
+        string expectedCardTitle = "Login";
+        var actualCardTitle = cut.Find("h4").TextContent;
+
+        // Assert
+        Assert.AreEqual(expectedPageTitle, actualPageTitle);
+        Assert.AreEqual(expectedCardTitle, actualCardTitle);
+    }
+
+
+    [TestMethod]
+    public void TherapistOverviewInitialRenderCorrectWithData()
+    {
+        // Arrange
+        var Therapists = new Therapist[]
+        { new Therapist {   FirstName = "Dylan",
+                            LastName = "Crowe"},
+          new Therapist {   FirstName = "Emily",
+                            LastName = "Wanda"}
+        }.ToList();
+
+        var mockTherapistService = Mock.Create<ITherapistService>();
+
+        Mock.Arrange(() => mockTherapistService.GetTherapists())
+        .Returns(Task.FromResult<IEnumerable<Therapist>>(Therapists));
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<ITherapistService>(mockTherapistService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.TherapistOverview />);
+
+        String actualText = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(actualText, "All Therapists");
+        StringAssert.Contains(actualText, "Dylan");
+        StringAssert.Contains(actualText, "Crowe");
+        StringAssert.Contains(actualText, "Emily");
+        StringAssert.Contains(actualText, "Wanda");
+    }
+
+
+    [TestMethod]
+    public void TherapistOverviewInitialRenderCorrectWithoutData()
+    {
+        // Arrange
+        var mockTherapistService = Mock.Create<ITherapistService>();
+        Mock.Arrange(() => mockTherapistService.GetTherapists())
+        .Returns(new TaskCompletionSource<IEnumerable<Therapist>>().Task);
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<ITherapistService>(mockTherapistService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.TherapistOverview />);
+
+        String actualText = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(actualText, "All Therapists");
+        StringAssert.Contains(actualText, "Retrieving therapist information, it will just take a moment...");
+    }
+
+
+    [TestMethod]
+    public void TherapistOverviewSearchForExistingTherapist()
+    {
+        // Arrange
+        var Therapists = new Therapist[0].ToList();
+
+        // list for mock search results
+        var searchResults = new Therapist[]
+        { new Therapist {  FirstName = "Dylan",
+                LastName = "Crowe"}
+                }.ToList();
+
+        var mockTherapistService = Mock.Create<ITherapistService>();
+
+        Mock.Arrange(() => mockTherapistService.GetTherapists())
+        .Returns(Task.FromResult<IEnumerable<Therapist>>(Therapists));
+
+        Mock.Arrange(() => mockTherapistService.Search("dylan", "dylan"))
+        .Returns(Task.FromResult<IEnumerable<Therapist>>(searchResults));
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<ITherapistService>(mockTherapistService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.TherapistOverview />);
+
+        var searchButton = cut.Find("button");
+        var inputField = cut.Find("input");
+
+        // search for existing Therapist
+        inputField.Change("dylan");
+        searchButton.Click();
+
+        // Assert
+        var renderMarkup = cut.Markup;
+        StringAssert.Contains(renderMarkup, "Dylan");
+        StringAssert.Contains(renderMarkup, "Crowe");
+    }
+
+
+    [TestMethod]
+    public void TherapistOverviewSearchBlankInputField()
+    {
+        // Arrange
+        var Therapists = new Therapist[0].ToList();
+
+        var searchResults = new Therapist[0].ToList();
+
+        var mockTherapistService = Mock.Create<ITherapistService>();
+
+        Mock.Arrange(() => mockTherapistService.GetTherapists())
+        .Returns(Task.FromResult<IEnumerable<Therapist>>(Therapists));
+
+        Mock.Arrange(() => mockTherapistService.Search("", ""))
+        .Returns(Task.FromResult<IEnumerable<Therapist>>(searchResults));
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<ITherapistService>(mockTherapistService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.TherapistOverview />);
+
+        var searchButton = cut.Find("button");
+        var inputField = cut.Find("input");
+
+        // don't input a search name
+        searchButton.Click();
+
+        var renderMarkup = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(renderMarkup, "Name not found - maybe check your spelling or try another name");
+    }
+
+
+    [TestMethod]
+    public void PatientOverviewInitialRenderCorrectWithData()
+    {
+        // Arrange
+        //Therapist List with Entries
+        var Patients = new Patient[]
+        { new Patient {  FirstName = "Louise",
+                         LastName = "Murphy"},
+          new Patient {  FirstName = "Emily",
+                         LastName = "Quinn"}
+        }.ToList();
+
+        var mockPatientService = Mock.Create<IPatientService>();
+
+        Mock.Arrange(() => mockPatientService.GetPatients())
+        .Returns(Task.FromResult<IEnumerable<Patient>>(Patients));
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<IPatientService>(mockPatientService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.PatientOverview />);
+
+        var actualText = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(actualText, "All Patients");
+        StringAssert.Contains(actualText, "Louise");
+        StringAssert.Contains(actualText, "Murphy");
+        StringAssert.Contains(actualText, "Emily");
+        StringAssert.Contains(actualText, "Quinn");
+    }
+
+    [TestMethod]
+    public void PatientOverviewInitialRenderWithoutDataCorrect()
+    {
+        // Arrange
+        var mockPatientService = Mock.Create<IPatientService>();
+        Mock.Arrange(() => mockPatientService.GetPatients())
+        .Returns(new TaskCompletionSource<IEnumerable<Patient>>().Task);
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<IPatientService>(mockPatientService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.PatientOverview />);
+
+        String actualText = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(actualText, "All Patients");
+        StringAssert.Contains(actualText, "Retrieving patient information, it will just take a moment...");
+    }
+
+}
