@@ -140,8 +140,8 @@
         // list for mock search results
         var searchResults = new Therapist[]
         { new Therapist {  FirstName = "Dylan",
-                LastName = "Crowe"}
-                }.ToList();
+                        LastName = "Crowe"}
+                            }.ToList();
 
         var mockTherapistService = Mock.Create<ITherapistService>();
 
@@ -215,10 +215,10 @@
         //Therapist List with Entries
         var Patients = new Patient[]
         { new Patient {  FirstName = "Louise",
-                         LastName = "Murphy"},
-          new Patient {  FirstName = "Emily",
-                         LastName = "Quinn"}
-        }.ToList();
+                                 LastName = "Murphy"},
+                  new Patient {  FirstName = "Emily",
+                                 LastName = "Quinn"}
+                    }.ToList();
 
         var mockPatientService = Mock.Create<IPatientService>();
 
@@ -262,6 +262,73 @@
         // Assert
         StringAssert.Contains(actualText, "All Patients");
         StringAssert.Contains(actualText, "Retrieving patient information, it will just take a moment...");
+    }
+
+    [TestMethod]
+    public void TreatmentOverviewInitialRenderCorrectWithoutData()
+    {
+        // Arrange
+        var mockTreatmentService = Mock.Create<ITreatmentService>();
+        Mock.Arrange(() => mockTreatmentService.GetTreatments())
+        .Returns(new TaskCompletionSource<IEnumerable<TreatmentDto>>().Task);
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<ITreatmentService>(mockTreatmentService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.TreatmentOverview />);
+
+        String actualText = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(actualText, "All Treatments");
+        StringAssert.Contains(actualText, "Retrieving treatment information, it will just take a moment...");
+    }
+
+    [TestMethod]
+    public void TreatmentOverviewInitialRenderCorrectWithData()
+    {
+        // Arrange
+        var Treatments = new TreatmentDto[]
+        { new TreatmentDto { PatientFirstName = "Patrick",
+                                         PatientLastName = "Christopher",
+                                         TherapistFirstName = "Dylan",
+                                         TherapistLastName = "Crowe",
+                                         Date = new DateTime(2021, 05, 23, 10, 00, 0),
+                                         Notes = "Please update after treatment"},
+                      new TreatmentDto { PatientFirstName = "Emily",
+                                         PatientLastName = "Quinn",
+                                         TherapistFirstName = "John",
+                                         TherapistLastName = "Murphy",
+                                         Date = new DateTime(2021, 05, 17, 11, 00, 0),
+                                         Notes = "Please update after treatment"}
+                                                 }.ToList();
+
+
+        var mockTreatmentService = Mock.Create<ITreatmentService>();
+        Mock.Arrange(() => mockTreatmentService.GetTreatments())
+        .Returns(Task.FromResult<IEnumerable<TreatmentDto>>(Treatments));
+
+        using var ctx = new Bunit.TestContext();
+
+        ctx.Services.AddSingleton<ITreatmentService>(mockTreatmentService);
+
+        // Act
+        var cut = ctx.Render(@<MyPTClinicApp.Client.Pages.TreatmentOverview />);
+
+        String actualText = cut.Markup;
+
+        // Assert
+        StringAssert.Contains(actualText, "All Treatments");
+        StringAssert.Contains(actualText, "Patrick");
+        StringAssert.Contains(actualText, "Christopher");
+        StringAssert.Contains(actualText, "Dylan");
+        StringAssert.Contains(actualText, "Crowe");
+        StringAssert.Contains(actualText, "Emily");
+        StringAssert.Contains(actualText, "Quinn");
+        StringAssert.Contains(actualText, "John");
+        StringAssert.Contains(actualText, "Murphy");
     }
 
 }
